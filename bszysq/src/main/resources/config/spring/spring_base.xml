@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.2.xsd
+	http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+	<context:annotation-config />
+	<!--自动扫描的包名 -->
+	<context:component-scan base-package="com.bszy" />
+
+	<!-- 加载属性文件  以下两种方式都可以-->
+	<context:property-placeholder location="classpath:config/jdbc/mysql.properties"
+		ignore-unresolvable="true" order="1" />
+
+	<bean id="parentDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <!-- 指定连接池中保留的最大连接数. Default:15-->
+        <property name="maxPoolSize" value="${jdbc.maxPoolSize}"/>
+        <!-- 指定连接池中保留的最小连接数-->
+        <property name="minPoolSize" value="${jdbc.minPoolSize}"/>
+        <!-- 指定连接池的初始化连接数  取值应在minPoolSize 与 maxPoolSize 之间.Default:3-->
+        <property name="initialPoolSize" value="${jdbc.initialPoolSize}"/>
+        <!-- 当连接池中的连接耗尽的时候c3p0一次同时获取的连接数. Default:3-->
+        <property name="acquireIncrement" value="${jdbc.acquireIncrement}"/>
+        <!-- JDBC的标准,用以控制数据源内加载的PreparedStatements数量。但由于预缓存的statements属于单个connection而不是整个连接池所以设置这个参数需要考虑到多方面的因数.如果maxStatements与maxStatementsPerConnection均为0,则缓存被关闭。Default:0-->
+        <property name="maxStatements" value="${jdbc.maxStatements}"/>
+        <!-- 定义在从数据库获取新连接失败后重复尝试的次数。 Default:30 -->
+        <property name="acquireRetryAttempts" value="${jdbc.acquireRetryAttempts}"/>
+        <!-- 获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常。但是数据源仍有效保留,并在下次调用getConnection()的时候继续尝试获取连接。如果设为true,那么在尝试获取连接失败后该数据源将申明已断开并永久关闭。Default:false -->
+        <property name="breakAfterAcquireFailure" value="${jdbc.breakAfterAcquireFailure}"/>
+        <!-- 性能消耗大请只在需要的时候使用它。如果设为true,那么在每个connection提交的时候都将校验其有效性。建议使用idleConnectionTestPeriod或automaticTestTable等提升连接测试的性能。 Default:false-->
+        <property name="testConnectionOnCheckout" value="${jdbc.testConnectionOnCheckout}"/>
+        <property name="maxIdleTime" value="7200"/>
+        <property name="testConnectionOnCheckin" value="true" />
+        <property name="idleConnectionTestPeriod" value="3600"/>
+    </bean>
+
+	<!-- 数据源配置 --> 
+    <bean id="dataSource" parent="parentDataSource">
+		<!-- 指定连接数据库的驱动-->
+        <property name="driverClass" value="${jdbc.master.driver}"/>
+        <!-- 指定连接数据库的URL-->
+        <property name="jdbcUrl" value="${jdbc.master.url}"/>
+        <!-- 指定连接数据库的用户名-->
+        <property name="user" value="${jdbc.master.username}"/>
+        <!-- 指定连接数据库的密码-->
+        <property name="password" value="${jdbc.master.password}"/>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="mapperLocations" value="classpath:config/mapper/**.xml"/> -->
+		<property name="configLocation" value="classpath:config/ibatis/config.xml" />
+	</bean>
+	<bean id="mapperScanners" class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />  
+        <property name="basePackage" value="com.bszy.*.mapper" />  
+    </bean>
+	
+	<!-- 事务管理 --> 
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+    	<property name="dataSource" ref="dataSource"></property> 
+    </bean> 
+	
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- // TODO 后台管理员权限控制 -->
+	<bean id="adminCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager" scope="prototype">
+		<property name="cacheManagerConfigFile" value="classpath:config/shiro/ehcache-admin.xml"></property>
+	</bean>
+	
+	<!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java -->
+	<!-- <bean id="adminRealm" class="com.bjjx.pet.admin.security.AdminRealm"/>  -->
+	   
+	<!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session -->  
+	<!-- 即<property name="sessionMode" value="native"/>,详细说明见官方文档 -->  
+	<!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 -->  
+	<bean id="adminSecurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">  
+	    <property name="cacheManager" ref="adminCacheManager" />
+	    <property name="realm" ref="adminRealm" />
+	</bean>  
+	   
+	<!-- Shiro主过滤器本身功能十分强大,其强大之处就在于它支持任何基于URL路径表达式的、自定义的过滤器的执行 -->  
+	<!-- Web应用中,Shiro可控制的Web请求必须经过Shiro主过滤器的拦截,Shiro对基于Spring的Web应用提供了完美的支持 -->  
+	<bean id="adminShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
+	    <property name="securityManager" ref="adminSecurityManager"/>  
+	    <property name="loginUrl" value="/admin/login.do"/>  
+	    <property name="successUrl" value="/admin/index.do"/>  
+	    <property name="unauthorizedUrl" value="/admin/login.do"/>  
+	    <property name="filterChainDefinitions">  
+	        <value>
+				/admin/log*=anon
+				/admin/**=authc
+	        </value>  
+	    </property>
+	</bean>
+	<bean id="adminShiroAdv" class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="securityManager" ref="adminSecurityManager" />
+	</bean> 
+	
+	<!--异常处理-->
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>sys/error/error</value>
+		</property>
+		<property name="defaultStatusCode">
+			<value>404</value>
+		</property>
+		<property name="warnLogCategory">
+			<value>org.springframework.web.servlet.handler.SimpleMappingExceptionResolver
+			</value>
+		</property>
+	</bean>
+</beans> 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bszy.admin.mapper.AdminMapper">
+  
+	<select id="list" resultType="Admin" >
+		select * from tbl_admin where isdel = 0
+	</select>
+	
+	<select id="get" resultType="Admin" parameterType="Long" >
+		select * from tbl_admin where isdel = 0 and id = #{id}
+	</select>
+	
+	<select id="login" resultType="Admin" parameterType="java.util.Map" >
+		select * from tbl_admin where name = #{name} and pwd = #{pwd} limit 1
+	</select>
+	
+    
+</mapper>

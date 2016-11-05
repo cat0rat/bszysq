@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bszy.app.mapper.AppCategoryMapper" >
+	
+	<select id="list_art" parameterType="java.lang.Integer" resultType="AppCategory" >
+		select c.*, aw.id artid, aw.name artname from tbl_category c left join (
+			select a.id, a.name, a.cateid from tbl_article as a
+			where a.isdel=0 and a.recom = 1 and #{num} > (
+			      select count(*) from tbl_article aa 
+			      where aa.isdel=0 and aa.recom=1 and aa.cateid = a.cateid and aa.id > a.id
+			)
+			order by a.id desc
+		) as aw on c.id = aw.cateid
+		where c.isdel=0
+	</select>
+	
+    
+</mapper>

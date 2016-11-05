@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-config.dtd" >
+    
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="BasePojo" type="com.mao.ssm.BasePojo" />
+		<!-- <typeAlias alias="BasePage" type="com.mao.ssm.BasePage" /> -->
+		<package name="com.bszy.admin.pojo" />
+		<package name="com.bszy.app.pojo" />
+	</typeAliases>
+	
+    <mappers>
+    	
+    	<mapper resource="config/mapper/Common.xml" />
+        <mapper resource="config/mapper/admin/Admin.xml" />
+        <mapper resource="config/mapper/admin/Category.xml" />
+        <mapper resource="config/mapper/admin/Arttag.xml" />
+        <mapper resource="config/mapper/admin/User.xml" />
+        <mapper resource="config/mapper/admin/Article.xml" />
+        
+        <mapper resource="config/mapper/app/AppCategory.xml" />
+        <mapper resource="config/mapper/app/AppArticle.xml" />
+        <!-- 
+        <mapper resource="config/mapper/Common.xml" />
+        <package name="config.mapper.admin"/>
+        <package name="config.mapper.app"/>
+         -->
+    </mappers>
+	 
+</configuration>
