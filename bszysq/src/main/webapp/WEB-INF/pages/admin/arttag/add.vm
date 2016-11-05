@@ -3,32 +3,10 @@
 <head>
 <title>#app_name()</title> 
 #base()
+<script src="/js/admin/form.js" type="text/javascript"></script>
 <script type="text/javascript">
-	function closeDialog() {
-		top.Q('#add_arttag').dialog('close');
-	}
-	function doSubmit() {
-		var isValid = Q("#data_form").form('validate');
-		if (isValid)
-			Q.ajax({
-				url : '/admin/arttag/add.json',
-				type : 'post',
-				data : Q('#data_form').serialize(),
-				dataType : 'json',
-				success : function(data) {
-					if (data.code == '200') {
-						Q.messager.alert('温馨提示', '保存成功!', '', function() {
-							closeDialog();
-						});
-					} else {
-						Q.messager.alert('温馨提示', '保存失败!', 'error');
-					}
-				},
-				error : function() {
-					Q.messager.alert('温馨提示', '系统繁忙，请重试!', 'error');
-				}
-			});
-	}
+F.dialogSelor = '#add_arttag';
+F.addUrl = '/admin/arttag/add.json';
 </script>
 </head>
 <body>
@@ -40,14 +18,22 @@
 					<td class="form_key">标签名称：</td>
 					<td class="form_input">
 						<input class="easyui-validatebox" type="text" name="name"
-							data-options="required:true,validType:'illChart'" /></td>
+							data-options="required:true,validType:'illChart'" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form_key">排序号：</td>
+					<td class="form_input">
+						<input class="easyui-numberbox" type="text" name="sortn" value="0"
+							data-options="min:0,max:1000" />
+					</td>
 				</tr>
 			</table>
 		</form>
 	</div>
 	<div style="text-align:center;padding:30px">
-		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="doSubmit()" iconCls="icon-save">保存</a> 
-		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeDialog()" iconCls="icon-back">关闭</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="F.addDo()" iconCls="icon-save">保存</a> 
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="F.dialogClose()" iconCls="icon-back">关闭</a>
 	</div>
 </body>
 </html>

@@ -15,7 +15,7 @@
 	<select id="list" resultType="Arttag" >
 		SELECT a.* FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
-		<if test="limit != null">LIMIT #{start}, #{limit}</if>
+		<include refid="Common.sql_order_limit"></include>
 	</select>
 	<select id="lscount" resultType="Long" >
 		SELECT COUNT(0) FROM tbl_arttag a
@@ -34,6 +34,7 @@
 		INSERT INTO tbl_arttag(name, sortn, ctime, utime, isdel) 
 		VALUES(#{name}, #{sortn}, #{ctime}, #{utime}, #{isdel})
 	</insert>
+	
 	<update id="update" >
 		UPDATE tbl_arttag a
 		<trim prefix="SET" suffixOverrides=",">
@@ -44,6 +45,5 @@
 		</trim>
 		WHERE a.id = #{id}
 	</update>
-	
     
 </mapper>

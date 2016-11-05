@@ -1,7 +1,6 @@
-var z = new function(){
-var zz = this;
-zz.load_data = function(opt){
-	var dg_opt = $.extend({
+var L = {
+dgLoadData: function(opt){
+	var dgOpt = $.extend({
 		//url : url,
 		queryParams : {
 			name : $("#name").val()
@@ -21,10 +20,10 @@ zz.load_data = function(opt){
 		loadFilter: function(data){
 			return  data.data ? data.data : data;
 		}
-	}, opt.dg_opt);
-	zz.dg = $(opt.dg_id || '#data_list').datagrid(dg_opt);
+	}, opt.dgOpt);
+	L.dg = $(opt.dgSelor || '#data_list').datagrid(dgOpt);
 	//设置分页控件 
-	var p = $('#data_list').datagrid('getPager');
+	var p = L.dg.datagrid('getPager');
 	$(p).pagination({
 		pageSize : 10,//每页显示的记录条数，默认为10 
 		pageList : [ 5, 10, 15 ],//可以设置每页记录条数的列表 
@@ -37,13 +36,18 @@ zz.load_data = function(opt){
 	    $(this).pagination('loaded');
 	}*/
 	});
-};
-zz.get_checked = function() {
-	return zz.dg.datagrid('getSelected');
-};
-
-zz.del = function(url){
-	var seled = zz.get_checked(); //获取选中行
+},
+dgSearch: function(dealFn){
+	var ps = L.dg.datagrid('options').queryParams;
+	dealFn && dealFn(ps);
+	L.dg.datagrid('options').queryParams = ps;
+	L.dg.datagrid('reload');
+},
+dgChecked: function() {
+	return L.dg.datagrid('getSelected');
+},
+dgDel: function(url){
+	var seled = L.dgChecked(); //获取选中行
 	if (seled) {
 		$.messager.confirm('确认', '确认删除?', function(row) {
 			if (row) {
@@ -53,7 +57,7 @@ zz.del = function(url){
 					url : url,
 					success : function() {
 						$.messager.alert('温馨提示', '删除成功!', '', function() {
-							zz.dg.datagrid('reload');
+							L.dg.datagrid('reload');
 						});
 					},
 					error : function() {
@@ -65,24 +69,22 @@ zz.del = function(url){
 	} else {
 		$.messager.alert('温馨提示', '必须且仅能选择一条需要删除的纪录', 'warning');
 	}
-};
-
-zz.editListData = function(url, dialogName){
-	var seled = zz.get_checked(); //获取选中行
+},
+dgEdit: function(url, dlgName){
+	var seled = L.dgChecked(); //获取选中行
 	if (seled) {
 		//弹出窗口预览
 		url += "?id="+ seled.id;
 		var topWidth = window.top.document.body.clientWidth - 200;
 		var topHeight = window.top.document.body.clientHeight - 100;
 
-		var _dialogHtml = "<div id='"+dialogName+"'>";
-		_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+		var html = "<div id='"+dlgName+"'>";
+		html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
 				+ url + "'></iframe>";
-		_dialogHtml += "</div>";
+		html += "</div>";
 
-		var _dialog = window.top.jQuery(_dialogHtml).appendTo(
-				window.top.document.body);
-		_dialog.dialog({
+		var dlg = window.top.$(html).appendTo(window.top.document.body);
+		dlg.dialog({
 			title : '修改数据',
 			collapsible : false,
 			draggable : false,
@@ -94,31 +96,29 @@ zz.editListData = function(url, dialogName){
 			height : topHeight,
 			modal : true,
 			onClose : function() {
-				_dialog.dialog("destroy");
-				jQuery("#data_list").datagrid("reload");
+				dlg.dialog("destroy");
+				L.dg.datagrid("reload");
 			}
 		});
 	} else {
-		jQuery.messager.alert('温馨提示', '必须且仅能选择一条需要修改的数据！', 'warning');
+		$.messager.alert('温馨提示', '必须且仅能选择一条需要修改的数据！', 'warning');
 	}
-}
-
-zz.viewListData = function(url, dialogName) {
-	var selectedRow = zz.get_checked(); //获取选中行
-	if (selectedRow) {
+},
+dgView: function(url, dlgName) {
+	var seled = L.dgChecked(); //获取选中行
+	if (seled) {
 		//弹出窗口预览
-		url += "?id="+ selectedRow.id;
+		url += "?id="+ seled.id;
 		var topWidth = window.top.document.body.clientWidth - 200;
 		var topHeight = window.top.document.body.clientHeight - 100;
 
-		var _dialogHtml = "<div id='"+dialogName+"'>";
-		_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+		var html = "<div id='"+dlgName+"'>";
+		html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
 				+ url + "'></iframe>";
-		_dialogHtml += "</div>";
+		html += "</div>";
 
-		var _dialog = window.top.jQuery(_dialogHtml).appendTo(
-				window.top.document.body);
-		_dialog.dialog({
+		var dlg = window.top.$(html).appendTo(window.top.document.body);
+		dlg.dialog({
 			title : '查看详情',
 			collapsible : false,
 			draggable : false,
@@ -130,21 +130,47 @@ zz.viewListData = function(url, dialogName) {
 			height : topHeight,
 			modal : true,
 			onClose : function() {
-				_dialog.dialog("destroy");
+				dlg.dialog("destroy");
 			}
 		});
 	} else {
-		jQuery.messager.alert('温馨提示', '必须且仅能选择一条需要查看的数据！', 'warning');
+		$.messager.alert('温馨提示', '必须且仅能选择一条需要查看的数据！', 'warning');
 	}
-};
+},
+dgAdd: function(url, dlgName) {
+	//弹出窗口预览
+	var topWidth = window.top.document.body.clientWidth - 200;
+	var topHeight = window.top.document.body.clientHeight - 100;
 
-zz.column_isdel = function(){
+	var html = "<div id='"+dlgName+"'>";
+	html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+			+ url + "'></iframe>";
+	html += "</div>";
+
+	var dlg = window.top.jQuery(html).appendTo(window.top.document.body);
+	dlg.dialog({
+		title : '添加数据',
+		collapsible : false,
+		draggable : false,
+		resizable : false,
+		minimizable : false,
+		maximizable : false,
+		cache : false,
+		width : topWidth,
+		height : topHeight,
+		modal : true,
+		onClose : function() {
+			L.dg.datagrid('reload');
+			dlg.dialog("destroy");
+		}
+	});
+},
+columnIsdel: function(){
 	return {field: 'isdel', title: '状态', width: 100, align: 'center', formatter: function(val){
 		return val === 0 ? '正常' : '已删除';
 	}};
-};
-
-zz.column_base = function(cols){
+},
+columnBase: function(cols){
 	var arr = [{field: 'id', title: 'ID', width: 60, align: 'center'}];
 	if(cols && cols.length){
 		for(var i = 0; i < cols.length; i++){
@@ -153,33 +179,34 @@ zz.column_base = function(cols){
 	}
 	arr.push({field: 'ctime', title: '添加时间', width: 100, align: 'center'});
 	arr.push({field: 'utime', title: '更新时间', width: 100, align: 'center'});
-	arr.push(zz.column_isdel());
+	arr.push(L.columnIsdel());
 	return [arr];
-};
-
-return this;
-};
-
-
-
-function loadUrl(url){
-	window.location.href=url;
+},
+loadUrl: function(url){
+	window.location.href = url;
 }
+};
 
-function addListData(url,dialogName) {
+
+
+
+
+
+
+function addListDataTwo(url,dlgName) {
 	//弹出窗口预览
 	var topWidth = window.top.document.body.clientWidth - 200;
 	var topHeight = window.top.document.body.clientHeight - 100;
 
-	var _dialogHtml = "<div id='"+dialogName+"'>";
-	_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+	var html = "<div id='"+dlgName+"'>";
+	html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
 			+ url + "'></iframe>";
-	_dialogHtml += "</div>";
+	html += "</div>";
 
-	var _dialog = window.top.jQuery(_dialogHtml).appendTo(
+	var dlg = window.top.jQuery(html).appendTo(
 			window.top.document.body);
-	_dialog.dialog({
-		title : '添加数据',
+	dlg.dialog({
+		title : '新增数据',
 		collapsible : false,
 		draggable : false,
 		resizable : false,
@@ -190,55 +217,25 @@ function addListData(url,dialogName) {
 		height : topHeight,
 		modal : true,
 		onClose : function() {
-			jQuery("#data_list").datagrid('reload');
-			_dialog.dialog("destroy");
-		}
-	});
-}
-
-function addListDataTwo(url,dialogName) {
-	//弹出窗口预览
-	var topWidth = window.top.document.body.clientWidth - 200;
-	var topHeight = window.top.document.body.clientHeight - 100;
-
-	var _dialogHtml = "<div id='"+dialogName+"'>";
-	_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
-			+ url + "'></iframe>";
-	_dialogHtml += "</div>";
-
-	var _dialog = window.top.jQuery(_dialogHtml).appendTo(
-			window.top.document.body);
-	_dialog.dialog({
-		title : '添加数据',
-		collapsible : false,
-		draggable : false,
-		resizable : false,
-		minimizable : false,
-		maximizable : false,
-		cache : false,
-		width : topWidth,
-		height : topHeight,
-		modal : true,
-		onClose : function() {
-			_dialog.dialog("destroy");
+			dlg.dialog("destroy");
 			window.location.href="$!link.getContextPath()/tc/list.do";
 		}
 	});
 }
 
-function addListDataThree(url,dialogName) {
+function addListDataThree(url,dlgName) {
 	//弹出窗口预览
 	var topWidth = window.top.document.body.clientWidth - 200;
 	var topHeight = window.top.document.body.clientHeight - 100;
 
-	var _dialogHtml = "<div id='"+dialogName+"'>";
-	_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+	var html = "<div id='"+dlgName+"'>";
+	html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
 			+ url + "'></iframe>";
-	_dialogHtml += "</div>";
+	html += "</div>";
 
-	var _dialog = window.top.jQuery(_dialogHtml).appendTo(
+	var dlg = window.top.jQuery(html).appendTo(
 			window.top.document.body);
-	_dialog.dialog({
+	dlg.dialog({
 		title : '添加数据',
 		collapsible : false,
 		draggable : false,
@@ -250,25 +247,25 @@ function addListDataThree(url,dialogName) {
 		height : topHeight,
 		modal : true,
 		onClose : function() {
-			_dialog.dialog("destroy");
+			dlg.dialog("destroy");
 			window.location.href="$!link.getContextPath()/tv/list.do";
 		}
 	});
 }
 
-function editListDataTwo(url,dialogName) {
+function editListDataTwo(url,dlgName) {
 	//弹出窗口预览
 	var topWidth = window.top.document.body.clientWidth - 200;
 	var topHeight = window.top.document.body.clientHeight - 100;
 
-	var _dialogHtml = "<div id='"+dialogName+"'>";
-	_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+	var html = "<div id='"+dlgName+"'>";
+	html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
 			+ url + "'></iframe>";
-	_dialogHtml += "</div>";
+	html += "</div>";
 
-	var _dialog = window.top.jQuery(_dialogHtml).appendTo(
+	var dlg = window.top.jQuery(html).appendTo(
 			window.top.document.body);
-	_dialog.dialog({
+	dlg.dialog({
 		title : '添加数据',
 		collapsible : false,
 		draggable : false,
@@ -280,7 +277,7 @@ function editListDataTwo(url,dialogName) {
 		height : topHeight,
 		modal : true,
 		onClose : function() {
-			_dialog.dialog("destroy");
+			dlg.dialog("destroy");
 			window.location.href="$!link.getContextPath()/tv/list.do";
 		}
 	});
@@ -292,8 +289,8 @@ function editListDataTwo(url,dialogName) {
 
 
 
-function viewListData1(url,dialogName) {
-	var selectedRow = getChecked(); //获取选中行
+function viewListData1(url, dlgName) {
+	var selectedRow = dgChecked(); //获取选中行
 	if (selectedRow) {
 		//弹出窗口预览
 		url += "?id="+ selectedRow.id;
@@ -302,14 +299,14 @@ function viewListData1(url,dialogName) {
 		var topWidth = window.top.document.body.clientWidth - 200;
 		var topHeight = window.top.document.body.clientHeight - 100;
 
-		var _dialogHtml = "<div id='"+dialogName+"'>";
-		_dialogHtml += "	<iframe id='"+dialogName+"' name='"+dialogName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
+		var html = "<div id='"+dlgName+"'>";
+		html += "	<iframe id='"+dlgName+"' name='"+dlgName+"' width='100%' height='98%' frameborder='0' scrolling='auto' src='"
 				+ url + "'></iframe>";
-		_dialogHtml += "</div>";
+		html += "</div>";
 
-		var _dialog = window.top.jQuery(_dialogHtml).appendTo(
+		var dlg = window.top.jQuery(html).appendTo(
 				window.top.document.body);
-		_dialog.dialog({
+		dlg.dialog({
 			title : '查看详情',
 			collapsible : false,
 			draggable : false,
@@ -321,7 +318,7 @@ function viewListData1(url,dialogName) {
 			height : topHeight,
 			modal : true,
 			onClose : function() {
-				_dialog.dialog("destroy");
+				dlg.dialog("destroy");
 			}
 		});
 	} else {
