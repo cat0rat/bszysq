@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>洗车</title>
+<link href="$!link.getContextPath()/js/jquery-easyui-1.3.1/themes/default/easyui.css" rel="stylesheet" type="text/css">
+<link href="$!link.getContextPath()/js/jquery-easyui-1.3.1/themes/icon.css" rel="stylesheet" type="text/css">
+<script src="$!link.getContextPath()/js/jquery-easyui-1.3.1/jquery-1.8.0.min.js" type="text/javascript"></script>
+<script src="$!link.getContextPath()/js/jquery-easyui-1.3.1/jquery.easyui.min.js" type="text/javascript"></script>
+<script src="$!link.getContextPath()/js/jquery-easyui-1.3.1/src/jquery.parser.js" type="text/javascript"></script>
+<style type="text/css">
+	.menu-item {
+		height: 30px;
+		line-height: 30px;
+		padding-left: 10px;
+		cursor: pointer;
+		border-bottom: 1px solid #ddd;
+		overflow: hidden;
+	}
+</style>
+<script>
+function addTab(name, url) {
+	var tt = $('#tt');
+	if (tt.tabs('exists', name)) {
+		tt.tabs('select', name);
+	} else {
+		tt.tabs('add', {
+			title : name,
+			//注：使用iframe即可防止同一个页面出现js和css冲突的问题 
+			content : '<iframe name="' + name + '"id="' + name
+					+ '"src="$!link.getContextPath()' + url
+					+ '" width="100%" height="100%" frameborder="0" scrolling="auto" ></iframe>',
+			//href:'$!link.getContextPath()/js/jquery-easyui-1.3.1/demo/datagrid_data.json',
+			cache : false,
+			closable : true,
+			tools : [{
+				iconCls:'icon-mini-refresh',
+				handler:function(){
+					refreshTab(url);
+				}
+			}]
+		});
+	}
+}
+
+function refreshTab(url){
+	//当前tab
+	var tt = $('#tt');
+	var current_tab = tt.tabs('getSelected');
+	tt.tabs('update',{
+	     tab:current_tab,
+	     options : {
+	          content : '<iframe scrolling="auto" frameborder="0" src="$!link.getContextPath()'
+	          	+ url + '" style="width:100%;height:100%;"></iframe>'
+	     }
+	});
+}
+</script>
+</head>
+<body class="easyui-layout">
+	<div data-options="region:'north',split:false,border:false" style="overflow: hidden; height: 60px;">
+		<table width="100%" border="0" cellpadding="0" cellspacing="0" style="height:100px;background: url($!link.getContextPath()/image/sys/left2.jpg) repeat-x;">
+			<tr>
+				<td></td>
+				<td>&nbsp;</td>
+				<td align="right">
+					<!--<img src="$!link.getContextPath()/image/sys/left3.jpg" width="446px" />-->
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3">
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div data-options="region:'west',split:false" title="菜单栏" style="width: 280px; padding: 1px; overflow: hidden;">
+		<div id="menus" class="easyui-accordion" data-options="fit:true,border:false">
+			#if($admin_rolex == 1)
+			<div title="文章管理" style="padding: 0px; overflow: auto;" data-options="selected:true">
+				<p class="menu-item" onclick="addTab('标签管理','/admin/arttag/list.do');">标签管理</p>
+			</div>
+			<div title="订单管理" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('查看全部订单','/orderManage/toAllOrders.do');">查看全部订单</p>
+				<p class="menu-item" onclick="addTab('申请退款的订单','/orderManage/toApplyRefund.do');">申请退款的订单</p>
+				<p class="menu-item" onclick="addTab('等待退款的订单','/orderManage/toWaitRefund.do');">等待退款的订单</p>
+			</div>
+			<div title="开发票管理" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('查看所有开发票申请','/recepit/toList.do');">查看所有开发票申请</p>
+				<p class="menu-item" onclick="addTab('等待处理开发票申请','/recepit/toWait.do');">等待处理开发票申请</p>
+			</div>
+			<div title="数据管理" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('洗车店管理','/washer/list.do');">洗车店管理</p>
+				<p class="menu-item" onclick="addTab('用户管理','/user/list.do');">用户管理</p>
+				<p class="menu-item" onclick="addTab('员工管理','/t_staff/list.do');">员工管理</p>
+				<p class="menu-item" onclick="addTab('系统操作日志','/oplog/tologs.do');">系统操作日志</p>
+			</div>
+			<div title="数据统计" style="padding: 0px;overflow: auto;">
+				<p class="menu-item" onclick="addTab('订单统计','/orderManage/toOrderCount.do');">订单统计</p>
+				<p class="menu-item" onclick="addTab('店面统计','/count/washer/toWasherCount.do');">店面统计</p>
+				<p class="menu-item" onclick="addTab('城市统计','/count/city/toCityCount.do');">城市统计</p>
+				<p class="menu-item" onclick="addTab('用户行为统计','/userAction/list.do');">用户行为统计</p>
+				<p class="menu-item" onclick="addTab('推广统计','/generalize/list.do');">推广统计</p>
+			</div>
+			<div title="后台账户管理" style="padding: 0px;overflow: auto;">
+				<p class="menu-item" onclick="addTab('后台账户管理','/sysUser/list.do');">后台账户管理</p>
+			</div>
+			<div title="规则和图片管理" style="padding: 0px;overflow: auto;">
+				<p class="menu-item" onclick="addTab('默认积分规则设置','/scaleConfig/list.do');">默认积分规则设置</p>
+				<p class="menu-item" onclick="addTab('店面积分规则设置','/washerScaleConfig/list.do');">店面积分规则设置</p>
+				<p class="menu-item" onclick="addTab('充值积分规则设置','/tc/list.do');">充值积分规则设置</p>
+				<p class="menu-item" onclick="addTab('会员等级规则设置','/tv/list.do');">会员等级规则设置</p>
+				<p class="menu-item" onclick="addTab('优惠券创建规则设置','/rule/coupon/creation/toCoupons.do');">优惠券创建规则设置</p>
+				<p class="menu-item" onclick="addTab('前端图片配置','/config/cimg/toConfig.do');">前端图片配置</p>
+			</div>
+			<div title="问卷调查" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('问卷调查模板设置','/template/questionnaire/toTemplate.do');">问卷调查模板设置</p>
+				<p class="menu-item" onclick="addTab('用户调查问卷反馈','/template/user/questionnaire/toQuestionnaires.do');">用户调查问卷反馈</p>
+			</div>
+			#elseif($admin_rolex == 2)
+			<div title="订单管理" style="padding: 0px; overflow: auto;" data-options="selected:true">
+				<p class="menu-item" onclick="addTab('查看全部订单','/orderManage/toAllOrders.do');">查看全部订单</p>
+				<p class="menu-item" onclick="addTab('申请退款的订单','/orderManage/toApplyRefund.do');">申请退款的订单</p>
+				<p class="menu-item" onclick="addTab('等待退款的订单','/orderManage/toWaitRefund.do');">等待退款的订单</p>
+			</div>
+			<div title="开发票管理" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('查看所有开发票申请','/recepit/toList.do');">查看所有开发票申请</p>
+				<p class="menu-item" onclick="addTab('等待处理开发票申请','/recepit/toWait.do');">等待处理开发票申请</p>
+			</div>
+			<div title="数据统计" style="padding: 0px;overflow: auto;">
+				<p class="menu-item" onclick="addTab('订单统计','/orderManage/toOrderCount.do');">订单统计</p>
+				<p class="menu-item" onclick="addTab('店面统计','/count/washer/toWasherCount.do');">店面统计</p>
+				<p class="menu-item" onclick="addTab('城市统计','/count/city/toCityCount.do');">城市统计</p>
+				<p class="menu-item" onclick="addTab('用户行为统计','/userAction/list.do');">用户行为统计</p>
+				<p class="menu-item" onclick="addTab('推广统计','/generalize/list.do');">推广统计</p>
+			</div>
+			#elseif($admin_rolex == 3)
+			<div title="订单管理" style="padding: 0px; overflow: auto;" data-options="selected:true">
+				<p class="menu-item" onclick="addTab('查看全部订单','/orderManage/toAllOrders.do');">查看全部订单</p>
+				<p class="menu-item" onclick="addTab('申请退款的订单','/orderManage/toApplyRefund.do');">申请退款的订单</p>
+				<p class="menu-item" onclick="addTab('等待退款的订单','/orderManage/toWaitRefund.do');">等待退款的订单</p>
+			</div>
+			<div title="开发票管理" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('查看所有开发票申请','/recepit/toList.do');">查看所有开发票申请</p>
+				<p class="menu-item" onclick="addTab('等待处理开发票申请','/recepit/toWait.do');">等待处理开发票申请</p>
+			</div>
+			#elseif($admin_rolex == 4)
+			<div title="数据管理" style="padding: 0px; overflow: auto;">
+				<p class="menu-item" onclick="addTab('洗车店管理','/washer/list.do');">洗车店管理</p>
+			</div>
+			#end
+			<div title="我的账户" style="padding: 0px; overflow: auto;" data-options="selected:true">
+				<p class="menu-item" onclick="addTab('修改登录密码','/sysUser/changePass.do');">修改登录密码</p>
+				<p class="menu-item" onclick="window.location.href='$!link.getContextPath()/sysUser/logout.do'">注销登录</p>
+            </div>
+		</div>
+	</div>
+	<div data-options="region:'center'" title="菜单列表"
+		style="overflow: hidden;">
+		<div id="tt" class="easyui-tabs" data-options="fit:true,border:false">
+			<div title="欢迎" style="padding: 20px; overflow: hidden;">
+				<div style="margin-top: 20px;">首页</div>
+			</div>
+			
+			<!--
+			<div title="Tab3" data-options="iconCls:'icon-reload',closable:true" style="overflow:hidden;padding:5px;">
+				<table id="tt2"></table> 
+			</div>
+			-->
+		</div>
+	</div>
+</body>
+</html>

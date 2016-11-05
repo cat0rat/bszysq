@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#app_name()</title> 
+#base()
+<script type="text/javascript">
+	function closeDialog() {
+		top.jQuery('#view_arttag').dialog('close');
+	}
+</script>
+</head>
+<body>
+
+<div id="Comm_ModelName">查看详情</div>
+<div id="Comm_Form">
+	<form id="data_form" method="post" style="width: 100%;">
+	<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td class="form_key">ID：</td>
+			<td class="form_input">$!{bean.id}</td>
+		</tr>
+		<tr>
+			<td class="form_key">标签名称：</td>
+			<td class="form_input">$!{bean.name}</td>
+		</tr>
+		<tr>
+			<td class="form_key">排序号：</td>
+			<td class="form_input">$!{bean.sortn}</td>
+		</tr>
+		<tr>
+			<td class="form_key">添加时间：</td>
+			<td class="form_input">$!{bean.ctimeStr}</td>
+		</tr>
+		<tr>
+			<td class="form_key">更新时间：</td>
+			<td class="form_input">$!{bean.utimeStr}</td>
+		</tr>
+		<tr>
+			<td class="form_key">状态：</td>
+			<td class="form_input">$!{bean.isdelStr}</td>
+		</tr>
+	</table>
+	</form>
+</div>
+<div style="text-align:center;padding:30px">
+	<a href="javascript:void(0)" class="easyui-linkbutton" onclick="closeDialog()" iconCls="icon-back">关闭</a>
+</div>
+
+</body>
+</html>
