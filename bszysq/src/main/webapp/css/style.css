@@ -1,0 +1,42 @@
+.Comm_Container {
+	
+}
+
+.Margin_02 {
+	margin-left: 2%;
+	margin-right: 2%;
+	_margin-left: 2%;
+	_margin-right: 2%;
+}
+
+/* 分类列表容器 */
+.Comm_Grid {
+	height: auto;
+}
+
+.Comm_Grid .grid_item {
+	width: 28%;
+	overflow: hidden;
+	height: auto;
+	float: left;
+	margin-left: 4%;
+	cursor: pointer;
+}
+
+.Comm_Grid .grid_img {
+	text-align: center;
+	padding: 10px 20px;
+}
+
+.Comm_Grid .grid_img IMG {
+	width: 100%;
+}
+
+.Comm_Grid .grid_title {
+	height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	text-align: center;
+}
+
+

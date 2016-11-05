@@ -1,0 +1,264 @@
+BODY {
+	width: 100%;
+	height: auto;
+	overflow: auto;
+}
+
+#logo {
+	height: 100px;
+	background-color: #1967AF;
+}
+
+#binner {
+	height: 30px;
+	background: url("../images/admin_nav_center.png");
+}
+
+#binner .nav {
+	width: 100px;	
+	line-height: 30px;
+	cursor: pointer;
+	text-align: center;
+	color: white; 
+}
+
+#binner .nav.on {
+	font-weight: bold; 
+	background: url("../images/admin_nav_bg.png"); 
+}
+
+#binner .nav_left {
+	width: 5px; 
+	height: 30px; 
+	background: url("../images/admin_nav_left.png");
+}
+
+#binner .nav_right {
+	width: 5px; 
+	height: 30px; 
+	background: url("../images/admin_nav_right.png");
+}
+
+.resources {
+	height: 30px;
+	line-height: 30px;
+	padding-left: 10px;
+	cursor: pointer;
+	border-bottom: 1px dashed #efefef;
+	background: url("../images/arrow_right.png") no-repeat 170px 7px; 
+	overflow: hidden;
+}
+
+.resources.on {
+	font-weight: bold; 
+	background-color: #FBEC88;
+}
+
+.resources.over {
+	font-weight: bold; 
+	background-color: #D0E5F5;
+}
+
+#main_footer {
+	height: 30px; 
+	line-height: 30px; 
+	border: 0px; 
+	text-align: center; 
+	font-weight: bold;
+	background: url("../images/footer_bg_blue.jpg") repeat-x;
+}
+
+/* 模块名称样式 */
+#Comm_ModelName {
+	margin: 5px 7px 0px 5px;
+	height: 26px;
+	padding-left: 5px;
+	line-height: 26px;
+	color: #15428b;
+	font-weight: bold;
+	font-size: 12px;
+	background: url('../images/panel_title_blue.png') repeat-x;
+	position: relative;
+	border: 1px solid #99BBE8;
+	text-align: left;
+}
+
+/* 列表搜索部分样式 */
+#Comm_Search {
+	margin: 0px 7px 0px 5px;
+	height: auto;
+	border-left: 1px solid #99BBE8;
+	border-right: 1px solid #99BBE8;
+	border-bottom: 1px solid #CCC;
+	background: #efefef;
+	overflow: hidden;
+}
+
+#Comm_Search div {
+	padding: 5px;
+}
+
+/* 树状菜单样式 */
+#Comm_Tree {
+	margin: 0px 7px 0px 5px;
+	height: auto;
+	border-left: 1px solid #99BBE8;
+	border-right: 1px solid #99BBE8;
+	border-bottom: 1px solid #CCC;
+	background: #efefef;
+	overflow: auto;
+}
+
+#Comm_Tree div {
+	padding: 3px 5px;
+}
+
+/* 列表样式 */
+#Comm_Grid {
+	margin: 0px 7px 0px 5px;
+	border-left: 1px solid #99BBE8;
+	border-right: 1px solid #99BBE8;
+	_width: 100%;
+}
+
+#Comm_Grid table {
+	white-space: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-size: medium;
+	font-variant: normal;
+	font-style: normal;
+	color: -webkit-text;
+	border: 0px;
+}
+
+#Comm_Grid table thead tr th {
+	height: 24px;
+	line-height: 24px;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px dotted #ccc;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 0px 5px;
+	background: #fafafa url('../images/datagrid_header_bg.gif') repeat-x left bottom;
+}
+
+#Comm_Grid table tbody tr td {
+	height: 24px;
+	line-height: 24px;
+	border-bottom: 1px dotted #ccc;
+	border-right: 1px dotted #ccc;
+	font-size: 12px;
+	padding: 0px 5px;
+	font-weight: normal;
+	cursor: pointer;
+	word-break:break-all;
+}
+
+#Comm_Grid table tbody tr.on {
+	background-color: #D0E5F5;
+}
+
+#Comm_Grid table tbody tr.checked {
+	background-color: #FBEC88;
+}
+
+#Comm_Grid .no_data {
+	width: 100%;
+	height: 40px; 
+	line-height: 40px;
+	text-align: center;
+}
+
+/* 分页样式 */
+#Comm_PageBar {
+	margin: 0px 7px 5px 5px;
+	padding: 0px 5px;
+	border: 1px solid #99BBE8;
+	border-top: 1px solid #CCC;
+	background: #efefef;
+}
+
+/* 表单样式 */
+#Comm_Form {
+	margin: 0px 7px 0px 5px;
+	border-left: 1px solid #99BBE8;
+	border-right: 1px solid #99BBE8;
+	_width: 100%;
+}
+
+#Comm_Form table {
+	width: 100%;
+	white-space: normal;
+	line-height: normal;
+	font-weight: normal;
+	font-size: medium;
+	font-variant: normal;
+	font-style: normal;
+	color: -webkit-text;
+	border: 0px;
+}
+
+#Comm_Form table td{
+	height: 20px;
+	line-height: 30px;
+	padding: 2px 0px;
+	font-size: 12px;
+	border-bottom: 1px solid #99BBE8;
+}
+
+#Comm_Form .form_key {
+	width: 20%;
+	text-align: right;
+	padding-right: 5px;
+	background: #efefef;
+}
+
+#Comm_Form .form_input {
+	width: 30%;
+	padding-left: 5px;
+}
+
+#Comm_Form .form_input INPUT{
+	width: 60%;
+}
+
+#Comm_Form .form_input TEXTAREA{
+	width: 60%;
+	height: 60px;
+}
+
+/* 选择样式 */
+.Comm_Choosed .item {
+	height: 24px;
+	border: 1px solid #cccccc;
+	margin: 1px 2px;
+}
+
+.Comm_Choosed .item .text {
+	float: left;
+	line-height: 24px;
+	padding: 0 5px;
+	overflow: hidden;
+	max-width: 200px;
+}
+
+.Comm_Choosed .item .close {
+	float: right;
+	width: 24px;
+	line-height: 24px;
+	text-align: center;
+	font-weight: bold;
+	border-left: 1px solid #cccccc;
+	cursor: pointer;
+	color: red;
+}
+
+.Comm_Choosed .item .chk {
+	float: left;
+	width: 24px;
+	line-height: 24px;
+	padding: 3px 0;
+	text-align: center;
+	border-right: 1px solid #cccccc;
+}

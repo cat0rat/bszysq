@@ -1,0 +1,57 @@
+HTML,BODY,FORM,DIV,H1,H2,H3,H4,H5,H6,LI,OL,P,UL {
+	PADDING-BOTTOM: 0px; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; PADDING-TOP: 0px
+}
+INPUT {
+	FONT-SIZE: 100%
+}
+BODY {
+	FONT-SIZE: 100%;
+	FONT-FAMILY: "宋体", Microsoft YaHei, Segoe UI, Tahoma, Arial, Verdana, sans-serif;
+	WIDTH: 100%;
+	HEIGHT: 100%;
+	MARGIN: 0 auto;
+	BACKGROUND-COLOR: #FFF;
+	FONT-SIZE: 12px;
+	OVERFLOW: hidden;
+}
+SELECT {
+	FONT-FAMILY: Microsoft YaHei, Segoe UI, Tahoma, Arial, Verdana, sans-serif
+}
+HTML {
+	BACKGROUND-COLOR: width; HEIGHT: 100%; 
+}
+A:link {
+	TEXT-DECORATION: none; COLOR: #333
+}
+A:visited {
+	TEXT-DECORATION: none; COLOR: #333
+}
+A:hover {
+	TEXT-DECORATION: none; COLOR: #333
+}
+A:active {
+	TEXT-DECORATION: none; COLOR: #333
+}
+IMG {
+	BORDER-BOTTOM: medium none; BORDER-LEFT: medium none; BORDER-TOP: medium none; BORDER-RIGHT: medium none
+}
+OL {
+	LIST-STYLE-TYPE: none
+}
+UL {
+	LIST-STYLE-TYPE: none;
+	overflow: hidden;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+.mw_100 {
+	min-width: 100px;
+	_min-width: 100px;
+}
