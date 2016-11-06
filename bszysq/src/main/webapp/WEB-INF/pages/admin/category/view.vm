@@ -20,12 +20,14 @@
 			<td class="form_input">$!{bean.id}</td>
 		</tr>
 		<tr>
-			<td class="form_key">标签名称：</td>
+			<td class="form_key">版块名称：</td>
 			<td class="form_input">$!{bean.name}</td>
 		</tr>
 		<tr>
-			<td class="form_key">排序号：</td>
-			<td class="form_input">$!{bean.sortn}</td>
+			<td class="form_key">配图：</td>
+			<td class="form_input">
+				<img id="imgshow" src="$!{bean.img}" style="width: 90px; height: 90px;">
+			</td>
 		</tr>
 		<tr>
 			<td class="form_key">添加时间：</td>
