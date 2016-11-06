@@ -2,6 +2,7 @@ package com.mao.ssm;
 
 import java.util.HashMap;
 
+@SuppressWarnings("rawtypes")
 public class AjaxResult {
 	String code = "-1";
 	String msg = "执行失败";
@@ -47,10 +48,14 @@ public class AjaxResult {
 	}
 	/** 设置数据, 不为空则标记成功, 否则失败 */
 	public void t_succ_not_null(Object data){
+		t_succ_not_null(data, null);
+	}
+	/** 设置数据, 不为空则标记成功, 否则失败 */
+	public void t_succ_not_null(Object data, String code){
 		if(data != null){
 			t_succ(data);
 		}else{
-			t_fail(null);
+			t_fail(code);
 		}
 	}
 	

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#app_name()</title>
+#base()
+<script type="text/javascript">
+	jQuery(function() {
+		L.dgLoadData({
+			dgOpt : {
+				url : '/admin/category/list.json',
+				columns : L.columnBase([ 
+					{field : 'name', title : '版块名称', width : 200, align : 'center'},
+					{field : 'img', title : '配图', width : 200, align : 'center', formatter: function(val){
+						if(val) return '<img style="width:90px; height: 90px;" src="' + val + '" >';
+					}} 
+				])
+			}
+		});
+	});
+	function search() {
+		L.dgSearch(function(ps) {
+			ps.name = jQuery("#name").val();
+		});
+	}
+	function add() { //新增数据
+		L.dgAdd('/admin/category/add.do', 'add_category');
+	}
+	function edit() { //修改数据
+		L.dgEdit('/admin/category/edit.do', 'edit_category');
+	}
+	function del() { //删除数据  
+		L.dgDel('/admin/category/delete.json');
+	}
+	function view() { //查看数据
+		L.dgView('/admin/category/view.do', 'view_category');
+	}
+</script>
+</head>
+<body>
+<div>
+	<div class="easyui-panel ui-search-panel" style="padding: 10px;" title="条件查询"
+		data-options="striped: true,collapsible:true,iconCls:'icon-search'">
+		<form id="searchForm">
+		<p class="ui-fields">
+			<label class="ui-label">查询条件:</label>
+			<input id="name" name="name" class="easyui-box ui-text" style="width: 100px;"> 
+			<a href="javascript:search();" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">搜索</a>
+		</p>
+		</form>
+	</div>
+	<div id="toolbar">
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="add()">新增</a>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="edit()">修改</a> 
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="del()">删除</a> 
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" plain="true" onclick="view()">详情</a>
+	</div>
+	<table id="data_list" title="数据列表"></table>
+</div>
+</body>
+</html>

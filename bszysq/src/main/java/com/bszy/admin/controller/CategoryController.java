@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,6 @@ import com.bszy.admin.service.CategoryService;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
-import com.mao.ssm.BasePage;
 import com.mao.ssm.FormValid;
 
 @Controller
@@ -25,29 +25,48 @@ public class CategoryController extends BaseController {
 	@Inject
 	private CategoryService service;
 	
+	// TODO page
+
+	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
+	public String list(){
+		return "admin/category/list";
+	}
+	@RequestMapping(value = "/add.do", method = RequestMethod.GET)
+	public String add(){
+		return "admin/category/add";
+	}
+	@RequestMapping(value = "/edit.do", method = RequestMethod.GET)
+	public String edit(Long id, Model model) {
+		model.addAttribute("bean", service.get(id));
+		return "admin/category/edit";
+	}
+	@RequestMapping(value = "/view.do", method = RequestMethod.GET)
+	public String view(Long id, Model model) {
+		model.addAttribute("bean", service.get(id));
+		return "admin/category/view";
+	}
+	
+	// TODO json
+	
 	@ResponseBody
-	@RequestMapping("/get.json")
+	@RequestMapping(value = "/get.json", method = RequestMethod.POST)
 	public void get_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Category mo = service.get(id);
-		ar.t_succ_not_null(mo);
+		ar.t_succ_not_null(service.get(id));
 	}
 	
 	@ResponseBody
-	@RequestMapping("/delete.json")
+	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
 	public void delete_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		boolean rb = service.delete(id);
-		ar.t_result(rb);
+		ar.t_result(service.delete(id));
 	}
 	
-
 	@ResponseBody
-	@RequestMapping("/list.json")
+	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
 	public void list_json(CategorySearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		BasePage<Category> bp = service.list(bs);
-		ar.t_succ_not_null(bp);
+		ar.t_succ_not_null(service.list(bs));
 	}
 
 	@ResponseBody
@@ -60,17 +79,18 @@ public class CategoryController extends BaseController {
 		}
 		String name = form.getName();
 		if(FormValid.isEmpty(name)){
-			ar.t_fail("5001");
+			ar.t_fail("6001");
 			return ;
 		}
 		if(!FormValid.range(name, 1, 20)){
-			ar.t_fail("5002");
+			ar.t_fail("6002");
 			return ;
 		}
 		
 		Category mo = new Category();
 		mo.init_add();
 		mo.setName(name);
+		mo.setImg(form.getImg());
 		mo.setSortn(MUtil.toInt(form.getSortn(), 0));
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
@@ -91,11 +111,11 @@ public class CategoryController extends BaseController {
 		}
 		String name = form.getName();
 		if(FormValid.isEmpty(name)){
-			ar.t_fail("5001");
+			ar.t_fail("6001");
 			return ;
 		}
 		if(!FormValid.range(name, 1, 20)){
-			ar.t_fail("5002");
+			ar.t_fail("6002");
 			return ;
 		}
 		
@@ -103,6 +123,7 @@ public class CategoryController extends BaseController {
 		mo.init_update();
 		mo.setId(id);
 		mo.setName(name);
+		mo.setImg(form.getImg());
 		mo.setSortn(MUtil.toInteger(form.getSortn()));
 		mo.setIsdel(MUtil.toInteger(form.getIsdel()));
 		boolean rb = service.update(mo);

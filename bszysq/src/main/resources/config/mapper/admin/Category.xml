@@ -15,7 +15,7 @@
 	<select id="list" resultType="Category" >
 		SELECT a.* FROM tbl_category a
 		<include refid="sql_list_where"></include>
-		<if test="limit != null">LIMIT #{start}, #{limit}</if>
+		<include refid="Common.sql_order_limit"></include>
 	</select>
 	<select id="lscount" resultType="Long" >
 		SELECT COUNT(0) FROM tbl_category a
@@ -27,7 +27,7 @@
 		SELECT a.* FROM tbl_category a WHERE a.id = #{id}
 	</select>
 	<delete id="delete">
-		DELETE FROM tbl_category a WHERE a.id = #{id}
+		DELETE FROM tbl_category WHERE id = #{id}
 	</delete>
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >

@@ -50,28 +50,24 @@ public class ArttagController extends BaseController {
 	// TODO json
 	
 	@ResponseBody
-	@RequestMapping("/get.json")
+	@RequestMapping(value = "/get.json", method = RequestMethod.POST)
 	public void get_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Arttag mo = service.get(id);
-		ar.t_succ_not_null(mo);
+		ar.t_succ_not_null(service.get(id));
 	}
 	
 	@ResponseBody
-	@RequestMapping("/delete.json")
+	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
 	public void delete_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		boolean rb = service.delete(id);
-		ar.t_result(rb);
+		ar.t_result(service.delete(id));
 	}
 	
-
 	@ResponseBody
-	@RequestMapping("/list.json")
+	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
 	public void list_json(ArttagSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		BasePage<Arttag> bp = service.list(bs);
-		ar.t_succ_not_null(bp);
+		ar.t_succ_not_null(service.list(bs));
 	}
 
 	@ResponseBody

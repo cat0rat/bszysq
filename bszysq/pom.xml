@@ -342,10 +342,18 @@
 		    <version>0.1.53</version>
 		</dependency>
 		
+		<!-- 个推 消息推送 -->
 		<dependency>
 		    <groupId>com.gexin.platform</groupId>
 		    <artifactId>gexin-rp-sdk-http</artifactId>
 		    <version>4.0.1.2</version>
+		</dependency>
+		
+		<!-- 七牛 图片云 -->
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>[7.0.0, 7.1.99]</version>
 		</dependency>
 		
 	</dependencies>

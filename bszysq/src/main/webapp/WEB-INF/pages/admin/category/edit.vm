@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>#app_name()</title> 
+#base()
+<script src="/js/admin/form.js" type="text/javascript"></script>
+<script type="text/javascript">
+F.dialogSelor = '#edit_category';
+F.updateUrl = '/admin/category/update.json';
+F.upimgOpt.upimgSelor = '#upimg';
+F.updateInit();
+</script>
+</head>
+<body>
+	<div id="Comm_ModelName">修改数据</div>
+	<div id="Comm_Form">
+		<form id="data_form" method="post" style="width: 100%;">
+			<input type="hidden" name="id" value="$!{bean.id}" />
+			<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td class="form_key">分类名称：</td>
+					<td class="form_input">
+						<input class="easyui-validatebox" type="text" name="name" value="$!{bean.name}"
+							data-options="required:true,validType:'illChart'" />
+					</td>
+				</tr>
+				<tr>
+					<td class="form_key">配图：</td>
+					<td class="form_input">
+						<img id="imgshow" src="$!{bean.img}" style="width: 90px; height: 90px;">
+						<input id="imgval" type="hidden" name="img" value="$!{bean.img}" />
+						<input id="upimg" type="button" value="选择图片" style="width: 60px;" />
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div style="text-align:center;padding:30px">
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="F.updateDo()" iconCls="icon-save">保存</a> 
+		<a href="javascript:void(0)" class="easyui-linkbutton" onclick="F.dialogClose()" iconCls="icon-back">关闭</a>
+	</div>
+</body>
+</html>
