@@ -42,13 +42,13 @@ public class BasePojo implements Serializable {
 		if(utime != null)
 			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(utime);
 		else
-			return "";
+			return null;
 	}
 	public String getCtimeStr() {
 		if(ctime != null)
 			return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(ctime);
 		else
-			return "";
+			return null;
 	}
 	public String getIsdelStr() {
 		return isdel != null && isdel == 0 ? "正常" : "已删除";

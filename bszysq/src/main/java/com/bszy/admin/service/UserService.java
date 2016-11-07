@@ -1,25 +1,17 @@
 package com.bszy.admin.service;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
 import com.bszy.admin.mapper.UserMapper;
 import com.bszy.admin.pojo.User;
+import com.mao.ssm.BaseService;
 
 @Service
-public class UserService {
-	
+public class UserService extends BaseService<User, UserMapper> {
 	@Inject
 	private UserMapper mapper;
+	public UserMapper mapper(){return mapper;}
 	
-	public User get(Long id){
-		return mapper.get(id);
-	}
-	
-	public List<User> list(){
-		return mapper.list();
-	}
 }

@@ -14,5 +14,10 @@ public class FormValid {
 		int len = val == null ? 0 : val.length();
 		return len >= min && len <= max;
 	}
+	public static boolean rangeAllowNull(String val, int min, int max){
+		if(val == null || val.length() == 0) return true;
+		int len = val.length();
+		return len >= min && len <= max;
+	}
 	
 }

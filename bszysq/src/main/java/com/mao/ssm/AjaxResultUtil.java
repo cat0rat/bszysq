@@ -2,11 +2,12 @@ package com.mao.ssm;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.GsonBuilder;
+import com.alibaba.fastjson.JSONObject;
 
 /**
  * Ajax返回值工具类
@@ -79,19 +80,23 @@ public class AjaxResultUtil {
 	// TODO 辅助
 	
 	/** 将对象转换成json字符串 */
-	public static String toJsonStr(Object vo){
-		//String result = new Gson().toJson(vo);
-		String result = new GsonBuilder()  
-			  .setDateFormat("yyyy-MM-dd HH:mm:ss")
-			  .create().toJson(vo);
+	public static String toJsonStr(Object mo){
+//		String result = new Gson().toJson(mo);
+//		String result = new GsonBuilder()  
+//			  .setDateFormat("yyyy-MM-dd HH:mm:ss")
+//			  .create().toJson(mo);
+		String result = JSONObject.toJSONString(mo);
 		return result;
 	}
 	
 	// TODO 测试
 	
 	public static void main(String[] args) {
-		Object vo = "你好";
-		System.out.println(toJsonStr(vo));
+		BasePojo mo = new BasePojo();
+		mo.setUtime(new Date());
+		mo.setIsdel(1);
+		System.out.println(toJsonStr(mo));
+		System.out.println(JSONObject.toJSONString(mo));
 	}
 
 }

@@ -9,8 +9,8 @@
 			dgOpt : {
 				url : '/admin/arttag/list.json',
 				columns : L.columnBase([ 
-					{field : 'name',title : '分类名称',width : 200,align : 'center'},
-					{field : 'sortn',xtitle : '排序号',width : 60,align : 'center'} 
+					{field : 'name', title : '标签名称', width : 200, align : 'center'},
+					{field : 'sortn', title : '排序号', width : 60, align : 'center'} 
 				])
 			}
 		});

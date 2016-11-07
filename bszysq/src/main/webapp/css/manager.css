@@ -207,6 +207,10 @@ BODY {
 	border-bottom: 1px solid #99BBE8;
 }
 
+#Comm_Form table td > span {
+	line-height: normal;
+}
+
 #Comm_Form .form_key {
 	width: 20%;
 	text-align: right;
@@ -222,6 +226,7 @@ BODY {
 #Comm_Form .form_input INPUT{
 	width: 60%;
 }
+#Comm_Form .form_input INPUT[type=radio]{ width: auto; }
 
 #Comm_Form .form_input TEXTAREA{
 	width: 60%;

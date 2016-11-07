@@ -166,9 +166,17 @@ dgAdd: function(url, dlgName) {
 	});
 },
 columnIsdel: function(){
-	return {field: 'isdel', title: '状态', width: 100, align: 'center', formatter: function(val){
-		return val === 0 ? '正常' : '已删除';
-	}};
+	return {field: 'isdelStr', title: '状态', width: 60, align: 'center'};
+},
+columnImg: function(opt){
+	return $.extend({field : 'img', title : '配图', width : 100, align : 'center', formatter: function(val){
+		if(val) return '<img style="width:90px; height: 90px;" src="' + val + '" >';
+	}}, opt);
+},
+columnHeadImg: function(opt){
+	return $.extend({field : 'head', title : '头像', width : 60, align : 'center', formatter: function(val){
+		if(val) return '<img style="width:60px; height: 60px;" src="' + val + '" >';
+	}}, opt);
 },
 columnBase: function(cols){
 	var arr = [{field: 'id', title: 'ID', width: 60, align: 'center'}];
@@ -177,9 +185,9 @@ columnBase: function(cols){
 			arr.push(cols[i]);
 		}
 	}
-	arr.push({field: 'ctime', title: '添加时间', width: 100, align: 'center'});
-	arr.push({field: 'utime', title: '更新时间', width: 100, align: 'center'});
-	arr.push(L.columnIsdel());
+	arr.push({field: 'ctimeStr', title: '添加时间', width: 100, align: 'center'});
+	arr.push({field: 'utimeStr', title: '更新时间', width: 100, align: 'center'});
+	arr.push({field: 'isdelStr', title: '状态', width: 60, align: 'center'});
 	return [arr];
 },
 loadUrl: function(url){

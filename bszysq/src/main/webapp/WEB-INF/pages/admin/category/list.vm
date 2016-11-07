@@ -10,9 +10,7 @@
 				url : '/admin/category/list.json',
 				columns : L.columnBase([ 
 					{field : 'name', title : '版块名称', width : 200, align : 'center'},
-					{field : 'img', title : '配图', width : 200, align : 'center', formatter: function(val){
-						if(val) return '<img style="width:90px; height: 90px;" src="' + val + '" >';
-					}} 
+					L.columnImg({field : 'img', title : '配图'})
 				])
 			}
 		});
