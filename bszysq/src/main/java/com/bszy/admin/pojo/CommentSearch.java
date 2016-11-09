@@ -1,33 +1,23 @@
 package com.bszy.admin.pojo;
 
-import com.mao.ssm.BasePojo;
+import com.mao.ssm.BaseSearch;
 
-/**
- * 评论
- * @author Mao 2016年10月29日 下午1:18:52
- */
-public class Comment extends BasePojo {
-	private static final long serialVersionUID = 1L;
+public class CommentSearch extends BaseSearch {
 	
 	private Long artid;			// 文章id
 	private String artname;		// 文章标题(关联)
+	
 	private Long authorid;		// 文章作者id
 	private String authornname;	// 文章作者昵称(关联)
-	private String authorhead;	// 文章作者头像(关联)
 	
 	private Long userid;		// 评论者id
 	private String usernname;	// 评论者昵称(关联)
-	private String userhead;	// 评论者头像(关联)
 	
 	private Long touserid;		// 对谁的评论id
 	private String tousernname;	// 对谁的评论昵称(关联)
-	private String touserhead;	// 对谁的评论头像(关联)
 	
 	private String context;		// 内容(<1000字符)
-	private String imgs;		// 多图(<5000字符，完整网址)
-	
-	private Long liken;		// 点赞数
-	private Long commn;		// 评论数
+	private Integer isdel;		// 删除标记, 0: 正常; 1: 已删除
 	
 	public Long getArtid() {
 		return artid;
@@ -53,12 +43,6 @@ public class Comment extends BasePojo {
 	public void setAuthornname(String authornname) {
 		this.authornname = authornname;
 	}
-	public String getAuthorhead() {
-		return authorhead;
-	}
-	public void setAuthorhead(String authorhead) {
-		this.authorhead = authorhead;
-	}
 	public Long getUserid() {
 		return userid;
 	}
@@ -70,24 +54,6 @@ public class Comment extends BasePojo {
 	}
 	public void setUsernname(String usernname) {
 		this.usernname = usernname;
-	}
-	public String getUserhead() {
-		return userhead;
-	}
-	public void setUserhead(String userhead) {
-		this.userhead = userhead;
-	}
-	public String getContext() {
-		return context;
-	}
-	public void setContext(String context) {
-		this.context = context;
-	}
-	public String getImgs() {
-		return imgs;
-	}
-	public void setImgs(String imgs) {
-		this.imgs = imgs;
 	}
 	public Long getTouserid() {
 		return touserid;
@@ -101,23 +67,17 @@ public class Comment extends BasePojo {
 	public void setTousernname(String tousernname) {
 		this.tousernname = tousernname;
 	}
-	public String getTouserhead() {
-		return touserhead;
+	public String getContext() {
+		return context;
 	}
-	public void setTouserhead(String touserhead) {
-		this.touserhead = touserhead;
+	public void setContext(String context) {
+		this.context = context;
 	}
-	public Long getLiken() {
-		return liken;
+	public Integer getIsdel() {
+		return isdel;
 	}
-	public void setLiken(Long liken) {
-		this.liken = liken;
+	public void setIsdel(Integer isdel) {
+		this.isdel = isdel;
 	}
-	public Long getCommn() {
-		return commn;
-	}
-	public void setCommn(Long commn) {
-		this.commn = commn;
-	}
-	
+
 }

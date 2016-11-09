@@ -16,6 +16,11 @@ function build_tree_art(cates, topics){
 				href:'/admin/article/page.do'
 			}
 		},{
+			text: '评论管理',
+			beans: {
+				href:'/admin/comment/page.do'
+			}
+		},{
 			text: '轮播管理',
 			beans: {
 				href:'/admin/slider/page.do'

@@ -1,5 +1,7 @@
 package com.mao.ssm;
 
+import com.mao.lang.MUtil;
+
 /**
  * 表单验证
  * @author Mao 2016年10月30日 下午11:52:05
@@ -24,4 +26,10 @@ public class FormValid {
 		return ids != null && ids.length() > 0;
 	}
 	
+	public static boolean isId(String id){
+		return MUtil.isId(id);
+	}
+	public static boolean isId(Long id){
+		return MUtil.isId(id);
+	}
 }

@@ -83,13 +83,8 @@ form .x_input.x-ipt3, form .x-ipt3{
     width: 555px;
 }
 
-form .x_input.x-ipt3, form .x-ipt3{
-	width: 465px;
-}
-
-form textarea.x-ipt3{
-	width: 463px;
-}
+form .x_input.x-ipt3, form .x-ipt3{ width: 465px; }
+form textarea.x-ipt3{width: 463px;}
 
 .ue-wpr{
 	display:inline-block;
