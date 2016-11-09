@@ -21,6 +21,7 @@
         <mapper resource="config/mapper/admin/Article.xml" />
         <mapper resource="config/mapper/admin/Slider.xml" />
         <mapper resource="config/mapper/admin/Comment.xml" />
+        <mapper resource="config/mapper/admin/Smscode.xml" />
         
         <mapper resource="config/mapper/app/AppCategory.xml" />
         <mapper resource="config/mapper/app/AppArticle.xml" />

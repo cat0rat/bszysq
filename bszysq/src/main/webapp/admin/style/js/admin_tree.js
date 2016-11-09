@@ -31,6 +31,11 @@ function build_tree_art(cates, topics){
 			beans: {
 				href:'/admin/user/page.do'
 			}
+		},{
+			text: '短信验证码管理',
+			beans: {
+				href:'/admin/smscode/page.do'
+			}
 //			},{
 //				text: '修改密码',
 //				beans: {

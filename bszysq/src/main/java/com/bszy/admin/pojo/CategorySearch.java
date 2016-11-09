@@ -6,7 +6,7 @@ public class CategorySearch extends BaseSearch {
 	
 	private String name;
 	private Integer sortn;	// 排序号(默认0, 倒序)
-	private Integer isdel;
+	private Integer isdel;	// 删除标记, 0: 正常; 1: 已删除
 
 	public String getName() {
 		return name;

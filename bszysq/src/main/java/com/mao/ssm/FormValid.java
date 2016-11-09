@@ -12,6 +12,10 @@ public class FormValid {
 		return val == null || val.length() == 0;
 	}
 	
+	public static boolean len(String val, int len){
+		return val != null && val.length() == len;
+	}
+	
 	public static boolean range(String val, int min, int max){
 		int len = val == null ? 0 : val.length();
 		return len >= min && len <= max;
@@ -26,10 +30,14 @@ public class FormValid {
 		return ids != null && ids.length() > 0;
 	}
 	
-	public static boolean isId(String id){
-		return MUtil.isId(id);
+	public static boolean isId(String val){
+		return MUtil.isId(val);
 	}
-	public static boolean isId(Long id){
-		return MUtil.isId(id);
+	public static boolean isId(Long val){
+		return MUtil.isId(val);
+	}
+	
+	public static boolean isMobile(String val){
+		return MUtil.isMobile(val);
 	}
 }

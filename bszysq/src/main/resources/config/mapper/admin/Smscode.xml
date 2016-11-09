@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bszy.admin.mapper.SmscodeMapper" >
+
+	<sql id="sql_list_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="mobile != null and mobile != ''">AND a.mobile LIKE CONCAT('%',#{mobile},'%' )</if>
+			<if test="typen != null">AND a.typen = #{typen}</if>
+			<if test="lastid != null">AND a.id > #{lastid}</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="list" resultType="Smscode" >
+		SELECT a.* FROM tbl_smscode a
+		<include refid="sql_list_where"></include>
+		<include refid="Common.sql_order_limit"></include>
+	</select>
+	<select id="lscount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_smscode a
+		<include refid="sql_list_where"></include>
+	</select>
+	
+	
+	<select id="get" resultType="Smscode" >
+		SELECT a.* FROM tbl_smscode a WHERE a.id = #{id}
+	</select>
+	<delete id="delete">
+		DELETE FROM tbl_smscode WHERE id = #{id}
+	</delete>
+	<delete id="dels">
+		DELETE FROM tbl_smscode WHERE id in(${ids})
+	</delete>
+	
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tbl_smscode(mobile, code, typen, ctime, isdel) 
+		VALUES(#{mobile}, #{code}, #{typen}, #{ctime}, #{isdel})
+	</insert>
+	<update id="update" >
+		UPDATE tbl_smscode a
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="mobile != null">a.mobile = #{mobile},</if>
+			<if test="code != null">a.code = #{code},</if>
+			<if test="typen != null">a.typen = #{typen},</if>
+			<if test="isdel != null">a.isdel = #{isdel},</if>
+		</trim>
+		WHERE a.id = #{id}
+	</update>
+	
+    
+</mapper>
