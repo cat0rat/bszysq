@@ -20,4 +20,8 @@ public class FormValid {
 		return len >= min && len <= max;
 	}
 	
+	public static boolean isIds(String ids){
+		return ids != null && ids.length() > 0;
+	}
+	
 }

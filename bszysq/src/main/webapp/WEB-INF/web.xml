@@ -35,6 +35,20 @@
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 	
+	<!-- // TODO 过滤字符集 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
 	<session-config>
 	  <session-timeout>60</session-timeout>
 	</session-config>

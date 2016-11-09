@@ -9,6 +9,7 @@ public interface BaseMapper<T extends BasePojo> {
 	public Long add(T mo);
 	public Long update(T mo);
 	public Long delete(Long id);
+	public Long dels(Map<String, Object> map);
 	public List<T> list();
 	
 	// TODO 查询 

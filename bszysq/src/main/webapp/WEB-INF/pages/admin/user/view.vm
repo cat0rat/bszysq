@@ -15,32 +15,57 @@
 <div id="Comm_Form">
 	<form id="data_form" method="post" style="width: 100%;">
 	<table border="0" cellpadding="0" cellspacing="0">
-		<tr>
-			<td class="form_key">ID：</td>
-			<td class="form_input">$!{bean.id}</td>
-		</tr>
-		<tr>
-			<td class="form_key">版块名称：</td>
-			<td class="form_input">$!{bean.name}</td>
-		</tr>
-		<tr>
-			<td class="form_key">配图：</td>
+		<tr><td class="form_key">ID：</td>
+			<td class="form_input">$!{bean.id}</td></tr>
+		<tr><td class="form_key">用户名：</td>
+			<td class="form_input">$!{bean.name}</td></tr>
+		<tr><td class="form_key">昵称：</td>
+			<td class="form_input">$!{bean.nname}</td></tr>
+			
+		<tr><td class="form_key">微信unionid：</td>
+			<td class="form_input">$!{bean.unionid}</td></tr>
+		<tr><td class="form_key">微信openid：</td>
+			<td class="form_input">$!{bean.openid}</td></tr>
+			
+		<tr><td class="form_key">认证状态：</td>
+			<td class="form_input">$!{bean.authxStr}</td></tr>
+		<tr><td class="form_key">手机号：</td>
+			<td class="form_input">$!{bean.mobile}</td></tr>
+		<tr><td class="form_key">姓名：</td>
+			<td class="form_input">$!{bean.tname}</td></tr>
+		<tr><td class="form_key">城市编码：</td>
+			<td class="form_input">$!{bean.citycode}</td></tr>
+		<tr><td class="form_key">城市：</td>
+			<td class="form_input">$!{bean.city}</td></tr>
+		<tr><td class="form_key">地址：</td>
+			<td class="form_input">$!{bean.address}</td></tr>
+			
+		<tr><td class="form_key">性别：</td>
+			<td class="form_input">$!{bean.sexStr}</td></tr>
+		<tr><td class="form_key">头像：</td>
 			<td class="form_input">
-				<img id="imgshow" src="$!{bean.img}" style="width: 90px; height: 90px;">
-			</td>
-		</tr>
-		<tr>
-			<td class="form_key">添加时间：</td>
-			<td class="form_input">$!{bean.ctimeStr}</td>
-		</tr>
-		<tr>
-			<td class="form_key">更新时间：</td>
-			<td class="form_input">$!{bean.utimeStr}</td>
-		</tr>
-		<tr>
-			<td class="form_key">状态：</td>
-			<td class="form_input">$!{bean.isdelStr}</td>
-		</tr>
+				<img id="imgshow" src="$!{bean.head}" style="width: 90px; height: 90px;">
+			</td></tr>
+		<tr><td class="form_key">邮箱：</td>
+			<td class="form_input">$!{bean.email}</td></tr>
+		<tr><td class="form_key">生日：</td>
+			<td class="form_input">$!{bean.birthStr}</td></tr>
+		<tr><td class="form_key">最后一次登录时间：</td>
+			<td class="form_input">$!{bean.ltimeStr}</td></tr>
+		<tr><td class="form_key">最后一次登录ip：</td>
+			<td class="form_input">$!{bean.lip}</td></tr>
+		<tr><td class="form_key">登录次数：</td>
+			<td class="form_input">$!{bean.lcount}</td></tr>
+		<tr><td class="form_key">登录状态：</td>
+			<td class="form_input">$!{bean.lstatStr}</td></tr>
+			
+		
+		<tr><td class="form_key">添加时间：</td>
+			<td class="form_input">$!{bean.ctimeStr}</td></tr>
+		<tr><td class="form_key">更新时间：</td>
+			<td class="form_input">$!{bean.utimeStr}</td></tr>
+		<tr><td class="form_key">状态：</td>
+			<td class="form_input">$!{bean.isdelStr}</td></tr>
 	</table>
 	</form>
 </div>

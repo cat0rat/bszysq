@@ -1,0 +1,103 @@
+.hidden{
+	display: none;
+}
+#lookMgrDlg{
+	overflow: hidden;
+}
+
+form .x_input{
+	width: 200px;
+	margin-top: 5px;
+}
+.l_search{
+	padding: 0px; 
+	margin: 0px;
+	padding-top: 0px;
+	overflow: hidden;
+}
+.l_search_tr{
+    height: 20px;   /* 另外添加的 */
+	padding-left: 20px;
+	margin-top: 10px; 
+}
+.l_search_td{
+	width: 240px;
+	float:left; 
+	margin-left:0px;
+}
+.l_search_btn{
+	float:left; 
+	margin-left:0px;
+}
+.l_search_tr .x_input{
+	width: 150px;
+	margin-top: 0px;
+}
+.y_clear{
+	clear: both;
+	margin: 0px;
+	padding: 0px;
+}
+
+/** 表单及表格 */
+.dlg-tb{
+	padding:7px 11px 0 7px; 
+}
+.dlg-tb .t-r{
+	padding-left: 10px;
+}
+.dialog-button {
+	text-align: center !important;
+}
+
+/** 
+.dlg-frm{
+    width: 520px;
+    margin: 0px auto;
+}
+.dlg-frm .t-r{
+	padding-left: 10px;
+}
+ */
+.dlg-frm .t-memo{
+	font-size: 11px;
+	color: #999;
+}
+.dlg-frm .t-img-sec{
+	padding-left: 42px;
+}
+.dlg-frm .t-img{
+	width: 64px;
+	height: 64px;
+}
+
+form .x_input.x-ipt3, form .x-ipt3{
+	width: 440px;
+}
+
+.dlg-frm{
+    width: 600px;
+    margin: 0px auto;
+}
+.dlg-frm.t-min{
+    width: 555px;
+}
+
+form .x_input.x-ipt3, form .x-ipt3{
+	width: 465px;
+}
+
+form textarea.x-ipt3{
+	width: 463px;
+}
+
+.ue-wpr{
+	display:inline-block;
+	position:relative;
+	width:466px;
+}
+.ue-srt{
+	width:466px;
+	height:400px;
+	display:inline-block;
+}

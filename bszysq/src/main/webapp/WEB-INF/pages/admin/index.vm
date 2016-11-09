@@ -76,11 +76,12 @@ function refreshTab(url){
 	<div data-options="region:'west',split:false" title="菜单栏" style="width: 280px; padding: 1px; overflow: hidden;">
 		<div id="menus" class="easyui-accordion" data-options="fit:true,border:false">
 			#if($admin_rolex == 1)
-			<div title="文章管理" style="padding: 0px; overflow: auto;">
+			<div title="文章管理" style="padding: 0px; overflow: auto;" data-options="selected:true">
 				<p class="menu-item" onclick="addTab('标签管理','/admin/arttag/list.do');">标签管理</p>
 				<p class="menu-item" onclick="addTab('版块管理','/admin/category/list.do');">版块管理</p>
+				<p class="menu-item" onclick="addTab('文章管理','/admin/article/list.do');">文章管理</p>
 			</div>
-			<div title="用户管理" style="padding: 0px;overflow: auto;" data-options="selected:true">
+			<div title="用户管理" style="padding: 0px;overflow: auto;">
 				<p class="menu-item" onclick="addTab('用户管理','/admin/user/list.do');">用户管理</p>
 			</div>
 			<div title="后台账户管理" style="padding: 0px;overflow: auto;">

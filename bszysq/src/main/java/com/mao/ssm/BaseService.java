@@ -1,5 +1,6 @@
 package com.mao.ssm;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,13 @@ public class BaseService<T extends BasePojo, M extends BaseMapper<T>> {
 	public boolean delete(Long id){
 		Long rn = mapper().delete(id);
 		return rn != null && rn == 1;
+	}
+	@Transactional
+	public boolean dels(String ids){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("ids", ids);
+		Long rn = mapper().dels(map);
+		return rn != null && rn > 0;
 	}
 	@Transactional
 	public boolean add(T mo){

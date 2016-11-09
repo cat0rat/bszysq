@@ -16,7 +16,6 @@ import com.bszy.admin.service.ArttagService;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
-import com.mao.ssm.BasePage;
 import com.mao.ssm.FormValid;
 
 @Controller
@@ -27,7 +26,11 @@ public class ArttagController extends BaseController {
 	private ArttagService service;
 	
 	// TODO page
-
+	
+	@RequestMapping(value = {"/", "/page.do"}, method = RequestMethod.GET)
+	public String page(){
+		return "admin/arttag";
+	}
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public String list(){
 		return "admin/arttag/list";
@@ -64,6 +67,14 @@ public class ArttagController extends BaseController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/dels.json", method = RequestMethod.POST)
+	public void dels_json(String ids, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		if(ids == null || !FormValid.isIds(ids)){ ar.t_fail("1501"); return ; }
+		ar.t_result(service.dels(ids));
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
 	public void list_json(ArttagSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
@@ -74,19 +85,10 @@ public class ArttagController extends BaseController {
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
 	public void add_json(ArttagForm form, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		if(form == null){
-			ar.t_fail("1501");
-			return ;
-		}
+		if(form == null){ ar.t_fail("1501"); return ; }
 		String name = form.getName();
-		if(FormValid.isEmpty(name)){
-			ar.t_fail("5001");
-			return ;
-		}
-		if(!FormValid.range(name, 1, 20)){
-			ar.t_fail("5002");
-			return ;
-		}
+		if(FormValid.isEmpty(name)){ ar.t_fail("5001"); return ; }
+		if(!FormValid.range(name, 1, 20)){ ar.t_fail("5002"); return ; }
 		
 		Arttag mo = new Arttag();
 		mo.init_add();
@@ -100,24 +102,13 @@ public class ArttagController extends BaseController {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public void update_json(ArttagForm form, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		if(form == null){
-			ar.t_fail("1501");
-			return ;
-		}
+		if(form == null){ ar.t_fail("1501"); return ; }
+		
 		Long id = MUtil.toLong(form.getId());
-		if(!MUtil.isId(id)){
-			ar.t_fail("1501");
-			return ;
-		}
+		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ; }
 		String name = form.getName();
-		if(FormValid.isEmpty(name)){
-			ar.t_fail("5001");
-			return ;
-		}
-		if(!FormValid.range(name, 1, 20)){
-			ar.t_fail("5002");
-			return ;
-		}
+		if(FormValid.isEmpty(name)){ ar.t_fail("5001"); return ; }
+		if(!FormValid.range(name, 1, 20)){ ar.t_fail("5002"); return ; }
 		
 		Arttag mo = new Arttag();
 		mo.init_update();

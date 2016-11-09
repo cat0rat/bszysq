@@ -1,0 +1,215 @@
+
+/*表格样式*/
+/*a:visited{color:#fff;}*/
+.panel-header{
+	background:url(../img/tableTitle.png) repeat-x;
+	filter:none;
+}
+.panel-title{
+	color:#fff;
+}
+/** 窗口背景色补充-jzs */
+/**
+.window{
+	background-color: #79B3E1;
+	background: linear-gradient(to bottom,#79B3E1 0,#79B3E1 20%);
+}*/
+.window{
+	background-color: #79B3E1;
+	background: #3162c1;
+	filter:none;
+	background: linear-gradient(to bottom,#356ac8 0,#4d9fe8  100%);
+}
+.datagrid-header{
+	height:28px;
+	line-height:28px;
+	background:#def1ff;
+	border-color:#aed3ee;
+}
+.datagrid-header td, .datagrid-body td, .datagrid-footer td{
+	border-color:#aed3ee;
+}
+.pagination a.l-btn-plain{
+	border:1px #fff solid;
+}
+.datagrid-toolbar, .datagrid-pager{
+	background:#F2F2F2;
+}
+.datagrid-header, .datagrid-toolbar, .datagrid-pager, .datagrid-footer-inner{
+	border-color:#95b8e7;
+}
+.datagrid-header, .datagrid-td-rownumber{
+	filter:none;
+}
+/*表单样式*/
+.forms{
+	border:1px #aad3ef solid;
+	border-collapse:collapse;
+	background:#f4f5f7;
+}
+.forms caption{
+	height:30px;
+	line-height:30px;
+	font-size:14px;
+	color:#fff;
+	font-weight:bold;
+	text-align:left;
+	padding-left:5px;
+	background:url(../img/formTitle.png) repeat-x;
+}
+.forms tbody tr{
+	height:30px;
+	border-top:1px #aad3ef dashed;
+}
+.forms tbody th{
+	text-align:right;
+	font-size:12px;
+	font-weight:100;
+	border-right:1px #aad3ef solid;
+}
+.forms tbody td{
+	padding:5px;
+	border-left:1px #aad3ef solid;
+}
+.forms tfoot td{
+	height:39px;
+	background:url(../img/tfoot.png) repeat-x;
+}
+.inputBg{
+	background:url(../img/inputBg.png) repeat-x #fff top;
+	border:1px #8fb1df solid;
+	width:99%;
+}
+.input-text{
+	height:22px;
+}
+.input-select{
+	padding:2px
+}
+.input-textarea{ height:60px;}
+.btn{
+	height:20px;
+	line-height:20px;
+	padding:0 10px;
+	border:0;
+	border-radius:5px;
+	background:url(../img/inputBtn.png) repeat-x;
+	cursor:pointer;
+	margin-right:5px;
+	color:#fff;
+}
+.toolBtn{
+	display:inline-block;
+	padding:2px 5px 2px 20px;
+	color:#000;
+} 
+.select{
+	background:url(../img/select.png) no-repeat left center;
+}
+.add{
+	background:url(../img/add.png) no-repeat left center;
+}
+.checkOut{
+	background:url(../img/checkOut.png) no-repeat left center;
+}
+.info tbody th{
+	background:#d5e8f6;
+}
+
+/*20150123样式追加*/
+/*tab样式*/
+
+.tabs-header,
+.tabs-tool {
+  background-color: #356ac8;
+}
+
+.tabs li a.tabs-inner {
+  color: #ffffff;
+  background-color: #4d9fe8;
+  background: -webkit-linear-gradient(top,#4d9fe8 0,#356ac8 100%);
+  background: -moz-linear-gradient(top,#4d9fe8 0,#356ac8 100%);
+  background: -o-linear-gradient(top,#4d9fe8 0,#356ac8 100%);
+  background: linear-gradient(to bottom,#4d9fe8 0,#356ac8 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4d9fe8,endColorstr=#356ac8,GradientType=0);
+}
+
+.tabs li.tabs-selected a.tabs-inner {
+  background-color: #eff5ff;
+  color: #0e2c5e;
+  background: -webkit-linear-gradient(top,#eff5ff 0,#ffffff8 100%);
+  background: -moz-linear-gradient(top,#eff5ff 0,#ffffff 100%);
+  background: -o-linear-gradient(top,#eff5ff 0,#ffffff 100%);
+  background: linear-gradient(to bottom,#eff5ff 0,#ffffff 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#ffffff,GradientType=0);
+}
+.tabs li a.tabs-close {
+  background: url('../../../easyui/themes/default/images/tabs_icons.png') no-repeat -34px center #fff;
+}
+.tabs li.tabs-selected a.tabs-close {
+  background: url('../../../easyui/themes/default/images/tabs_icons.png') no-repeat -34px center #eaf2ff;
+}
+.tabs-header,
+.tabs-scroller-left,
+.tabs-scroller-right,
+.tabs-tool,
+.tabs,
+.tabs-panels,
+.tabs li a.tabs-inner,
+.tabs li.tabs-selected a.tabs-inner,
+.tabs-header-bottom .tabs li.tabs-selected a.tabs-inner,
+.tabs-header-left .tabs li.tabs-selected a.tabs-inner,
+.tabs-header-right .tabs li.tabs-selected a.tabs-inner {
+  border-color: #356ac8;
+}
+/*按钮*/
+a.l-btn {
+  color: #ffffff;
+ /* border: 1px #3162c1 solid;*/
+}
+a:hover.l-btn {
+/* background-position: right -24px;*/
+  text-decoration: none;
+  color: #000;
+  /* border: 1px #4d9fe8 solid;*/
+}
+
+/*列表*/
+.datagrid-toolbar{
+	background: #3162c1;
+	background: linear-gradient(to bottom,#3162c1 0,#2373cc 100%);
+}
+
+
+.datagrid-header{
+	height:28px;
+	line-height:28px;
+	background: #b1c9eb;
+	border-color: #b1c9eb;
+}
+
+/* 菜单层级追加样式 */
+.menuBg1{background:#1faae3 !important; width:150px;}
+.menuBg1 .menu-active{background:#0092e2;border:#0092e2 1px solid;color:#fff;border-radius:0;}
+
+.menuBg2{background:#0092e2 !important; width:150px;}
+.menuBg2 .menu-item{border-bottom: 1px #ddd dashed !important}
+.menuBg2 .menu-active{background:#0a7dd2;border:#0a7dd2 1px solid;color:#fff;border-radius:0;}
+
+.menuBg3{background:#0a7dd2 !important; width:150px;}
+.menuBg3 .menu-item{border-bottom: 1px #ddd dashed !important}
+.menuBg3 .menu-active{background:#0564c7;border:#0564c7 1px solid;color:#fff;border-radius:0;}
+
+.layout-expand {
+  background-color: #356ac8;
+}
+.layout-expand-over {
+  background-color: #356ac8;
+}
+/** .datagrid-row-selected{background: #b1c9eb !important} */
+.datagrid-row-selected{background: #E5DE94 !important}
+table{
+	font-size: 12px;
+}

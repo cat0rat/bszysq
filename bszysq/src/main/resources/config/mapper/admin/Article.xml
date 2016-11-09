@@ -4,16 +4,95 @@
 
 <mapper namespace="com.bszy.admin.mapper.ArticleMapper">
 	
+	<sql id="sql_list_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="tagid != null and tagid != ''">AND a.tagid = #{tagid}</if>
+			<if test="tagname != null and tagname != ''">AND t.name LIKE CONCAT('%',#{tagname},'%' )</if>
+			<if test="cateid != null and cateid != ''">AND a.cateid = #{cateid}</if>
+			<if test="catename != null and catename != ''">AND c.name LIKE CONCAT('%',#{catename},'%' )</if>
+			<if test="userid != null and userid != ''">AND a.userid = #{userid}</if>
+			<if test="usernname != null and usernname != ''">AND u.nname LIKE CONCAT('%',#{usernname},'%' )</if>
+			<if test="recom != null and recom != ''">AND a.recom = #{recom}</if>
+			
+			<if test="lastid != null and lastid != ''">AND a.id > #{lastid}</if>
+			<if test="isdel != null and isdel != ''">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
 	<select id="list" resultType="Article" >
-		select * from tbl_article
+		SELECT a.*, t.name tagname, c.name catename, u.nname usernname 
+		FROM tbl_article a
+			left join tbl_arttag t on a.tagid = t.id
+			left join tbl_category c on a.cateid = c.id
+			left join tbl_user u on a.userid = u.id
+		<include refid="sql_list_where"></include>
+		<include refid="Common.sql_order_limit"></include>
+	</select>
+	<select id="lscount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_article a
+			left join tbl_arttag t on a.tagid = t.id
+			left join tbl_category c on a.cateid = c.id
+			left join tbl_user u on a.userid = u.id
+		<include refid="sql_list_where"></include>
 	</select>
 	
-	<select id="get" parameterType="Long" resultType="Article" >
-		select a.*, u.nname usernname, c.name catename
-		from tbl_article a left join tbl_user u on a.userid = u.id
+	
+	<select id="get" resultType="Article" >
+		SELECT a.*, t.name tagname, c.name catename, u.nname usernname 
+		FROM tbl_article a 
+			left join tbl_arttag t on a.tagid = t.id
 			left join tbl_category c on a.cateid = c.id
-		where a.id = #{id}
+			left join tbl_user u on a.userid = u.id
+		WHERE a.id = #{id}
 	</select>
+	<delete id="delete">
+		DELETE FROM tbl_article WHERE id = #{id}
+	</delete>
+	<delete id="dels">
+		DELETE FROM tbl_article WHERE id in(${ids})
+	</delete>
+	
+	<update id="recoms">
+		UPDATE tbl_article a set a.recom = #{recom} WHERE id in(${ids})
+	</update>
+	
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tbl_article(name, img, brief, context, imgs, 
+			sortn, tagids, cateid, userid, recom, 
+			lookn, liken, sharen, commn, favorn, 
+			ctime, utime, isdel) 
+		VALUES(#{name}, #{img}, #{brief}, #{context}, #{imgs},
+			#{sortn}, #{tagids}, #{cateid}, #{userid}, #{recom}, 
+			#{lookn}, #{liken}, #{sharen}, #{commn}, #{favorn}, 
+			#{ctime}, #{utime}, #{isdel})
+	</insert>
+	<update id="update" >
+		UPDATE tbl_article a
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null">a.name = #{name},</if>
+			<if test="img != null">a.img = #{img},</if>
+			<if test="brief != null">a.brief = #{brief},</if>
+			<if test="context != null">a.context = #{context},</if>
+			<if test="imgs != null">a.imgs = #{imgs},</if>
+			
+			<if test="sortn != null">a.sortn = #{sortn},</if>
+			<if test="tagids != null">a.tagids = #{tagids},</if>
+			<if test="cateid != null">a.cateid = #{cateid},</if>
+			<if test="userid != null">a.userid = #{userid},</if>
+			<if test="recom != null">a.recom = #{recom},</if>
+			
+			<if test="lookn != null">a.lookn = #{lookn},</if>
+			<if test="liken != null">a.liken = #{liken},</if>
+			<if test="sharen != null">a.sharen = #{sharen},</if>
+			<if test="commn != null">a.commn = #{commn},</if>
+			<if test="favorn != null">a.favorn = #{favorn},</if>
+			
+			<if test="utime != null">a.utime = #{utime},</if>
+			<if test="isdel != null">a.isdel = #{isdel},</if>
+		</trim>
+		WHERE a.id = #{id}
+	</update>
 	
     
 </mapper>

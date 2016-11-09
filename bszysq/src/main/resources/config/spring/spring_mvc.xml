@@ -19,24 +19,26 @@
 
 	<!-- <mvc:view-controller path="/gsh" view-name="index"/> -->
 
-	<!-- 选择velocity为视图解释类 -->
+	<!-- 选择velocity为视图解释类 
 	<bean class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
 		<property name="prefix" value="/pages/" />
 		<property name="suffix" value=".vm" />
 		<property name="contentType" value="text/html; charset=UTF-8" />
-		<property name="cache" value="false" /><!--是否缓存模板 -->
-		<property name="requestContextAttribute" value="link" /><!--request属性引用名称 -->
-		<property name="exposeSpringMacroHelpers" value="true" /><!--是否开放request属性 -->
+		<property name="cache" value="false" />
+		<property name="requestContextAttribute" value="link" />
+		<property name="exposeSpringMacroHelpers" value="true" />
 		<property name="toolboxConfigLocation" value="/WEB-INF/classes/config/velocity/toolbox.xml" />
 	</bean>
+	-->
 	
 	<!-- velocity配置引擎 -->
+	<!-- 页面文件的路径,相对于webapp -->
+	<!-- 在配置文件中配置velocity属性
 	<bean class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
-		<!-- 页面文件的路径,相对于webapp -->
 		<property name="resourceLoaderPath" value="/WEB-INF" />
-		<!-- 在配置文件中配置velocity属性 -->
 		<property name="configLocation" value="classpath:config/velocity/velocity.properties" />
-	</bean>
+	</bean> 
+	-->
 	
 	<!-- // TODO 拦截器：事务、转发、错误 -->
 	<mvc:interceptors>
@@ -105,5 +107,10 @@
 	<!-- 支持上传文件 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+		
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 
 </beans> 

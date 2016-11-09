@@ -29,6 +29,9 @@
 	<delete id="delete" >
 		DELETE FROM tbl_arttag WHERE id = #{id}
 	</delete>
+	<delete id="dels">
+		DELETE FROM tbl_arttag WHERE id in(${ids})
+	</delete>
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
 		INSERT INTO tbl_arttag(name, sortn, ctime, utime, isdel) 

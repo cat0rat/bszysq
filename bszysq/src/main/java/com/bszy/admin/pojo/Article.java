@@ -14,9 +14,10 @@ public class Article extends BasePojo {
 	private String brief;		// 简介(<500字符)
 	private String context;		// 内容(<1万字)
 	private String imgs;		// 多图(<5000字符，完整网址)
+	
 	private Integer sortn;		// 排序号(默认0, 倒序)
-	private String tagids;		// 标签id(多英文逗号分隔)
-	private String tagnames;	// 标签名(多英文逗号分隔)(关联)
+	private String tagid;		// 标签id
+	private String tagname;		// 标签名(关联)
 	private Long cateid;		// 所属版块id
 	private String catename;	// 所属版块名称(关联)
 	private Long userid;		// 发布者id
@@ -28,6 +29,13 @@ public class Article extends BasePojo {
 	private Long sharen;	// 分享数
 	private Long commn;		// 评论数
 	private Long favorn;	// 收藏量
+	
+	public String getRecomStr() {
+		if(recom != null)
+			if(0 == recom) return "正常";
+			else if(1 == recom) return "推荐";
+		return "未知";
+	}
 	
 	public String getName() {
 		return name;
@@ -58,12 +66,6 @@ public class Article extends BasePojo {
 	}
 	public void setImgs(String imgs) {
 		this.imgs = imgs;
-	}
-	public String getTagids() {
-		return tagids;
-	}
-	public void setTagids(String tagids) {
-		this.tagids = tagids;
 	}
 	public Long getUserid() {
 		return userid;
@@ -119,12 +121,6 @@ public class Article extends BasePojo {
 	public void setBrief(String brief) {
 		this.brief = brief;
 	}
-	public String getTagnames() {
-		return tagnames;
-	}
-	public void setTagnames(String tagnames) {
-		this.tagnames = tagnames;
-	}
 	public String getCatename() {
 		return catename;
 	}
@@ -136,6 +132,18 @@ public class Article extends BasePojo {
 	}
 	public void setUsernname(String usernname) {
 		this.usernname = usernname;
+	}
+	public String getTagid() {
+		return tagid;
+	}
+	public void setTagid(String tagid) {
+		this.tagid = tagid;
+	}
+	public String getTagname() {
+		return tagname;
+	}
+	public void setTagname(String tagname) {
+		this.tagname = tagname;
 	}
 	
 }

@@ -29,6 +29,10 @@ public class UserController extends BaseController {
 	
 	// TODO page
 
+	@RequestMapping(value = {"/", "/page.do"}, method = RequestMethod.GET)
+	public String page(){
+		return "admin/user";
+	}
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public String list(){
 		return "admin/user/list";
@@ -62,6 +66,14 @@ public class UserController extends BaseController {
 	public void delete_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		ar.t_result(service.delete(id));
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/dels.json", method = RequestMethod.POST)
+	public void dels_json(String ids, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		if(ids == null || !FormValid.isIds(ids)){ ar.t_fail("1501"); return ; }
+		ar.t_result(service.dels(ids));
 	}
 	
 	@ResponseBody

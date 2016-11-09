@@ -35,37 +35,29 @@ public class User extends BasePojo {
 	private Integer lstat;	// 登录状态: 0: 离线; 1: 在线; 2: 隐身
 	
 	public String getAuthxStr() {
-		if(authx != null){
-			if(authx == 0){
-				return "已认证";
-			}else if(authx == 1){
-				return "未认证";
-			}else if(authx == 2){
-				return "申请认证";
-			}
-		}
+		if(authx != null)
+			if(authx == 0) return "已认证";
+			else if(authx == 1) return "未认证";
+			else if(authx == 2) return "申请认证";
 		return "未知";
 	}
 	public String getSexStr() {
-		if(sex != null){
-			if("1".equals(sex)){
-				return "男";
-			}else if("2".equals(sex)){
-				return "女";
-			}
-		}
+		if(sex != null)
+			if("1".equals(sex)) return "男";
+			else if("2".equals(sex)) return "女";
 		return "未知";
 	}
+	public String getBirthStr() {
+		return date_str(birth);
+	}
+	public String getLtimeStr() {
+		return datetime_str(ltime);
+	}
 	public String getLstatStr() {
-		if(lstat != null){
-			if(lstat == 0){
-				return "离线";
-			}else if(lstat == 1){
-				return "在线";
-			}else if(lstat == 2){
-				return "隐身";
-			}
-		}
+		if(lstat != null)
+			if(lstat == 0) return "离线";
+			else if(lstat == 1) return "在线";
+			else if(lstat == 2) return "隐身";
 		return "未知";
 	}
 	

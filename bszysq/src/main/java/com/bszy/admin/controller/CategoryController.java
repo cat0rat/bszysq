@@ -26,7 +26,10 @@ public class CategoryController extends BaseController {
 	private CategoryService service;
 	
 	// TODO page
-
+	@RequestMapping(value = {"/", "/page.do"}, method = RequestMethod.GET)
+	public String page(){
+		return "admin/category";
+	}
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public String list(){
 		return "admin/category/list";
@@ -63,6 +66,14 @@ public class CategoryController extends BaseController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/dels.json", method = RequestMethod.POST)
+	public void dels_json(String ids, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		if(ids == null || !FormValid.isIds(ids)){ ar.t_fail("1501"); return ; }
+		ar.t_result(service.dels(ids));
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
 	public void list_json(CategorySearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
@@ -73,19 +84,11 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
 	public void add_json(CategoryForm form, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		if(form == null){
-			ar.t_fail("1501");
-			return ;
-		}
-		String name = form.getName();
-		if(FormValid.isEmpty(name)){
-			ar.t_fail("6001");
-			return ;
-		}
-		if(!FormValid.range(name, 1, 20)){
-			ar.t_fail("6002");
-			return ;
-		}
+		if(form == null){ ar.t_fail("1501"); return ; }
+		
+		String name = form.getName();	// 名称
+		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
+		if(!FormValid.range(name, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Category mo = new Category();
 		mo.init_add();
@@ -100,24 +103,13 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
 	public void update_json(CategoryForm form, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		if(form == null){
-			ar.t_fail("1501");
-			return ;
-		}
+		if(form == null){ ar.t_fail("1501"); return ; }
 		Long id = MUtil.toLong(form.getId());
-		if(!MUtil.isId(id)){
-			ar.t_fail("1501");
-			return ;
-		}
+		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ; }
+		
 		String name = form.getName();
-		if(FormValid.isEmpty(name)){
-			ar.t_fail("6001");
-			return ;
-		}
-		if(!FormValid.range(name, 1, 20)){
-			ar.t_fail("6002");
-			return ;
-		}
+		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
+		if(!FormValid.range(name, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Category mo = new Category();
 		mo.init_update();
