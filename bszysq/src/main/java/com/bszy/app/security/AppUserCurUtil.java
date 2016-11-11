@@ -1,4 +1,4 @@
-package com.bszy.admin.security;
+package com.bszy.app.security;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,18 +8,18 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
-import com.bszy.admin.pojo.Admin;
+import com.bszy.app.pojo.AppUser;
 
 /**
  * 
  * @author Mao 2016年10月28日 上午1:39:12
  */
-public class AdminCurUtil {
+public class AppUserCurUtil {
 	
-	public static final String Cur_User = "admin_session";		// 当前用户在session中存储的名字
-	public static final String Cur_Shiro_User = "admin_shiro_session";	// 当前用户类型在shiroSession中存储的名字
-	public static final String Cur_Shiro_Auth = "admin_shiro_auth";		// 当前用户的权限在shirioSession中的名字
-	public static final String Cur_Rolex = "admin_rolex";		// 当前用户角色
+	public static final String Cur_User = "uc_session";		// 当前用户在session中存储的名字
+	public static final String Cur_Shiro_User = "uc_shiro_session";	// 当前用户类型在shiroSession中存储的名字
+	public static final String Cur_Shiro_Auth = "uc_shiro_auth";		// 当前用户的权限在shirioSession中的名字
+	public static final String Cur_Rolex = "uc_rolex";		// 当前用户角色
 	
 
 	/** 当前用户的 shiro session */
@@ -33,9 +33,9 @@ public class AdminCurUtil {
 	}
 
 	/** 当前登录用户的信息  */
-	public static AdminCurInfo cur_user() {
+	public static AppUserCurInfo cur_user() {
 		Object uo = cur_shiro_session().getAttribute(Cur_Shiro_User);
-		return uo != null ? (AdminCurInfo) uo : new AdminCurInfo();
+		return uo != null ? (AppUserCurInfo) uo : new AppUserCurInfo();
 	}
 
 	/** 获取当前用户权限shiro对象 */
@@ -49,20 +49,20 @@ public class AdminCurUtil {
 	}
 	
 	/** 保存用户信息到session */
-	public static AdminCurInfo to_session(HttpSession session, Admin admin){
+	public static AppUserCurInfo to_session(HttpSession session, AppUser appUser){
 		// 存入HttpSession
-		session.setAttribute(Cur_User, admin);
-		session.setAttribute(Cur_Rolex, admin.getRolex());
+		session.setAttribute(Cur_User, appUser);
+		session.setAttribute(Cur_Rolex, appUser.getRolex());
 		
 		// 将用户信息存入shiro session
-		AdminCurInfo ui = to_shiro_user(admin);
+		AppUserCurInfo ui = to_shiro_user(appUser);
 		cur_shiro_session().setAttribute(Cur_Shiro_User, ui);
 		return ui;
 	}
 	
 	/** 转换成shiro用户对象 */
-	public static AdminCurInfo to_shiro_user(Admin mo) {
-		AdminCurInfo ui = new AdminCurInfo();
+	public static AppUserCurInfo to_shiro_user(AppUser mo) {
+		AppUserCurInfo ui = new AppUserCurInfo();
 		if (mo != null) {
 			ui.setId(mo.getId());
 			ui.setName(mo.getName());
@@ -79,4 +79,5 @@ public class AdminCurUtil {
 			subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
 		}
 	}
+	
 }

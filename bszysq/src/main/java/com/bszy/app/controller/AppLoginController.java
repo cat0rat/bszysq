@@ -1,17 +1,12 @@
-package com.bszy.admin.controller;
-
-import java.io.IOException;
+package com.bszy.app.controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.pojo.Admin;
@@ -21,23 +16,10 @@ import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 
 @Controller
-@RequestMapping("/admin")
-public class LoginController {
+@RequestMapping("/app")
+public class AppLoginController {
 	@Inject
 	private AdminService service;
-	
-	// TODO page
-
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public void login(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.sendRedirect(request.getContextPath() + "/login.html");
-	}
-
-	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
-	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		AdminCurUtil.logout();
-		response.sendRedirect(request.getContextPath() + "/login.html");
-	}
 	
 	// TODO json
 	

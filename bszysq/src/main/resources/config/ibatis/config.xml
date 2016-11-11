@@ -23,6 +23,7 @@
         <mapper resource="config/mapper/admin/Comment.xml" />
         <mapper resource="config/mapper/admin/Smscode.xml" />
         
+        <mapper resource="config/mapper/app/AppUser.xml" />
         <mapper resource="config/mapper/app/AppCategory.xml" />
         <mapper resource="config/mapper/app/AppArticle.xml" />
         <!-- 

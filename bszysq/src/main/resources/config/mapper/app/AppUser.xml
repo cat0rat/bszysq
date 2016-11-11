@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bszy.admin.mapper.AppUserMapper">
+	
+	<sql id="sql_list_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="nname != null and nname != ''">AND a.nname LIKE CONCAT('%',#{nname},'%' )</if>
+			<if test="unionid != null and unionid != ''">AND a.unionid = #{unionid}</if>
+			<if test="openid != null and openid != ''">AND a.openid = #{openid}</if>
+			<if test="authx != null">AND a.authx = #{authx}</if>
+			<if test="mobile != null and mobile != ''">AND a.mobile LIKE CONCAT('%',#{mobile},'%' )</if>
+			<if test="tname != null and tname != ''">AND a.tname LIKE CONCAT('%',#{tname},'%' )</if>
+			<if test="city != null and city != ''">AND a.city LIKE CONCAT('%',#{city},'%' )</if>
+			<if test="sex != null">AND a.sex = #{sex}</if>
+			<if test="email != null and email != ''">AND a.email LIKE CONCAT('%',#{email},'%' )</if>
+			<if test="birth != null">AND a.birth = #{birth}</if>
+			<if test="lstat != null">AND a.lstat = #{lstat}</if>
+			<if test="lastid != null">AND a.id > #{lastid}</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="list" resultType="AppUser" >
+		SELECT a.* FROM tbl_user a
+		<include refid="sql_list_where"></include>
+		<include refid="Common.sql_order_limit"></include>
+	</select>
+	<select id="lscount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_user a
+		<include refid="sql_list_where"></include>
+	</select>
+	
+	
+	<select id="get" resultType="AppUser" >
+		SELECT a.* FROM tbl_user a WHERE a.id = #{id}
+	</select>
+	<delete id="delete">
+		DELETE FROM tbl_user WHERE id = #{id}
+	</delete>
+	<delete id="dels">
+		DELETE FROM tbl_user WHERE id in(${ids})
+	</delete>
+	
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tbl_user(name, pwd, nname, 
+			unionid, openid, 
+			authx, mobile, tname, citycode, city, address,
+			sex, head, email, birth, ltime, lip, lcount, lstat,
+			ctime, utime, isdel) 
+		VALUES(#{name}, #{pwd}, #{nname}, 
+			#{unionid}, #{openid},
+			#{authx}, #{mobile}, #{tname}, #{citycode}, #{city}, #{address},
+			#{sex}, #{head}, #{email}, #{birth}, #{ltime}, #{lip}, #{lcount}, #{lstat},
+			#{ctime}, #{utime}, #{isdel})
+	</insert>
+	<update id="update" >
+		UPDATE tbl_user a
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null">a.name = #{name},</if>
+			<if test="pwd != null">a.pwd = #{pwd},</if>
+			<if test="nname != null">a.nname = #{nname},</if>
+			
+			<if test="unionid != null">a.unionid = #{unionid},</if>
+			<if test="openid != null">a.openid = #{openid},</if>
+			
+			<if test="authx != null">a.authx = #{authx},</if>
+			<if test="mobile != null">a.mobile = #{mobile},</if>
+			<if test="tname != null">a.tname = #{tname},</if>
+			<if test="citycode != null">a.citycode = #{citycode},</if>
+			<if test="city != null">a.city = #{city},</if>
+			<if test="address != null">a.address = #{address},</if>
+			
+			<if test="sex != null">a.sex = #{sex},</if>
+			<if test="head != null">a.head = #{head},</if>
+			<if test="email != null">a.email = #{email},</if>
+			<if test="birth != null">a.birth = #{birth},</if>
+			<if test="lip != null">a.lip = #{lip},</if>
+			<if test="lcount != null">a.lcount = #{lcount},</if>
+			<if test="lstat != null">a.lstat = #{lstat},</if>
+			
+			<if test="utime != null">a.utime = #{utime},</if>
+			<if test="isdel != null">a.isdel = #{isdel},</if>
+		</trim>
+		WHERE a.id = #{id}
+	</update>
+	
+	
+	<select id="login" resultType="AppUser" >
+		select * from tbl_user where name = #{name} and pwd = #{pwd} limit 1
+	</select>
+    
+</mapper>
