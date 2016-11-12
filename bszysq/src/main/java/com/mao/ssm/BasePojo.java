@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.mao.lang.RelativeDateFormat;
+
 public class BasePojo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;		// ID
-	private Date ctime;		// 创建时间
-	private Date utime;		// 更新时间
-	private Integer isdel;	// 删除标记, 0: 正常; 1: 已删除
+	protected Long id;		// ID
+	protected Date ctime;		// 创建时间
+	protected Date utime;		// 更新时间
+	protected Integer isdel;	// 删除标记, 0: 正常; 1: 已删除
 	
 	public Long getId() {
 		return id;
@@ -45,7 +47,7 @@ public class BasePojo implements Serializable {
 		return datetime_str(ctime);
 	}
 	public String getIsdelStr() {
-		return isdel != null && isdel == 0 ? "正常" : "已删除";
+		return isdel != null ? (isdel == 0 ? "正常" : "已删除") : null;
 	}
 	
 	public static String date_str(Date date){
@@ -53,6 +55,10 @@ public class BasePojo implements Serializable {
 	}
 	public static String datetime_str(Date date){
 		return date == null ? null : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+	}
+	public static String datetime_dis_str(Date date){
+		if(date == null) return null;
+		return RelativeDateFormat.format_day(date);
 	}
 	
 	public void init_add(){

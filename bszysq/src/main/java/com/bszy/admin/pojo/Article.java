@@ -34,7 +34,10 @@ public class Article extends BasePojo {
 		if(recom != null)
 			if(0 == recom) return "正常";
 			else if(1 == recom) return "推荐";
-		return "未知";
+		return null;
+	}
+	public String getCtimeDisStr() {
+		return datetime_dis_str(ctime);
 	}
 	
 	public String getName() {

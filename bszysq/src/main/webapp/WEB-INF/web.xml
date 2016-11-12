@@ -46,7 +46,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>appUserShiroFilter</filter-name>
-		<url-pattern>/app/uc/*</url-pattern>
+		<url-pattern>/app/*</url-pattern>
 	</filter-mapping>
 	
 	<!-- // TODO 过滤字符集 -->

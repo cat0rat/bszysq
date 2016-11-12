@@ -12,7 +12,7 @@ public class AppCategory extends BasePojo {
 	private String name;		// 版块名称(1~500字符)
 	private Integer sortn;		// 排序号(默认0, 倒序)
 	private String img;			// 配图(<500字符，完整网址)
-	private String artid;		// 文章id
+	private Long artid;			// 文章id
 	private String artname;		// 文章标题
 	
 	public String getName() {
@@ -33,10 +33,10 @@ public class AppCategory extends BasePojo {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public String getArtid() {
+	public Long getArtid() {
 		return artid;
 	}
-	public void setArtid(String artid) {
+	public void setArtid(Long artid) {
 		this.artid = artid;
 	}
 	public String getArtname() {

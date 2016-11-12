@@ -9,7 +9,7 @@
 			<when test="orderby != null and orderby != ''">ORDER BY ${orderby}</when>
 			<otherwise>ORDER BY a.id desc</otherwise>
 		</choose>
-		<if test="limit != null">LIMIT #{start}, #{limit}</if>
+		<if test="limit != null and limit > 0">LIMIT #{start}, #{limit}</if>
 	</sql>
   
 </mapper>

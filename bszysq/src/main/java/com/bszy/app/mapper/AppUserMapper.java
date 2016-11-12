@@ -11,4 +11,6 @@ import com.mao.ssm.BaseMapper;
  */
 public interface AppUserMapper extends BaseMapper<AppUser> {
 	public AppUser login(Map<String, String> params);
+	
+	public AppUser mine(Long id);
 }

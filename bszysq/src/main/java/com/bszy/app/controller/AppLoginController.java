@@ -1,50 +1,56 @@
 package com.bszy.app.controller;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bszy.admin.pojo.Admin;
-import com.bszy.admin.security.AdminCurUtil;
-import com.bszy.admin.service.AdminService;
+import com.bszy.app.pojo.AppUser;
+import com.bszy.app.security.AppUserCurUtil;
+import com.bszy.app.service.AppUserService;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
+import com.mao.ssm.BaseController;
 
 @Controller
 @RequestMapping("/app")
-public class AppLoginController {
+public class AppLoginController extends BaseController {
 	@Inject
-	private AdminService service;
+	private AppUserService service;
 	
 	// TODO json
 	
 	@ResponseBody
-	@RequestMapping(value = "/login.json")
-	public AjaxResult login_json(String name, String pwd, HttpServletRequest request){
-		AjaxResult ar = new AjaxResult();
-		if(name == null || name.length() == 0){ 
-			ar.t_fail("1101");
-			return ar;
-		}
+	@RequestMapping(value = "/login.json", method = RequestMethod.POST)
+	public void login_json(String name, String pwd, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		if(name == null || name.length() == 0){ ar.t_fail("1101"); return ; }
 		UsernamePasswordToken token = new UsernamePasswordToken(name, pwd, false);
 		try {
 			SecurityUtils.getSubject().login(token);
-			// 当前登录用户ID
-			Long uid = MUtil.toLong(SecurityUtils.getSubject().getPrincipal(), 0L);
-			// 获取当前登录用户
-			Admin mo = service.get(uid);
-			// 存入 session
-			AdminCurUtil.to_session(request.getSession(), mo);
-			ar.t_succ();
+			Long uid = MUtil.toLong(SecurityUtils.getSubject().getPrincipal(), 0L);	// 当前登录用户ID
+			AppUser mo = service.get(uid);	// 获取当前登录用户
+			AppUserCurUtil.to_session(request.getSession(), mo);	// 存入 session
+			ar.t_succ_not_null(mo, "1101");
 		} catch (Exception e) {
 			ar.t_fail("1004");
 		}
-		return ar;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/uc/logout.json")
+	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		AjaxResult ar = ajaxResult(request);
+		AppUserCurUtil.logout();
+		ar.t_succ();
 	}
 	
 }

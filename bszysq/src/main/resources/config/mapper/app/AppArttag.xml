@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bszy.admin.mapper.ArttagMapper" >
+<mapper namespace="com.bszy.app.mapper.AppArttagMapper" >
 	
 	<sql id="sql_list_where">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
@@ -21,7 +21,6 @@
 		SELECT COUNT(0) FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
 	</select>
-	
 	<select id="list_idval" resultType="Arttag" >
 		SELECT a.id, a.name FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
@@ -32,27 +31,5 @@
 	<select id="get" resultType="Arttag" >
 		SELECT a.* FROM tbl_arttag a WHERE a.id = #{id}
 	</select>
-	<delete id="delete" >
-		DELETE FROM tbl_arttag WHERE id = #{id}
-	</delete>
-	<delete id="dels">
-		DELETE FROM tbl_arttag WHERE id in(${ids})
-	</delete>
-	
-	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
-		INSERT INTO tbl_arttag(name, sortn, ctime, utime, isdel) 
-		VALUES(#{name}, #{sortn}, #{ctime}, #{utime}, #{isdel})
-	</insert>
-	
-	<update id="update" >
-		UPDATE tbl_arttag a
-		<trim prefix="SET" suffixOverrides=",">
-			<if test="name != null">a.name = #{name},</if>
-			<if test="sortn != null">a.sortn = #{sortn},</if>
-			<if test="utime != null">a.utime = #{utime},</if>
-			<if test="isdel != null">a.isdel = #{isdel},</if>
-		</trim>
-		WHERE a.id = #{id}
-	</update>
     
 </mapper>

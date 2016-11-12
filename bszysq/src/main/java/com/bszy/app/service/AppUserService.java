@@ -19,4 +19,8 @@ public class AppUserService extends BaseService<AppUser, AppUserMapper> {
 	public AppUser login(Map<String, String> params){
 		return mapper.login(params);
 	}
+	
+	public AppUser mine(Long id){
+		return mapper.mine(id);
+	}
 }

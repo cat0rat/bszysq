@@ -15,7 +15,7 @@
 			<if test="usernname != null and usernname != ''">AND u.nname LIKE CONCAT('%',#{usernname},'%' )</if>
 			<if test="recom != null and recom != ''">AND a.recom = #{recom}</if>
 			
-			<if test="lastid != null and lastid != ''">AND a.id > #{lastid}</if>
+			<if test="lastid != null and lastid != ''">AND a.id &lt; #{lastid}</if>
 			<if test="isdel != null and isdel != ''">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>

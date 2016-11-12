@@ -25,7 +25,9 @@
         
         <mapper resource="config/mapper/app/AppUser.xml" />
         <mapper resource="config/mapper/app/AppCategory.xml" />
+        <mapper resource="config/mapper/app/AppArttag.xml" />
         <mapper resource="config/mapper/app/AppArticle.xml" />
+        <mapper resource="config/mapper/app/AppSlider.xml" />
         <!-- 
         <mapper resource="config/mapper/Common.xml" />
         <package name="config.mapper.admin"/>
