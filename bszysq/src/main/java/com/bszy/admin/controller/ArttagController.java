@@ -88,7 +88,7 @@ public class ArttagController extends BaseController {
 		if(form == null){ ar.t_fail("1501"); return ; }
 		String name = form.getName();
 		if(FormValid.isEmpty(name)){ ar.t_fail("5001"); return ; }
-		if(!FormValid.range(name, 1, 20)){ ar.t_fail("5002"); return ; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("5002"); return ; }
 		
 		Arttag mo = new Arttag();
 		mo.init_add();
@@ -108,7 +108,7 @@ public class ArttagController extends BaseController {
 		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ; }
 		String name = form.getName();
 		if(FormValid.isEmpty(name)){ ar.t_fail("5001"); return ; }
-		if(!FormValid.range(name, 1, 20)){ ar.t_fail("5002"); return ; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("5002"); return ; }
 		
 		Arttag mo = new Arttag();
 		mo.init_update();

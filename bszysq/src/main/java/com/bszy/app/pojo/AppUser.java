@@ -40,13 +40,14 @@ public class AppUser extends BasePojo {
 			if(authx == 0) return "已认证";
 			else if(authx == 1) return "未认证";
 			else if(authx == 2) return "申请认证";
-		return "未知";
+		return null;
 	}
 	public String getSexStr() {
 		if(sex != null)
 			if("1".equals(sex)) return "男";
 			else if("2".equals(sex)) return "女";
-		return "未知";
+			else if("0".equals(sex)) return "未知";
+		return null;
 	}
 	public String getBirthStr() {
 		return date_str(birth);
@@ -59,7 +60,7 @@ public class AppUser extends BasePojo {
 			if(lstat == 0) return "离线";
 			else if(lstat == 1) return "在线";
 			else if(lstat == 2) return "隐身";
-		return "未知";
+		return null;
 	}
 	
 	

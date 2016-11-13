@@ -22,6 +22,7 @@ public class Article extends BasePojo {
 	private String catename;	// 所属版块名称(关联)
 	private Long userid;		// 发布者id
 	private String usernname;	// 发布者昵称(关联)
+	private String userhead;	// 发布者头像(关联)
 	private Integer recom;		// 0: 正常; 1: 推荐(版块下显示)
 	
 	private Long lookn;		// 浏览量
@@ -147,6 +148,12 @@ public class Article extends BasePojo {
 	}
 	public void setTagname(String tagname) {
 		this.tagname = tagname;
+	}
+	public String getUserhead() {
+		return userhead;
+	}
+	public void setUserhead(String userhead) {
+		this.userhead = userhead;
 	}
 	
 }

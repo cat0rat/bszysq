@@ -21,7 +21,7 @@
 	</sql>
 	
 	<select id="list" resultType="Article" >
-		SELECT a.*, t.name tagname, c.name catename, u.nname usernname 
+		SELECT a.*, t.name tagname, c.name catename, u.nname usernname, u.head userhead
 		FROM tbl_article a
 			left join tbl_arttag t on a.tagid = t.id
 			left join tbl_category c on a.cateid = c.id
@@ -39,7 +39,7 @@
 	
 	
 	<select id="get" resultType="Article" >
-		SELECT a.*, t.name tagname, c.name catename, u.nname usernname 
+		SELECT a.*, t.name tagname, c.name catename, u.nname usernname, u.head userhead 
 		FROM tbl_article a 
 			left join tbl_arttag t on a.tagid = t.id
 			left join tbl_category c on a.cateid = c.id

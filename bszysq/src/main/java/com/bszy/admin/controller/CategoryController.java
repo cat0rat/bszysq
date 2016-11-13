@@ -88,7 +88,7 @@ public class CategoryController extends BaseController {
 		
 		String name = form.getName();	// 名称
 		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.range(name, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Category mo = new Category();
 		mo.init_add();
@@ -109,7 +109,7 @@ public class CategoryController extends BaseController {
 		
 		String name = form.getName();
 		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.range(name, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Category mo = new Category();
 		mo.init_update();

@@ -88,7 +88,7 @@ public class SliderController extends BaseController {
 		
 		String img = form.getImg();	// 配图(<500字符，完整网址)
 		if(FormValid.isEmpty(img)){ ar.t_fail("7001"); return ; }
-		if(!FormValid.range(img, 1, 500)){ ar.t_fail("7002"); return ; }
+		if(!FormValid.len(img, 1, 500)){ ar.t_fail("7002"); return ; }
 		
 		Slider mo = new Slider();
 		mo.init_add();
@@ -112,7 +112,7 @@ public class SliderController extends BaseController {
 		
 		String img = form.getImg();	// 配图(<500字符，完整网址)
 		if(FormValid.isEmpty(img)){ ar.t_fail("7001"); return ; }
-		if(!FormValid.range(img, 1, 500)){ ar.t_fail("7002"); return ; }
+		if(!FormValid.len(img, 1, 500)){ ar.t_fail("7002"); return ; }
 		
 		Slider mo = new Slider();
 		mo.init_update();

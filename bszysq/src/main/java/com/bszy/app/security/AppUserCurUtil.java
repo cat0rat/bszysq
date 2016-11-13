@@ -1,5 +1,7 @@
 package com.bszy.app.security;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
@@ -19,7 +21,10 @@ public class AppUserCurUtil {
 	public static final String Cur_User = "uc_session";		// 当前用户在session中存储的名字
 	public static final String Cur_Shiro_User = "uc_shiro_session";	// 当前用户类型在shiroSession中存储的名字
 	public static final String Cur_Shiro_Auth = "uc_shiro_auth";		// 当前用户的权限在shirioSession中的名字
-	public static final String Cur_Rolex = "uc_rolex";		// 当前用户角色
+	public static final String Cur_Rolex = "uc_rolex";			// 当前用户角色
+	public static final String Cur_Captcha = "app_captcha";		// 图形验证码
+	public static final String Cur_Smscode = "app_smscode";		// 短信验证码
+	public static final String Cur_Smscode_Time = "app_smscode_time";	// 短信验证码时间
 	
 
 	/** 当前用户的 shiro session */
@@ -78,6 +83,29 @@ public class AppUserCurUtil {
 		if (subject.isAuthenticated()) {
 			subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
 		}
+	}
+	
+	/** 保存图形验证码到session */
+	public static void captcha_to_session(HttpSession session, String captcha){
+		session.setAttribute(Cur_Captcha, captcha);
+	}
+	/** 当前session图形验证码 */
+	public static String cur_captcha(HttpSession session){
+		return (String)session.getAttribute(Cur_Captcha);
+	}
+	
+	/** 保存短信验证码到session */
+	public static void smscode_to_session(HttpSession session, String smscode){
+		session.setAttribute(Cur_Smscode, smscode);
+		session.setAttribute(Cur_Smscode_Time, new Date().getTime());
+	}
+	/** 当前session短信验证码 */
+	public static String cur_smscode(HttpSession session){
+		return (String)session.getAttribute(Cur_Smscode);
+	}
+	/** 当前session短信验证码时间 */
+	public static Long cur_smscode_time(HttpSession session){
+		return (Long)session.getAttribute(Cur_Smscode_Time);
 	}
 	
 }

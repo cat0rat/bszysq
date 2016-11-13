@@ -14,10 +14,11 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>frameWork</servlet-name>
-		<url-pattern>*.app</url-pattern>
-		<url-pattern>*.do</url-pattern>
 		<url-pattern>*.json</url-pattern>
+		<url-pattern>*.do</url-pattern>
 		<url-pattern>*.htm</url-pattern>
+		<url-pattern>*.app</url-pattern>
+		<url-pattern>*.ico</url-pattern>
 	</servlet-mapping>
 	
 	

@@ -2,10 +2,12 @@ package com.mao.ssm;
 
 import java.util.HashMap;
 
+import com.mao.ini.ErrorCodeUtil;
+
 @SuppressWarnings("rawtypes")
 public class AjaxResult {
 	String code = "-1";
-	String msg = "执行失败";
+	String msg;
 	Object data;
 	
 	public String getCode() {
@@ -15,6 +17,9 @@ public class AjaxResult {
 		this.code = code;
 	}
 	public String getMsg() {
+		if(msg == null && code != null){
+			msg = ErrorCodeUtil.getConfig().getValue(code);
+		}
 		return msg;
 	}
 	public void setMsg(String msg) {
@@ -29,11 +34,11 @@ public class AjaxResult {
 	
 	// 辅助方法
 	public void t_result(boolean rb){
-		if(rb){
-			t_succ();
-		}else{
-			t_fail(null);
-		}
+		t_result(rb, null);
+	}
+	public void t_result(boolean rb, String code){
+		if(rb) t_succ();
+		else t_fail(code);
 	}
 	
 	/** 标记成功 */

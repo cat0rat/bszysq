@@ -3,6 +3,7 @@ package com.bszy.app.mapper;
 import java.util.Map;
 
 import com.bszy.app.pojo.AppUser;
+import com.bszy.app.pojo.AppUserRePwd;
 import com.mao.ssm.BaseMapper;
 
 /**
@@ -13,4 +14,7 @@ public interface AppUserMapper extends BaseMapper<AppUser> {
 	public AppUser login(Map<String, String> params);
 	
 	public AppUser mine(Long id);
+	public AppUser simple(Long id);
+	public Long hasName(String name);
+	public Long repwd(AppUserRePwd params);
 }

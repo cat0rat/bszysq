@@ -1,6 +1,8 @@
 package com.mao.upimg;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.qiniu.common.QiniuException;
 import com.qiniu.http.Response;
@@ -32,6 +34,16 @@ public class UpImg {
 			token = auth.uploadToken(bucketname);
 		//}
 		return token;
+	}
+	
+	static Map<String, String> tokenns = new HashMap<String, String>();
+	/** 返回uptoken和ns(Url前缀) */
+	public static Map<String, String> tokenns(){
+		String token = getUpToken();
+		if(token == null || token.length() == 0) return null;
+		tokenns.put("ns", NS);
+		tokenns.put("uptoken", token);
+		return tokenns;
 	}
 	
 	public void upload(String filePath, String key) throws IOException {

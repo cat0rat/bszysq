@@ -45,6 +45,24 @@ public class AppLoginController extends BaseController {
 		}
 	}
 	
+	// 未登录
+	@ResponseBody
+	@RequestMapping(value = "/unlogin.json")
+	public void unlogin_json(HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		ar.t_fail("1001");
+	}
+	
+	// 登录超时
+	@ResponseBody
+	@RequestMapping(value = "/unauthor.json")
+	public void unauthor_json(HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		ar.t_fail("1005");
+	}
+	
+	// TODO 已登录
+	
 	@ResponseBody
 	@RequestMapping(value = "/uc/logout.json")
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {

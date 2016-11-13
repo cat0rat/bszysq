@@ -1,39 +1,116 @@
 $(function(){
-$('#login_btn').click(function(){
-	login();
-});
-function login(){
-	$.ajax({
-		type: 'POST',
-		url: '/app/login.json',
-		data: {name: 'test3', pwd: '111111'}
-	});
-}
-$('#logout_btn').click(function(){
-	logout();
-});
-function logout(){
-	$.ajax({
-		type: 'POST',
-		url: '/app/uc/logout.json'
-	});
-}
-// 执行函数
-$('[fn]').click(function(){
-	var tt = $(this);
-	var fn = tt.attr('fn');
-	fn && eval('(' + fn + ')');
-});
+
+//TODO 登录
+window.AppLogin = {
+	login: function(data){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/login.json';
+		opt.data = $.extend({
+			name: 'test3', 
+			pwd: '111111'
+		}, data);
+		opt.success = function(d) {
+			if(d.code == '200'){
+				AppUser.showUserInfo(d.data);
+			}
+		};
+		$.ajax(opt);
+	},
+	uc:{
+		logout: function(){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/logout.json';
+			opt.success = function(d) {
+				if(d.code == '200'){
+					AppUser.showUserInfo({});
+				}
+			};
+			$.ajax(opt);
+		}
+	}
+};
+
+//TODO 注册
+window.AppReg = {
+	smscode: function(id){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/smscode.json';
+		opt.data = {
+			mobile: '13370175853',
+			captcha: $('#captcha').val()
+		};
+		opt.success = function(d) {
+			if(d.code == '200'){
+				$('#smscode').val(d.data);
+			}
+		};
+		$.ajax(opt);
+	},
+	recaptcha: function(t){
+		if(!t.org_src) t.org_src = t.src;
+		t.src = t.org_src + '?' + Math.random();
+	},
+	reg: function(id){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/reg.json';
+		opt.data = {
+			name: '13370175853',
+			pwd: '111111',
+			smscode: $('#smscode').val() || '4444',
+			captcha: $('#captcha').val()
+		};
+		$.ajax(opt);
+	}
+};
+
 
 // TODO 用户
 window.AppUser = {
-	mine: function(data){
-		var opt = Cmm.build_opt();
-		opt.url = '/app/uc/user/mine.json';
-		opt.data = $.extend({
-			
-		}, data);
-		$.ajax(opt);
+	uc: {
+		mine: function(data){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/user/mine.json';
+			opt.data = $.extend({
+				
+			}, data);
+			opt.success = function(d) {
+				if(d.code == '200'){
+					AppUser.showUserInfo(d.data);
+				}
+			};
+			$.ajax(opt);
+		},
+		simple: function(id){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/user/simple.json';
+			opt.data = {
+				id: id
+			};
+			$.ajax(opt);
+		},
+		auth: function(id){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/user/auth.json';
+			opt.data = {
+				tname: '小懒猫',
+				mobile: '13370175853',
+				address: '高教圆'
+			};
+			$.ajax(opt);
+		},
+		repwd: function(){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/user/repwd.json';
+			opt.data = {
+				oldpwd:  $('#oldpwd').val(),
+				pwd:  $('#pwd').val()
+			};
+			$.ajax(opt);
+		}
+	},
+	showUserInfo: function(info){
+		$('#nname').html(info.nname || '');
+		$('#userhead')[0].src = info.head || '';
 	},
 	list: function(data){
 		var opt = Cmm.build_opt();
@@ -48,6 +125,14 @@ window.AppUser = {
 	get: function(id){
 		var opt = Cmm.build_opt();
 		opt.url = '/admin/arttag/get.json';
+		opt.data = {
+			id: id
+		};
+		$.ajax(opt);
+	},
+	simple: function(id){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/user/simple.json';
 		opt.data = {
 			id: id
 		};
@@ -79,6 +164,17 @@ window.AppUser = {
 		opt.data = {
 			id: id
 		};
+		$.ajax(opt);
+	}
+};
+
+// TODO 无需登录
+
+//TODO 上传
+window.AppImgstore = {
+	uptoken: function(id){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/imgstore/uptoken.json';
 		$.ajax(opt);
 	}
 };
@@ -155,6 +251,27 @@ window.AppArticle = {
 	}
 };
 
+//TODO 评论
+window.AppComment = {
+	list: function(data){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/comment/list.json';
+		opt.data = $.extend({
+			page: 1,
+			limit: 5
+		}, data);
+		$.ajax(opt);
+	},
+	get: function(id){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/comment/get.json';
+		opt.data = {
+			id: id
+		};
+		$.ajax(opt);
+	}
+};
+
 
 //TODO 轮播
 window.AppSlider = {
@@ -176,6 +293,13 @@ window.AppSlider = {
 		$.ajax(opt);
 	}
 };
+
+//执行函数
+$('[fn]').click(function(){
+	var tt = $(this);
+	var fn = tt.attr('fn');
+	fn && eval('(' + fn + ')');
+});
 
 window.Cmm = {
 	ajax: function(){},

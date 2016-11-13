@@ -88,7 +88,7 @@ public class CommentController extends BaseController {
 		
 		String context = form.getContext();	// 内容(<1000字符)
 		if(FormValid.isEmpty(context)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.range(context, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(!FormValid.len(context, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Long artid = MUtil.toLong(form.getArtid());
 		if(!FormValid.isId(artid)){ ar.t_fail("6003"); return ; }
@@ -121,7 +121,7 @@ public class CommentController extends BaseController {
 		
 		String context = form.getContext();	// 内容(<1000字符)
 		if(FormValid.isEmpty(context)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.range(context, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(!FormValid.len(context, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Long artid = MUtil.toLong(form.getArtid());
 		if(!FormValid.isId(artid)){ ar.t_fail("6003"); return ; }

@@ -111,7 +111,7 @@ public class ArticleController  extends BaseController {
 		
 		String name = form.getName();	// 名称
 		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.range(name, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Article mo = new Article();
 		mo.init_add();
@@ -132,7 +132,7 @@ public class ArticleController  extends BaseController {
 		
 		String name = form.getName();
 		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.range(name, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Article mo = new Article();
 		mo.init_update();

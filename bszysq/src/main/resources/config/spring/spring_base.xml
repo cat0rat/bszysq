@@ -123,9 +123,9 @@
 	<!-- Web应用中,Shiro可控制的Web请求必须经过Shiro主过滤器的拦截,Shiro对基于Spring的Web应用提供了完美的支持 -->  
 	<bean id="appUserShiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
 	    <property name="securityManager" ref="appUserSecurityManager"/>  
-	    <property name="loginUrl" value="/app/login.do"/>  
-	    <property name="successUrl" value="/app/index.do"/>  
-	    <property name="unauthorizedUrl" value="/app/login.do"/>  
+	    <property name="loginUrl" value="/app/unlogin.json"/>  
+	    <property name="successUrl" value="/app/index.json"/>  
+	    <property name="unauthorizedUrl" value="/app/unauthor.json"/>  
 	    <property name="filterChainDefinitions">  
 	        <value>
 				/app/uc/**=authc

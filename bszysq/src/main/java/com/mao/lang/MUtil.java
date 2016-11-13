@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1277,13 +1278,22 @@ public class MUtil extends StringUtil {
 		}
 		return null;
 	}
+	
+	/** 4位短信验证码 */
+	public static String smscode() {
+		Random random = new Random();
+		int x = random.nextInt(8999);
+		x = x + 1000;
+		return x + "";
+	}
 		
 	//TODO 测试
 	
 	public static void main(String[] args) {
 		
 		//System.out.println(isBirth("1989-11-05"));
-		System.out.println(toLeftSlash("12233\\rurrir"));
+//		System.out.println(toLeftSlash("12233\\rurrir"));
+		System.out.println(smscode());
 	}
 }
 

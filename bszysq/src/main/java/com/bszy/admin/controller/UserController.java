@@ -91,14 +91,14 @@ public class UserController extends BaseController {
 		
 		String name = form.getName();	// 用户名
 		if(FormValid.isEmpty(name)){ ar.t_fail("2102"); return ; }
-		if(!FormValid.range(name, 3, 16)){ ar.t_fail("2103"); return ; }
+		if(!FormValid.len(name, 3, 16)){ ar.t_fail("2103"); return ; }
 		
 		String nname = form.getNname();	// 昵称
-		if(!FormValid.rangeAllowNull(nname, 2, 16)){ ar.t_fail("2101"); return ; }
+		if(!FormValid.lenAllowNull(nname, 2, 16)){ ar.t_fail("2101"); return ; }
 		
 		String pwd = form.getPwd();	// 密码
 		if(FormValid.isEmpty(pwd)){ ar.t_fail("2104"); return ; }
-		if(!FormValid.range(pwd, 6, 16)){ ar.t_fail("2105"); return ; }
+		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("2105"); return ; }
 		pwd = DigestUtils.md5Hex(pwd);
 		
 		User mo = new User();
@@ -137,7 +137,7 @@ public class UserController extends BaseController {
 		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ; }
 		
 		String nname = form.getNname();
-		if(!FormValid.rangeAllowNull(nname, 2, 16)){ ar.t_fail("2101"); return ; }
+		if(!FormValid.lenAllowNull(nname, 2, 16)){ ar.t_fail("2101"); return ; }
 		
 		User mo = new User();
 		mo.init_update();
