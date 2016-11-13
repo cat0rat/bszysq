@@ -23,7 +23,7 @@ public class Comment extends BasePojo {
 	private String tousernname;	// 对谁的评论昵称(关联)
 	private String touserhead;	// 对谁的评论头像(关联)
 	
-	private String context;		// 内容(<1000字符)
+	private String content;		// 内容(<1000字符)
 	private String imgs;		// 多图(<5000字符，完整网址)
 	
 	private Long liken;		// 点赞数
@@ -77,11 +77,11 @@ public class Comment extends BasePojo {
 	public void setUserhead(String userhead) {
 		this.userhead = userhead;
 	}
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getImgs() {
 		return imgs;

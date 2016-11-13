@@ -86,9 +86,9 @@ public class CommentController extends BaseController {
 		AjaxResult ar = ajaxResult(request);
 		if(form == null){ ar.t_fail("1501"); return ; }
 		
-		String context = form.getContext();	// 内容(<1000字符)
-		if(FormValid.isEmpty(context)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.len(context, 1, 20)){ ar.t_fail("6002"); return ; }
+		String content = form.getContent();	// 内容(<1000字符)
+		if(FormValid.isEmpty(content)){ ar.t_fail("6001"); return ; }
+		if(!FormValid.len(content, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Long artid = MUtil.toLong(form.getArtid());
 		if(!FormValid.isId(artid)){ ar.t_fail("6003"); return ; }
@@ -105,7 +105,7 @@ public class CommentController extends BaseController {
 		mo.setUserid(userid);
 		mo.setTouserid(MUtil.toLong(form.getTouserid()));
 		
-		mo.setContext(context);
+		mo.setContent(content);
 		mo.setImgs(form.getImgs());
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
@@ -119,9 +119,9 @@ public class CommentController extends BaseController {
 		Long id = MUtil.toLong(form.getId());
 		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ; }
 		
-		String context = form.getContext();	// 内容(<1000字符)
-		if(FormValid.isEmpty(context)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.len(context, 1, 20)){ ar.t_fail("6002"); return ; }
+		String content = form.getContent();	// 内容(<1000字符)
+		if(FormValid.isEmpty(content)){ ar.t_fail("6001"); return ; }
+		if(!FormValid.len(content, 1, 20)){ ar.t_fail("6002"); return ; }
 		
 		Long artid = MUtil.toLong(form.getArtid());
 		if(!FormValid.isId(artid)){ ar.t_fail("6003"); return ; }
@@ -139,7 +139,7 @@ public class CommentController extends BaseController {
 		mo.setUserid(userid);
 		mo.setTouserid(MUtil.toLong(form.getTouserid()));
 		
-		mo.setContext(context);
+		mo.setContent(content);
 		mo.setImgs(form.getImgs());
 		mo.setIsdel(MUtil.toInteger(form.getIsdel()));
 		boolean rb = service.update(mo);

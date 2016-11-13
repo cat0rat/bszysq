@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bszy.app.form.AppRegForm;
 import com.bszy.app.pojo.AppUser;
 import com.bszy.app.pojo.AppUserRePwd;
 import com.bszy.app.security.AppUserCurUtil;
@@ -32,6 +34,48 @@ public class AppUserController extends BaseController {
 		AjaxResult ar = ajaxResult(request);
 		if(FormValid.isId(id)){ ar.t_fail("1501"); return ; }
 		ar.t_succ_not_null(service.simple(id));
+	}
+	
+	// 找回密码
+	@ResponseBody
+	@RequestMapping(value = "/user/findpwd.json", method = RequestMethod.POST)
+	public void reg_json(AppRegForm form, HttpServletRequest request, HttpSession session){
+		AjaxResult ar = ajaxResult(request);
+		if(form == null){ ar.t_fail("1501"); return ; }
+		
+		String name = form.getName();	// 帐号
+		if(FormValid.isEmpty(name)){ ar.t_fail("1201"); return ; }
+		if(!FormValid.isMobile(name)){ ar.t_fail("1202"); return ; }
+		
+		String pwd = form.getPwd();	// 密码
+		if(FormValid.isEmpty(pwd)){ ar.t_fail("1203"); return ; }
+		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("1204"); return ; }
+		
+		String captcha = form.getCaptcha();	// 图形验证码
+		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
+		String captcha_val = AppUserCurUtil.cur_captcha(session);
+		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
+		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
+		
+		String smscode = form.getSmscode();	// 短信验证码
+		if(FormValid.isEmpty(smscode)){ ar.t_fail("1208"); return ; }
+		String smscode_val = AppUserCurUtil.cur_smscode(session);
+		if(FormValid.isEmpty(smscode_val)){ ar.t_fail("1210"); return ; }
+		if(!smscode_val.equalsIgnoreCase(smscode)){ ar.t_fail("1209"); return ; }
+		
+		Long id = service.hasName(name);
+		if(FormValid.isId(id)){ ar.t_fail("1230"); return ; }
+		
+		pwd = DigestUtils.md5Hex(pwd);
+		
+		AppUser mo = new AppUser();
+		mo.init_update();
+		mo.setName(name);
+		mo.setPwd(pwd);
+		
+		boolean rb = service.update(mo);
+		ar.t_result(rb);
+		
 	}
 	
 	// TODO 需登录

@@ -45,4 +45,9 @@ public class AppUserService extends BaseService<AppUser, AppUserMapper> {
 		Long rn = mapper.repwd(params);
 		return rn != null && rn == 1;
 	}
+	// 找回密码
+	public boolean findpwd(AppUser params){
+		Long rn = mapper.findpwd(params);
+		return rn != null && rn == 1;
+	}
 }

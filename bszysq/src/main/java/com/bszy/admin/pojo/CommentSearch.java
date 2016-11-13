@@ -16,7 +16,7 @@ public class CommentSearch extends BaseSearch {
 	private Long touserid;		// 对谁的评论id
 	private String tousernname;	// 对谁的评论昵称(关联)
 	
-	private String context;		// 内容(<1000字符)
+	private String content;		// 内容(<1000字符)
 	private Integer isdel;		// 删除标记, 0: 正常; 1: 已删除
 	
 	public Long getArtid() {
@@ -67,11 +67,11 @@ public class CommentSearch extends BaseSearch {
 	public void setTousernname(String tousernname) {
 		this.tousernname = tousernname;
 	}
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public Integer getIsdel() {
 		return isdel;

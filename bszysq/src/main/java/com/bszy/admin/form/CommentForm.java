@@ -10,7 +10,7 @@ public class CommentForm extends BaseForm {
 	private String userid;		// 评论者id
 	private String touserid;	// 对谁的评论id
 	
-	private String context;		// 内容(<1000字符)
+	private String content;		// 内容(<1000字符)
 	private String imgs;		// 多图(<5000字符，完整网址)
 	
 	private String liken;		// 点赞数
@@ -40,11 +40,11 @@ public class CommentForm extends BaseForm {
 	public void setTouserid(String touserid) {
 		this.touserid = touserid;
 	}
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getImgs() {
 		return imgs;

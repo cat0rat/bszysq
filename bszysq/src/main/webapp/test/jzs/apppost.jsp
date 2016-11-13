@@ -42,6 +42,14 @@ input{ margin-top:5px; }
 <input type="button" value="删除" fn="Arttag.deletex(18)" />
 <br>
 <hr />
+文章：
+<input type="button" value="写主题" fn="AppArticle.uc.add()" />
+<br>
+<hr />
+评论：
+<input type="button" value="写评论" fn="AppComment.uc.add()" />
+<br>
+<hr />
 <br>
 <span style="color: red;">无需登录：</span>
 <br>
@@ -52,6 +60,7 @@ input{ margin-top:5px; }
 <hr />
 用户：
 <input type="button" value="用户简单信息" fn="AppUser.simple(1005)" />
+<input type="button" value="--找回密码" fn="AppUser.findpwd()" />
 <br>
 <hr />
 标签：
@@ -66,7 +75,7 @@ input{ margin-top:5px; }
 <br>
 <hr />
 文章：
-<input type="button" value="列表" fn="AppArticle.list({cateid: 3, lastid: 118})" />
+<input type="button" value="列表" fn="AppArticle.list({cateid: 3, lastid: 0})" />
 <input type="button" value="查看" fn="AppArticle.get(119)" />
 <br>
 <hr />

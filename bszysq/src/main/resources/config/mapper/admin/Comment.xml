@@ -18,7 +18,7 @@
 			<if test="touserid != null">AND a.touserid = #{touserid}</if>
 			<if test="tousernname != null and tousernname != ''">AND tu.nname LIKE CONCAT('%',#{tousernname},'%' )</if>
 			
-			<if test="context != null and context != ''">AND a.context LIKE CONCAT('%',#{context},'%' )</if>
+			<if test="content != null and content != ''">AND a.content LIKE CONCAT('%',#{content},'%' )</if>
 			<if test="lastid != null">AND a.id > #{lastid}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
@@ -62,10 +62,10 @@
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
 		INSERT INTO tbl_comment(artid, authorid, userid, touserid, 
-			context, imgs, liken, commn, 
+			content, imgs, liken, commn, 
 			ctime, utime, isdel) 
 		VALUES(#{artid}, #{authorid}, #{userid}, #{touserid}, 
-			#{context}, #{imgs}, #{liken}, #{commn}, 
+			#{content}, #{imgs}, #{liken}, #{commn}, 
 			#{ctime}, #{utime}, #{isdel})
 	</insert>
 	<update id="update" >
@@ -76,7 +76,7 @@
 			<if test="userid != null">a.userid = #{userid},</if>
 			<if test="touserid != null">a.touserid = #{touserid},</if>
 			
-			<if test="context != null">a.context = #{context},</if>
+			<if test="content != null">a.content = #{content},</if>
 			<if test="imgs != null">a.imgs = #{imgs},</if>
 			
 			<if test="liken != null">a.liken = #{liken},</if>

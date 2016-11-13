@@ -12,11 +12,11 @@ public class Article extends BasePojo {
 	private String name;		// 标题(1~500字符)
 	private String img;			// 配图(<500字符，完整网址)
 	private String brief;		// 简介(<500字符)
-	private String context;		// 内容(<1万字)
+	private String content;		// 内容(<1万字)
 	private String imgs;		// 多图(<5000字符，完整网址)
 	
 	private Integer sortn;		// 排序号(默认0, 倒序)
-	private String tagid;		// 标签id
+	private Long tagid;			// 标签id
 	private String tagname;		// 标签名(关联)
 	private Long cateid;		// 所属版块id
 	private String catename;	// 所属版块名称(关联)
@@ -59,11 +59,11 @@ public class Article extends BasePojo {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getImgs() {
 		return imgs;
@@ -137,10 +137,10 @@ public class Article extends BasePojo {
 	public void setUsernname(String usernname) {
 		this.usernname = usernname;
 	}
-	public String getTagid() {
+	public Long getTagid() {
 		return tagid;
 	}
-	public void setTagid(String tagid) {
+	public void setTagid(Long tagid) {
 		this.tagid = tagid;
 	}
 	public String getTagname() {

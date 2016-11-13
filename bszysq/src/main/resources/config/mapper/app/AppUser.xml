@@ -110,5 +110,13 @@
 		</trim>
 		WHERE a.id = #{id} and a.pwd = #{oldpwd}
 	</update>
+	<update id="findpwd" >
+		UPDATE tbl_user a
+		<trim prefix="SET" suffixOverrides=",">
+			pwd = #{pwd},
+			<if test="utime != null">a.utime = #{utime},</if>
+		</trim>
+		WHERE a.name = #{name}
+	</update>
     
 </mapper>

@@ -58,12 +58,12 @@
 	</update>
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
-		INSERT INTO tbl_article(name, img, brief, context, imgs, 
-			sortn, tagids, cateid, userid, recom, 
+		INSERT INTO tbl_article(name, img, brief, content, imgs, 
+			sortn, tagid, cateid, userid, recom, 
 			lookn, liken, sharen, commn, favorn, 
 			ctime, utime, isdel) 
-		VALUES(#{name}, #{img}, #{brief}, #{context}, #{imgs},
-			#{sortn}, #{tagids}, #{cateid}, #{userid}, #{recom}, 
+		VALUES(#{name}, #{img}, #{brief}, #{content}, #{imgs},
+			#{sortn}, #{tagid}, #{cateid}, #{userid}, #{recom}, 
 			#{lookn}, #{liken}, #{sharen}, #{commn}, #{favorn}, 
 			#{ctime}, #{utime}, #{isdel})
 	</insert>
@@ -73,7 +73,7 @@
 			<if test="name != null">a.name = #{name},</if>
 			<if test="img != null">a.img = #{img},</if>
 			<if test="brief != null">a.brief = #{brief},</if>
-			<if test="context != null">a.context = #{context},</if>
+			<if test="content != null">a.content = #{content},</if>
 			<if test="imgs != null">a.imgs = #{imgs},</if>
 			
 			<if test="sortn != null">a.sortn = #{sortn},</if>

@@ -17,4 +17,5 @@ public interface AppUserMapper extends BaseMapper<AppUser> {
 	public AppUser simple(Long id);
 	public Long hasName(String name);
 	public Long repwd(AppUserRePwd params);
+	public Long findpwd(AppUser params);
 }

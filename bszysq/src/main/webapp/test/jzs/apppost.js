@@ -248,6 +248,19 @@ window.AppArticle = {
 			id: id
 		};
 		$.ajax(opt);
+	},
+	uc:{
+		add: function(data){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/article/add.json';
+			opt.data = $.extend({
+				name: '测试添加文章1',
+				tagid: 5,
+				cateid: 4,
+				content: '测试添加文章内容1'
+			}, data);
+			$.ajax(opt);
+		}
 	}
 };
 
@@ -269,6 +282,19 @@ window.AppComment = {
 			id: id
 		};
 		$.ajax(opt);
+	},
+	uc:{
+		add: function(data){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/comment/add.json';
+			opt.data = $.extend({
+				artid: 124,
+				authorid: 1005,
+				//touserid: 1005,
+				content: '测试添加评论1'
+			}, data);
+			$.ajax(opt);
+		}
 	}
 };
 

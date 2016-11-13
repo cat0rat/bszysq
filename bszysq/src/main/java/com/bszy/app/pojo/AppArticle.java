@@ -12,7 +12,7 @@ public class AppArticle extends BasePojo {
 	private String name;		// 标题(1~500字符)
 	private String img;			// 配图(<500字符，完整网址)
 	private String brief;		// 简介(<500字符)
-	private String context;		// 内容(<1万字)
+	private String content;		// 内容(<1万字)
 	private String imgs;		// 多图(<5000字符，完整网址)
 	private Integer sortn;		// 排序号(默认0, 倒序)
 	private String tagids;		// 标签id(多英文逗号分隔)
@@ -47,11 +47,11 @@ public class AppArticle extends BasePojo {
 	public void setImg(String img) {
 		this.img = img;
 	}
-	public String getContext() {
-		return context;
+	public String getContent() {
+		return content;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getImgs() {
 		return imgs;
