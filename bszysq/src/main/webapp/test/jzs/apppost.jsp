@@ -42,8 +42,10 @@ input{ margin-top:5px; }
 <input type="button" value="删除" fn="Arttag.deletex(18)" />
 <br>
 <hr />
-文章：
+主题：
 <input type="button" value="写主题" fn="AppArticle.uc.add()" />
+<input type="button" value="发表的主题" fn="AppArticle.uc.list({})" />
+<input type="button" value="回应的主题" fn="AppArticle.uc.commlist({})" />
 <br>
 <hr />
 评论：
@@ -70,11 +72,11 @@ input{ margin-top:5px; }
 <br>
 <hr />
 版块：
-<input type="button" value="列表带一条文章" fn="AppCategory.list_art({})" />
+<input type="button" value="列表带一条主题" fn="AppCategory.list_art({})" />
 <input type="button" value="查看" fn="AppCategory.get(1)" />
 <br>
 <hr />
-文章：
+主题：
 <input type="button" value="列表" fn="AppArticle.list({cateid: 3, lastid: 0})" />
 <input type="button" value="查看" fn="AppArticle.get(119)" />
 <br>

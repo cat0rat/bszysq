@@ -260,6 +260,24 @@ window.AppArticle = {
 				content: '测试添加文章内容1'
 			}, data);
 			$.ajax(opt);
+		},
+		list: function(data){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/article/list.json';
+			opt.data = $.extend({
+				page: 1,
+				limit: 5
+			}, data);
+			$.ajax(opt);
+		},
+		commlist: function(data){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/article/commlist.json';
+			opt.data = $.extend({
+				page: 1,
+				limit: 5
+			}, data);
+			$.ajax(opt);
 		}
 	}
 };

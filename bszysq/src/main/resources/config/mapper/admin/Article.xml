@@ -37,6 +37,41 @@
 		<include refid="sql_list_where"></include>
 	</select>
 	
+	<sql id="sql_commlist_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="tagid != null and tagid != ''">AND a.tagid = #{tagid}</if>
+			<if test="tagname != null and tagname != ''">AND t.name LIKE CONCAT('%',#{tagname},'%' )</if>
+			<if test="cateid != null and cateid != ''">AND a.cateid = #{cateid}</if>
+			<if test="catename != null and catename != ''">AND c.name LIKE CONCAT('%',#{catename},'%' )</if>
+			<if test="recom != null and recom != ''">AND a.recom = #{recom}</if>
+			
+			<if test="lastid != null and lastid != ''">AND a.id &lt; #{lastid}</if>
+			<if test="isdel != null and isdel != ''">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	<select id="commlist" resultType="Article" >
+		SELECT a.*, t.name tagname, c.name catename, u.nname usernname, u.head userhead
+		FROM ( SELECT aa.* FROM tbl_article aa WHERE aa.id in( 
+				SELECT cm.artid FROM tbl_comment cm WHERE cm.userid = #{userid}
+			) ) as a
+			left join tbl_arttag t on a.tagid = t.id
+			left join tbl_category c on a.cateid = c.id
+			left join tbl_user u on a.userid = u.id
+		<include refid="sql_commlist_where"></include>
+		<include refid="Common.sql_order_limit"></include>
+	</select>
+	<select id="commlscount" resultType="Long" >
+		SELECT COUNT(0)
+		FROM ( SELECT aa.* FROM tbl_article aa WHERE aa.id in( 
+				SELECT cm.artid FROM tbl_comment cm WHERE cm.userid = #{userid}
+			) ) as a
+			left join tbl_arttag t on a.tagid = t.id
+			left join tbl_category c on a.cateid = c.id
+			left join tbl_user u on a.userid = u.id
+		<include refid="sql_list_where"></include>
+	</select>
+	
 	
 	<select id="get" resultType="Article" >
 		SELECT a.*, t.name tagname, c.name catename, u.nname usernname, u.head userhead 

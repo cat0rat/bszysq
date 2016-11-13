@@ -14,8 +14,8 @@ public interface BaseMapper<T extends BasePojo> {
 	
 	// TODO 查询 
 	public List<T> list(BaseSearch bs);
+	public Long lscount(BaseSearch bs);
 	public List<T> list_idval(BaseSearch bs);
 	public List<Map> list_map(BaseSearch bs);
-	public Long lscount(BaseSearch bs);
 	
 }

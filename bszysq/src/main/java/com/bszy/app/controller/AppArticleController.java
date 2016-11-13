@@ -61,7 +61,7 @@ public class AppArticleController extends BaseController {
 		if(FormValid.isEmpty(content)){ ar.t_fail("6103"); return ; }
 		if(!FormValid.len(content, 1, 10000)){ ar.t_fail("6104"); return ; }
 		
-		Long id = AppUserCurUtil.cur_uid();
+		Long uid = AppUserCurUtil.cur_uid();
 		
 		Article mo = new Article();
 		mo.init_add();
@@ -72,7 +72,7 @@ public class AppArticleController extends BaseController {
 		mo.setImg(form.getImg());
 		mo.setImgs(form.getImgs());
 		mo.setBrief(form.getBrief());
-		mo.setUserid(id);
+		mo.setUserid(uid);
 		mo.setRecom(0);
 		mo.setSortn(MUtil.toInt(form.getSortn(), 0));
 		
@@ -85,6 +85,27 @@ public class AppArticleController extends BaseController {
 		
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
+	}
+	
+	// 我的主题
+	@ResponseBody
+	@RequestMapping("/uc/article/list.json")
+	public void uc_list_json(ArticleSearch bs, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		Long uid = AppUserCurUtil.cur_uid();
+		bs.setUserid(uid);
+		ar.t_succ_not_null(service.list(bs));
+	}
+	
+
+	// 回应的主题
+	@ResponseBody
+	@RequestMapping("/uc/article/commlist.json")
+	public void uc_commlist_json(ArticleSearch bs, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		Long uid = AppUserCurUtil.cur_uid();
+		bs.setUserid(uid);
+		ar.t_succ_not_null(service.commlist(bs));
 	}
 	
 }
