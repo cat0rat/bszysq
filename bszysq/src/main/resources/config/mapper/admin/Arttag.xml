@@ -15,7 +15,7 @@
 	<select id="list" resultType="Arttag" >
 		SELECT a.* FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
-		<include refid="Common.sql_order_limit"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
 	</select>
 	<select id="lscount" resultType="Long" >
 		SELECT COUNT(0) FROM tbl_arttag a
@@ -25,7 +25,7 @@
 	<select id="list_idval" resultType="Arttag" >
 		SELECT a.id, a.name FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
-		<include refid="Common.sql_order_limit"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
 	</select>
 	
 	

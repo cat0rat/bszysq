@@ -61,11 +61,11 @@ public class AppRegController extends BaseController {
 		if(FormValid.isEmpty(mobile)){ ar.t_fail("1212"); return ; }
 		if(!FormValid.isMobile(mobile)){ ar.t_fail("1213"); return ; }
 		
-		// 图形验证码
-		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
-		String captcha_val = AppUserCurUtil.cur_captcha(session);
-		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
-		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
+//		// 图形验证码
+//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
+//		String captcha_val = AppUserCurUtil.cur_captcha(session);
+//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
+//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
 		
 		// 短信验证码
 		Long stime = AppUserCurUtil.cur_smscode_time(session);
@@ -75,9 +75,9 @@ public class AppRegController extends BaseController {
 		}
 		
 		String smscode = MUtil.smscode();
+		AppUserCurUtil.smscode_to_session(session, smscode);
 		// ... 调用 发送短信验证码 接口
 		System.out.println("手机号：" + mobile + ", 短信验证码：" + smscode);
-		AppUserCurUtil.smscode_to_session(session, smscode);
 		ar.t_succ(smscode); ar.setMsg("短信验证码已发送到您的手机上，请注意查收。");
 		
 	}
@@ -99,11 +99,11 @@ public class AppRegController extends BaseController {
 		if(FormValid.isEmpty(pwd)){ ar.t_fail("1203"); return ; }
 		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("1204"); return ; }
 		
-		String captcha = form.getCaptcha();	// 图形验证码
-		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
-		String captcha_val = AppUserCurUtil.cur_captcha(session);
-		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
-		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
+//		String captcha = form.getCaptcha();	// 图形验证码
+//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
+//		String captcha_val = AppUserCurUtil.cur_captcha(session);
+//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
+//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
 		
 		String smscode = form.getSmscode();	// 短信验证码
 		if(FormValid.isEmpty(smscode)){ ar.t_fail("1208"); return ; }

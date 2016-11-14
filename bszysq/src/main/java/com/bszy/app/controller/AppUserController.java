@@ -57,11 +57,11 @@ public class AppUserController extends BaseController {
 		if(FormValid.isEmpty(pwd)){ ar.t_fail("1203"); return ; }
 		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("1204"); return ; }
 		
-		String captcha = form.getCaptcha();	// 图形验证码
-		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
-		String captcha_val = AppUserCurUtil.cur_captcha(session);
-		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
-		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
+//		String captcha = form.getCaptcha();	// 图形验证码
+//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
+//		String captcha_val = AppUserCurUtil.cur_captcha(session);
+//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
+//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
 		
 		String smscode = form.getSmscode();	// 短信验证码
 		if(FormValid.isEmpty(smscode)){ ar.t_fail("1208"); return ; }
