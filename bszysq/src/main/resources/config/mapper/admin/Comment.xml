@@ -6,6 +6,7 @@
 
 	<sql id="sql_list_where">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			AND a.commid is null
 			<if test="artid != null">AND a.artid = #{artid}</if>
 			<if test="artname != null and artname != ''">AND art.name LIKE CONCAT('%',#{artname},'%' )</if>
 			
@@ -25,14 +26,14 @@
 	</sql>
 	
 	<select id="list" resultType="Comment" >
-		SELECT a.*, art.name artname, au.nname authornname, uu.nname usernname, tu.nname tousernname
+		SELECT a.*, art.name artname, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead, tu.nname tousernname, tu.head userhead
 		FROM tbl_comment a
 		LEFT JOIN tbl_article art on art.id = a.artid
 		LEFT JOIN tbl_user au on au.id = a.authorid
 		LEFT JOIN tbl_user uu on uu.id = a.userid
 		LEFT JOIN tbl_user tu on tu.id = a.touserid
 		<include refid="sql_list_where"></include>
-		<include refid="Common.sql_order_limit"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
 	</select>
 	<select id="lscount" resultType="Long" >
 		SELECT COUNT(0) FROM tbl_comment a
@@ -43,9 +44,49 @@
 		<include refid="sql_list_where"></include>
 	</select>
 	
+	<sql id="sql_applist_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			AND a.commid is null AND a.artid = #{artid}
+			<if test="lastid != null">AND a.id > #{lastid}</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="applist" resultType="Comment" >
+		SELECT a.*, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead
+		FROM tbl_comment a
+		LEFT JOIN tbl_user au on au.id = a.authorid
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		<include refid="sql_applist_where"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
+	</select>
+	<select id="applscount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_comment a
+		LEFT JOIN tbl_user au on au.id = a.authorid
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		<include refid="sql_applist_where"></include>
+	</select>
+	
+	<sql id="sql_appsublist_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			AND a.artid = #{artid} AND a.commid is not null AND a.commid in ( ${commids} )
+			<if test="lastid != null">AND a.id > #{lastid}</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	<select id="appsublist" resultType="Comment" >
+		SELECT a.*, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead, tu.nname tousernname, tu.head userhead
+		FROM tbl_comment a
+		LEFT JOIN tbl_user au on au.id = a.authorid
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		LEFT JOIN tbl_user tu on tu.id = a.touserid
+		<include refid="sql_appsublist_where"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
+	</select>
+	
 	
 	<select id="get" resultType="Comment" >
-		SELECT a.*, art.name artname, au.nname authornname, uu.nname usernname, tu.nname tousernname 
+		SELECT a.*, art.name artname, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead, tu.nname tousernname, tu.head userhead
 		FROM tbl_comment a 
 		LEFT JOIN tbl_article art on art.id = a.artid
 		LEFT JOIN tbl_user au on au.id = a.authorid
@@ -64,7 +105,8 @@
 		INSERT INTO tbl_comment(artid, authorid, userid, touserid, 
 			content, imgs, liken, commn, 
 			ctime, utime, isdel) 
-		VALUES(#{artid}, #{authorid}, #{userid}, #{touserid}, 
+		VALUES(#{artid}, (select userid from tbl_article where id = #{artid} limit 1), 
+			#{userid}, #{touserid}, 
 			#{content}, #{imgs}, #{liken}, #{commn}, 
 			#{ctime}, #{utime}, #{isdel})
 	</insert>
@@ -87,6 +129,13 @@
 		</trim>
 		WHERE a.id = #{id}
 	</update>
+	
+	<select id="refids" resultType="Comment" parameterType="java.lang.Long" >
+		SELECT a.id, a.artid, a.userid, art.userid authorid
+		FROM tbl_comment a 
+		LEFT JOIN tbl_article art on art.id = a.artid
+		WHERE a.id = #{id}
+	</select>
 	
     
 </mapper>

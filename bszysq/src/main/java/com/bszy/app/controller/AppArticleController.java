@@ -91,7 +91,7 @@ public class AppArticleController extends BaseController {
 		mo.setIsdel(0);
 		
 		boolean rb = service.add(mo);
-		ar.t_result(rb);
+		if(rb) ar.t_succ_not_null(mo.getId());
 	}
 	
 	// 我的主题
@@ -109,6 +109,16 @@ public class AppArticleController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/uc/article/commlist.json")
 	public void uc_commlist_json(ArticleSearch bs, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		Long uid = AppUserCurUtil.cur_uid();
+		bs.setUserid(uid);
+		ar.t_succ_not_null(service.commlist(bs));
+	}
+	
+	// 浏览的主题---
+	@ResponseBody
+	@RequestMapping("/uc/article/looklist.json")
+	public void uc_looklist_json(ArticleSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		Long uid = AppUserCurUtil.cur_uid();
 		bs.setUserid(uid);

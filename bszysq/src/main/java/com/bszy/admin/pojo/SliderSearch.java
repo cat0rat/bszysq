@@ -8,6 +8,9 @@ public class SliderSearch extends BaseSearch {
 	private Integer sortn;	// 排序号(默认0, 倒序)
 	private Integer pos;	// 位置
 	private Integer isdel;
+	{
+		pos = 0;
+	}
 
 	public String getName() {
 		return name;

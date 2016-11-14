@@ -9,6 +9,7 @@ public class CommentForm extends BaseForm {
 	private String authorid;	// 文章作者id
 	private String userid;		// 评论者id
 	private String touserid;	// 对谁的评论id
+	private String commid;		// 对哪条评论id的评论
 	
 	private String content;		// 内容(<1000字符)
 	private String imgs;		// 多图(<5000字符，完整网址)
@@ -63,6 +64,12 @@ public class CommentForm extends BaseForm {
 	}
 	public void setCommn(String commn) {
 		this.commn = commn;
+	}
+	public String getCommid() {
+		return commid;
+	}
+	public void setCommid(String commid) {
+		this.commid = commid;
 	}
 	
 }

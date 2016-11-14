@@ -11,5 +11,13 @@
 		</choose>
 		<if test="limit != null and limit > 0">LIMIT #{start}, #{limit}</if>
 	</sql>
+	
+	<sql id="sql_order_asc_limit">
+		<choose>
+			<when test="orderby != null and orderby != ''">ORDER BY ${orderby}</when>
+			<otherwise>ORDER BY a.id asc</otherwise>
+		</choose>
+		<if test="limit != null and limit > 0">LIMIT #{start}, #{limit}</if>
+	</sql>
   
 </mapper>

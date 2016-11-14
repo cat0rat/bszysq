@@ -75,11 +75,11 @@ public class AppCommentController extends BaseController {
 		if(FormValid.isEmpty(content)){ ar.t_fail("6001"); return ; }
 		if(!FormValid.len(content, 1, 1000)){ ar.t_fail("6002"); return ; }
 		
-		Long artid = MUtil.toLong(form.getArtid());	// 文章
+		Long artid = MUtil.toLong(form.getArtid());	// 主题
 		if(!FormValid.isId(artid)){ ar.t_fail("6003"); return ; }
 		
-		Long authorid = MUtil.toLong(form.getAuthorid());	// 文章作者
-		if(!FormValid.isId(authorid)){ ar.t_fail("6004"); return ; }
+//		Long authorid = MUtil.toLong(form.getAuthorid());	// 主题作者
+//		if(!FormValid.isId(authorid)){ ar.t_fail("6004"); return ; }
 		
 		Long uid = AppUserCurUtil.cur_uid();
 		
@@ -87,7 +87,7 @@ public class AppCommentController extends BaseController {
 		mo.init_add();
 		
 		mo.setArtid(artid);
-		mo.setAuthorid(authorid);
+//		mo.setAuthorid(authorid);
 		mo.setUserid(uid);
 		mo.setTouserid(MUtil.toLong(form.getTouserid()));
 		
@@ -98,7 +98,44 @@ public class AppCommentController extends BaseController {
 		mo.setCommn(0L);
 		mo.setIsdel(0);
 		boolean rb = service.add(mo);
-		ar.t_result(rb);
+		if(rb) ar.t_succ_not_null(mo.getId());
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/uc/comment/add_comm.json", method = RequestMethod.POST)
+	public void add_comm_json(CommentForm form, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		if(form == null){ ar.t_fail("1501"); return ; }
+		
+		String content = form.getContent();	// 内容(<1000字符)
+		if(FormValid.isEmpty(content)){ ar.t_fail("6001"); return ; }
+		if(!FormValid.len(content, 1, 1000)){ ar.t_fail("6002"); return ; }
+		
+		Long commid = MUtil.toLong(form.getCommid());	// 已有的评论ID
+		if(!FormValid.isId(commid)){ ar.t_fail("6006"); return ; }
+		
+		Comment oldmo = service.refids(commid);
+		if(oldmo == null){ ar.t_fail("6007"); return ; }
+		
+		Long uid = AppUserCurUtil.cur_uid();
+		
+		Comment mo = new Comment();
+		mo.init_add();
+		
+		mo.setCommid(commid);
+		mo.setArtid(oldmo.getArtid());
+		mo.setAuthorid(oldmo.getAuthorid());
+		mo.setUserid(uid);
+		mo.setTouserid(oldmo.getUserid());
+		
+		mo.setContent(content);
+		mo.setImgs(form.getImgs());
+		
+		mo.setLiken(0L);
+		mo.setCommn(0L);
+		mo.setIsdel(0);
+		boolean rb = service.add(mo);
+		if(rb) ar.t_succ_not_null(mo.getId());
 	}
 	
 }

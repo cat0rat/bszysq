@@ -1,5 +1,7 @@
 package com.bszy.admin.pojo;
 
+import java.util.List;
+
 import com.mao.ssm.BasePojo;
 
 /**
@@ -23,11 +25,18 @@ public class Comment extends BasePojo {
 	private String tousernname;	// 对谁的评论昵称(关联)
 	private String touserhead;	// 对谁的评论头像(关联)
 	
+	private Long commid;		// 对哪条评论id的评论
+	private List<Comment> subcomms;	// 下级评论
+	
 	private String content;		// 内容(<1000字符)
 	private String imgs;		// 多图(<5000字符，完整网址)
 	
 	private Long liken;		// 点赞数
 	private Long commn;		// 评论数
+	
+	public String getCtimeDisStr() {
+		return datetime_dis_str(ctime);
+	}
 	
 	public Long getArtid() {
 		return artid;
@@ -118,6 +127,18 @@ public class Comment extends BasePojo {
 	}
 	public void setCommn(Long commn) {
 		this.commn = commn;
+	}
+	public Long getCommid() {
+		return commid;
+	}
+	public void setCommid(Long commid) {
+		this.commid = commid;
+	}
+	public List<Comment> getSubcomms() {
+		return subcomms;
+	}
+	public void setSubcomms(List<Comment> subcomms) {
+		this.subcomms = subcomms;
 	}
 	
 }

@@ -316,9 +316,17 @@ window.AppComment = {
 			opt.url = '/app/uc/comment/add.json';
 			opt.data = $.extend({
 				artid: 124,
-				authorid: 1005,
-				//touserid: 1005,
-				content: '测试添加评论1'
+				content: '测试评论主题内容1'
+			}, data);
+			$.ajax(opt);
+		},
+		add_comm: function(data){
+			var opt = Cmm.build_opt();
+			opt.url = '/app/uc/comment/add_comm.json';
+			opt.data = $.extend({
+				artid: 124,
+				commid: 10,
+				content: '测试对评论的评论的内容1'
 			}, data);
 			$.ajax(opt);
 		}

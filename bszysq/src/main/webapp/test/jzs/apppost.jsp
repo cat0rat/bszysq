@@ -49,7 +49,8 @@ input{ margin-top:5px; }
 <br>
 <hr />
 评论：
-<input type="button" value="写评论" fn="AppComment.uc.add()" />
+<input type="button" value="对主题的评论" fn="AppComment.uc.add()" />
+<input type="button" value="对评论的评论" fn="AppComment.uc.add_comm()" />
 <br>
 <hr />
 <br>

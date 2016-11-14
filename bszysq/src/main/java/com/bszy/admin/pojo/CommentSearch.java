@@ -16,6 +16,9 @@ public class CommentSearch extends BaseSearch {
 	private Long touserid;		// 对谁的评论id
 	private String tousernname;	// 对谁的评论昵称(关联)
 	
+	private Long commid;		// 对哪条评论id的评论
+	private String commids;		// 一级评论
+	
 	private String content;		// 内容(<1000字符)
 	private Integer isdel;		// 删除标记, 0: 正常; 1: 已删除
 	
@@ -78,6 +81,18 @@ public class CommentSearch extends BaseSearch {
 	}
 	public void setIsdel(Integer isdel) {
 		this.isdel = isdel;
+	}
+	public Long getCommid() {
+		return commid;
+	}
+	public void setCommid(Long commid) {
+		this.commid = commid;
+	}
+	public String getCommids() {
+		return commids;
+	}
+	public void setCommids(String commids) {
+		this.commids = commids;
 	}
 
 }
