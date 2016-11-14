@@ -10,7 +10,7 @@ import com.mao.lang.MUtil;
  */
 public class BaseSearch {
 	
-	protected String orderby;		// 排序
+	protected String orderby;		// 排序, 如: id, 或 id desc,utime desc
 	
 	protected Long start = 0L;	// 开始位置
 	protected Integer page = 1;	// 页码, 1开始。

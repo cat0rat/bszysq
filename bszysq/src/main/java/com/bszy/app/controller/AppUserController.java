@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,12 @@ public class AppUserController extends BaseController {
 	private AppUserService service;
 	
 	@ResponseBody
-	@RequestMapping(value = "/user/simple.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/user/simple/{id}.json")
+	public void simple_json_var(@PathVariable Long id, HttpServletRequest request){
+		simple_json(id, request);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/user/simple.json")
 	public void simple_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		if(FormValid.isId(id)){ ar.t_fail("1501"); return ; }
@@ -82,7 +88,7 @@ public class AppUserController extends BaseController {
 	
 	// 我的信息
 	@ResponseBody
-	@RequestMapping(value = "/uc/user/mine.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/uc/user/mine.json")
 	public void mine_json(HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		Long id = AppUserCurUtil.cur_uid();
@@ -90,8 +96,7 @@ public class AppUserController extends BaseController {
 	}
 	
 	// 我的简单信息
-	@ResponseBody
-	@RequestMapping(value = "/uc/user/simple.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/uc/user/simple.json")
 	public void uc_simple_json(HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		Long id = AppUserCurUtil.cur_uid();

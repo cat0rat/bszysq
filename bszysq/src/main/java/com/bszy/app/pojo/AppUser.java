@@ -11,7 +11,7 @@ import com.mao.ssm.BasePojo;
 public class AppUser extends BasePojo {
 	private static final long serialVersionUID = 1L;
 	
-	private String name;	// 用户名(3~16位字母数字)
+	private String name;	// 用户名(手机号)
 	private String pwd;		// 密码(6~16位字母数字)
 	private String nname;	// 昵称(2~16位字母数字汉字)
 	private Integer rolex;	// 角色: 0:普通用户, 9: 超级管理员

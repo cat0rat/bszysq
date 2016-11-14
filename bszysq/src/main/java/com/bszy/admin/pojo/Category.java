@@ -12,6 +12,8 @@ public class Category extends BasePojo {
 	private String name;	// 版块名称(1~500字符)
 	private Integer sortn;	// 排序号(默认0, 倒序)
 	private String img;		// 配图(<500字符，完整网址)
+	private Long artid;		// 主题id
+	private String artname;	// 主题标题
 	
 	public String getName() {
 		return name;
@@ -30,6 +32,18 @@ public class Category extends BasePojo {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public Long getArtid() {
+		return artid;
+	}
+	public void setArtid(Long artid) {
+		this.artid = artid;
+	}
+	public String getArtname() {
+		return artname;
+	}
+	public void setArtname(String artname) {
+		this.artname = artname;
 	}
 	
 }

@@ -1,5 +1,7 @@
 package com.bszy.admin.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
@@ -15,4 +17,7 @@ public class CategoryService extends BaseService<Category, CategoryMapper> {
 	private CategoryMapper mapper;
 	public CategoryMapper mapper(){return mapper;}
 	
+	public List<Category> list_art(Integer num){
+		return mapper.list_art(num);
+	}
 }

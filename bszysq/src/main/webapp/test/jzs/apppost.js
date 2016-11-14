@@ -185,8 +185,8 @@ window.AppArttag = {
 		var opt = Cmm.build_opt();
 		opt.url = '/app/arttag/list_idval.json';
 		opt.data = $.extend({
-			page: 1,
-			limit: -1
+//			page: 1,
+//			limit: -1
 		}, data);
 		$.ajax(opt);
 	},
@@ -211,6 +211,15 @@ window.AppArttag = {
 
 //TODO 版块
 window.AppCategory = {
+	list_idval: function(data){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/category/list_idval.json';
+		opt.data = $.extend({
+//				page: 1,
+//				limit: -1
+		}, data);
+		$.ajax(opt);
+	},
 	list_art: function(data){
 		var opt = Cmm.build_opt();
 		opt.url = '/app/category/list_art.json';
@@ -230,7 +239,7 @@ window.AppCategory = {
 	}
 };
 
-//TODO 文章
+//TODO 主题
 window.AppArticle = {
 	list: function(data){
 		var opt = Cmm.build_opt();

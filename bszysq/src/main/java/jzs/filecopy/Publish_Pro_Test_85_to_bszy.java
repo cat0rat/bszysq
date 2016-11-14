@@ -18,7 +18,7 @@ public class Publish_Pro_Test_85_to_bszy extends Publish_Pro_Base {
 			
 			// pub.tomcat_port  = 23900;
 			pub.remote_dir = "/home/bjjx/tomcat-jzs_xw/xtmp";
-			pub.root_pw = "";
+			pub.root_pw = "jx2016ABCD";
 			pub.build_sh = "./jzs_xw_build.sh";
 			pub.ck_key = "\\/tomcat-jzs_xw\\/";
 			pub.pro_zip_path = "/temp/bszy-85/ROOT.zip";

@@ -66,12 +66,13 @@ input{ margin-top:5px; }
 <br>
 <hr />
 标签：
-<input type="button" value="列表(id,nanme)" fn="AppArttag.list_idval({})" />
+<input type="button" value="列表(id,name)" fn="AppArttag.list_idval({})" />
 <input type="button" value="列表" fn="AppArttag.list({})" />
 <input type="button" value="查看" fn="AppArttag.get(1)" />
 <br>
 <hr />
 版块：
+<input type="button" value="列表(id,name)" fn="AppCategory.list_idval({})" />
 <input type="button" value="列表带一条主题" fn="AppCategory.list_art({})" />
 <input type="button" value="查看" fn="AppCategory.get(1)" />
 <br>

@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,14 +30,19 @@ public class AppCommentController extends BaseController {
 	// TODO json
 	
 	@ResponseBody
-	@RequestMapping(value = "/comment/get.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/comment/get/{id}.json")
+	public void get_json_var(@PathVariable Long id, HttpServletRequest request){
+		get_json(id, request);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/comment/get.json")
 	public void get_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		ar.t_succ_not_null(service.get(id));
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/comment/list.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/comment/list.json")
 	public void list_json(CommentSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		ar.t_succ_not_null(service.list(bs));

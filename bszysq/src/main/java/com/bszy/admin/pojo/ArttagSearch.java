@@ -7,6 +7,9 @@ public class ArttagSearch extends BaseSearch {
 	private String name;
 	private Integer sortn;	// 排序号(默认0, 倒序)
 	private Integer isdel;
+	{
+		limit = null;
+	}
 
 	public String getName() {
 		return name;
