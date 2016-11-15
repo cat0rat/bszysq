@@ -34,9 +34,9 @@ public class Comment extends BasePojo {
 	private Long liken;		// 点赞数
 	private Long commn;		// 评论数
 	
-	public String getCtimeDisStr() {
-		return datetime_dis_str(ctime);
-	}
+//	public String getCtimeDisStr() {
+//		return datetime_dis_str(ctime);
+//	}
 	
 	public Long getArtid() {
 		return artid;

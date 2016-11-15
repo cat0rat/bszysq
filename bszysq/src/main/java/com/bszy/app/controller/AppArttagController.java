@@ -38,14 +38,14 @@ public class AppArttagController extends BaseController {
 	@RequestMapping(value = "/list.json")
 	public void list_json(ArttagSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		ar.t_succ_not_null(service.list(bs));
+		ar.t_succ_not_null(service.list(bs).getRows());
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/list_idval.json")
 	public void list_idval_json(ArttagSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		ar.t_succ_not_null(service.list_idval(bs));
+		ar.t_succ_not_null(service.list_idval(bs).getRows());
 	}
 
 }

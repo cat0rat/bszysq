@@ -13,7 +13,6 @@ import com.bszy.admin.form.CommentForm;
 import com.bszy.admin.pojo.Comment;
 import com.bszy.admin.pojo.CommentSearch;
 import com.bszy.admin.service.CommentService;
-import com.bszy.app.security.AppUserCurUtil;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
@@ -78,16 +77,13 @@ public class AppCommentController extends BaseController {
 		Long artid = MUtil.toLong(form.getArtid());	// 主题
 		if(!FormValid.isId(artid)){ ar.t_fail("6003"); return ; }
 		
-//		Long authorid = MUtil.toLong(form.getAuthorid());	// 主题作者
-//		if(!FormValid.isId(authorid)){ ar.t_fail("6004"); return ; }
-		
-		Long uid = AppUserCurUtil.cur_uid();
+		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		
 		Comment mo = new Comment();
 		mo.init_add();
 		
 		mo.setArtid(artid);
-//		mo.setAuthorid(authorid);
 		mo.setUserid(uid);
 		mo.setTouserid(MUtil.toLong(form.getTouserid()));
 		
@@ -117,7 +113,8 @@ public class AppCommentController extends BaseController {
 		Comment oldmo = service.refids(commid);
 		if(oldmo == null){ ar.t_fail("6007"); return ; }
 		
-		Long uid = AppUserCurUtil.cur_uid();
+		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		
 		Comment mo = new Comment();
 		mo.init_add();

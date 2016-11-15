@@ -36,20 +36,6 @@
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- // TODO app用户权限控制 -->
-	<filter>
-		<filter-name>appUserShiroFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-		<init-param>
-			<param-name>targetFilterLifecycle</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>appUserShiroFilter</filter-name>
-		<url-pattern>/app/*</url-pattern>
-	</filter-mapping>
-	
 	<!-- // TODO 过滤字符集 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

@@ -1,5 +1,7 @@
 package com.bszy.admin.pojo;
 
+import java.util.List;
+
 import com.mao.ssm.BasePojo;
 
 /**
@@ -31,15 +33,17 @@ public class Article extends BasePojo {
 	private Long commn;		// 评论数
 	private Long favorn;	// 收藏量
 	
+	private List<Comment> comms;	// 前5条评论
+	
 	public String getRecomStr() {
 		if(recom != null)
 			if(0 == recom) return "正常";
 			else if(1 == recom) return "推荐";
 		return null;
 	}
-	public String getCtimeDisStr() {
-		return datetime_dis_str(ctime);
-	}
+//	public String getCtimeDisStr() {
+//		return datetime_dis_str(ctime);
+//	}
 	
 	public String getName() {
 		return name;
@@ -154,6 +158,12 @@ public class Article extends BasePojo {
 	}
 	public void setUserhead(String userhead) {
 		this.userhead = userhead;
+	}
+	public List<Comment> getComms() {
+		return comms;
+	}
+	public void setComms(List<Comment> comms) {
+		this.comms = comms;
 	}
 	
 }

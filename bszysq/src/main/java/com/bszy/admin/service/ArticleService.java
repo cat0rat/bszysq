@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bszy.admin.mapper.ArticleMapper;
 import com.bszy.admin.pojo.Article;
+import com.bszy.admin.pojo.CommentSearch;
 import com.mao.ssm.BasePage;
 import com.mao.ssm.BaseSearch;
 import com.mao.ssm.BaseService;
@@ -21,6 +22,8 @@ public class ArticleService extends BaseService<Article, ArticleMapper> {
 	@Inject
 	private ArticleMapper mapper;
 	public ArticleMapper mapper(){return mapper;}
+	@Inject
+	private CommentService commentService;
 	
 	@Transactional
 	public boolean recoms(String ids, Integer recom){
@@ -52,6 +55,16 @@ public class ArticleService extends BaseService<Article, ArticleMapper> {
 		}
 		
 		return bp;
+	}
+	
+	// 带评论
+	public Article get_comms(Long id){
+		Article mo = mapper().get(id);
+		CommentSearch bs = new CommentSearch();
+		bs.setArtid(mo.getId());
+		bs.setLimit(5);
+		mo.setComms(commentService.list(bs).getRows());
+		return mo;
 	}
 	
 }

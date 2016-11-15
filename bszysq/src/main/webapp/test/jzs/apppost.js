@@ -1,4 +1,5 @@
 $(function(){
+window.uc = {};
 
 //TODO 登录
 window.AppLogin = {
@@ -6,11 +7,12 @@ window.AppLogin = {
 		var opt = Cmm.build_opt();
 		opt.url = '/app/login.json';
 		opt.data = $.extend({
-			name: 'test3', 
+			name: '13370175853', 
 			pwd: '111111'
 		}, data);
 		opt.success = function(d) {
 			if(d.code == '200'){
+				uc = d.data;
 				AppUser.showUserInfo(d.data);
 			}
 		};
@@ -36,8 +38,8 @@ window.AppReg = {
 		var opt = Cmm.build_opt();
 		opt.url = '/app/smscode.json';
 		opt.data = {
-			mobile: '13370175853',
-			captcha: $('#captcha').val()
+			mobile: '13370175853'//,
+			//captcha: $('#captcha').val()
 		};
 		opt.success = function(d) {
 			if(d.code == '200'){
@@ -71,7 +73,7 @@ window.AppUser = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/user/mine.json';
 			opt.data = $.extend({
-				
+				uid: uc.id
 			}, data);
 			opt.success = function(d) {
 				if(d.code == '200'){
@@ -92,6 +94,7 @@ window.AppUser = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/user/auth.json';
 			opt.data = {
+				uid: uc.id,
 				tname: '小懒猫',
 				mobile: '13370175853',
 				address: '高教圆'
@@ -102,6 +105,7 @@ window.AppUser = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/user/repwd.json';
 			opt.data = {
+				uid: uc.id,
 				oldpwd:  $('#oldpwd').val(),
 				pwd:  $('#pwd').val()
 			};
@@ -258,11 +262,20 @@ window.AppArticle = {
 		};
 		$.ajax(opt);
 	},
+	get_comms: function(id){
+		var opt = Cmm.build_opt();
+		opt.url = '/app/article/get_comms.json';
+		opt.data = {
+			id: id
+		};
+		$.ajax(opt);
+	},
 	uc:{
 		add: function(data){
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/article/add.json';
 			opt.data = $.extend({
+				uid: uc.id,
 				name: '测试添加文章1',
 				tagid: 5,
 				cateid: 4,
@@ -274,6 +287,7 @@ window.AppArticle = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/article/list.json';
 			opt.data = $.extend({
+				uid: uc.id,
 				page: 1,
 				limit: 5
 			}, data);
@@ -283,6 +297,7 @@ window.AppArticle = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/article/commlist.json';
 			opt.data = $.extend({
+				uid: uc.id,
 				page: 1,
 				limit: 5
 			}, data);
@@ -315,6 +330,7 @@ window.AppComment = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/comment/add.json';
 			opt.data = $.extend({
+				uid: uc.id,
 				artid: 124,
 				content: '测试评论主题内容1'
 			}, data);
@@ -324,6 +340,7 @@ window.AppComment = {
 			var opt = Cmm.build_opt();
 			opt.url = '/app/uc/comment/add_comm.json';
 			opt.data = $.extend({
+				uid: uc.id,
 				artid: 124,
 				commid: 10,
 				content: '测试对评论的评论的内容1'

@@ -37,7 +37,7 @@ public class AppSliderController extends BaseController {
 	@RequestMapping(value = "/list.json")
 	public void list_json(SliderSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		ar.t_succ_not_null(service.list(bs));
+		ar.t_succ_not_null(service.list(bs).getRows());
 	}
 	
 }

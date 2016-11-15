@@ -40,15 +40,15 @@ public class BasePojo implements Serializable {
 	}
 	
 	// TODO 辅助
-	public String getUtimeStr() {
-		return datetime_str(utime);
-	}
-	public String getCtimeStr() {
-		return datetime_str(ctime);
-	}
-	public String getIsdelStr() {
-		return isdel != null ? (isdel == 0 ? "正常" : "已删除") : null;
-	}
+//	public String getUtimeStr() {
+//		return datetime_str(utime);
+//	}
+//	public String getCtimeStr() {
+//		return datetime_str(ctime);
+//	}
+//	public String getIsdelStr() {
+//		return isdel != null ? (isdel == 0 ? "正常" : "已删除") : null;
+//	}
 	
 	public static String date_str(Date date){
 		return date == null ? null : new SimpleDateFormat("yyyy-MM-dd").format(date);

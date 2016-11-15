@@ -13,7 +13,6 @@ import com.bszy.admin.form.ArticleForm;
 import com.bszy.admin.pojo.Article;
 import com.bszy.admin.pojo.ArticleSearch;
 import com.bszy.admin.service.ArticleService;
-import com.bszy.app.security.AppUserCurUtil;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
@@ -31,12 +30,22 @@ public class AppArticleController extends BaseController {
 	public void get_var(@PathVariable Long id, HttpServletRequest request){
 		get(id, request);
 	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/article/get.json")
 	public void get(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		ar.t_succ_not_null(service.get(id));
+	}
+	@ResponseBody
+	@RequestMapping(value = "/article/get_comms/{id}.json")
+	public void get_comms_var(@PathVariable Long id, HttpServletRequest request){
+		get_comms(id, request);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/article/get_comms.json")
+	public void get_comms(Long id, HttpServletRequest request){
+		AjaxResult ar = ajaxResult(request);
+		ar.t_succ_not_null(service.get_comms(id));
 	}
 	
 	@ResponseBody
@@ -68,7 +77,8 @@ public class AppArticleController extends BaseController {
 		if(FormValid.isEmpty(content)){ ar.t_fail("6103"); return ; }
 		if(!FormValid.len(content, 1, 10000)){ ar.t_fail("6104"); return ; }
 		
-		Long uid = AppUserCurUtil.cur_uid();
+		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		
 		Article mo = new Article();
 		mo.init_add();
@@ -99,7 +109,8 @@ public class AppArticleController extends BaseController {
 	@RequestMapping("/uc/article/list.json")
 	public void uc_list_json(ArticleSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Long uid = AppUserCurUtil.cur_uid();
+		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.list(bs));
 	}
@@ -110,7 +121,8 @@ public class AppArticleController extends BaseController {
 	@RequestMapping("/uc/article/commlist.json")
 	public void uc_commlist_json(ArticleSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Long uid = AppUserCurUtil.cur_uid();
+		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.commlist(bs));
 	}
@@ -120,7 +132,8 @@ public class AppArticleController extends BaseController {
 	@RequestMapping("/uc/article/looklist.json")
 	public void uc_looklist_json(ArticleSearch bs, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Long uid = AppUserCurUtil.cur_uid();
+		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.commlist(bs));
 	}

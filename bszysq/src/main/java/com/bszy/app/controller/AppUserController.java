@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.app.form.AppRegForm;
+import com.bszy.app.form.AppUserForm;
 import com.bszy.app.pojo.AppUser;
 import com.bszy.app.pojo.AppUserRePwd;
 import com.bszy.app.security.AppUserCurUtil;
 import com.bszy.app.service.AppUserService;
+import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 import com.mao.ssm.FormValid;
@@ -38,7 +40,7 @@ public class AppUserController extends BaseController {
 	@RequestMapping(value = "/user/simple.json")
 	public void simple_json(Long id, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		if(FormValid.isId(id)){ ar.t_fail("1501"); return ; }
+		if(!FormValid.isId(id)){ ar.t_fail("1501"); return ; }
 		ar.t_succ_not_null(service.simple(id));
 	}
 	
@@ -88,28 +90,45 @@ public class AppUserController extends BaseController {
 	
 	// 我的信息
 	@ResponseBody
+	@RequestMapping(value = "/uc/user/mine/{uid}.json")
+	public void mine_json_var(@PathVariable String uid, HttpServletRequest request){
+		mine_json(uid, request);
+	}
+	@ResponseBody
 	@RequestMapping(value = "/uc/user/mine.json")
-	public void mine_json(HttpServletRequest request){
+	public void mine_json(String uid, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Long id = AppUserCurUtil.cur_uid();
+		Long id = MUtil.toLong(uid);	// 检查当前用户ID(登录)
+		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ; }
 		ar.t_succ_not_null(service.mine(id));
 	}
 	
 	// 我的简单信息
+	@RequestMapping(value = "/uc/user/simple/{uid}.json")
+	public void uc_simple_json_var(@PathVariable String uid, HttpServletRequest request){
+		uc_simple_json(uid, request);
+	}
 	@RequestMapping(value = "/uc/user/simple.json")
-	public void uc_simple_json(HttpServletRequest request){
+	public void uc_simple_json(String uid, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Long id = AppUserCurUtil.cur_uid();
+		Long id = MUtil.toLong(uid);	// 检查当前用户ID(登录)
+		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ; }
 		AppUser mo = service.simple(id);
 		ar.t_succ(mo);
 	}
 	
 	// 用户信息
 	@ResponseBody
-	@RequestMapping(value = "/uc/user/get.json", method = RequestMethod.POST)
-	public void get_json(HttpServletRequest request){
+	@RequestMapping(value = "/uc/user/get.json")
+	public void get_json_var(@PathVariable String uid, HttpServletRequest request){
+		get_json(uid, request);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/uc/user/get.json")
+	public void get_json(String uid, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		Long id = AppUserCurUtil.cur_uid();
+		Long id = MUtil.toLong(uid);	// 检查当前用户ID(登录)
+		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ; }
 		AppUser mo = service.get(id);
 		ar.t_succ(mo);
 	}
@@ -117,9 +136,12 @@ public class AppUserController extends BaseController {
 	// 认证
 	@ResponseBody
 	@RequestMapping(value = "/uc/user/auth.json", method = RequestMethod.POST)
-	public void uc_simple_json(AppUser form, HttpServletRequest request){
+	public void uc_auth_json(AppUserForm form, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
 		if(form == null){ ar.t_fail("1501"); return ; }
+		
+		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
 		
 		String tname = form.getTname();	// 姓名
 		if(FormValid.isEmpty(tname)){ ar.t_fail("1270"); return ; }
@@ -132,10 +154,9 @@ public class AppUserController extends BaseController {
 		String address = form.getAddress();	// 地址
 		if(!FormValid.lenAllowNull(address, 2, 50)){ ar.t_fail("1272"); return ; }
 		
-		Long id = AppUserCurUtil.cur_uid();
 		AppUser mo = new AppUser();
 		mo.init_update();
-		mo.setId(id);
+		mo.setId(uid);
 		mo.setTname(tname);
 		mo.setMobile(mobile);
 		mo.setAddress(address);
@@ -148,8 +169,11 @@ public class AppUserController extends BaseController {
 	// 修改密码
 	@ResponseBody
 	@RequestMapping(value = "/uc/user/repwd.json", method = RequestMethod.POST)
-	public void repwd_json(String oldpwd, String pwd, HttpServletRequest request){
+	public void repwd_json(String uid, String oldpwd, String pwd, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
+		
+		Long id = MUtil.toLong(uid);	// 检查当前用户ID(登录)
+		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ; }
 		
 		// 原密码
 		if(FormValid.isEmpty(oldpwd)){ ar.t_fail("1280"); return ; }
@@ -159,7 +183,6 @@ public class AppUserController extends BaseController {
 		if(FormValid.isEmpty(pwd)){ ar.t_fail("1203"); return ; }
 		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("1204"); return ; }
 		
-		Long id = AppUserCurUtil.cur_uid();
 		oldpwd = DigestUtils.md5Hex(oldpwd);
 		pwd = DigestUtils.md5Hex(pwd);
 		AppUserRePwd params = new AppUserRePwd();

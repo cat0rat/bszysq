@@ -49,20 +49,19 @@ public class AppUser extends BasePojo {
 			else if("0".equals(sex)) return "未知";
 		return null;
 	}
-	public String getBirthStr() {
-		return date_str(birth);
-	}
-	public String getLtimeStr() {
-		return datetime_str(ltime);
-	}
-	public String getLstatStr() {
-		if(lstat != null)
-			if(lstat == 0) return "离线";
-			else if(lstat == 1) return "在线";
-			else if(lstat == 2) return "隐身";
-		return null;
-	}
-	
+//	public String getBirthStr() {
+//		return date_str(birth);
+//	}
+//	public String getLtimeStr() {
+//		return datetime_str(ltime);
+//	}
+//	public String getLstatStr() {
+//		if(lstat != null)
+//			if(lstat == 0) return "离线";
+//			else if(lstat == 1) return "在线";
+//			else if(lstat == 2) return "隐身";
+//		return null;
+//	}
 	
 	public String getName() {
 		return name;

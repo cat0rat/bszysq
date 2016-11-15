@@ -54,7 +54,7 @@ public class AppRegController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/smscode.json")
-	public void smscode_json(String mobile, String captcha, HttpServletRequest request, HttpSession session){
+	public void smscode_json(String mobile, /*String captcha, */HttpServletRequest request, HttpSession session){
 		AjaxResult ar = ajaxResult(request);
 		
 		// 手机号

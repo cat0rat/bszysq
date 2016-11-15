@@ -1,24 +1,24 @@
 package com.bszy.app.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.app.pojo.AppUser;
-import com.bszy.app.security.AppUserCurUtil;
 import com.bszy.app.service.AppUserService;
-import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
+import com.mao.ssm.FormValid;
 
 @Controller
 @RequestMapping("/app")
@@ -32,16 +32,24 @@ public class AppLoginController extends BaseController {
 	@RequestMapping(value = "/login.json", method = RequestMethod.POST)
 	public void login_json(String name, String pwd, HttpServletRequest request){
 		AjaxResult ar = ajaxResult(request);
-		if(name == null || name.length() == 0){ ar.t_fail("1101"); return ; }
-		UsernamePasswordToken token = new UsernamePasswordToken(name, pwd, false);
-		try {
-			SecurityUtils.getSubject().login(token);
-			Long uid = MUtil.toLong(SecurityUtils.getSubject().getPrincipal(), 0L);	// 当前登录用户ID
-			AppUser mo = service.get(uid);	// 获取当前登录用户
-			AppUserCurUtil.to_session(request.getSession(), mo);	// 存入 session
-			ar.t_succ_not_null(mo, "1101");
-		} catch (Exception e) {
-			ar.t_fail("1004");
+		if(FormValid.isEmpty(name)){ ar.t_fail("1201"); return ; }
+		if(!FormValid.isMobile(name)){ ar.t_fail("1202"); return ; }
+		
+		if(FormValid.isEmpty(pwd)){ ar.t_fail("1203"); return ; }
+		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("1204"); return ; }
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("name", name);
+		params.put("pwd", DigestUtils.md5Hex(pwd));
+		AppUser mo = service.login(params);
+		if(mo != null){
+			if(mo.getIsdel() != 0){
+				ar.t_fail("1028");  return ;	// 被冻结
+			}else{
+				ar.t_succ_not_null(mo, "1101"); // 成功
+			}
+		}else{
+			ar.t_fail("1004");	// 帐号或密码错误
 		}
 	}
 	
@@ -67,7 +75,6 @@ public class AppLoginController extends BaseController {
 	@RequestMapping(value = "/uc/logout.json")
 	public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		AjaxResult ar = ajaxResult(request);
-		AppUserCurUtil.logout();
 		ar.t_succ();
 	}
 	

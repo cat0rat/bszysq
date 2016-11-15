@@ -81,6 +81,7 @@ input{ margin-top:5px; }
 主题：
 <input type="button" value="列表" fn="AppArticle.list({cateid: 3, lastid: 0})" />
 <input type="button" value="查看" fn="AppArticle.get(119)" />
+<input type="button" value="查看(带前5条评论)" fn="AppArticle.get_comms(124)" />
 <br>
 <hr />
 评论：
