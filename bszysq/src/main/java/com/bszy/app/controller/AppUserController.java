@@ -44,16 +44,16 @@ public class AppUserController extends BaseController {
 		ar.t_succ_not_null(service.simple(id));
 	}
 	
-	// 找回密码
+	// 忘记密码
 	@ResponseBody
 	@RequestMapping(value = "/user/findpwd.json", method = RequestMethod.POST)
 	public void reg_json(AppRegForm form, HttpServletRequest request, HttpSession session){
 		AjaxResult ar = ajaxResult(request);
 		if(form == null){ ar.t_fail("1501"); return ; }
 		
-		String name = form.getName();	// 帐号
-		if(FormValid.isEmpty(name)){ ar.t_fail("1201"); return ; }
-		if(!FormValid.isMobile(name)){ ar.t_fail("1202"); return ; }
+		String mobile = form.getMobile();	// 帐号
+		if(FormValid.isEmpty(mobile)){ ar.t_fail("1201"); return ; }
+		if(!FormValid.isMobile(mobile)){ ar.t_fail("1202"); return ; }
 		
 		String pwd = form.getPwd();	// 密码
 		if(FormValid.isEmpty(pwd)){ ar.t_fail("1203"); return ; }
@@ -71,14 +71,14 @@ public class AppUserController extends BaseController {
 		if(FormValid.isEmpty(smscode_val)){ ar.t_fail("1210"); return ; }
 		if(!smscode_val.equalsIgnoreCase(smscode)){ ar.t_fail("1209"); return ; }
 		
-		Long id = service.hasName(name);
+		Long id = service.hasName(mobile);
 		if(FormValid.isId(id)){ ar.t_fail("1230"); return ; }
 		
 		pwd = DigestUtils.md5Hex(pwd);
 		
 		AppUser mo = new AppUser();
 		mo.init_update();
-		mo.setName(name);
+		mo.setName(mobile);
 		mo.setPwd(pwd);
 		
 		boolean rb = service.update(mo);
@@ -119,7 +119,7 @@ public class AppUserController extends BaseController {
 	
 	// 用户信息
 	@ResponseBody
-	@RequestMapping(value = "/uc/user/get.json")
+	@RequestMapping(value = "/uc/user/get/{uid}.json")
 	public void get_json_var(@PathVariable String uid, HttpServletRequest request){
 		get_json(uid, request);
 	}

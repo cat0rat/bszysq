@@ -5,17 +5,17 @@ import com.mao.ssm.BaseForm;
 public class AppRegForm extends BaseForm {
 	private static final long serialVersionUID = 1L;
 	
-	private String name;	// 用户名(手机号)
+	private String mobile;	// 用户名(手机号)
 	private String nname;	// 昵称(2~16位字母数字汉字)
 	private String pwd;		// 密码(6~16位字母数字)
 	private String captcha;	// 图形验证码(4位)
 	private String smscode;	// 短信验证码(4位)
 	
-	public String getName() {
-		return name;
+	public String getMobile() {
+		return mobile;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 	public String getNname() {
 		return nname;

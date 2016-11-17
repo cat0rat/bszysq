@@ -33,7 +33,7 @@ public class AppArticleController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/article/get.json")
 	public void get(Long id, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+		AjaxResult ar = new AjaxResult();	//ajaxResult(request);
 		ar.t_succ_not_null(service.get(id));
 	}
 	@ResponseBody

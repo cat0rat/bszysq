@@ -15,7 +15,7 @@
 	<!-- 默认的注解映射的支持 可以不用写出来 -->
 	<!-- 会自动注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter 
 		两个bean -->
-	<!--<mvc:annotation-driven /> -->
+	<mvc:annotation-driven />
 
 	<!-- <mvc:view-controller path="/gsh" view-name="index"/> -->
 

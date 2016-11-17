@@ -7,7 +7,7 @@ window.AppLogin = {
 		var opt = Cmm.build_opt();
 		opt.url = '/app/login.json';
 		opt.data = $.extend({
-			name: '13370175853', 
+			mobile: '13370175853', 
 			pwd: '111111'
 		}, data);
 		opt.success = function(d) {
@@ -56,10 +56,10 @@ window.AppReg = {
 		var opt = Cmm.build_opt();
 		opt.url = '/app/reg.json';
 		opt.data = {
-			name: '13370175853',
+			mobile: '13370175853',
 			pwd: '111111',
-			smscode: $('#smscode').val() || '4444',
-			captcha: $('#captcha').val()
+			smscode: $('#smscode').val() || '4444'//,
+			//captcha: $('#captcha').val()
 		};
 		$.ajax(opt);
 	}
@@ -385,6 +385,7 @@ window.Cmm = {
 		var opt = {
 			type: 'POST',
 			dataType: 'json',
+			contentType : "application/json",
 			success : function(d) {
 				console.log(d);
 			},
