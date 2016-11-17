@@ -19,7 +19,7 @@ public class AppUser extends BasePojo {
 	private String unionid;	// 微信唯一id(20~50字符)
 	private String openid;	// 微信id(20~50字符)
 
-	private Integer authx;	// 0: 已认证; 1: 未认证; 2: 申请认证
+	private Integer authx;	// 0: 已认证; 1: 未认证; 2: 认证中
 	private String mobile;	// 手机号
 	private String tname;	// 姓名(2~20位字母数字汉字)
 	private String citycode;// 城市编码
@@ -39,7 +39,7 @@ public class AppUser extends BasePojo {
 		if(authx != null)
 			if(authx == 0) return "已认证";
 			else if(authx == 1) return "未认证";
-			else if(authx == 2) return "申请认证";
+			else if(authx == 2) return "认证中";
 		return null;
 	}
 	public String getSexStr() {

@@ -11,9 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -130,6 +127,11 @@ public class BaseController {
 	/** 获取ajax返回结果对象 */
 	protected AjaxResult ajaxResult(HttpServletRequest request) {
 		return ajaxResult(request, null);
+	}
+	
+	/** 获取ajax返回结果对象(new) */
+	protected AjaxResult ajaxResult(HttpServletRequest request, int i) {
+		return new AjaxResult();
 	}
 
 	/** 设置ajax返回结果对象 */

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -53,25 +54,26 @@ public class AppRegController extends BaseController {
 		}
 	}
 	
-	@RequestMapping(value = "/smscode.json")
-	public void smscode_json(@RequestBody String mobile, /*String captcha, */HttpServletRequest request, HttpSession session){
-		AjaxResult ar = ajaxResult(request);
+	@ResponseBody
+	@RequestMapping(value = "/smscode/{mobile}", method = RequestMethod.GET)
+	public AjaxResult smscode_json(@PathVariable String mobile, /*String captcha, */HttpServletRequest request, HttpSession session){
+		AjaxResult ar = new AjaxResult();
 		
 		// 手机号
-		if(FormValid.isEmpty(mobile)){ ar.t_fail("1212"); return ; }
-		if(!FormValid.isMobile(mobile)){ ar.t_fail("1213"); return ; }
+		if(FormValid.isEmpty(mobile)){ ar.t_fail("1212"); return ar; }
+		if(!FormValid.isMobile(mobile)){ ar.t_fail("1213"); return ar; }
 		
 //		// 图形验证码
-//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
+//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ar; }
 //		String captcha_val = AppUserCurUtil.cur_captcha(session);
-//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
-//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
+//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ar; }
+//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ar; }
 		
 		// 短信验证码
 		Long stime = AppUserCurUtil.cur_smscode_time(session);
 		int ss = 0;
 		if(stime != null && (ss = (int)((new Date().getTime() - stime) / 1000)) < 60 ){ 
-			ar.t_fail("1211"); ar.setData(ss); return ; 
+			ar.t_fail("1211"); ar.setData(ss); return ar; 
 		}
 		
 		String smscode = MUtil.smscode();
@@ -79,11 +81,11 @@ public class AppRegController extends BaseController {
 		// ... 调用 发送短信验证码 接口
 		System.out.println("手机号：" + mobile + ", 短信验证码：" + smscode);
 		ar.t_succ(smscode); ar.setMsg("短信验证码已发送到您的手机上，请注意查收。");
-		
+		return ar;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/reg.json", method = RequestMethod.POST)
+	@RequestMapping(value = "/reg", method = RequestMethod.POST)
 	public AjaxResult reg_json(@RequestBody AppRegForm form, HttpServletRequest request, HttpSession session){
 		AjaxResult ar = new AjaxResult();
 		if(form == null){ ar.t_fail("1501"); return ar; }
@@ -100,10 +102,10 @@ public class AppRegController extends BaseController {
 		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("1204"); return ar; }
 		
 //		String captcha = form.getCaptcha();	// 图形验证码
-//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ; }
+//		if(FormValid.isEmpty(captcha)){ ar.t_fail("1205"); return ar; }
 //		String captcha_val = AppUserCurUtil.cur_captcha(session);
-//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ; }
-//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ; }
+//		if(FormValid.isEmpty(captcha_val)){ ar.t_fail("1207"); return ar; }
+//		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ar; }
 		
 		String smscode = form.getSmscode();	// 短信验证码
 		if(FormValid.isEmpty(smscode)){ ar.t_fail("1208"); return ar; }
