@@ -1,11 +1,11 @@
 package com.bszy.app.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.pojo.ArttagSearch;
@@ -21,37 +21,37 @@ public class AppCategoryController extends BaseController {
 	private CategoryService service;
 	
 	@ResponseBody
-	@RequestMapping("/get/{id}.json")
-	public void get_json_var(@PathVariable Long id, HttpServletRequest request){
-		get_json(id, request);
-	}
-	@ResponseBody
-	@RequestMapping("/get.json")
-	public void get_json(Long id, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+	public AjaxResult get_json_var(@PathVariable Long id){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.get(id));
+		return ar;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/list.json")
-	public void list(HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public AjaxResult list(){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.list());
+		return ar;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/list_art.json")
-	public void list_art(HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/list_art", method = RequestMethod.GET)
+	public AjaxResult list_art(){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.list_art(1));
+		return ar;
 	}
 	
 
 	@ResponseBody
-	@RequestMapping(value = "/list_idval.json")
-	public void list_idval_json(ArttagSearch bs, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
-		ar.t_succ_not_null(service.list_idval(bs).getRows());
+	@RequestMapping(value = {"/list_idval", "/list_idname"}, method = RequestMethod.GET)
+	public AjaxResult list_idval_json(){
+		AjaxResult ar = new AjaxResult();
+		ArttagSearch bs = new ArttagSearch();
+		ar.t_succ_not_null(service.list_idname(bs).getRows());
+		return ar;
 	}
 	
 }

@@ -21,7 +21,7 @@
 		SELECT COUNT(0) FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
 	</select>
-	<select id="list_idval" resultType="Arttag" >
+	<select id="list_idval" resultType="AppIdName" >
 		SELECT a.id, a.name FROM tbl_arttag a
 		<include refid="sql_list_where"></include>
 		<include refid="Common.sql_order_limit"></include>

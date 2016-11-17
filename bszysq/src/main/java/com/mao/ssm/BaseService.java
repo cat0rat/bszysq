@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bszy.admin.pojo.IdName;
 import com.mao.lang.MUtil;
 
 @Service
@@ -94,16 +95,16 @@ public class BaseService<T extends BasePojo, M extends BaseMapper<T>> {
 	 * 基方法 查询
 	 * @param bs
 	 */
-	public BasePage<T> list_idval(BaseSearch bs){
-		BasePage<T> bp = new BasePage<T>();
+	public BasePage<IdName> list_idname(BaseSearch bs){
+		BasePage<IdName> bp = new BasePage<IdName>();
 		bs.start_i();
-		List<T> rows = mapper().list_idval(bs);
+		List<IdName> rows = mapper().list_idname(bs);
 		Long total = mapper().lscount(bs);
 
 		bp.t_param(bs.page_i(), bs.limit_i());
 		bp.t_result(total, rows);
 		if(rows != null && rows.size() > 0){
-			T mo = rows.get(rows.size() - 1);
+			IdName mo = rows.get(rows.size() - 1);
 			if(mo != null){
 				Long lastid = mo.getId();
 				bp.setLastid(lastid != null ? lastid : 0L);

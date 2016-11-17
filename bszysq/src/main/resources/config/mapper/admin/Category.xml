@@ -49,13 +49,13 @@
 		WHERE a.id = #{id}
 	</update>
 	
-	<select id="list_idval" resultType="Arttag" >
+	<select id="list_idname" resultType="IdName" >
 		SELECT a.id, a.name FROM tbl_category a
 		<include refid="sql_list_where"></include>
 		<include refid="Common.sql_order_asc_limit"></include>
 	</select>
-	<select id="list_art" resultType="Category" >
-		select c.*, aw.id artid, aw.name artname from tbl_category c left join (
+	<select id="list_art" resultType="AppCategoryArt" >
+		select c.id, c.name, c.img, aw.id artid, aw.name artname from tbl_category c left join (
 			select a.id, a.name, a.cateid from tbl_article as a
 			where a.isdel=0 and a.recom = 1 and #{num} > (
 			      select count(*) from tbl_article aa 

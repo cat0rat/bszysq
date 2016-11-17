@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,59 +27,52 @@ public class AppArticleController extends BaseController {
 	private ArticleService service;
 	
 	@ResponseBody
-	@RequestMapping(value = "/article/get/{id}.json")
-	public void get_var(@PathVariable Long id, HttpServletRequest request){
-		get(id, request);
-	}
-	@ResponseBody
-	@RequestMapping(value = "/article/get.json")
-	public void get(Long id, HttpServletRequest request){
-		AjaxResult ar = new AjaxResult();	//ajaxResult(request);
+	@RequestMapping(value = "/article/get/{id}", method = RequestMethod.GET)
+	public AjaxResult get_var(@PathVariable Long id){
+		AjaxResult ar = new AjaxResult();	//new AjaxResult();
 		ar.t_succ_not_null(service.get(id));
+		return ar;
 	}
 	@ResponseBody
-	@RequestMapping(value = "/article/get_comms/{id}.json")
-	public void get_comms_var(@PathVariable Long id, HttpServletRequest request){
-		get_comms(id, request);
-	}
-	@ResponseBody
-	@RequestMapping(value = "/article/get_comms.json")
-	public void get_comms(Long id, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/article/get_comms/{id}", method = RequestMethod.GET)
+	public AjaxResult get_comms_var(@PathVariable Long id){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.get_comms(id));
+		return ar;
 	}
 	
 	@ResponseBody
-	@RequestMapping("/article/list.json")
-	public void list(ArticleSearch bs, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/article/list", method = RequestMethod.POST)
+	public AjaxResult list(@RequestBody ArticleSearch bs){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.list(bs));
+		return ar;
 	}
 	
 	// TODO 需登录
 	
 	@ResponseBody
-	@RequestMapping(value = "/uc/article/add.json", method = RequestMethod.POST)
-	public void add_json(ArticleForm form, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
-		if(form == null){ ar.t_fail("1501"); return ; }
+	@RequestMapping(value = "/uc/article/add", method = RequestMethod.POST)
+	public AjaxResult add_json(@RequestBody ArticleForm form){
+		AjaxResult ar = new AjaxResult();
+		if(form == null){ ar.t_fail("1501"); return ar; }
 		
 		String name = form.getName();	// 标题
-		if(FormValid.isEmpty(name)){ ar.t_fail("6100"); return ; }
-		if(!FormValid.len(name, 1, 500)){ ar.t_fail("6101"); return ; }
+		if(FormValid.isEmpty(name)){ ar.t_fail("6100"); return ar; }
+		if(!FormValid.len(name, 1, 500)){ ar.t_fail("6101"); return ar; }
 		
 		Long tagid = MUtil.toLong(form.getTagid());	// 标签
-		if(!FormValid.isId(tagid)){ ar.t_fail("6102"); return ; }
+		if(!FormValid.isId(tagid)){ ar.t_fail("6102"); return ar; }
 		
 		Long cateid = MUtil.toLong(form.getCateid());	// 版块
-		if(!FormValid.isId(cateid)){ ar.t_fail("6105"); return ; }
+		if(!FormValid.isId(cateid)){ ar.t_fail("6105"); return ar; }
 		
 		String content = form.getContent();	// 内容
-		if(FormValid.isEmpty(content)){ ar.t_fail("6103"); return ; }
-		if(!FormValid.len(content, 1, 10000)){ ar.t_fail("6104"); return ; }
+		if(FormValid.isEmpty(content)){ ar.t_fail("6103"); return ar; }
+		if(!FormValid.len(content, 1, 10000)){ ar.t_fail("6104"); return ar; }
 		
 		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
-		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
 		
 		Article mo = new Article();
 		mo.init_add();
@@ -102,40 +96,44 @@ public class AppArticleController extends BaseController {
 		
 		boolean rb = service.add(mo);
 		if(rb) ar.t_succ_not_null(mo.getId());
+		return ar;
 	}
 	
 	// 我的主题
 	@ResponseBody
-	@RequestMapping("/uc/article/list.json")
-	public void uc_list_json(ArticleSearch bs, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/uc/article/list", method = RequestMethod.POST)
+	public AjaxResult uc_list_json(@RequestBody ArticleSearch bs){
+		AjaxResult ar = new AjaxResult();
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
-		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.list(bs));
+		return ar;
 	}
 	
 
 	// 回应的主题
 	@ResponseBody
-	@RequestMapping("/uc/article/commlist.json")
-	public void uc_commlist_json(ArticleSearch bs, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/uc/article/commlist", method = RequestMethod.POST)
+	public AjaxResult uc_commlist_json(@RequestBody ArticleSearch bs){
+		AjaxResult ar = new AjaxResult();
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
-		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.commlist(bs));
+		return ar;
 	}
 	
 	// 浏览的主题---
 	@ResponseBody
-	@RequestMapping("/uc/article/looklist.json")
-	public void uc_looklist_json(ArticleSearch bs, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/uc/article/looklist", method = RequestMethod.POST)
+	public AjaxResult uc_looklist_json(@RequestBody ArticleSearch bs){
+		AjaxResult ar = new AjaxResult();
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
-		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ; }
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.commlist(bs));
+		return ar;
 	}
 	
 }
