@@ -1,7 +1,6 @@
 package com.bszy.app.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +28,8 @@ public class AppArticleController extends BaseController {
 	@ResponseBody
 	@RequestMapping(value = "/article/get/{id}", method = RequestMethod.GET)
 	public AjaxResult get_var(@PathVariable Long id){
-		AjaxResult ar = new AjaxResult();	//new AjaxResult();
-		ar.t_succ_not_null(service.get(id));
+		AjaxResult ar = new AjaxResult();
+		ar.t_succ_not_null(service.detail(id));
 		return ar;
 	}
 	@ResponseBody
@@ -45,7 +44,7 @@ public class AppArticleController extends BaseController {
 	@RequestMapping(value = "/article/list", method = RequestMethod.POST)
 	public AjaxResult list(@RequestBody ArticleSearch bs){
 		AjaxResult ar = new AjaxResult();
-		ar.t_succ_not_null(service.list(bs));
+		ar.t_succ_not_null(service.list_simple(bs));
 		return ar;
 	}
 	

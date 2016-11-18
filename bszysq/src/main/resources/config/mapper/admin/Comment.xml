@@ -52,7 +52,7 @@
 		</trim>
 	</sql>
 	
-	<select id="applist" resultType="Comment" >
+	<select id="applist" resultType="AppCommentSimple" >
 		SELECT a.*, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead
 		FROM tbl_comment a
 		LEFT JOIN tbl_user au on au.id = a.authorid
@@ -74,7 +74,7 @@
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>
-	<select id="appsublist" resultType="Comment" >
+	<select id="appsublist" resultType="AppCommentSub" >
 		SELECT a.*, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead, tu.nname tousernname, tu.head userhead
 		FROM tbl_comment a
 		LEFT JOIN tbl_user au on au.id = a.authorid

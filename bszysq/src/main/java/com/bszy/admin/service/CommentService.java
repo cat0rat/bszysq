@@ -15,6 +15,8 @@ import org.springframework.stereotype.Service;
 import com.bszy.admin.mapper.CommentMapper;
 import com.bszy.admin.pojo.Comment;
 import com.bszy.admin.pojo.CommentSearch;
+import com.bszy.app.pojo.AppCommentSimple;
+import com.bszy.app.pojo.AppCommentSub;
 import com.mao.ssm.BasePage;
 import com.mao.ssm.BaseService;
 
@@ -31,26 +33,26 @@ public class CommentService extends BaseService<Comment, CommentMapper> {
 	}
 	
 	/** 查询评论 */
-	public BasePage<Comment> list(CommentSearch bs){
-		BasePage<Comment> bp = new BasePage<Comment>();
+	public BasePage<AppCommentSimple> list(CommentSearch bs){
+		BasePage<AppCommentSimple> bp = new BasePage<AppCommentSimple>();
 		bs.start_i();
-		List<Comment> rows = mapper().applist(bs);
+		List<AppCommentSimple> rows = mapper().applist(bs);
 		Long total = mapper().applscount(bs);
 
 		bp.t_param(bs.page_i(), bs.limit_i());
 		bp.t_result(total, rows);
 		if(rows != null && rows.size() > 0){
-			Comment mo = rows.get(rows.size() - 1);
+			AppCommentSimple mo = rows.get(rows.size() - 1);
 			if(mo != null){
 				Long lastid = mo.getId();
 				bp.setLastid(lastid != null ? lastid : 0L);
 			}
 			// 查询下级评论
 			Set<Long> commidss = new HashSet<Long>();
-			Map<Long, List<Comment>> idscms = new HashMap<Long, List<Comment>>();
-			for(Comment cmm : rows){
+			Map<Long, List<AppCommentSub>> idscms = new HashMap<Long, List<AppCommentSub>>();
+			for(AppCommentSimple cmm : rows){
 				commidss.add(cmm.getId());
-				cmm.setSubcomms(new ArrayList<Comment>());
+				cmm.setSubcomms(new ArrayList<AppCommentSub>());
 				idscms.put(cmm.getId(), cmm.getSubcomms());
 			}
 			Long[] commids = commidss.toArray(new Long[0]);
@@ -59,8 +61,8 @@ public class CommentService extends BaseService<Comment, CommentMapper> {
 			sbs.setArtid(bs.getArtid());
 			sbs.setLimit(null);
 			sbs.setCommids(idsstr);
-			List<Comment> scms = mapper().appsublist(sbs);
-			for(Comment c : scms){
+			List<AppCommentSub> scms = mapper().appsublist(sbs);
+			for(AppCommentSub c : scms){
 				idscms.get(c.getCommid()).add(c);
 			}
 		}

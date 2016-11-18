@@ -15,7 +15,7 @@ public class BaseSearch {
 	protected Long start = 0L;	// 开始位置
 	protected Integer page = 1;	// 页码, 1开始。
 	protected Integer limit = 20;	// 每页条数，默认20。
-	protected Long lastid = null;	// 上一次查询最后一条数据的id。
+	protected Long lastid;	// 上一次查询最后一条数据的id。
 	
 	protected Long uid;	// 当前用户ID
 	
