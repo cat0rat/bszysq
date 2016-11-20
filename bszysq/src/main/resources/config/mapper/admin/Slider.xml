@@ -12,7 +12,6 @@
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>
-	
 	<select id="list" resultType="Slider" >
 		SELECT a.* FROM tbl_slider a
 		<include refid="sql_list_where"></include>
@@ -21,6 +20,24 @@
 	<select id="lscount" resultType="Long" >
 		SELECT COUNT(0) FROM tbl_slider a
 		<include refid="sql_list_where"></include>
+	</select>
+	
+	<sql id="sql_list_simple_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="pos != null">AND a.pos = #{pos}</if>
+			<if test="lastid != null">AND a.id > #{lastid}</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	<select id="list_simple" resultType="AppSliderSimple" >
+		SELECT a.* FROM tbl_slider a
+		<include refid="sql_list_simple_where"></include>
+		<include refid="Common.sql_order_limit"></include>
+	</select>
+	<select id="lscount_simple" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_slider a
+		<include refid="sql_list_simple_where"></include>
 	</select>
 	
 	

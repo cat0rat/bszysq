@@ -106,7 +106,7 @@ public class AppArticleController extends BaseController {
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
 		bs.setUserid(uid);
-		ar.t_succ_not_null(service.list(bs));
+		ar.t_succ_not_null(service.list_simple(bs));
 		return ar;
 	}
 	

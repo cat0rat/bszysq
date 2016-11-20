@@ -44,16 +44,16 @@ public class ArticleService extends BaseService<Article, ArticleMapper> {
 	 * 基方法 查询
 	 * @param bs
 	 */
-	public BasePage<Article> commlist(BaseSearch bs){
-		BasePage<Article> bp = new BasePage<Article>();
+	public BasePage<AppArticleSimple> commlist(BaseSearch bs){
+		BasePage<AppArticleSimple> bp = new BasePage<AppArticleSimple>();
 		bs.start_i();
-		List<Article> rows = mapper.commlist(bs);
+		List<AppArticleSimple> rows = mapper.commlist(bs);
 		Long total = mapper.commlscount(bs);
 
 		bp.t_param(bs.page_i(), bs.limit_i());
 		bp.t_result(total, rows);
 		if(rows != null && rows.size() > 0){
-			Article mo = rows.get(rows.size() - 1);
+			AppArticleSimple mo = rows.get(rows.size() - 1);
 			if(mo != null){
 				Long lastid = mo.getId();
 				bp.setLastid(lastid != null ? lastid : 0L);

@@ -356,6 +356,13 @@
 			<version>[7.0.0, 7.1.99]</version>
 		</dependency>
 		
+		<!-- 阿里大于短信 -->
+		<dependency>
+			<groupId>com.taobao</groupId>
+			<artifactId>alidayu</artifactId>
+			<version>20160607</version>
+		</dependency>
+		
 	</dependencies>
 	<repositories>
 	    <repository>

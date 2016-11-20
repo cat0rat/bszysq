@@ -17,7 +17,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
 	public AppArticleDetail detail(Long id);
 	public Long recoms(Map<String, Object> map);
 	
-	public List<Article> commlist(BaseSearch bs);
+	public List<AppArticleSimple> commlist(BaseSearch bs);
 	public Long commlscount(BaseSearch bs);
 	
 	public List<AppArticleSimple> list_simple(BaseSearch bs);

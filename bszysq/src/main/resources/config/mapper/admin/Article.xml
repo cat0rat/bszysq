@@ -50,7 +50,7 @@
 			<if test="isdel != null and isdel != ''">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>
-	<select id="commlist" resultType="Article" >
+	<select id="commlist" resultType="AppArticleSimple" >
 		SELECT a.*, t.name tagname, c.name catename, u.nname usernname, u.head userhead
 		FROM ( SELECT aa.* FROM tbl_article aa WHERE aa.id in( 
 				SELECT cm.artid FROM tbl_comment cm WHERE cm.userid = #{userid}
@@ -93,7 +93,7 @@
 			left join tbl_arttag t on a.tagid = t.id
 			left join tbl_category c on a.cateid = c.id
 			left join tbl_user u on a.userid = u.id
-		<include refid="sql_list_where"></include>
+		<include refid="sql_list_simple_where"></include>
 		<include refid="Common.sql_order_limit"></include>
 	</select>
 	<select id="lscount_simple" resultType="Long" >
@@ -101,7 +101,7 @@
 			left join tbl_arttag t on a.tagid = t.id
 			left join tbl_category c on a.cateid = c.id
 			left join tbl_user u on a.userid = u.id
-		<include refid="sql_list_where"></include>
+		<include refid="sql_list_simple_where"></include>
 	</select>
 	
 	

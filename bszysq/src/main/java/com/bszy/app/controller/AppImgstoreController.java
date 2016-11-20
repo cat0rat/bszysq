@@ -1,9 +1,8 @@
 package com.bszy.app.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mao.ssm.AjaxResult;
@@ -17,10 +16,11 @@ public class AppImgstoreController extends BaseController {
 	// TODO json
 	
 	@ResponseBody
-	@RequestMapping(value = "/uptoken.json")
-	public void token_json(HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	@RequestMapping(value = "/uptoken", method = RequestMethod.GET)
+	public AjaxResult token_json(){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(UpImg.tokenns(), "1602");
+		return ar;
 	}
 	
 }

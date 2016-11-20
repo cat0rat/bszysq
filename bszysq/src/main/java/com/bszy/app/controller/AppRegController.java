@@ -23,6 +23,7 @@ import com.bszy.app.security.AppUserCurUtil;
 import com.bszy.app.service.AppUserService;
 import com.mao.captcha.Captcha;
 import com.mao.lang.MUtil;
+import com.mao.smscode.AliDayuSms;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 import com.mao.ssm.FormValid;
@@ -79,8 +80,15 @@ public class AppRegController extends BaseController {
 		String smscode = MUtil.smscode();
 		AppUserCurUtil.smscode_to_session(session, smscode);
 		// ... 调用 发送短信验证码 接口
-		System.out.println("手机号：" + mobile + ", 短信验证码：" + smscode);
-		ar.t_succ(smscode); ar.setMsg("短信验证码已发送到您的手机上，请注意查收。");
+		String rstr = AliDayuSms.sendSmscode(mobile, smscode);
+		if(rstr == null){
+			System.out.println("手机号：" + mobile + ", 短信验证码：" + smscode);
+			ar.t_succ();
+			//ar.t_succ(smscode); 
+			ar.setMsg("短信验证码已发送到您的手机上，请注意查收。");
+		}else{
+			ar.t_fail("1231", rstr);
+		}
 		return ar;
 	}
 	
