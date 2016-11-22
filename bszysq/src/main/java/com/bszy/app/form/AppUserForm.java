@@ -7,7 +7,7 @@ public class AppUserForm extends BaseForm {
 	
 	private String name;	// 用户名(6~16位字母数字)
 	private String pwd;		// 密码(6~16位字母数字)
-	private String nname;	// 昵称(6~16位字母数字汉字)
+	private String nname;	// 昵称(2~16位字母数字汉字)
 	private String rolex;	// 角色: 0:普通用户, 9: 超级管理员
 	
 	private String unionid;	// 微信唯一id(20~50字符)

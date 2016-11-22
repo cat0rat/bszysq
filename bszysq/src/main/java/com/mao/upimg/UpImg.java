@@ -37,6 +37,7 @@ public class UpImg {
 	public static String getUpToken() {
 		//if(token == null){
 			token = auth.uploadToken(bucketname);
+			System.out.println("七牛host:" + (Config.zone != null ? Config.zone.upHost : null));
 		//}
 		return token;
 	}
@@ -99,7 +100,7 @@ public class UpImg {
 	
 	
 	public static void main(String[] args) throws IOException {
-		new UpImg().upload("E:\\bjjx\\公用\\jzs\\小项目\\bszy\\碧水庄园社区\\1首页.png", "head/test.png");
+		new UpImg().upload("E:/temp/ass/gg.jpg", "head/test5.png");
 	}
 	
 }

@@ -122,6 +122,8 @@ public class AppRegController extends BaseController {
 		Long id = service.hasName(mobile);
 		if(FormValid.isId(id)){ ar.t_fail("1230"); return ar; }
 		
+		if(nname == null) nname = "用户" + mobile.substring(mobile.length() - 5, mobile.length() -4);
+		
 		pwd = DigestUtils.md5Hex(pwd);
 		
 		AppUser mo = new AppUser();

@@ -149,6 +149,65 @@ public class AppUserController extends BaseController {
 		ar.t_result(rb);
 		return ar;
 	}
+	
+	// 更新个人信息
+//	@ResponseBody
+//	@RequestMapping(value = "/uc/user/update/nname", method = RequestMethod.POST)
+//	public AjaxResult uc_update_nname_json(@RequestBody AppUserForm form){
+//		return uc_update_json("nname", form);
+//	}
+	@ResponseBody
+	@RequestMapping(value = "/uc/user/update/{field}", method = RequestMethod.POST)
+	public AjaxResult uc_update_json(@PathVariable String field, @RequestBody AppUserForm form){
+		AjaxResult ar = new AjaxResult();
+		
+		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+
+		if(FormValid.isEmpty(field)){ ar.t_fail("1501"); return ar; }
+		
+		AppUser mo = new AppUser();
+		switch (field) {
+		case "head":
+			String head = form.getHead();	// 头像
+			if(FormValid.isEmpty(head)){ ar.t_fail("1273"); return ar; }
+			if(!FormValid.len(head, 2, 500)){ ar.t_fail("1501"); return ar; }
+			mo.setHead(head);
+			break;
+		case "tname":
+			String tname = form.getTname();	// 姓名
+			if(FormValid.isEmpty(tname)){ ar.t_fail("1270"); return ar; }
+			if(!FormValid.len(tname, 2, 16)){ ar.t_fail("1271"); return ar; }
+			mo.setTname(tname);
+			break;
+		case "nname":
+			String nname = form.getNname();	// 昵称
+			if(FormValid.isEmpty(nname)){ ar.t_fail("1274"); return ar; }
+			if(!FormValid.len(nname, 2, 16)){ ar.t_fail("1275"); return ar; }
+			mo.setNname(nname);
+			break;
+		case "mobile":
+			String mobile = form.getMobile();	// 手机号
+			if(FormValid.isEmpty(mobile)){ ar.t_fail("1212"); return ar; }
+			if(!FormValid.isMobile(mobile)){ ar.t_fail("1213"); return ar; }
+			mo.setMobile(mobile);
+			break;
+		case "address":
+			String address = form.getAddress();	// 地址
+			if(FormValid.isEmpty(address)){ ar.t_fail("1502"); return ar; }
+			if(!FormValid.lenAllowNull(address, 2, 50)){ ar.t_fail("1272"); return ar; }
+			mo.setAddress(address);
+			break;
+		default:
+			ar.t_fail("1501"); return ar;
+		}
+		mo.init_update();
+		mo.setId(uid);
+		
+		boolean rb = service.update(mo);
+		ar.t_result(rb);
+		return ar;
+	}
 
 	// 修改密码
 	@ResponseBody
