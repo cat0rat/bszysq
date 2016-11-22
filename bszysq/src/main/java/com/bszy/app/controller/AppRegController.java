@@ -2,7 +2,6 @@ package com.bszy.app.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bszy.app.form.AppRegForm;
 import com.bszy.app.pojo.AppUser;
 import com.bszy.app.security.AppUserCurUtil;
+import com.bszy.app.security.SmscodeTimer;
 import com.bszy.app.service.AppUserService;
 import com.mao.captcha.Captcha;
 import com.mao.lang.MUtil;
@@ -71,14 +71,12 @@ public class AppRegController extends BaseController {
 //		if(!captcha_val.equalsIgnoreCase(captcha)){ ar.t_fail("1206"); return ar; }
 		
 		// 短信验证码
-		Long stime = AppUserCurUtil.cur_smscode_time(session);
-		int ss = 0;
-		if(stime != null && (ss = (int)((new Date().getTime() - stime) / 1000)) < 60 ){ 
-			ar.t_fail("1211"); ar.setData(ss); return ar; 
-		}
+		Long ss = SmscodeTimer.remaining(mobile, 60);
+		if(ss != null){ ar.t_fail("1211"); return ar; }	// ar.setData(ss); 
 		
 		String smscode = MUtil.smscode();
-		AppUserCurUtil.smscode_to_session(session, smscode);
+		SmscodeTimer.build(mobile, smscode);
+		//AppUserCurUtil.smscode_to_session(session, smscode);
 		// ... 调用 发送短信验证码 接口
 		String rstr = AliDayuSms.sendSmscode(mobile, smscode);
 		if(rstr == null){
@@ -117,7 +115,7 @@ public class AppRegController extends BaseController {
 		
 		String smscode = form.getSmscode();	// 短信验证码
 		if(FormValid.isEmpty(smscode)){ ar.t_fail("1208"); return ar; }
-		String smscode_val = AppUserCurUtil.cur_smscode(session);
+		String smscode_val = SmscodeTimer.smscode(mobile);
 		if(FormValid.isEmpty(smscode_val)){ ar.t_fail("1210"); return ar; }
 		if(!smscode_val.equalsIgnoreCase(smscode)){ ar.t_fail("1209"); return ar; }
 		

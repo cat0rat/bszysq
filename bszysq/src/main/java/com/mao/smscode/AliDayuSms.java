@@ -41,6 +41,7 @@ public class AliDayuSms {
 			if(rsp.isSuccess()){
 				rstr = null;
 			}else{
+				if(rsp.getMsg() != null) throw new ApiException(rsp.getMsg());
 				rstr = rsp.getSubMsg();
 			}
 		} catch (ApiException e) {

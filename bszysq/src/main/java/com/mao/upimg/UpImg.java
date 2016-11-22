@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.qiniu.common.Config;
 import com.qiniu.common.QiniuException;
+import com.qiniu.common.Zone;
 import com.qiniu.http.Response;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
@@ -20,6 +22,9 @@ public class UpImg {
 	public static Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 	// Token
 	public static String token;
+	static{
+		Config.zone = Zone.zone1();
+	}
 	
 	// 上传到七牛后保存的文件名
 	String key = null;

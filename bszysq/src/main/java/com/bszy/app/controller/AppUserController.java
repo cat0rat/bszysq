@@ -18,7 +18,7 @@ import com.bszy.app.form.AppRepwdForm;
 import com.bszy.app.form.AppUserForm;
 import com.bszy.app.pojo.AppUser;
 import com.bszy.app.pojo.AppUserRePwd;
-import com.bszy.app.security.AppUserCurUtil;
+import com.bszy.app.security.SmscodeTimer;
 import com.bszy.app.service.AppUserService;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
@@ -64,12 +64,9 @@ public class AppUserController extends BaseController {
 		
 		String smscode = form.getSmscode();	// 短信验证码
 		if(FormValid.isEmpty(smscode)){ ar.t_fail("1208"); return ar; }
-		String smscode_val = AppUserCurUtil.cur_smscode(session);
+		String smscode_val = SmscodeTimer.smscode(mobile);
 		if(FormValid.isEmpty(smscode_val)){ ar.t_fail("1210"); return ar; }
 		if(!smscode_val.equalsIgnoreCase(smscode)){ ar.t_fail("1209"); return ar; }
-		
-		Long id = service.hasName(mobile);
-		if(FormValid.isId(id)){ ar.t_fail("1230"); return ar; }
 		
 		pwd = DigestUtils.md5Hex(pwd);
 		
@@ -78,7 +75,7 @@ public class AppUserController extends BaseController {
 		mo.setName(mobile);
 		mo.setPwd(pwd);
 		
-		boolean rb = service.update(mo);
+		boolean rb = service.findpwd(mo);
 		ar.t_result(rb);
 		return ar;
 	}

@@ -5,7 +5,7 @@ import com.mao.ssm.BaseSearch;
 public class ArticleSearch extends BaseSearch {
 	
 	private String name;		// 标题(1~500字符)
-	private Long tagid;		// 标签id
+	private Long tagid;			// 标签id
 	private String tagname;		// 标签名
 	private Long cateid;		// 所属版块id
 	private String catename;	// 所属版块名称
