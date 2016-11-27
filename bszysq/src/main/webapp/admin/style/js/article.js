@@ -5,9 +5,9 @@ $.extend(z, {
 $.extend(z.dg, {
 	gen_toolbar: function(zz){
 		var tb = [
-			{text:'添加', iconCls:'icon-standard-add', plain:true, handler: z.add.dlg_open},
-			{text:'修改', iconCls:'icon-edit', plain:true, handler: z.edit.dlg_open},
-			{text:'查看', iconCls:'icon-search', plain:true, handler: z.look.dlg_open},
+//			{text:'添加', iconCls:'icon-standard-add', plain:true, handler: z.add.dlg_open},
+//			{text:'修改', iconCls:'icon-edit', plain:true, handler: z.edit.dlg_open},
+//			{text:'查看', iconCls:'icon-search', plain:true, handler: z.look.dlg_open},
 			{text:'删除', iconCls:'icon-standard-cancel', plain:true, handler: zz.do_del},
 //			'-',
 //			{text:'禁用', iconCls:'icon-remove', plain:true, handler: zz.do_dis},

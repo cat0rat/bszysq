@@ -33,7 +33,7 @@
 			<select name="pos" class="easyui-combobox x_input" 
 				data-options="panelHeight:'auto',editable:false, width: 150"> 
 				<option value="">全部</option>
-				<option value="1">首页</option>   
+				<option value="0">首页</option>   
 			</select>
 		</div>
 		<div class="l_search_td">
@@ -60,13 +60,13 @@
 
 <!-- 添加对话框 -->
  <div id="addMgrDlg" style="padding-left:5px;">
-	<form id="addMgrForm" class="dlg-frm t-min" method="post" enctype="multipart/form-data">
+	<form id="addMgrForm" class="dlg-frm t-min" method="post">
 	<table class="dlg-tb">
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
 				<select name="pos" class="easyui-combobox x_input" 
 					data-options="panelHeight:'auto',required:true, editable:false, width: 200"> 
-					<option value="1">首页</option>   
+					<option value="0">首页</option>   
 				</select>
 			</td>
 			<td class="t-r">&nbsp;</td>
@@ -96,8 +96,7 @@
 					data-options="validType:'length[0, 500]'"/>
 			</td></tr>
 		<tr><td class="t-l-c t-memo" colspan="4">
-				完整的网址, 如: http://wx.hechangzj.com/article/1<br>
-				或 文章 ID，如：1
+				完整的网址, 如: http://wx.hechangzj.com/article/1
 			</td></tr>
 		<tr style="display: none;"><td class="t-l"><span>简介：</span></td>
 			<td class="t-l-c" colspan="3">
@@ -109,14 +108,14 @@
 
 <!-- 修改 -->
 <div id="editMgrDlg" style="padding-left:5px;">
-	<form id="editMgrForm" class="dlg-frm t-min" method="post" enctype="multipart/form-data">
+	<form id="editMgrForm" class="dlg-frm t-min" method="post">
 	<input type="hidden" name="id" />
 	<table class="dlg-tb">
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
 				<select name="pos" class="easyui-combobox x_input" 
 					data-options="panelHeight:'auto',required:true, editable:false, width: 200"> 
-					<option value="1">首页</option>   
+					<option value="0">首页</option>   
 				</select>
 			</td>
 			<td class="t-r">&nbsp;</td>
@@ -146,8 +145,7 @@
 					data-options="validType:'length[0, 500]'"/>
 			</td></tr>
 		<tr><td class="t-l-c t-memo" colspan="4">
-				完整的网址, 如: http://wx.hechangzj.com/article/1<br>
-				或 文章 ID，如：1
+				完整的网址, 如: http://wx.hechangzj.com/article/1
 			</td></tr>
 		<tr style="display: none;"><td class="t-l"><span>简介：</span></td>
 			<td class="t-l-c" colspan="3">
@@ -159,13 +157,13 @@
 
 <!-- 查看 -->
 <div id="lookMgrDlg" style="padding-left:5px;">
-	<form id="lookMgrForm" class="dlg-frm t-min" method="post" enctype="multipart/form-data">
+	<form id="lookMgrForm" class="dlg-frm t-min" method="post">
 	<table class="dlg-tb">
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
 				<select name="pos" class="easyui-combobox x_input" 
 					data-options="panelHeight:'auto', editable:false, width: 200"> 
-					<option value="1">首页</option>   
+					<option value="0">首页</option>   
 				</select>
 			</td>
 			<td class="t-r">&nbsp;</td>

@@ -12,7 +12,7 @@ public class Slider extends BasePojo {
 
 	private String name;	// 标题(<100字符)
 	private String img;		// 配图(<500字符，完整网址)
-	private Integer sortn;		// 排序号(默认0, 倒序)
+	private Integer sortn;	// 排序号(默认0, 倒序)
 	private Integer pos;	// 位置(0:首页)
 	private String brief;	// 简介(<500字符)
 	private String link;	// 跳转地址(<500字符，完整网址)

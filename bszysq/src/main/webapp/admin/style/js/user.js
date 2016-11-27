@@ -1,22 +1,41 @@
-var S_Role = { 9: '管理员', 1: '用户' };
+var S_rolex = { 0: '普通用户', 9: '<font style="color: #00f">超级管理员</font>' };
+var S_phonetype = { 0: '安卓', 1: '<font style="color: #00f">苹果</font>' };
+var S_sex = { 1: '男', 2: '<font style="color: #00f">女</font>' };
+var S_authx = { 0: '<font style="color: #00f">已认证</font>', 1: '未认证', 2: '<font style="color: #f00">待审核</font>' };
 $.extend(z, {
-	clazz: 'category',
-	gDlgheight: 200
+	clazz: 'user',
+	gDlgHeight: 300
 });
 $.extend(z.dg, {
 	gen_columns: function(zz){
-		var cols = [[ 
-		    {field: 'ck', checkbox: true}, 
-			{field: 'id', title: '编号', width:100, align:'center', sortable: true},
-			{field: 'name', title: '登录账号', width:220, align:'center', sortable: true, formatter: function(v, r, ix){
+		var cols = z.dg.columnBase([
+			z.dg.columnMinImg({field: 'head', title: '头像', width:35}),
+			{field: 'name', title: '登录账号', width:90, align:'center', sortable: true, formatter: function(v, r, ix){
 				return '<b>' + v + '</b>';
 			}},
-			{field: 'rolex', title: '角色', width:220, align:'center', sortable: true, formatter: function(v, r, ix){
-				return S_Role[v] || '未知';
+			{field: 'nname', title: '昵称', width:90, align:'center', sortable: true},
+			{field: 'rolex', title: '角色', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
+				return S_rolex[v] || '未知';
 			}},
-			{field: 'mobile', title: '手机', width:220, align:'center', sortable: true},
-			{field: 'utime', title: '更新时间', width:220, align:'center', sortable: true, sortable: true}
-		]];
+			
+//			{field: 'unionid', title: '微信唯一id', width:90, align:'center'},
+//			{field: 'openid', title: '微信id', width:90, align:'center'},
+//			{field: 'getuicid', title: '个推ClientID', width:90, align:'center'},
+			
+			{field: 'phonetype', title: '手机类型', width:50, align:'center', sortable: true, formatter: function(v, r, ix){
+				return S_phonetype[v] || '未知';
+			}},
+			{field: 'phonename', title: '手机显示名', width:90, align:'center', sortable: true},
+			
+			{field: 'authx', title: '认证状态', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
+				return S_authx[v] || '未知';
+			}},
+			{field: 'sex', title: '性别', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
+				return S_sex[v] || '未知';
+			}},
+			
+			{field: 'mobile', title: '手机', width:90, align:'center', sortable: true}
+			]);
 		return cols;
 	}
 });

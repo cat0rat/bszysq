@@ -2,7 +2,7 @@
 	display: none;
 }
 #lookMgrDlg{
-	overflow: hidden;
+	overflow-x: hidden;
 }
 
 form .x_input{

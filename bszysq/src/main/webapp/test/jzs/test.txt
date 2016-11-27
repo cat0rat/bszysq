@@ -1,0 +1,35 @@
+String name;        // 用户名(3~16位字母数字)
+String pwd;        // 密码(6~16位字母数字)
+String nname;        // 昵称(2~16位字母数字汉字)
+Integer rolex;    // 角色: 0:普通用户, 9: 超级管理员
+
+String unionid;    // 微信唯一id(20~50字符)
+String openid;    // 微信id(20~50字符)
+
+String getuicid;        // 个推ClientID(20~50字符)
+String getuialias;    // 个推别名(<50字符)
+String getuitag;        // 个推标签(<500字符)
+
+Integer phonetype;    // 手机类型: 0: 安卓; 1: 苹果;
+String phonename;        // 手机显示名, 如: Android 4.2, iPhone 7等(<50字符)
+
+Integer authx;    // 0: 已认证; 1: 未认证; 2: 申请认证
+String mobile;    // 手机号
+String tname;        // 姓名(2~20位字母数字汉字)
+String citycode;    // 城市编码
+String city;        // 城市(<50字符)
+String address;    // 地址(<500字符)
+
+String sex;        // 1:男; 2:女; 0:未知
+String head;        // 头像(<500字符，完整网址)
+String email;        // 邮箱(<500字符)
+Date birth;        // 生日
+Date ltime;        // 最后一次登录时间
+String lip;        // 最后一次登录ip
+Integer lcount;    // 登录次数
+Integer lstat;    // 登录状态: 0: 离线; 1: 在线; 2: 隐身
+
+Long id;        // ID
+Date ctime;        // 创建时间
+Date utime;        // 更新时间
+Integer isdel;    // 删除标记, 0: 正常; 1: 已删除

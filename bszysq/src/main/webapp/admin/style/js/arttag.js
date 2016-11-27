@@ -1,5 +1,5 @@
 $.extend(z, {
-	clazz: 'category',
+	clazz: 'arttag',
 });
 $.extend(z.dg, {
 	gen_columns: function(zz){

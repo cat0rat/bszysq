@@ -11,6 +11,7 @@
 			<if test="rolex != null">AND a.rolex = #{rolex}</if>
 			<if test="unionid != null and unionid != ''">AND a.unionid = #{unionid}</if>
 			<if test="openid != null and openid != ''">AND a.openid = #{openid}</if>
+			<if test="phonetype != null and phonetype != ''">AND a.phonetype = #{phonetype}</if>
 			<if test="authx != null">AND a.authx = #{authx}</if>
 			<if test="mobile != null and mobile != ''">AND a.mobile LIKE CONCAT('%',#{mobile},'%' )</if>
 			<if test="tname != null and tname != ''">AND a.tname LIKE CONCAT('%',#{tname},'%' )</if>

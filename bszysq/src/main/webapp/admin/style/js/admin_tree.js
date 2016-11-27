@@ -15,11 +15,11 @@ function build_tree_art(cates, topics){
 			beans: {
 				href:'/admin/article/page.do'
 			}
-		},{
-			text: '评论管理',
-			beans: {
-				href:'/admin/comment/page.do'
-			}
+//		},{
+//			text: '评论管理',
+//			beans: {
+//				href:'/admin/comment/page.do'
+//			}
 		},{
 			text: '轮播管理',
 			beans: {
@@ -31,11 +31,11 @@ function build_tree_art(cates, topics){
 			beans: {
 				href:'/admin/user/page.do'
 			}
-		},{
-			text: '短信验证码管理',
-			beans: {
-				href:'/admin/smscode/page.do'
-			}
+//		},{
+//			text: '短信验证码管理',
+//			beans: {
+//				href:'/admin/smscode/page.do'
+//			}
 //			},{
 //				text: '修改密码',
 //				beans: {

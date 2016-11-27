@@ -48,7 +48,20 @@ var z = {
 					$.messager.alert('温馨提示', '系统繁忙，请重试!', 'error');
 				},
 				loadFilter: function(data){
-					return  data.data ? data.data : data;
+					data = data.data ? data.data : data;
+					if(data && data.rows && data.rows.length){
+						$.each(data.rows, function(ix, row){
+							if(row){
+								if(row.ctime){
+									row.ctimeStr = m_i.to_dstr(row.ctime);
+								}
+								if(row.utime){
+									row.utimeStr = m_i.to_dstr(row.utime);
+								}
+							}
+						});
+					}
+					return data;
 				}
 			});
 		},
@@ -236,6 +249,16 @@ var z = {
 		columnImg: function(opt){
 			return $.extend({field : 'img', title : '配图', width : 100, align : 'center', formatter: function(val){
 				if(val) return '<img style="width:90px; height: 90px;" src="' + val + '" >';
+			}}, opt);
+		},
+		columnMidImg: function(opt){
+			return $.extend({field : 'img', title : '配图', width : 100, align : 'center', formatter: function(val){
+				if(val) return '<img style="width:60px; height: 60px;" src="' + val + '" >';
+			}}, opt);
+		},
+		columnMinImg: function(opt){
+			return $.extend({field : 'img', title : '配图', width : 100, align : 'center', formatter: function(val){
+				if(val) return '<img style="width:30px; height: 30px;" src="' + val + '" >';
 			}}, opt);
 		},
 		columnHeadImg: function(opt){

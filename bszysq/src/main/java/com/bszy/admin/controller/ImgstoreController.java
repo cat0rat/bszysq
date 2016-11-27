@@ -3,8 +3,6 @@ package com.bszy.admin.controller;
 import java.util.Date;
 import java.util.UUID;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,8 +23,8 @@ public class ImgstoreController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/upload.json", method = RequestMethod.POST)
-	public void upload_json(ImgstoreForm form, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	public AjaxResult upload_json(ImgstoreForm form){
+		AjaxResult ar = new AjaxResult();
 		MultipartFile mfile = form.getFile();
 		String url = null;
 		if(mfile != null && !mfile.isEmpty()){
@@ -43,6 +41,7 @@ public class ImgstoreController extends BaseController {
 			}
 		}
 		ar.t_succ_not_null(url, "1601");
+		return ar;
 	}
 	
 }

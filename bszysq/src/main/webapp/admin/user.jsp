@@ -25,29 +25,39 @@
 <form id="search_form" >
 	<div class="l_search_tr">
 		<div class="l_search_td">
-			用户角色：
-			<select name="xrole" class="easyui-combobox x_input" 
-				data-options="panelHeight:'auto',editable:false, width: 150"> 
+			用户角色： <select name="rolex" class="easyui-combobox x_input" 
+				data-options="panelHeight:'auto',editable:false, width: 90"> 
 				<option value="">全部</option>
 				<option value="9">管理员</option>   
-			    <option value="1">用户</option> 
+			    <option value="0">用户</option> 
 			</select>
 		</div>
 		<div class="l_search_td">
-			用户名：
-			<input type="text" name="uname" class="x_input"/>
+			帐号： <input type="text" name="name" class="x_input"/>
 		</div>
-		<!-- 
 		<div class="l_search_td">
-			状态：
-			<select name="isdel" class="easyui-combobox x_input"  
-				data-options="panelHeight:'auto',editable:false, width: 150">
-  					<option value="">全部</option>   
-  					<option value="1">正常</option>  
-				<option value="0">已禁用</option>   
+			昵称： <input type="text" name="nname" class="x_input"/>
+		</div>
+		<div class="l_search_td">
+			手机类型： <select name="phonetype" class="easyui-combobox x_input" 
+				data-options="panelHeight:'auto',editable:false, width: 90"> 
+				<option value="">全部</option>
+				<option value="0">安卓</option>   
+			    <option value="1">苹果</option> 
 			</select>
 		</div>
-		 -->
+		<div class="l_search_td">
+			手机号： <input type="text" name="mobile" class="x_input"/>
+		</div>
+		<div class="l_search_td">
+			认证状态： <select name="authx" class="easyui-combobox x_input" 
+				data-options="panelHeight:'auto',editable:false, width: 90"> 
+				<option value="">请选择</option>
+			    <option value="0">已认证</option>
+				<option value="1">未认证</option>   
+				<option value="2">待审核</option>
+			</select>
+		</div>
 		<div class="l_search_btn">
 			<a id="search_btn" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
 		</div>
@@ -65,44 +75,73 @@
 <div id="addMgrDlg" style="padding-left:5px;">
 	<form id="addMgrForm" class="dlg-frm t-min" method="post">
 	<table class="dlg-tb">
-		<tr>
-			<td class="t-l">角色：</td>
-			<td class="t-l-c">
-				<select name="xrole" class="easyui-combobox x_input" 
-					data-options="panelHeight:'auto',required:true,editable:false, width: 200"> 
+		<tr><td class="t-l">角色：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="rolex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto',required:true,editable:false"> 
 					<option value="">请选择</option>
 					<option value="9">管理员</option>   
-				    <option value="1">用户</option>
+				    <option value="0" selected="selected">用户</option>
 				</select>
 			</td>
-			<td class="t-r">&nbsp;</td>
-			<td class="t-r-c">
-				
-			</td>
-		</tr>
-		<tr>
-			<td class="t-l">账号：</td>
-			<td class="t-l-c">
-				<input type="text" name="uname" class="easyui-validatebox x_input"
-					data-options="required:true, validType:'name[3, 20]'"/>
-			</td>
-			<td class="t-r">密码：</td>
-			<td class="t-r-c">
-				<input type="text" name="pwd" class="easyui-validatebox x_input"
-					data-options="required:true, validType:'length[6, 20]'"/>
-			</td>
-		</tr>
-		<tr>
-			<td class="t-l">手机：</td>
-			<td class="t-l-c">
-				<input type="text" name="mobile" class="easyui-validatebox x_input"
+		<tr><td class="t-l">昵称：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="nname" class="easyui-validatebox x_input x-ipt3"
+					data-options="required:true, validType:'length[2, 16]'"/>
+			</td></tr>
+		<tr><td class="t-l">账号：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="name" class="easyui-validatebox x_input x-ipt3"
+					data-options="required:true, validType:'name[3, 16]'"/>
+			</td></tr>
+		<tr><td class="t-l">密码：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="pwd" class="easyui-validatebox x_input x-ipt3"
+					data-options="required:true, validType:'length[6, 16]'"/>
+			</td></tr>
+			
+		<tr><td class="t-l">手机：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="mobile" class="easyui-validatebox x_input x-ipt3"
 					data-options="validType:['len[11]', 'mobile']"/>
-			</td>
-			<td class="t-r"></td>
-			<td class="t-r-c">
-				
-			</td>
-		</tr>
+			</td></tr>
+		<tr><td class="t-l">认证状态：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="authx" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto',required:true,editable:false"> 
+					<option value="">请选择</option>
+				    <option value="0">已认证</option>
+					<option value="1" selected="selected">未认证</option>   
+					<option value="2">待审核</option>
+				</select>
+			</td></tr>
+		<!-- 
+		<tr><td class="t-l">微信唯一id：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="unionid" class="easyui-validatebox x_input x-ipt3"
+					data-options="validType:'length[20, 50]'"/>
+			</td></tr>
+		<tr><td class="t-l">微信id：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="openid" class="easyui-validatebox x_input x-ipt3"
+					data-options="validType:'length[20, 50]'"/>
+			</td></tr>
+			
+		<tr><td class="t-l">个推ClientID：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="getuicid" class="easyui-validatebox x_input x-ipt3"
+					data-options="validType:'length[20, 50]'"/>
+			</td></tr>
+		<tr><td class="t-l">手机类型：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="phonetype" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto',required:true,editable:false, width: 200"> 
+					<option value="">请选择</option>
+				    <option value="0" selected="selected">安卓</option>
+					<option value="9">苹果</option>   
+				</select>
+			</td></tr>
+		-->
 	</table>
 	</form>
 </div>
@@ -112,66 +151,134 @@
 	<form id="editMgrForm" class="dlg-frm t-min" method="post">
 	<input type="hidden" name="id" />
 	<table class="dlg-tb">
-		<tr>
-			<td class="t-l">角色：</td>
-			<td class="t-l-c">
-				<select name="xrole" class="easyui-combobox x_input" prompt="请选择"
-					data-options="panelHeight:'auto',editable:false,required:true,validType:'comboEmp', width: 200">
-					<option value="0">请选择</option>
+		<tr><td class="t-l">角色：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="rolex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto',required:true,editable:false"> 
+					<option value="">请选择</option>
 					<option value="9">管理员</option>   
-				    <option value="1">用户</option>
+				    <option value="0" selected="selected">用户</option>
 				</select>
 			</td>
-			<td class="t-r">&nbsp;</td>
-			<td class="t-r-c">
-				
-			</td>
-		</tr>
-		<tr>
-			<td class="t-l">账号：</td>
-			<td class="t-l-c">
-				<input type="text" name="uname" class="easyui-validatebox x_input"
-					data-options="required:true, validType:'name[3, 20]'"/>
-			</td>
-			<td class="t-r">手机：</td>
-			<td class="t-r-c">
-				<input type="text" name="mobile" class="easyui-validatebox x_input"
+		<tr><td class="t-l">昵称：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="nname" class="easyui-validatebox x_input x-ipt3"
+					data-options="required:true, validType:'length[2, 16]'"/>
+			</td></tr>
+		<tr><td class="t-l">账号：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="name" class="easyui-validatebox x_input x-ipt3"
+					data-options="required:true, validType:'name[3, 16]'"/>
+			</td></tr>
+			
+		<tr><td class="t-l">手机：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="mobile" class="easyui-validatebox x_input x-ipt3"
 					data-options="validType:['len[11]', 'mobile']"/>
-			</td>
-		</tr>
+			</td></tr>
+		<tr><td class="t-l">认证状态：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="authx" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto',required:true,editable:false"> 
+					<option value="">请选择</option>
+				    <option value="0">已认证</option>
+					<option value="1" selected="selected">未认证</option>   
+					<option value="2">待审核</option>   
+				</select>
+			</td></tr>
 	</table>
 	</form>
 </div>
 
 <!-- 查看用户 -->
 <div id="lookMgrDlg" style="padding-left:5px;">
-	<form id="lookMgrForm" class="dlg-frm t-min" method="post">
+	<form id="lookMgrForm" class="dlg-frm" method="post">
 	<table class="dlg-tb">
-		<tr>
-			<td class="t-l">角色：</td>
-			<td class="t-l-c">
-				<select name="xrole" class="easyui-combobox x_input" 
-					data-options="panelHeight:'auto',user_dg_deleditable:false, width: 200">
+		<tr><td class="t-l"><span>头像：</span></td>
+			<td class="t-l-c" colspan="3">
+				<img class="mi-upimg-img" upimgshow="head" />
+			</td></tr>
+		<tr><td class="t-l">角色：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="rolex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
 					<option value="">请选择</option>
 					<option value="9">管理员</option>   
-				    <option value="1">用户</option>
+				    <option value="0" selected="selected">用户</option>
 				</select>
 			</td>
-			<td class="t-r">&nbsp;</td>
-			<td class="t-r-c">
-				
-			</td>
-		</tr>
-		<tr>
-			<td class="t-l">账号：</td>
-			<td class="t-l-c">
-				<input type="text" name="uname" class="x_input"/>
-			</td>
-			<td class="t-r">手机：</td>
-			<td class="t-r-c">
-				<input type="text" name="mobile" class="x_input"/>
-			</td>
-		</tr>
+		<tr><td class="t-l">昵称：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="nname" class="x_input x-ipt3" />
+			</td></tr>
+		<tr><td class="t-l">账号：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="name" class="x_input x-ipt3" />
+			</td></tr>
+		
+		<tr><td class="t-l">姓名：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="tname" class="x_input x-ipt3" />
+			</td></tr>
+		<tr><td class="t-l">手机：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="mobile" class="x_input x-ipt3" />
+			</td></tr>
+		<tr><td class="t-l">地址：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="address" class="x_input x-ipt3" />
+			</td></tr>
+		<tr><td class="t-l">认证状态：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="authx" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
+					<option value="">请选择</option>
+				    <option value="0">已认证</option>
+					<option value="1" selected="selected">未认证</option>   
+					<option value="2">待审核</option>   
+				</select>
+			</td></tr>
+		<tr><td class="t-l">性别：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="sex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
+					<option value="">请选择</option>
+					<option value="1" selected="selected">男</option>   
+					<option value="2">女</option>   
+				</select>
+			</td></tr>
+			
+		<tr><td class="t-l">微信唯一id：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="unionid" class="x_input x-ipt3" />
+			</td></tr>
+		<tr><td class="t-l">微信id：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="openid" class="x_input x-ipt3" />
+			</td></tr>
+			
+		<tr><td class="t-l">个推ClientID：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="getuicid" class="x_input x-ipt3" />
+			</td></tr>
+		<tr><td class="t-l">手机类型：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="phonetype" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
+					<option value="">请选择</option>
+				    <option value="0" selected="selected">安卓</option>
+					<option value="9">苹果</option>   
+				</select>
+			</td></tr>
+		<tr><td class="t-l">手机显示名：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="phonename" class="x_input x-ipt3" />
+			</td></tr>
+			
+		<tr><td class="t-l">邮箱：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="email" class="x_input x-ipt3" />
+			</td></tr>
 	</table>
 	</form>
 </div>

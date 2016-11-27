@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,73 +44,60 @@ public class ArticleController  extends BaseController {
 		model.addAttribute("jar", AjaxResultUtil.toJsonStr(jar));
 		return "admin/article";
 	}
-	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
-	public String list(){
-		return "admin/article/list";
-	}
-	@RequestMapping(value = "/add.do", method = RequestMethod.GET)
-	public String add(){
-		return "admin/article/add";
-	}
-	@RequestMapping(value = "/edit.do", method = RequestMethod.GET)
-	public String edit(Long id, Model model) {
-		model.addAttribute("bean", service.get(id));
-		return "admin/article/edit";
-	}
-	@RequestMapping(value = "/view.do", method = RequestMethod.GET)
-	public String view(Long id, Model model) {
-		model.addAttribute("bean", service.get(id));
-		return "admin/article/view";
-	}
 	
 	// TODO json
 	
 	@ResponseBody
 	@RequestMapping(value = "/get.json", method = RequestMethod.POST)
-	public void get_json(Long id, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	public AjaxResult get_json(Long id){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.get(id));
+		return ar;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/delete.json", method = RequestMethod.POST)
-	public void delete_json(Long id, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	public AjaxResult delete_json(Long id){
+		AjaxResult ar = new AjaxResult();
 		ar.t_result(service.delete(id));
+		return ar;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/dels.json", method = RequestMethod.POST)
-	public void dels_json(String ids, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
-		if(ids == null || !FormValid.isIds(ids)){ ar.t_fail("1501"); return ; }
+	public AjaxResult dels_json(String ids){
+		AjaxResult ar = new AjaxResult();
+		if(ids == null || !FormValid.isIds(ids)){ ar.t_fail("1501"); return ar; }
 		ar.t_result(service.dels(ids));
+		return ar;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/recoms.json", method = RequestMethod.POST)
-	public void recoms_json(String ids, Integer status, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
-		if(ids == null || !FormValid.isIds(ids) || status == null){ ar.t_fail("1501"); return ; }
+	public AjaxResult recoms_json(String ids, Integer status){
+		AjaxResult ar = new AjaxResult();
+		if(ids == null || !FormValid.isIds(ids) || status == null){ ar.t_fail("1501"); return ar; }
 		ar.t_result(service.recoms(ids, status));
+		return ar;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
-	public void list_json(ArticleSearch bs, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
+	public AjaxResult list_json(ArticleSearch bs){
+		AjaxResult ar = new AjaxResult();
 		ar.t_succ_not_null(service.list(bs));
+		return ar;
 	}
 
 	@ResponseBody
 	@RequestMapping(value = "/add.json", method = RequestMethod.POST)
-	public void add_json(ArticleForm form, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
-		if(form == null){ ar.t_fail("1501"); return ; }
+	public AjaxResult add_json(ArticleForm form){
+		AjaxResult ar = new AjaxResult();
+		if(form == null){ ar.t_fail("1501"); return ar; }
 		
 		String name = form.getName();	// 名称
-		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ar; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ar; }
 		
 		Article mo = new Article();
 		mo.init_add();
@@ -120,19 +106,20 @@ public class ArticleController  extends BaseController {
 		mo.setSortn(MUtil.toInt(form.getSortn(), 0));
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
+		return ar;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/update.json", method = RequestMethod.POST)
-	public void update_json(ArticleForm form, HttpServletRequest request){
-		AjaxResult ar = ajaxResult(request);
-		if(form == null){ ar.t_fail("1501"); return ; }
+	public AjaxResult update_json(ArticleForm form){
+		AjaxResult ar = new AjaxResult();
+		if(form == null){ ar.t_fail("1501"); return ar; }
 		Long id = MUtil.toLong(form.getId());
-		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ; }
+		if(!MUtil.isId(id)){ ar.t_fail("1501"); return ar; }
 		
 		String name = form.getName();
-		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ; }
-		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ; }
+		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ar; }
+		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ar; }
 		
 		Article mo = new Article();
 		mo.init_update();
@@ -143,6 +130,7 @@ public class ArticleController  extends BaseController {
 		mo.setIsdel(MUtil.toInteger(form.getIsdel()));
 		boolean rb = service.update(mo);
 		ar.t_result(rb);
+		return ar;
 	}
 	
 }

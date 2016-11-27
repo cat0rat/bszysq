@@ -1,10 +1,8 @@
 package com.bszy.admin.controller;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,10 +27,6 @@ public class CategoryController extends BaseController {
 	@RequestMapping(value = {"/", "/page.do"}, method = RequestMethod.GET)
 	public String page(){
 		return "admin/category";
-	}
-	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
-	public String list(){
-		return "admin/category/list";
 	}
 	
 	// TODO json

@@ -12,7 +12,7 @@
 	}
 	if(xrole == 1){	// admin:超级管理员
 %>
-	<%@ include file="/admin/admin.jsp" %>
+	<%@ include file="/admin/admin_menu.jsp" %>
 <%
 	}
 %>

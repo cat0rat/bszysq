@@ -11,36 +11,36 @@ import com.mao.ssm.BasePojo;
 public class AppUser extends BasePojo {
 	private static final long serialVersionUID = 1L;
 	
-	private String name;	// 用户名(手机号)
-	private String pwd;		// 密码(6~16位字母数字)
-	private String nname;	// 昵称(2~16位字母数字汉字)
-	private Integer rolex;	// 角色: 0:普通用户, 9: 超级管理员
+	protected String name;		// 用户名(手机号)
+	protected String pwd;		// 密码(6~16位字母数字)
+	protected String nname;		// 昵称(2~16位字母数字汉字)
+	protected Integer rolex;	// 角色: 0:普通用户, 9: 超级管理员
 	
-	private String unionid;	// 微信唯一id(20~50字符)
-	private String openid;	// 微信id(20~50字符)
+	protected String unionid;	// 微信唯一id(20~50字符)
+	protected String openid;	// 微信id(20~50字符)
 	
-	private String getuicid;	// 个推ClientID(20~50字符)
-	private String getuialias;	// 个推别名(<50字符)
-	private String getuitag;	// 个推标签(<500字符)
+	protected String getuicid;		// 个推ClientID(20~50字符)
+	protected String getuialias;	// 个推别名(<50字符)
+	protected String getuitag;		// 个推标签(<500字符)
 	
-	private Integer phonetype;	// 手机类型: 0: 安卓; 1: 苹果;
-	private String phonename;	// 手机显示名, 如: Android 4.2, iPhone 7等(<50字符)
+	protected Integer phonetype;	// 手机类型: 0: 安卓; 1: 苹果;
+	protected String phonename;		// 手机显示名, 如: Android 4.2, iPhone 7等(<50字符)
 
-	private Integer authx;	// 0: 已认证; 1: 未认证; 2: 认证中
-	private String mobile;	// 手机号
-	private String tname;	// 姓名(2~20位字母数字汉字)
-	private String citycode;// 城市编码
-	private String city;	// 城市(<50字符)
-	private String address;	// 地址(<500字符)
+	protected Integer authx;	// 0: 已认证; 1: 未认证; 2: 认证中
+	protected String mobile;	// 手机号
+	protected String tname;		// 姓名(2~20位字母数字汉字)
+	protected String citycode;	// 城市编码
+	protected String city;		// 城市(<50字符)
+	protected String address;	// 地址(<500字符)
 
-	private String sex;		// 1:男; 2:女; 0:未知
-	private String head;	// 头像(<500字符，完整网址)
-	private String email;	// 邮箱(<500字符)
-	private Date birth;		// 生日
-	private Date ltime;		// 最后一次登录时间
-	private String lip;		// 最后一次登录ip
-	private Integer lcount;	// 登录次数
-	private Integer lstat;	// 登录状态: 0: 离线; 1: 在线; 2: 隐身
+	protected String sex;		// 1:男; 2:女; 0:未知
+	protected String head;		// 头像(<500字符，完整网址)
+	protected String email;		// 邮箱(<500字符)
+	protected Date birth;		// 生日
+	protected Date ltime;		// 最后一次登录时间
+	protected String lip;		// 最后一次登录ip
+	protected Integer lcount;	// 登录次数
+	protected Integer lstat;	// 登录状态: 0: 离线; 1: 在线; 2: 隐身
 	
 	public String getAuthxStr() {
 		if(authx != null)
