@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bszy.app.mapper.AppSysmsgMapper">
+	
+	<sql id="sql_list_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="content != null and content != ''">AND t.content LIKE CONCAT('%',#{content},'%' )</if>
+			<if test="typex != null and typex != ''">AND a.typex = #{typex}</if>
+			<if test="extra != null and extra != ''">AND c.extra LIKE CONCAT('%',#{extra},'%' )</if>
+			
+			<if test="lastid != null and lastid != ''">AND a.id &lt; #{lastid}</if>
+			<if test="isdel != null and isdel != ''">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="list" resultType="Article" >
+		SELECT a.*, t.name tagname, c.name catename, u.nname usernname, u.head userhead
+		FROM tbl_sysmsg a
+			left join tbl_arttag t on a.tagid = t.id
+			left join tbl_category c on a.cateid = c.id
+			left join tbl_user u on a.userid = u.id
+		<include refid="sql_list_where"></include>
+		<include refid="Common.sql_order_limit"></include>
+	</select>
+	<select id="lscount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_sysmsg a
+			left join tbl_arttag t on a.tagid = t.id
+			left join tbl_category c on a.cateid = c.id
+			left join tbl_user u on a.userid = u.id
+		<include refid="sql_list_where"></include>
+	</select>
+	
+	<select id="get" resultType="AppSysmsg" >
+		SELECT a.* FROM tbl_sysmsg a WHERE a.id = #{id}
+	</select>
+	<delete id="delete">
+		DELETE FROM tbl_sysmsg WHERE id = #{id}
+	</delete>
+	<delete id="dels">
+		DELETE FROM tbl_sysmsg WHERE id in(${ids})
+	</delete>
+	
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tbl_sysmsg(name, content, typex, extra,
+			ctime, utime, isdel) 
+		VALUES(#{name}, #{content}, #{typex}, #{extra}, 
+			#{ctime}, #{utime}, #{isdel})
+	</insert>
+	<update id="update" >
+		UPDATE tbl_sysmsg a
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="name != null">a.name = #{name},</if>
+			<if test="content != null">a.content = #{content},</if>
+			<if test="typex != null">a.typex = #{typex},</if>
+			<if test="extra != null">a.extra = #{extra},</if>
+			
+			<if test="utime != null">a.utime = #{utime},</if>
+			<if test="isdel != null">a.isdel = #{isdel},</if>
+		</trim>
+		WHERE a.id = #{id}
+	</update>
+	
+    
+</mapper>

@@ -50,4 +50,9 @@ public class AppUserService extends BaseService<AppUser, AppUserMapper> {
 		Long rn = mapper.findpwd(params);
 		return rn != null && rn == 1;
 	}
+	// 绑定个推ClientID
+	public boolean bindGetuiCid(AppUser params){
+		Long rn = mapper.bindGetuiCid(params);
+		return rn != null && rn == 1;
+	}
 }

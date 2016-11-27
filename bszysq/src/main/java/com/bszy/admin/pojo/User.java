@@ -17,6 +17,10 @@ public class User extends BasePojo {
 	
 	private String unionid;	// 微信唯一id(20~50字符)
 	private String openid;	// 微信id(20~50字符)
+	
+	private String getuicid;	// 个推ClientID(20~50字符)
+	private String getuialias;	// 个推别名(<50字符)
+	private String getuitag;	// 个推标签(<500字符)
 
 	private Integer authx;	// 0: 已认证; 1: 未认证; 2: 申请认证
 	private String mobile;	// 手机号
@@ -174,6 +178,24 @@ public class User extends BasePojo {
 	}
 	public void setBirth(Date birth) {
 		this.birth = birth;
+	}
+	public String getGetuicid() {
+		return getuicid;
+	}
+	public void setGetuicid(String getuicid) {
+		this.getuicid = getuicid;
+	}
+	public String getGetuialias() {
+		return getuialias;
+	}
+	public void setGetuialias(String getuialias) {
+		this.getuialias = getuialias;
+	}
+	public String getGetuitag() {
+		return getuitag;
+	}
+	public void setGetuitag(String getuitag) {
+		this.getuitag = getuitag;
 	}
 	
 }

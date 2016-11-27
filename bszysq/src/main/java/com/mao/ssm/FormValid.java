@@ -20,6 +20,7 @@ public class FormValid {
 		int len = val == null ? 0 : val.length();
 		return len >= min && len <= max;
 	}
+	// 是否为指定的长度, 允许为null或""
 	public static boolean lenAllowNull(String val, int min, int max){
 		if(val == null || val.length() == 0) return true;
 		int len = val.length();

@@ -118,5 +118,15 @@
 		</trim>
 		WHERE a.name = #{name}
 	</update>
+	
+	<update id="bindGetuiCid" >
+		UPDATE tbl_user a 
+		SET a.getuicid = #{getuicid}, a.phonetype = #{phonetype}, a.phonename = #{phonename}
+		WHERE a.id = #{id}
+	</update>
+    
+	<select id="getuiSimple" resultType="AppUserGetui" >
+		SELECT a.id, a.nname, a.getuicid, a.phonetype FROM tbl_user a WHERE a.id = #{id}
+	</select>
     
 </mapper>

@@ -22,4 +22,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
 	
 	public List<AppArticleSimple> list_simple(BaseSearch bs);
 	public Long lscount_simple(BaseSearch bs);
+	
+	public Long authorId(Long id);	// 通过文章ID获取作者ID
+	
 }

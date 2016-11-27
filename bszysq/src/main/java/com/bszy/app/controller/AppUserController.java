@@ -239,5 +239,32 @@ public class AppUserController extends BaseController {
 		ar.t_result(rb, "1282");
 		return ar;
 	}
+
+	// 绑定个推ClientID
+	@ResponseBody
+	@RequestMapping(value = "/uc/user/bindGetuiCid", method = RequestMethod.POST)
+	public AjaxResult bindGetuiCid_json(@RequestBody AppUserForm form){
+		AjaxResult ar = new AjaxResult();
+		
+		Long id = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
+		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ar; }
+		
+		// 个推ClientID
+		String getuicid = form.getGetuicid();
+		if(FormValid.isEmpty(getuicid)){ ar.t_fail("2201"); return ar; }
+		if(!FormValid.len(getuicid, 20, 50)){ ar.t_fail("2202"); return ar; }
+		
+		String phonename = form.getPhonename();	// 手机显示名
+		if(!FormValid.lenAllowNull(phonename, 0, 50)){ ar.t_fail("2210"); return ar; }
+		
+		AppUser params = new AppUser();
+		params.setId(id);
+		params.setGetuicid(getuicid);
+		params.setPhonetype(MUtil.toInt(form.getPhonetype(), 0));
+		params.setPhonename(phonename);
+		boolean rb = service.bindGetuiCid(params);
+		ar.t_result(rb, "1282");
+		return ar;
+	}
 	
 }

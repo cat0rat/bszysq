@@ -13,6 +13,7 @@ import com.bszy.admin.form.CommentForm;
 import com.bszy.admin.pojo.Comment;
 import com.bszy.admin.pojo.CommentSearch;
 import com.bszy.admin.service.CommentService;
+import com.bszy.app.service.AppSysmsgService;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
@@ -24,6 +25,8 @@ public class AppCommentController extends BaseController {
 	
 	@Inject
 	private CommentService service;
+	@Inject
+	private AppSysmsgService sysmsgService;
 	
 	
 	// TODO json
@@ -46,6 +49,7 @@ public class AppCommentController extends BaseController {
 	
 	// TODO 需登录
 	
+	// 添加评论
 	@ResponseBody
 	@RequestMapping(value = "/uc/comment/add", method = RequestMethod.POST)
 	public AjaxResult add_json(@RequestBody CommentForm form){
@@ -76,10 +80,18 @@ public class AppCommentController extends BaseController {
 		mo.setCommn(0L);
 		mo.setIsdel(0);
 		boolean rb = service.add(mo);
-		if(rb) ar.t_succ_not_null(mo.getId());
+		if(rb){
+			ar.t_succ_not_null(mo.getId());
+			try {
+				sysmsgService.comment(mo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return ar;
 	}
 	
+	// 对评论的评论
 	@ResponseBody
 	@RequestMapping(value = "/uc/comment/add_comm", method = RequestMethod.POST)
 	public AjaxResult add_comm_json(@RequestBody CommentForm form){
@@ -114,9 +126,18 @@ public class AppCommentController extends BaseController {
 		mo.setLiken(0L);
 		mo.setCommn(0L);
 		mo.setIsdel(0);
+		
 		boolean rb = service.add(mo);
-		if(rb) ar.t_succ_not_null(mo.getId());
+		if(rb){
+			ar.t_succ_not_null(mo.getId());
+			try {
+				sysmsgService.commentex(mo);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return ar;
+		
 	}
 	
 }

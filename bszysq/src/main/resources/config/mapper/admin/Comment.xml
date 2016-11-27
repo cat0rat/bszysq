@@ -102,11 +102,11 @@
 	</delete>
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
-		INSERT INTO tbl_comment(artid, authorid, userid, touserid, 
-			content, imgs, liken, commn, 
+		INSERT INTO tbl_comment(artid, authorid, userid, touserid, commid, 
+			content, imgs, liken, commn,
 			ctime, utime, isdel) 
 		VALUES(#{artid}, (select userid from tbl_article where id = #{artid} limit 1), 
-			#{userid}, #{touserid}, 
+			#{userid}, #{touserid}, #{commid}, 
 			#{content}, #{imgs}, #{liken}, #{commn}, 
 			#{ctime}, #{utime}, #{isdel})
 	</insert>
@@ -117,6 +117,7 @@
 			<if test="authorid != null">a.authorid = #{authorid},</if>
 			<if test="userid != null">a.userid = #{userid},</if>
 			<if test="touserid != null">a.touserid = #{touserid},</if>
+			<if test="touserid != null">a.commid = #{commid},</if>
 			
 			<if test="content != null">a.content = #{content},</if>
 			<if test="imgs != null">a.imgs = #{imgs},</if>

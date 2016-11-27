@@ -73,14 +73,22 @@ public class AppArticleController extends BaseController {
 		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
 		
+		// 处理图片
+		String img = form.getImg();
+		String imgs = form.getImgs();
+		if(MUtil.isNotEmpty(img) && MUtil.isNotEmpty(imgs)){
+			String[] imgar = MUtil.split2(imgs, ",", false);
+			if(imgar != null && imgar.length > 0) img = imgar[0];
+		}
+		
 		Article mo = new Article();
 		mo.init_add();
 		mo.setName(name);
 		mo.setTagid(tagid);
 		mo.setCateid(cateid);
 		mo.setContent(content);
-		mo.setImg(form.getImg());
-		mo.setImgs(form.getImgs());
+		mo.setImg(img);
+		mo.setImgs(imgs);
 		mo.setBrief(form.getBrief());
 		mo.setUserid(uid);
 		mo.setRecom(0);

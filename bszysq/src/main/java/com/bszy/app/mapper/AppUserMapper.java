@@ -3,6 +3,7 @@ package com.bszy.app.mapper;
 import java.util.Map;
 
 import com.bszy.app.pojo.AppUser;
+import com.bszy.app.pojo.AppUserGetui;
 import com.bszy.app.pojo.AppUserRePwd;
 import com.mao.ssm.BaseMapper;
 
@@ -18,4 +19,9 @@ public interface AppUserMapper extends BaseMapper<AppUser> {
 	public Long hasName(String name);
 	public Long repwd(AppUserRePwd params);
 	public Long findpwd(AppUser params);
+	
+	// 个推
+	public Long bindGetuiCid(AppUser params);
+	public AppUserGetui getuiSimple(Long id);	// 获取 个推简单信息
+	
 }

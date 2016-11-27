@@ -12,6 +12,13 @@ public class AppUserForm extends BaseForm {
 	
 	private String unionid;	// 微信唯一id(20~50字符)
 	private String openid;	// 微信id(20~50字符)
+	
+	private String getuicid;	// 个推ClientID(20~50字符)
+	private String getuialias;	// 个推别名(<50字符)
+	private String getuitag;	// 个推标签(<500字符)
+	
+	private String phonetype;	// 手机类型: 0: 安卓; 1: 苹果;
+	private String phonename;	// 手机显示名, 如: Android 4.2, iPhone 7等(<50字符)
 
 	private String authx;	// 0: 已认证; 1: 未认证; 2: 申请认证
 	private String mobile;	// 手机号
@@ -148,6 +155,36 @@ public class AppUserForm extends BaseForm {
 	}
 	public void setRolex(String rolex) {
 		this.rolex = rolex;
+	}
+	public String getGetuicid() {
+		return getuicid;
+	}
+	public void setGetuicid(String getuicid) {
+		this.getuicid = getuicid;
+	}
+	public String getGetuialias() {
+		return getuialias;
+	}
+	public void setGetuialias(String getuialias) {
+		this.getuialias = getuialias;
+	}
+	public String getGetuitag() {
+		return getuitag;
+	}
+	public void setGetuitag(String getuitag) {
+		this.getuitag = getuitag;
+	}
+	public String getPhonetype() {
+		return phonetype;
+	}
+	public void setPhonetype(String phonetype) {
+		this.phonetype = phonetype;
+	}
+	public String getPhonename() {
+		return phonename;
+	}
+	public void setPhonename(String phonename) {
+		this.phonename = phonename;
 	}
 	
 }
