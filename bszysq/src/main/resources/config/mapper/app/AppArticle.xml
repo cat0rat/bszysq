@@ -8,18 +8,12 @@
 		select a.*, u.nname usernname, c.name catename
 		from tbl_article a left join tbl_user u on a.userid = u.id
 			left join tbl_category c on a.cateid = c.id
-		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="lastid != null">AND a.id > #{lastid}</if>
-		</trim>
 		<if test="limit != null">LIMIT #{start},#{limit}</if>
 	</select>
 	<select id="lscount" resultType="Long" >
 		select count(0)
 		from tbl_article a left join tbl_user u on a.userid = u.id
 			left join tbl_category c on a.cateid = c.id
-		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="lastid != null">AND a.id = #{lastid}</if>
-		</trim>
 	</select>
 	
 	<select id="get" resultType="Article" parameterType="Long" >

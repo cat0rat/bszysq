@@ -27,7 +27,8 @@ public class AppArticleDetail implements Serializable {
 	private Long id;		// ID
 	private Date ctime;		// 创建时间
 	
-	private List<AppCommentSimple> comms;	// 前5条评论
+//	private List<AppCommentSimple> comms;	// 前5条评论
+	private List<AppCommentRef> comms;	// 前5条评论
 	
 	public String getName() {
 		return name;
@@ -95,10 +96,10 @@ public class AppArticleDetail implements Serializable {
 	public void setUserhead(String userhead) {
 		this.userhead = userhead;
 	}
-	public List<AppCommentSimple> getComms() {
+	public List<AppCommentRef> getComms() {
 		return comms;
 	}
-	public void setComms(List<AppCommentSimple> comms) {
+	public void setComms(List<AppCommentRef> comms) {
 		this.comms = comms;
 	}
 

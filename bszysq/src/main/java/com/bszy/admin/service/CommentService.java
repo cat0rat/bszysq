@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import com.bszy.admin.mapper.CommentMapper;
 import com.bszy.admin.pojo.Comment;
 import com.bszy.admin.pojo.CommentSearch;
+import com.bszy.app.pojo.AppCommentRef;
 import com.bszy.app.pojo.AppCommentSimple;
 import com.bszy.app.pojo.AppCommentSub;
 import com.mao.ssm.BasePage;
+import com.mao.ssm.BaseSearch;
 import com.mao.ssm.BaseService;
 
 @Service
@@ -69,4 +71,25 @@ public class CommentService extends BaseService<Comment, CommentMapper> {
 		
 		return bp;
 	}
+	
+	/** 查询评论(评论评论时, 引用被评论内容) */
+	public BasePage<AppCommentRef> listref(BaseSearch bs){
+		BasePage<AppCommentRef> bp = new BasePage<AppCommentRef>();
+		bs.start_i();
+		List<AppCommentRef> rows = mapper().applistref(bs);
+		Long total = mapper().applsrefcount(bs);
+
+		bp.t_param(bs.page_i(), bs.limit_i());
+		bp.t_result(total, rows);
+		if(rows != null && rows.size() > 0){
+			AppCommentRef mo = rows.get(rows.size() - 1);
+			if(mo != null){
+				Long lastid = mo.getId();
+				bp.setLastid(lastid != null ? lastid : 0L);
+			}
+		}
+		
+		return bp;
+	}
+	
 }

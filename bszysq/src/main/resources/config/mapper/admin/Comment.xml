@@ -20,7 +20,6 @@
 			<if test="tousernname != null and tousernname != ''">AND tu.nname LIKE CONCAT('%',#{tousernname},'%' )</if>
 			
 			<if test="content != null and content != ''">AND a.content LIKE CONCAT('%',#{content},'%' )</if>
-			<if test="lastid != null">AND a.id > #{lastid}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>
@@ -44,10 +43,35 @@
 		<include refid="sql_list_where"></include>
 	</select>
 	
+	<sql id="sql_applistref_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			AND a.artid = #{artid}
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="applistref" resultType="AppCommentRef" >
+		SELECT a.artid, a.authorid, 
+	       a.userid, uu.nname usernname, uu.head userhead, a.content, 
+	       a.commid, (SELECT content FROM tbl_comment WHERE id = a.commid limit 1) as commcontent,
+	       a.touserid, tu.nname tousernname, tu.head touserhead,
+	       a.id, a.ctime
+		FROM tbl_comment a
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		LEFT JOIN tbl_user tu on tu.id = a.touserid
+		<include refid="sql_applistref_where"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
+	</select>
+	<select id="applsrefcount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_comment a
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		LEFT JOIN tbl_user tu on tu.id = a.touserid
+		<include refid="sql_applistref_where"></include>
+	</select>
+	
 	<sql id="sql_applist_where">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			AND a.commid is null AND a.artid = #{artid}
-			<if test="lastid != null">AND a.id > #{lastid}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>
@@ -70,7 +94,6 @@
 	<sql id="sql_appsublist_where">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			AND a.artid = #{artid} AND a.commid is not null AND a.commid in ( ${commids} )
-			<if test="lastid != null">AND a.id > #{lastid}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>

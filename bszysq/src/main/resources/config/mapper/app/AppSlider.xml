@@ -8,7 +8,6 @@
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
 			<if test="pos != null">AND a.pos = #{pos}</if>
-			<if test="lastid != null">AND a.id > #{lastid}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>

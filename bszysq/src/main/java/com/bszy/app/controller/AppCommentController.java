@@ -43,7 +43,7 @@ public class AppCommentController extends BaseController {
 	@RequestMapping(value = "/comment/list", method = RequestMethod.POST)
 	public AjaxResult list_json(@RequestBody CommentSearch bs){
 		AjaxResult ar = new AjaxResult();
-		ar.t_succ_not_null(service.list(bs));
+		ar.t_succ_not_null(service.listref(bs));
 		return ar;
 	}
 	

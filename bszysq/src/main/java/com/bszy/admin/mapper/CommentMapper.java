@@ -3,6 +3,7 @@ package com.bszy.admin.mapper;
 import java.util.List;
 
 import com.bszy.admin.pojo.Comment;
+import com.bszy.app.pojo.AppCommentRef;
 import com.bszy.app.pojo.AppCommentSimple;
 import com.bszy.app.pojo.AppCommentSub;
 import com.mao.ssm.BaseMapper;
@@ -17,6 +18,10 @@ public interface CommentMapper extends BaseMapper<Comment> {
 	public List<AppCommentSimple> applist(BaseSearch bs);
 	public Long applscount(BaseSearch bs);
 	public List<AppCommentSub> appsublist(BaseSearch bs);
+	
+	// 评论评论时, 引用被评论内容
+	public List<AppCommentRef> applistref(BaseSearch bs);
+	public Long applsrefcount(BaseSearch bs);
 	
 	// 与评论相关的id
 	public Comment refids(Long id);

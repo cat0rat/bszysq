@@ -79,6 +79,10 @@
 	<!-- cache-period="31556926" /> -->
 	<!-- <mvc:resources mapping="/css/**" location="/css/" -->
 	<!-- cache-period="31556926" /> -->
+	
+	<mvc:resources mapping="/**/style/**/**" location="/" />
+	<mvc:resources mapping="**.html" location="/" />
+	<mvc:resources mapping="**.ico" location="/" />
 
 	<bean id="stringHttpMessageConverter"
 		class="org.springframework.http.converter.StringHttpMessageConverter">

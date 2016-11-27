@@ -19,7 +19,6 @@
 			<if test="email != null and email != ''">AND a.email LIKE CONCAT('%',#{email},'%' )</if>
 			<if test="birth != null">AND a.birth = #{birth}</if>
 			<if test="lstat != null">AND a.lstat = #{lstat}</if>
-			<if test="lastid != null">AND a.id > #{lastid}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>

@@ -68,8 +68,7 @@ public class ArticleService extends BaseService<Article, ArticleMapper> {
 		AppArticleDetail mo = mapper().detail(id);
 		CommentSearch bs = new CommentSearch();
 		bs.setArtid(mo.getId());
-		bs.setLimit(5);
-		mo.setComms(commentService.list(bs).getRows());
+		mo.setComms(commentService.listref(bs).getRows());
 		return mo;
 	}
 	

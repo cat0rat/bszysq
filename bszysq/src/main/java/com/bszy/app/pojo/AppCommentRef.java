@@ -1,30 +1,31 @@
-package com.bszy.admin.pojo;
+package com.bszy.app.pojo;
 
-import com.mao.ssm.BaseSearch;
+import java.io.Serializable;
+import java.util.Date;
 
-public class CommentSearch extends BaseSearch {
-	public static Integer Limit = 15;
+/**
+ * 评论(关联评论)
+ * @author jzs 2016年11月19日 上午1:03:57
+ */
+public class AppCommentRef implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Long artid;			// 文章id
-	private String artname;		// 文章标题(关联)
-	
 	private Long authorid;		// 文章作者id
-	private String authornname;	// 文章作者昵称(关联)
 	
 	private Long userid;		// 评论者id
 	private String usernname;	// 评论者昵称(关联)
-	
-	private Long touserid;		// 对谁的评论id
-	private String tousernname;	// 对谁的评论昵称(关联)
+	private String userhead;	// 评论者头像(关联)
+	private String content;		// 本次评论的内容(<1000字符)
 	
 	private Long commid;		// 对哪条评论id的评论
-	private String commids;		// 一级评论
+	private String commcontent;	// 对哪条评论内容的评论
+	private Long touserid;		// 对谁的评论id
+	private String tousernname;	// 对谁的评论昵称(关联)
+	private String touserhead;	// 对谁的评论头像(关联)
 	
-	private String content;		// 内容(<1000字符)
-	private Integer isdel;		// 删除标记, 0: 正常; 1: 已删除
-	{
-		limit = Limit;
-	}
+	private Long id;		// ID
+	private Date ctime;		// 创建时间
 	
 	public Long getArtid() {
 		return artid;
@@ -32,23 +33,11 @@ public class CommentSearch extends BaseSearch {
 	public void setArtid(Long artid) {
 		this.artid = artid;
 	}
-	public String getArtname() {
-		return artname;
-	}
-	public void setArtname(String artname) {
-		this.artname = artname;
-	}
 	public Long getAuthorid() {
 		return authorid;
 	}
 	public void setAuthorid(Long authorid) {
 		this.authorid = authorid;
-	}
-	public String getAuthornname() {
-		return authornname;
-	}
-	public void setAuthornname(String authornname) {
-		this.authornname = authornname;
 	}
 	public Long getUserid() {
 		return userid;
@@ -62,6 +51,12 @@ public class CommentSearch extends BaseSearch {
 	public void setUsernname(String usernname) {
 		this.usernname = usernname;
 	}
+	public String getUserhead() {
+		return userhead;
+	}
+	public void setUserhead(String userhead) {
+		this.userhead = userhead;
+	}
 	public Long getTouserid() {
 		return touserid;
 	}
@@ -74,17 +69,29 @@ public class CommentSearch extends BaseSearch {
 	public void setTousernname(String tousernname) {
 		this.tousernname = tousernname;
 	}
+	public String getTouserhead() {
+		return touserhead;
+	}
+	public void setTouserhead(String touserhead) {
+		this.touserhead = touserhead;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getIsdel() {
-		return isdel;
+	public Long getId() {
+		return id;
 	}
-	public void setIsdel(Integer isdel) {
-		this.isdel = isdel;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public Date getCtime() {
+		return ctime;
+	}
+	public void setCtime(Date ctime) {
+		this.ctime = ctime;
 	}
 	public Long getCommid() {
 		return commid;
@@ -92,11 +99,11 @@ public class CommentSearch extends BaseSearch {
 	public void setCommid(Long commid) {
 		this.commid = commid;
 	}
-	public String getCommids() {
-		return commids;
+	public String getCommcontent() {
+		return commcontent;
 	}
-	public void setCommids(String commids) {
-		this.commids = commids;
+	public void setCommcontent(String commcontent) {
+		this.commcontent = commcontent;
 	}
-
+	
 }
