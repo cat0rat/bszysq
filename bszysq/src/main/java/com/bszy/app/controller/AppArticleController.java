@@ -76,7 +76,7 @@ public class AppArticleController extends BaseController {
 		// 处理图片
 		String img = form.getImg();
 		String imgs = form.getImgs();
-		if(MUtil.isNotEmpty(img) && MUtil.isNotEmpty(imgs)){
+		if(MUtil.isEmpty(img) && MUtil.isNotEmpty(imgs)){
 			String[] imgar = MUtil.split2(imgs, ",", false);
 			if(imgar != null && imgar.length > 0) img = imgar[0];
 		}
