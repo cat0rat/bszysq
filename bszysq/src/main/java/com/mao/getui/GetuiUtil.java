@@ -7,14 +7,14 @@ import com.gexin.rp.sdk.base.impl.SingleMessage;
 import com.gexin.rp.sdk.base.impl.Target;
 import com.gexin.rp.sdk.exceptions.RequestException;
 import com.gexin.rp.sdk.http.IGtPush;
-import com.gexin.rp.sdk.template.LinkTemplate;
 import com.gexin.rp.sdk.template.TransmissionTemplate;
 
 public class GetuiUtil {
 	//定义常量, appId、appKey、masterSecret 采用本文档 "第二步 获取访问凭证 "中获得的应用配置
-    private static String appId = "zys48iIpdQ9tLuHVhLOby4";
-    private static String appKey = "to2MOk33xk69Ldcsapr961";
-    private static String masterSecret = "gGlL8kRA6r8cn0FcDhmNa9";
+    private static String appId = "WytD1A1DZ5APOQXUPzBkb9";
+    private static String appKey = "GZdaaqFq8572joeMowwZw2";
+    private static String masterSecret = "mGiDUrSev7772amZWCk5Q1";
+    //private static String AppSecret = "znKJHWnTr79VfRvv0GivR9";
     private static String url = "http://sdk.open.api.igexin.com/apiex.htm";
     
     public static int Offline_Expire_Time = 24 * 3600 * 1000;
