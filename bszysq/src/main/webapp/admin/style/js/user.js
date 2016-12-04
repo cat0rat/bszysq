@@ -7,6 +7,21 @@ $.extend(z, {
 	gDlgHeight: 300
 });
 $.extend(z.dg, {
+	gen_toolbar: function(zz){
+		var tb = [
+			{text:'添加', iconCls:'icon-add', plain:true, handler: z.add.dlg_open},
+			{text:'修改', iconCls:'icon-edit', plain:true, handler: z.edit.dlg_open},
+			{text:'查看', iconCls:'icon-search', plain:true, handler: z.look.dlg_open},
+			{text:'删除', iconCls:'icon-cancel', plain:true, handler: zz.do_del},
+//			'-',
+//			{text:'禁用', iconCls:'icon-remove', plain:true, handler: zz.do_dis},
+//			{text:'启用', iconCls:'icon-tick', plain:true, handler: zz.do_undis},
+			'-',
+			{text:'认证通过', iconCls:'icon-ok', plain:true, handler: zz.do_authx_ok},
+			{text:'认证不通过', iconCls:'icon-no', plain:true, handler: zz.do_authx_no}
+		];
+		return tb;
+	},
 	gen_columns: function(zz){
 		var cols = z.dg.columnBase([
 			z.dg.columnMinImg({field: 'head', title: '头像', width:35}),
@@ -37,6 +52,48 @@ $.extend(z.dg, {
 			{field: 'mobile', title: '手机', width:90, align:'center', sortable: true}
 			]);
 		return cols;
+	},
+	/** 认证通过 */
+	do_authx_ok: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'nname', '设置认证通过', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:0};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/authx.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已设置认证通过');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '设置认证通过失败');
+					}
+				}
+			});
+		});
+	},
+	/** 认证不通过 */
+	do_authx_no: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'nname', '设置认证不通过', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:1};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/authx.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已设置认证不通过');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '设置认证不通过失败');
+					}
+				}
+			});
+		});
 	}
 });
 z.init();

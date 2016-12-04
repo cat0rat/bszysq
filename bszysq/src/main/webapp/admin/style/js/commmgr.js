@@ -201,48 +201,6 @@ var z = {
 				});
 			});
 		},
-		/** 推荐 */
-		do_recom: function(){
-			var dg = z.dg.dg;
-			M.eu.dg_ids_opts(dg, 'id', 'name', '推荐', function(ids, sels){
-				$.messager.progress();
-				var ps = {ids: ids, status:'1'};
-				$.ajax({
-					url : '/admin/' + z.clazz + '/recoms.json',
-					data : ps,
-					success : function(d) {
-						$.messager.progress('close');
-						if(d.code == '200'){
-							M.alert('已推荐');
-							dg.datagrid('load');
-						}else{
-							M.err(d.message || '推荐失败');
-						}
-					}
-				});
-			});
-		},
-		/** 取消推荐 */
-		do_unrecom: function(){
-			var dg = z.dg.dg;
-			M.eu.dg_ids_opts(dg, 'id', 'name', '取消推荐', function(ids, sels){
-				$.messager.progress();
-				var ps = {ids: ids, status:'0'};
-				$.ajax({
-					url : '/admin/' + z.clazz + '/recoms.json',
-					data : ps,
-					success : function(d) {
-						$.messager.progress('close');
-						if(d.code == '200'){
-							M.alert('已取消推荐');
-							dg.datagrid('load');
-						}else{
-							M.err(d.message || '取消推荐失败');
-						}
-					}
-				});
-			});
-		},
 		columnIsdel: function(){
 			return {field: 'isdelStr', title: '状态', width: 60, align: 'center'};
 		},

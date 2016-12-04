@@ -13,8 +13,8 @@ $.extend(z.dg, {
 //			{text:'禁用', iconCls:'icon-remove', plain:true, handler: zz.do_dis},
 //			{text:'启用', iconCls:'icon-standard-tick', plain:true, handler: zz.do_undis},
 //			'-',
-			{text:'推荐', iconCls:'icon-remove', plain:true, handler: zz.do_recom},
-			{text:'取消推荐', iconCls:'icon-standard-tick', plain:true, handler: zz.do_unrecom}
+			{text:'推荐', iconCls:'icon-tip', plain:true, handler: zz.do_recom},
+			{text:'取消推荐', iconCls:'icon-no', plain:true, handler: zz.do_unrecom}
 		];
 		return tb;
 	},
@@ -30,6 +30,48 @@ $.extend(z.dg, {
 			{field: 'uname', title: '发布者', width:90, align:'center'}
 		]);
 		return cols;
+	},
+	/** 推荐 */
+	do_recom: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'name', '推荐', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:'1'};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/recoms.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已推荐');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '推荐失败');
+					}
+				}
+			});
+		});
+	},
+	/** 取消推荐 */
+	do_unrecom: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'name', '取消推荐', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:'0'};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/recoms.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已取消推荐');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '取消推荐失败');
+					}
+				}
+			});
+		});
 	}
 });
 $.extend(z.add, {

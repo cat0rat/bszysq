@@ -23,7 +23,7 @@ import com.bszy.app.security.SmscodeTimer;
 import com.bszy.app.service.AppUserService;
 import com.mao.captcha.Captcha;
 import com.mao.lang.MUtil;
-import com.mao.smscode.AliDayuSms;
+import com.mao.smscode.MiaoDiSms;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 import com.mao.ssm.FormValid;
@@ -78,7 +78,7 @@ public class AppRegController extends BaseController {
 		SmscodeTimer.build(mobile, smscode);
 		//AppUserCurUtil.smscode_to_session(session, smscode);
 		// ... 调用 发送短信验证码 接口
-		String rstr = AliDayuSms.sendSmscode(mobile, smscode);
+		String rstr = MiaoDiSms.sendSmscode(mobile, smscode);
 		if(rstr == null){
 			System.out.println("手机号：" + mobile + ", 短信验证码：" + smscode);
 			ar.t_succ();

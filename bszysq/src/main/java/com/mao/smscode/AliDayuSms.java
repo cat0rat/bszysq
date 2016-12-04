@@ -22,10 +22,10 @@ public class AliDayuSms {
 //		req.setSmsTemplateCode("SMS_27540177");
 //		AlibabaAliqinFcSmsNumSendResponse rsp = client.execute(req);
 //		System.out.println(rsp.getBody());
-		System.out.println(sendSmscode("13370175853", "1111"));
+		System.out.println(sendSmscode2("13370175853", "1111"));
 	}
 	
-	public static String sendSmscode(String mobile, String code){
+	public static String sendSmscode2(String mobile, String code){
 		TaobaoClient client = new DefaultTaobaoClient(url, appkey, secret);
 		AlibabaAliqinFcSmsNumSendRequest req = new AlibabaAliqinFcSmsNumSendRequest();
 		req.setExtend("");

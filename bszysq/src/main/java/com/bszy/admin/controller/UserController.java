@@ -16,6 +16,7 @@ import com.mao.lang.DateUtil;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
+import com.mao.ssm.BaseStatusForm;
 import com.mao.ssm.FormValid;
 
 @Controller
@@ -145,6 +146,23 @@ public class UserController extends BaseController {
 		mo.setBirth(DateUtil.toDate(form.getBirth(), null, false));
 		
 		boolean rb = service.update(mo);
+		ar.t_result(rb);
+		return ar;
+	}
+
+	
+	@ResponseBody
+	@RequestMapping(value = "/authx.json", method = RequestMethod.POST)
+	public AjaxResult authx_json(BaseStatusForm form){
+		AjaxResult ar = new AjaxResult();
+		boolean rb = false;
+		Long id = MUtil.toLong(form.getId());
+		if(MUtil.isId(id)){
+			rb = service.authx(form);
+		}else if(MUtil.isNotEmpty(form.getIds())){
+			rb = service.authxs(form);
+		}else{ ar.t_fail("1501"); return ar; }
+		
 		ar.t_result(rb);
 		return ar;
 	}

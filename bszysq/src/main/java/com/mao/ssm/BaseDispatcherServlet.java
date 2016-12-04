@@ -19,6 +19,7 @@ public class BaseDispatcherServlet extends DispatcherServlet {
 			}else{
 				//tourl = "/exception/page/404";
 				super.noHandlerFound(request, response);
+				return ;
 			}
 		}
 		request.getRequestDispatcher(tourl).forward(request, response);

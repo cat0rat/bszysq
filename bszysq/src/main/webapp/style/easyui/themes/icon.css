@@ -1,3 +1,5 @@
+.icon-standard-add{background:url('icons/edit_add.png') no-repeat center center;}
+.icon-standard-cancel{background:url('icons/cancel.png') no-repeat center center;}
 .icon-blank{
 	background:url('icons/blank.gif') no-repeat center center;
 }

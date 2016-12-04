@@ -8,7 +8,7 @@
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
     <%@ include file="/admin/inc/ueditor.jsp" %>
-	<script type="text/javascript" src="/admin/style/js/article.js"></script>
+	<script src="/admin/style/js/article.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="maskContainer">

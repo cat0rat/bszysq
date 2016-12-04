@@ -89,5 +89,12 @@
 		WHERE a.id = #{id}
 	</update>
 	
+	<update id="authx" >
+		UPDATE tbl_user a SET a.authx = #{status} WHERE a.id = #{id}
+	</update>
+	<update id="authxs" >
+		UPDATE tbl_user a SET a.authx = #{status} WHERE a.id in (${ids})
+	</update>
+	
     
 </mapper>
