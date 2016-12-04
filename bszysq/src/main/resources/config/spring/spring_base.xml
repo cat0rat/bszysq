@@ -120,4 +120,7 @@
 			</value>
 		</property>
 	</bean>-->
+	
+	<!-- // TODO 全局工具类 -->
+	<bean id="appUtil" class="com.mao.init.AppUtil" />
 </beans> 

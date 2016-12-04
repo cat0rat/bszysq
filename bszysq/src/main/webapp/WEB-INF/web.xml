@@ -2,6 +2,11 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
 	<display-name>springMVC</display-name>
 	
+	<!-- // TODO 监听网站启动(用于初始化全局配置) -->
+	<listener>
+		<listener-class>com.mao.init.StartupListener</listener-class>
+	</listener>
+	
 	<!-- 配置spring -->
 	<servlet>
 		<servlet-name>frameWork</servlet-name>
