@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.CommentForm;
 import com.bszy.admin.pojo.Comment;
-import com.bszy.admin.pojo.CommentSearch;
 import com.bszy.admin.service.CommentService;
+import com.bszy.admin.vo.CommentSearch;
 import com.bszy.app.service.AppSysmsgService;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;

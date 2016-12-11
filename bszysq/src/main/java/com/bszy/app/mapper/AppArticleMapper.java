@@ -3,7 +3,7 @@ package com.bszy.app.mapper;
 import java.util.List;
 
 import com.bszy.app.pojo.AppArticle;
-import com.bszy.app.pojo.AppArticleSearch;
+import com.bszy.app.vo.AppArticleSearch;
 import com.mao.ssm.BaseMapper;
 
 /**

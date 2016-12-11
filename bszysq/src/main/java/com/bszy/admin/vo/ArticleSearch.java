@@ -1,4 +1,4 @@
-package com.bszy.admin.pojo;
+package com.bszy.admin.vo;
 
 import com.mao.ssm.BaseSearch;
 

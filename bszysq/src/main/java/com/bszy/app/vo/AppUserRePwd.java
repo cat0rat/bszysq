@@ -1,4 +1,4 @@
-package com.bszy.app.pojo;
+package com.bszy.app.vo;
 
 import com.mao.ssm.BasePojo;
 

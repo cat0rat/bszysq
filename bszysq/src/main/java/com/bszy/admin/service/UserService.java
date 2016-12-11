@@ -17,13 +17,24 @@ public class UserService extends BaseService<User, UserMapper> {
 	public UserMapper mapper(){return mapper;}
 	
 	@Transactional
-	public boolean authx(BaseStatusForm mo){
-		Long rn = mapper().authx(mo);
+	public boolean option_authx(BaseStatusForm mo){
+		Long rn = mapper().option_authx(mo);
 		return rn != null && rn == 1;
 	}
 	@Transactional
-	public boolean authxs(BaseStatusForm mo){
-		Long rn = mapper().authxs(mo);
+	public boolean option_authxs(BaseStatusForm mo){
+		Long rn = mapper().option_authxs(mo);
+		return rn != null && rn > 0;
+	}
+	
+	@Transactional
+	public boolean option_isdel(BaseStatusForm mo){
+		Long rn = mapper().option_isdels(mo);
+		return rn != null && rn == 1;
+	}
+	@Transactional
+	public boolean option_isdels(BaseStatusForm mo){
+		Long rn = mapper().option_isdels(mo);
 		return rn != null && rn > 0;
 	}
 	

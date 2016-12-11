@@ -52,10 +52,18 @@
 		<div class="l_search_td">
 			认证状态： <select name="authx" class="easyui-combobox x_input" 
 				data-options="panelHeight:'auto',editable:false, width: 90"> 
-				<option value="">请选择</option>
+				<option value="">全部</option>
 			    <option value="0">已认证</option>
 				<option value="1">未认证</option>   
 				<option value="2">待审核</option>
+			</select>
+		</div>
+		<div class="l_search_td">
+			用户状态： <select name="isdel" class="easyui-combobox x_input" 
+				data-options="panelHeight:'auto',editable:false, width: 90"> 
+				<option value="">全部</option>
+			    <option value="0">正常</option>
+				<option value="1">封号</option>   
 			</select>
 		</div>
 		<div class="l_search_btn">

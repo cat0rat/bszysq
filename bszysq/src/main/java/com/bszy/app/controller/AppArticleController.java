@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.ArticleForm;
 import com.bszy.admin.pojo.Article;
-import com.bszy.admin.pojo.ArticleSearch;
 import com.bszy.admin.service.ArticleService;
+import com.bszy.admin.vo.ArticleSearch;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;

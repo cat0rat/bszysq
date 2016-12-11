@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bszy.admin.pojo.IdName;
+import com.bszy.admin.vo.IdName;
 import com.mao.lang.MUtil;
 
 @Service

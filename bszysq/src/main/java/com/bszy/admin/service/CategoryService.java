@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bszy.admin.mapper.CategoryMapper;
 import com.bszy.admin.pojo.Category;
-import com.bszy.app.pojo.AppCategoryArt;
+import com.bszy.app.vo.AppCategoryArt;
 import com.mao.ssm.BaseService;
 
 @Service

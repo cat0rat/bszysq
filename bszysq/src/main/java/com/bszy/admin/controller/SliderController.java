@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.SliderForm;
 import com.bszy.admin.pojo.Slider;
-import com.bszy.admin.pojo.SliderSearch;
 import com.bszy.admin.service.SliderService;
+import com.bszy.admin.vo.SliderSearch;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;

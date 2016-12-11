@@ -1,16 +1,12 @@
-package com.bszy.admin.pojo;
+package com.bszy.admin.vo;
 
 import com.mao.ssm.BaseSearch;
 
-public class SliderSearch extends BaseSearch {
+public class CategorySearch extends BaseSearch {
 	
 	private String name;
 	private Integer sortn;	// 排序号(默认0, 倒序)
-	private Integer pos;	// 位置
-	private Integer isdel;
-	{
-		pos = 0;
-	}
+	private Integer isdel;	// 删除标记, 0: 正常; 1: 已删除
 
 	public String getName() {
 		return name;
@@ -29,12 +25,6 @@ public class SliderSearch extends BaseSearch {
 	}
 	public void setSortn(Integer sortn) {
 		this.sortn = sortn;
-	}
-	public Integer getPos() {
-		return pos;
-	}
-	public void setPos(Integer pos) {
-		this.pos = pos;
 	}
 
 	

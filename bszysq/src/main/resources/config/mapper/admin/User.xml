@@ -89,11 +89,17 @@
 		WHERE a.id = #{id}
 	</update>
 	
-	<update id="authx" >
+	<update id="option_authx" >
 		UPDATE tbl_user a SET a.authx = #{status} WHERE a.id = #{id}
 	</update>
-	<update id="authxs" >
+	<update id="option_authxs" >
 		UPDATE tbl_user a SET a.authx = #{status} WHERE a.id in (${ids})
+	</update>	
+	<update id="option_isdel" >
+		UPDATE tbl_user a SET a.isdel = #{status} WHERE a.id = #{id}
+	</update>
+	<update id="option_isdels" >
+		UPDATE tbl_user a SET a.isdel = #{status} WHERE a.id in (${ids})
 	</update>
 	
     

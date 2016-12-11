@@ -10,7 +10,7 @@ import com.bszy.admin.pojo.Comment;
 import com.bszy.app.mapper.AppSysmsgMapper;
 import com.bszy.app.mapper.AppUserMapper;
 import com.bszy.app.pojo.AppSysmsg;
-import com.bszy.app.pojo.AppUserGetui;
+import com.bszy.app.vo.AppUserGetui;
 import com.mao.getui.GetuiPojo;
 import com.mao.getui.GetuiUtil;
 import com.mao.ssm.AjaxResultUtil;

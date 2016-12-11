@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.ArttagForm;
 import com.bszy.admin.pojo.Arttag;
-import com.bszy.admin.pojo.ArttagSearch;
 import com.bszy.admin.service.ArttagService;
+import com.bszy.admin.vo.ArttagSearch;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;

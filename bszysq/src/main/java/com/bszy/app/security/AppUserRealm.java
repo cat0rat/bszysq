@@ -18,8 +18,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.bszy.app.pojo.AppUser;
 import com.bszy.app.service.AppUserService;
+import com.bszy.app.vo.AppMineUser;
 import com.mao.ssm.AjaxResult;
 
 
@@ -46,7 +46,7 @@ public class AppUserRealm extends AuthorizingRealm {
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("name", token.getUsername());
 			params.put("pwd", DigestUtils.md5Hex(String.valueOf(token.getPassword())));
-			AppUser mo = service.login(params);
+			AppMineUser mo = service.login(params);
 			if(mo != null){
 				if(mo.getIsdel() != 0){
 					ar.t_fail("1028");	// 被冻结

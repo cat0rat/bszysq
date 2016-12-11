@@ -2,6 +2,7 @@ var S_rolex = { 0: '普通用户', 9: '<font style="color: #00f">超级管理员
 var S_phonetype = { 0: '安卓', 1: '<font style="color: #00f">苹果</font>' };
 var S_sex = { 1: '男', 2: '<font style="color: #00f">女</font>' };
 var S_authx = { 0: '<font style="color: #00f">已认证</font>', 1: '未认证', 2: '<font style="color: #f00">待审核</font>' };
+var S_isdel = { 0: '正常', 1: '<font style="color: #f00">已封号</font>' };
 $.extend(z, {
 	clazz: 'user',
 	gDlgHeight: 300
@@ -18,13 +19,16 @@ $.extend(z.dg, {
 //			{text:'启用', iconCls:'icon-tick', plain:true, handler: zz.do_undis},
 			'-',
 			{text:'认证通过', iconCls:'icon-ok', plain:true, handler: zz.do_authx_ok},
-			{text:'认证不通过', iconCls:'icon-no', plain:true, handler: zz.do_authx_no}
+			{text:'认证不通过', iconCls:'icon-no', plain:true, handler: zz.do_authx_no},
+			{text:'恢复', iconCls:'icon-ok', plain:true, handler: zz.do_isdel_ok},
+			{text:'封号', iconCls:'icon-no', plain:true, handler: zz.do_isdel_no}
 		];
 		return tb;
 	},
 	gen_columns: function(zz){
 		var cols = z.dg.columnBase([
 			z.dg.columnMinImg({field: 'head', title: '头像', width:35}),
+			{field: 'mobile', title: '手机', width:90, align:'center', sortable: true},
 			{field: 'name', title: '登录账号', width:90, align:'center', sortable: true, formatter: function(v, r, ix){
 				return '<b>' + v + '</b>';
 			}},
@@ -45,11 +49,12 @@ $.extend(z.dg, {
 			{field: 'authx', title: '认证状态', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
 				return S_authx[v] || '未知';
 			}},
+			{field: 'isdel', title: '用户状态', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
+				return S_isdel[v] || '未知';
+			}},
 			{field: 'sex', title: '性别', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
 				return S_sex[v] || '未知';
-			}},
-			
-			{field: 'mobile', title: '手机', width:90, align:'center', sortable: true}
+			}}
 			]);
 		return cols;
 	},
@@ -60,7 +65,7 @@ $.extend(z.dg, {
 			$.messager.progress();
 			var ps = {ids: ids, status:0};
 			$.ajax({
-				url : '/admin/' + z.clazz + '/authx.json',
+				url : '/admin/' + z.clazz + '/option/authx.json',
 				data : ps,
 				success : function(d) {
 					$.messager.progress('close');
@@ -81,7 +86,7 @@ $.extend(z.dg, {
 			$.messager.progress();
 			var ps = {ids: ids, status:1};
 			$.ajax({
-				url : '/admin/' + z.clazz + '/authx.json',
+				url : '/admin/' + z.clazz + '/option/authx.json',
 				data : ps,
 				success : function(d) {
 					$.messager.progress('close');
@@ -90,6 +95,48 @@ $.extend(z.dg, {
 						dg.datagrid('load');
 					}else{
 						M.err(d.message || '设置认证不通过失败');
+					}
+				}
+			});
+		});
+	},
+	/** 恢复用户 */
+	do_isdel_ok: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'nname', '恢复用户', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:0};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/option/isdel.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已恢复用户');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '恢复用户失败');
+					}
+				}
+			});
+		});
+	},
+	/** 封号用户 */
+	do_isdel_no: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'nname', '封号用户', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:1};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/option/isdel.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已封号用户');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '封号用户失败');
 					}
 				}
 			});

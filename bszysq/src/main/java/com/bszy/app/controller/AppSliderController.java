@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bszy.admin.pojo.SliderSearch;
 import com.bszy.admin.service.SliderService;
+import com.bszy.admin.vo.SliderSearch;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 

@@ -1,15 +1,13 @@
-package com.bszy.admin.pojo;
+package com.bszy.app.vo;
 
 import com.mao.ssm.BaseSearch;
 
-public class ArttagSearch extends BaseSearch {
+public class AppSliderSearch extends BaseSearch {
 	
 	private String name;
 	private Integer sortn;	// 排序号(默认0, 倒序)
+	private Integer pos;	// 位置
 	private Integer isdel;
-	{
-		limit = null;
-	}
 
 	public String getName() {
 		return name;
@@ -29,5 +27,12 @@ public class ArttagSearch extends BaseSearch {
 	public void setSortn(Integer sortn) {
 		this.sortn = sortn;
 	}
+	public Integer getPos() {
+		return pos;
+	}
+	public void setPos(Integer pos) {
+		this.pos = pos;
+	}
+
 	
 }

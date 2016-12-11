@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.bszy.admin.pojo.Article;
-import com.bszy.app.pojo.AppArticleDetail;
-import com.bszy.app.pojo.AppArticleSimple;
+import com.bszy.app.vo.AppArticleDetail;
+import com.bszy.app.vo.AppArticleSimple;
 import com.mao.ssm.BaseMapper;
 import com.mao.ssm.BaseSearch;
 

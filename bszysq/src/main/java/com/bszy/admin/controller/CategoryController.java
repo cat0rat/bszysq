@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.CategoryForm;
 import com.bszy.admin.pojo.Category;
-import com.bszy.admin.pojo.CategorySearch;
 import com.bszy.admin.service.CategoryService;
+import com.bszy.admin.vo.CategorySearch;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;

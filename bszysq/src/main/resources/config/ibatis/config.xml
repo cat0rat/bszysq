@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
 	"http://mybatis.org/dtd/mybatis-3-config.dtd" >
-    
+
 <configuration>
 
 	<typeAliases>
@@ -9,31 +9,33 @@
 		<!-- <typeAlias alias="BasePage" type="com.mao.ssm.BasePage" /> -->
 		<package name="com.bszy.admin.pojo" />
 		<package name="com.bszy.app.pojo" />
+		<package name="com.bszy.admin.vo" />
+		<package name="com.bszy.app.vo" />
 	</typeAliases>
-	
-    <mappers>
-    	
-    	<mapper resource="config/mapper/Common.xml" />
-        <mapper resource="config/mapper/admin/Admin.xml" />
-        <mapper resource="config/mapper/admin/Category.xml" />
-        <mapper resource="config/mapper/admin/Arttag.xml" />
-        <mapper resource="config/mapper/admin/User.xml" />
-        <mapper resource="config/mapper/admin/Article.xml" />
-        <mapper resource="config/mapper/admin/Slider.xml" />
-        <mapper resource="config/mapper/admin/Comment.xml" />
-        <mapper resource="config/mapper/admin/Smscode.xml" />
-        
-        <mapper resource="config/mapper/app/AppUser.xml" />
-        <mapper resource="config/mapper/app/AppCategory.xml" />
-        <mapper resource="config/mapper/app/AppArttag.xml" />
-        <mapper resource="config/mapper/app/AppArticle.xml" />
-        <mapper resource="config/mapper/app/AppSlider.xml" />
-        <mapper resource="config/mapper/app/AppSysmsg.xml" />
-        <!-- 
-        <mapper resource="config/mapper/Common.xml" />
-        <package name="config.mapper.admin"/>
-        <package name="config.mapper.app"/>
-         -->
-    </mappers>
-	 
+
+	<mappers>
+
+		<mapper resource="config/mapper/Common.xml" />
+		<mapper resource="config/mapper/admin/Admin.xml" />
+		<mapper resource="config/mapper/admin/Category.xml" />
+		<mapper resource="config/mapper/admin/Arttag.xml" />
+		<mapper resource="config/mapper/admin/User.xml" />
+		<mapper resource="config/mapper/admin/Article.xml" />
+		<mapper resource="config/mapper/admin/Slider.xml" />
+		<mapper resource="config/mapper/admin/Comment.xml" />
+		<mapper resource="config/mapper/admin/Smscode.xml" />
+
+		<mapper resource="config/mapper/app/AppUser.xml" />
+		<mapper resource="config/mapper/app/AppCategory.xml" />
+		<mapper resource="config/mapper/app/AppArttag.xml" />
+		<mapper resource="config/mapper/app/AppArticle.xml" />
+		<mapper resource="config/mapper/app/AppSlider.xml" />
+		<mapper resource="config/mapper/app/AppSysmsg.xml" />
+		<!--
+			<mapper resource="config/mapper/Common.xml" />
+			<package name="config.mapper.admin"/>
+			<package name="config.mapper.app"/>
+		-->
+	</mappers>
+
 </configuration>

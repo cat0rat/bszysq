@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bszy.admin.mapper.SliderMapper;
 import com.bszy.admin.pojo.Slider;
-import com.bszy.app.pojo.AppSliderSimple;
+import com.bszy.app.vo.AppSliderSimple;
 import com.mao.ssm.BasePage;
 import com.mao.ssm.BaseSearch;
 import com.mao.ssm.BaseService;

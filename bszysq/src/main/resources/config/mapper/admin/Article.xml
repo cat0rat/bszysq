@@ -149,7 +149,7 @@
 			<if test="imgs != null">a.imgs = #{imgs},</if>
 			
 			<if test="sortn != null">a.sortn = #{sortn},</if>
-			<if test="tagids != null">a.tagids = #{tagids},</if>
+			<if test="tagid != null">a.tagid = #{tagid},</if>
 			<if test="cateid != null">a.cateid = #{cateid},</if>
 			<if test="userid != null">a.userid = #{userid},</if>
 			<if test="recom != null">a.recom = #{recom},</if>

@@ -19,6 +19,12 @@ public class ArticleForm extends BaseForm {
 	private String usernname;	// 发布者昵称(关联)
 	private String recom;		// 0: 正常; 1: 推荐(版块下显示)
 	
+	private String lookn;		// 浏览量
+	private String liken;		// 点赞数
+	private String sharen;		// 分享数
+	private String commn;		// 评论数
+	private String favorn;		// 收藏量
+	
 	public String getName() {
 		return name;
 	}
@@ -96,6 +102,36 @@ public class ArticleForm extends BaseForm {
 	}
 	public void setRecom(String recom) {
 		this.recom = recom;
+	}
+	public String getLookn() {
+		return lookn;
+	}
+	public void setLookn(String lookn) {
+		this.lookn = lookn;
+	}
+	public String getLiken() {
+		return liken;
+	}
+	public void setLiken(String liken) {
+		this.liken = liken;
+	}
+	public String getSharen() {
+		return sharen;
+	}
+	public void setSharen(String sharen) {
+		this.sharen = sharen;
+	}
+	public String getCommn() {
+		return commn;
+	}
+	public void setCommn(String commn) {
+		this.commn = commn;
+	}
+	public String getFavorn() {
+		return favorn;
+	}
+	public void setFavorn(String favorn) {
+		this.favorn = favorn;
 	}
 	
 }

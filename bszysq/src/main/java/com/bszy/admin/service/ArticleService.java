@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bszy.admin.mapper.ArticleMapper;
 import com.bszy.admin.pojo.Article;
-import com.bszy.admin.pojo.CommentSearch;
-import com.bszy.app.pojo.AppArticleDetail;
-import com.bszy.app.pojo.AppArticleSimple;
+import com.bszy.admin.vo.CommentSearch;
+import com.bszy.app.vo.AppArticleDetail;
+import com.bszy.app.vo.AppArticleSimple;
 import com.mao.ssm.BasePage;
 import com.mao.ssm.BaseSearch;
 import com.mao.ssm.BaseService;

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.app.form.AppLoginForm;
-import com.bszy.app.pojo.AppUser;
 import com.bszy.app.service.AppUserService;
+import com.bszy.app.vo.AppMineUser;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 import com.mao.ssm.FormValid;
@@ -45,7 +45,7 @@ public class AppLoginController extends BaseController {
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("name", mobile);
 		params.put("pwd", DigestUtils.md5Hex(pwd));
-		AppUser mo = service.login(params);
+		AppMineUser mo = service.login(params);
 		if(mo != null){
 			if(mo.getIsdel() != 0){
 				ar.t_fail("1028");  return ar;	// 被冻结

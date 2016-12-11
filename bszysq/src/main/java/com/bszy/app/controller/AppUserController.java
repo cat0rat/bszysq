@@ -17,9 +17,9 @@ import com.bszy.app.form.AppRegForm;
 import com.bszy.app.form.AppRepwdForm;
 import com.bszy.app.form.AppUserForm;
 import com.bszy.app.pojo.AppUser;
-import com.bszy.app.pojo.AppUserRePwd;
 import com.bszy.app.security.SmscodeTimer;
 import com.bszy.app.service.AppUserService;
+import com.bszy.app.vo.AppUserRePwd;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
@@ -94,13 +94,13 @@ public class AppUserController extends BaseController {
 	}
 	
 	// 我的简单信息
+	@ResponseBody
 	@RequestMapping(value = "/uc/user/simple/{uid}", method = RequestMethod.GET)
 	public AjaxResult uc_simple_json_var(@PathVariable String uid){
 		AjaxResult ar = new AjaxResult();
 		Long id = MUtil.toLong(uid);	// 检查当前用户ID(登录)
 		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ar; }
-		AppUser mo = service.simple(id);
-		ar.t_succ(mo);
+		ar.t_succ_not_null(service.simple(id));
 		return ar;
 	}
 	
@@ -111,8 +111,7 @@ public class AppUserController extends BaseController {
 		AjaxResult ar = new AjaxResult();
 		Long id = MUtil.toLong(uid);	// 检查当前用户ID(登录)
 		if(!FormValid.isId(id)){ ar.t_fail("1001"); return ar; }
-		AppUser mo = service.get(id);
-		ar.t_succ(mo);
+		ar.t_succ_not_null(service.get(id));
 		return ar;
 	}
 	
@@ -131,8 +130,8 @@ public class AppUserController extends BaseController {
 		if(!FormValid.len(tname, 2, 16)){ ar.t_fail("1271"); return ar; }
 		
 		String mobile = form.getMobile();	// 手机号
-		if(FormValid.isEmpty(mobile)){ ar.t_fail("1212"); return ar; }
-		if(!FormValid.isMobile(mobile)){ ar.t_fail("1213"); return ar; }
+//		if(FormValid.isEmpty(mobile)){ ar.t_fail("1212"); return ar; }
+//		if(!FormValid.isMobile(mobile)){ ar.t_fail("1213"); return ar; }
 		
 		String address = form.getAddress();	// 地址
 		if(!FormValid.lenAllowNull(address, 2, 50)){ ar.t_fail("1272"); return ar; }

@@ -3,7 +3,7 @@ package com.mao.ssm;
 import java.util.List;
 import java.util.Map;
 
-import com.bszy.admin.pojo.IdName;
+import com.bszy.admin.vo.IdName;
 
 @SuppressWarnings("rawtypes")
 public interface BaseMapper<T extends BasePojo> {

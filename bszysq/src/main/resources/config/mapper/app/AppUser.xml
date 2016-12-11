@@ -89,14 +89,14 @@
 	</update>
 	
 	
-	<select id="login" resultType="AppUser" >
+	<select id="login" resultType="AppMineUser" >
 		SELECT * FROM tbl_user WHERE rolex=0 and name = #{name} and pwd = #{pwd} limit 1
 	</select>
-	<select id="mine" resultType="AppUser" >
+	<select id="mine" resultType="AppMineUser" >
 		SELECT a.* FROM tbl_user a WHERE a.id = #{id}
 	</select>
-	<select id="simple" resultType="AppUser" >
-		SELECT a.id, a.nname, a.head, a.authx, a.sex FROM tbl_user a WHERE a.id = #{id}
+	<select id="simple" resultType="AppSimpleUser" >
+		SELECT a.id, a.nname, a.head, a.authx, a.sex, a.isdel FROM tbl_user a WHERE a.id = #{id}
 	</select>
 	<select id="hasName" resultType="java.lang.Long" >
 		SELECT a.id FROM tbl_user a WHERE a.name = #{name}

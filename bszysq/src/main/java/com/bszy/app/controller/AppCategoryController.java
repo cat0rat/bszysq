@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bszy.admin.pojo.ArttagSearch;
 import com.bszy.admin.service.CategoryService;
+import com.bszy.admin.vo.ArttagSearch;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.SmscodeForm;
 import com.bszy.admin.pojo.Smscode;
-import com.bszy.admin.pojo.SmscodeSearch;
 import com.bszy.admin.service.SmscodeService;
+import com.bszy.admin.vo.SmscodeSearch;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;

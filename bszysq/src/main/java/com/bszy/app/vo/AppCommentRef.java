@@ -1,14 +1,13 @@
-package com.bszy.app.pojo;
+package com.bszy.app.vo;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
- * 评论(一级)
- * @author jzs 2016年11月19日 上午1:03:38
+ * 评论(关联评论)
+ * @author jzs 2016年11月19日 上午1:03:57
  */
-public class AppCommentSimple implements Serializable {
+public class AppCommentRef implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long artid;			// 文章id
@@ -17,9 +16,13 @@ public class AppCommentSimple implements Serializable {
 	private Long userid;		// 评论者id
 	private String usernname;	// 评论者昵称(关联)
 	private String userhead;	// 评论者头像(关联)
+	private String content;		// 本次评论的内容(<1000字符)
 	
-	private String content;		// 内容(<1000字符)
-	private List<AppCommentSub> subcomms;	// 下级评论
+	private Long commid;		// 对哪条评论id的评论
+	private String commcontent;	// 对哪条评论内容的评论
+	private Long touserid;		// 对谁的评论id
+	private String tousernname;	// 对谁的评论昵称(关联)
+	private String touserhead;	// 对谁的评论头像(关联)
 	
 	private Long id;		// ID
 	private Date ctime;		// 创建时间
@@ -54,17 +57,29 @@ public class AppCommentSimple implements Serializable {
 	public void setUserhead(String userhead) {
 		this.userhead = userhead;
 	}
+	public Long getTouserid() {
+		return touserid;
+	}
+	public void setTouserid(Long touserid) {
+		this.touserid = touserid;
+	}
+	public String getTousernname() {
+		return tousernname;
+	}
+	public void setTousernname(String tousernname) {
+		this.tousernname = tousernname;
+	}
+	public String getTouserhead() {
+		return touserhead;
+	}
+	public void setTouserhead(String touserhead) {
+		this.touserhead = touserhead;
+	}
 	public String getContent() {
 		return content;
 	}
 	public void setContent(String content) {
 		this.content = content;
-	}
-	public List<AppCommentSub> getSubcomms() {
-		return subcomms;
-	}
-	public void setSubcomms(List<AppCommentSub> subcomms) {
-		this.subcomms = subcomms;
 	}
 	public Long getId() {
 		return id;
@@ -77,6 +92,18 @@ public class AppCommentSimple implements Serializable {
 	}
 	public void setCtime(Date ctime) {
 		this.ctime = ctime;
+	}
+	public Long getCommid() {
+		return commid;
+	}
+	public void setCommid(Long commid) {
+		this.commid = commid;
+	}
+	public String getCommcontent() {
+		return commcontent;
+	}
+	public void setCommcontent(String commcontent) {
+		this.commcontent = commcontent;
 	}
 	
 }

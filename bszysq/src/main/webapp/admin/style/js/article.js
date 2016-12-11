@@ -5,9 +5,9 @@ $.extend(z, {
 $.extend(z.dg, {
 	gen_toolbar: function(zz){
 		var tb = [
-//			{text:'添加', iconCls:'icon-standard-add', plain:true, handler: z.add.dlg_open},
-//			{text:'修改', iconCls:'icon-edit', plain:true, handler: z.edit.dlg_open},
-//			{text:'查看', iconCls:'icon-search', plain:true, handler: z.look.dlg_open},
+			{text:'添加', iconCls:'icon-standard-add', plain:true, handler: z.add.dlg_open},
+			{text:'修改', iconCls:'icon-edit', plain:true, handler: z.edit.dlg_open},
+			{text:'查看', iconCls:'icon-search', plain:true, handler: z.look.dlg_open},
 			{text:'删除', iconCls:'icon-standard-cancel', plain:true, handler: zz.do_del},
 //			'-',
 //			{text:'禁用', iconCls:'icon-remove', plain:true, handler: zz.do_dis},
@@ -23,7 +23,7 @@ $.extend(z.dg, {
 			{field: 'name', title: '标题', width:220, align:'center'},	
 			{field: 'catename', title: '版块', width:90, align:'center'},
 			{field: 'tagname', title: '标签', width:90, align:'center'},
-			z.dg.columnImg({field: 'img', title: '配图'}),
+			z.dg.columnMidImg({field: 'img', title: '配图'}),
 			{field: 'recom', title: '是否推荐', width:200, align:'center', formatter: function(v){
 				return v == 1 ? '<span style="color:red;">推荐</span>' : '正常';
 			}},
@@ -74,11 +74,11 @@ $.extend(z.dg, {
 		});
 	}
 });
-$.extend(z.add, {
-	dlgOpt: {
-		height: 280
-	}
-});
+//$.extend(z.add, {
+//	dlgOpt: {
+//		height: 280
+//	}
+//});
 z.init();
 
 
@@ -99,6 +99,22 @@ $(function(){
 		panelHeight: 'auto', 
 		editable: false, 
 		width: 150,
+		valueField: 'id', 
+		textField: 'name',
+		data: [{id:'', name: '全部'}].concat(jar.tags)
+	});
+	
+	$('.i_has_empty.cate_comb').combobox({
+		panelHeight: 'auto', 
+		editable: false, 
+		valueField: 'id', 
+		textField: 'name',
+		data: [{id:'', name: '全部'}].concat(jar.cates)
+	});
+
+	$('.i_has_empty.tag_comb').combobox({
+		panelHeight: 'auto', 
+		editable: false, 
 		valueField: 'id', 
 		textField: 'name',
 		data: [{id:'', name: '全部'}].concat(jar.tags)

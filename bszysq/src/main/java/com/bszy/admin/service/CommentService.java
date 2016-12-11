@@ -14,10 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.bszy.admin.mapper.CommentMapper;
 import com.bszy.admin.pojo.Comment;
-import com.bszy.admin.pojo.CommentSearch;
-import com.bszy.app.pojo.AppCommentRef;
-import com.bszy.app.pojo.AppCommentSimple;
-import com.bszy.app.pojo.AppCommentSub;
+import com.bszy.admin.vo.CommentSearch;
+import com.bszy.app.vo.AppCommentRef;
+import com.bszy.app.vo.AppCommentSimple;
+import com.bszy.app.vo.AppCommentSub;
 import com.mao.ssm.BasePage;
 import com.mao.ssm.BaseSearch;
 import com.mao.ssm.BaseService;

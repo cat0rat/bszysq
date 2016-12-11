@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bszy.app.mapper.AppArticleMapper;
 import com.bszy.app.pojo.AppArticle;
-import com.bszy.app.pojo.AppArticleSearch;
+import com.bszy.app.vo.AppArticleSearch;
 import com.mao.ssm.BasePage;
 import com.mao.ssm.BaseService;
 

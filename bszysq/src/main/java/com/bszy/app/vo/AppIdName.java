@@ -1,6 +1,6 @@
-package com.bszy.admin.pojo;
+package com.bszy.app.vo;
 
-public class IdName {
+public class AppIdName {
 	private Long id;
 	private String name;
 	

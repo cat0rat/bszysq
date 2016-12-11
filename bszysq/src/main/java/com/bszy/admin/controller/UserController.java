@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.UserForm;
 import com.bszy.admin.pojo.User;
-import com.bszy.admin.pojo.UserSearch;
 import com.bszy.admin.service.UserService;
+import com.bszy.admin.vo.UserSearch;
 import com.mao.lang.DateUtil;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
@@ -152,15 +152,32 @@ public class UserController extends BaseController {
 
 	
 	@ResponseBody
-	@RequestMapping(value = "/authx.json", method = RequestMethod.POST)
-	public AjaxResult authx_json(BaseStatusForm form){
+	@RequestMapping(value = "/option/authx.json", method = RequestMethod.POST)
+	public AjaxResult option_authx_json(BaseStatusForm form){
 		AjaxResult ar = new AjaxResult();
 		boolean rb = false;
 		Long id = MUtil.toLong(form.getId());
 		if(MUtil.isId(id)){
-			rb = service.authx(form);
+			rb = service.option_authx(form);
 		}else if(MUtil.isNotEmpty(form.getIds())){
-			rb = service.authxs(form);
+			rb = service.option_authxs(form);
+		}else{ ar.t_fail("1501"); return ar; }
+		
+		ar.t_result(rb);
+		return ar;
+	}
+
+	
+	@ResponseBody
+	@RequestMapping(value = "/option/isdel.json", method = RequestMethod.POST)
+	public AjaxResult option_isdel_json(BaseStatusForm form){
+		AjaxResult ar = new AjaxResult();
+		boolean rb = false;
+		Long id = MUtil.toLong(form.getId());
+		if(MUtil.isId(id)){
+			rb = service.option_isdel(form);
+		}else if(MUtil.isNotEmpty(form.getIds())){
+			rb = service.option_isdels(form);
 		}else{ ar.t_fail("1501"); return ar; }
 		
 		ar.t_result(rb);
