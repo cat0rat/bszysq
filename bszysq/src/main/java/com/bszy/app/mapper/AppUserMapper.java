@@ -3,7 +3,7 @@ package com.bszy.app.mapper;
 import java.util.Map;
 
 import com.bszy.app.pojo.AppUser;
-import com.bszy.app.vo.AppMineUser;
+import com.bszy.app.vo.AppUserMine;
 import com.bszy.app.vo.AppSimpleUser;
 import com.bszy.app.vo.AppUserGetui;
 import com.bszy.app.vo.AppUserRePwd;
@@ -14,9 +14,9 @@ import com.mao.ssm.BaseMapper;
  * @author Mao 2016年10月26日 上午1:23:12
  */
 public interface AppUserMapper extends BaseMapper<AppUser> {
-	public AppMineUser login(Map<String, String> params);
+	public AppUserMine login(Map<String, String> params);
 	
-	public AppMineUser mine(Long id);
+	public AppUserMine mine(Long id);
 	public AppSimpleUser simple(Long id);
 	public Long hasName(String name);
 	public Long repwd(AppUserRePwd params);

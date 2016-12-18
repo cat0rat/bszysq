@@ -7,6 +7,9 @@
 	<sql id="sql_list_where">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
 			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="addart != null">AND a.addart = #{addart}</if>
+			<if test="addartauth != null">AND a.addartauth = #{addartauth}</if>
+			<if test="lookartauth != null">AND a.lookartauth = #{lookartauth}</if>
 			<if test="isdel != null">AND a.isdel = #{isdel}</if>
 		</trim>
 	</sql>
@@ -33,8 +36,8 @@
 	</delete>
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
-		INSERT INTO tbl_category(name, sortn, img, ctime, utime, isdel) 
-		VALUES(#{name}, #{sortn}, #{img}, #{ctime}, #{utime}, #{isdel})
+		INSERT INTO tbl_category(name, sortn, img, addart, addartauth, lookartauth, ctime, utime, isdel) 
+		VALUES(#{name}, #{sortn}, #{img}, #{addart}, #{addartauth}, #{lookartauth}, #{ctime}, #{utime}, #{isdel})
 	</insert>
 	<update id="update" >
 		UPDATE tbl_category a
@@ -42,6 +45,9 @@
 			<if test="name != null">a.name = #{name},</if>
 			<if test="sortn != null">a.sortn = #{sortn},</if>
 			<if test="img != null">a.img = #{img},</if>
+			<if test="addart != null">a.addart = #{addart},</if>
+			<if test="addartauth != null">a.addartauth = #{addartauth},</if>
+			<if test="lookartauth != null">a.lookartauth = #{lookartauth},</if>
 			<if test="utime != null">a.utime = #{utime},</if>
 			<if test="isdel != null">a.isdel = #{isdel},</if>
 		</trim>
@@ -65,5 +71,13 @@
 		where c.isdel=0
 	</select>
 	
+	<select id="artauth" resultType="CategoryArtAuth" >
+		SELECT a.id, a.addart, a.addartauth, a.lookartauth FROM tbl_category a WHERE a.id = #{id}
+	</select> 
+	
+<!-- 	<select id="check_category_access" resultType="java.lang.String" >
+		SELECT if(a.lookartauth = 0, '200', select u.)
+		FROM tbl_category a WHERE a.id = #{cateid}
+	</select> -->
     
 </mapper>

@@ -17,6 +17,12 @@ public class Slider extends BasePojo {
 	private String brief;	// 简介(<500字符)
 	private String link;	// 跳转地址(<500字符，完整网址)
 	
+	private Integer typex;		// 跳转类型, 0: 外链; 1: 内部主题
+	private Long artid;			// 主题id
+	private Long cateid;		// 版块id
+	private String artname;		// 主题标题
+	private String catename;	// 版块标题
+	
 	public String getName() {
 		return name;
 	}
@@ -28,6 +34,36 @@ public class Slider extends BasePojo {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public Integer getTypex() {
+		return typex;
+	}
+	public void setTypex(Integer typex) {
+		this.typex = typex;
+	}
+	public Long getArtid() {
+		return artid;
+	}
+	public void setArtid(Long artid) {
+		this.artid = artid;
+	}
+	public Long getCateid() {
+		return cateid;
+	}
+	public void setCateid(Long cateid) {
+		this.cateid = cateid;
+	}
+	public String getArtname() {
+		return artname;
+	}
+	public void setArtname(String artname) {
+		this.artname = artname;
+	}
+	public String getCatename() {
+		return catename;
+	}
+	public void setCatename(String catename) {
+		this.catename = catename;
 	}
 	public Integer getSortn() {
 		return sortn;

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bszy.app.mapper.AppUserMapper;
 import com.bszy.app.pojo.AppUser;
-import com.bszy.app.vo.AppMineUser;
+import com.bszy.app.vo.AppUserMine;
 import com.bszy.app.vo.AppSimpleUser;
 import com.bszy.app.vo.AppUserRePwd;
 import com.mao.ssm.BaseService;
@@ -20,7 +20,7 @@ public class AppUserService extends BaseService<AppUser, AppUserMapper> {
 	private AppUserMapper mapper;
 	public AppUserMapper mapper(){return mapper;}
 	
-	public AppMineUser login(Map<String, String> params){
+	public AppUserMine login(Map<String, String> params){
 		return mapper.login(params);
 	}
 	
@@ -34,7 +34,7 @@ public class AppUserService extends BaseService<AppUser, AppUserMapper> {
 		return rn != null && rn == 1;
 	}
 	
-	public AppMineUser mine(Long id){
+	public AppUserMine mine(Long id){
 		return mapper.mine(id);
 	}
 	

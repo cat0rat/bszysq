@@ -25,7 +25,10 @@ public class Article extends BasePojo {
 	private Long userid;		// 发布者id
 	private String usernname;	// 发布者昵称(关联)
 	private String userhead;	// 发布者头像(关联)
+	
 	private Integer recom;		// 0: 正常; 1: 推荐(版块下显示)
+	private Integer ding;		// 置顶, 0:正常; 1: 置顶
+	private Integer adminadd;	// 是否官方发布, 0: 用户发布; 1: 官方发布
 	
 	private Long lookn;		// 浏览量
 	private Long liken;		// 点赞数
@@ -156,6 +159,22 @@ public class Article extends BasePojo {
 	public String getUserhead() {
 		return userhead;
 	}
+	public Integer getDing() {
+		return ding;
+	}
+
+	public void setDing(Integer ding) {
+		this.ding = ding;
+	}
+
+	public Integer getAdminadd() {
+		return adminadd;
+	}
+
+	public void setAdminadd(Integer adminadd) {
+		this.adminadd = adminadd;
+	}
+
 	public void setUserhead(String userhead) {
 		this.userhead = userhead;
 	}

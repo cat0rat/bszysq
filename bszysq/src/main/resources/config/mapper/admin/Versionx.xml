@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bszy.admin.mapper.VersionxMapper" >
+
+	<sql id="sql_list_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="typex != null">AND a.typex = #{typex}</if>
+			<if test="verx != nulll and verx != ''">AND a.verx LIKE CONCAT('%',#{verx},'%' )</if>
+			<if test="vercode != nulll and vercode != ''">AND a.vercode LIKE CONCAT('%',#{vercode},'%' )</if>
+			<if test="packagex != null and packagex != ''">AND a.packagex LIKE CONCAT('%',#{packagex},'%' )</if>
+			<if test="name != null and name != ''">AND a.name LIKE CONCAT('%',#{name},'%' )</if>
+			<if test="force != null">AND a.force = #{force}</if>
+			<if test="release != null">AND a.release = #{release}</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="list" resultType="Versionx" >
+		SELECT a.* FROM tbl_versionx a
+		<include refid="sql_list_where"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
+	</select>
+	<select id="lscount" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_versionx a
+		<include refid="sql_list_where"></include>
+	</select>
+	
+	
+	<select id="get" resultType="Versionx" >
+		SELECT a.* FROM tbl_versionx a WHERE a.id = #{id}
+	</select>
+	<delete id="delete">
+		DELETE FROM tbl_versionx WHERE id = #{id}
+	</delete>
+	<delete id="dels">
+		DELETE FROM tbl_versionx WHERE id in(${ids})
+	</delete>
+	
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
+		INSERT INTO tbl_versionx(typex, verx, vercode, descx, packagex, 
+			upgradex, force, release, url,
+			ctime, utime, isdel) 
+		VALUES(#{typex}, #{verx}, #{vercode}, #{descx}, #{packagex},
+			#{upgradex}, #{force}, #{release}, #{url},
+			#{ctime}, #{utime}, #{isdel})
+	</insert>
+	<update id="update" >
+		UPDATE tbl_versionx a
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="typex != null">a.typex = #{typex},</if>
+			<if test="verx != null">a.verx = #{verx},</if>
+			<if test="vercode != null">a.vercode = #{vercode},</if>
+			<if test="descx != null">a.descx = #{descx},</if>
+			<if test="packagex != null">a.packagex = #{packagex},</if>
+			<if test="upgradex != null">a.upgradex = #{upgradex},</if>
+			<if test="force != null">a.force = #{force},</if>
+			<if test="release != null">a.release = #{release},</if>
+			<if test="url != null">a.url = #{url},</if>
+			<if test="utime != null">a.utime = #{utime},</if>
+			<if test="isdel != null">a.isdel = #{isdel},</if>
+		</trim>
+		WHERE a.id = #{id}
+	</update>
+	
+	<select id="for_packagex" resultType="AppVersionx">
+	<!-- 
+		SELECT c.version, c.version_code, c.bb_describe as 'describe', c.bb_force as 'force' , c.url 
+		FROM (SELECT a.version a.version_code, a.bb_describe, a.bb_force, a.url
+		        FROM sys_version2 a WHERE a.package = $packageName 
+		        ORDER BY a.upgrade_time DESC limit 0,1
+		    ) AS c  
+		UNION 
+		SELECT d.version, d.version_code, d.bb_describe as 'describe', d.bb_force  as 'force', d.url 
+		FROM (SELECT b.version, b.version_code, b.bb_describe, b.bb_force, b.url 
+		        FROM sys_version2 b WHERE b.package =  $packageName AND b.bb_force = 1 
+		        ORDER BY b.upgrade_time DESC limit 0,1
+		      ) AS d
+	 -->
+	(SELECT * FROM tbl_versionx a WHERE a.typex = #{typex} and a.packagex = #{packagex}
+		ORDER BY a.upgradex DESC limit 0,1
+	)
+	UNION
+	(SELECT * FROM tbl_versionx a WHERE a.typex = #{typex} and a.packagex = #{packagex} AND a.force = 1
+		ORDER BY a.upgradex DESC limit 0,1
+	)
+	</select>	
+    
+</mapper>

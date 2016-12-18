@@ -12,7 +12,9 @@
 		</trim>
 	</sql>
 	<select id="list" resultType="Slider" >
-		SELECT a.* FROM tbl_slider a
+		SELECT a.*, art.name artname, art.cateid, c.name catename FROM tbl_slider a 
+			LEFT JOIN tbl_article art on a.artid=art.id
+			LEFT JOIN tbl_category c on art.cateid=c.id
 		<include refid="sql_list_where"></include>
 		<include refid="Common.sql_order_limit"></include>
 	</select>
@@ -29,7 +31,7 @@
 		</trim>
 	</sql>
 	<select id="list_simple" resultType="AppSliderSimple" >
-		SELECT a.* FROM tbl_slider a
+		SELECT a.*, art.cateid FROM tbl_slider a LEFT JOIN tbl_article art on a.artid=art.id
 		<include refid="sql_list_simple_where"></include>
 		<include refid="Common.sql_order_limit"></include>
 	</select>
@@ -40,7 +42,11 @@
 	
 	
 	<select id="get" resultType="Slider" >
-		SELECT a.* FROM tbl_slider a WHERE a.id = #{id}
+		SELECT a.*, art.name artname, art.cateid, c.name catename FROM tbl_slider a 
+			FROM tbl_slider a
+			LEFT JOIN tbl_article art on a.artid=art.id
+			LEFT JOIN tbl_category c on art.cateid=c.id 
+			WHERE a.id = #{id}
 	</select>
 	<delete id="delete">
 		DELETE FROM tbl_slider WHERE id = #{id}
@@ -50,9 +56,9 @@
 	</delete>
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
-		INSERT INTO tbl_slider(name, img, sortn, pos, brief, link,
+		INSERT INTO tbl_slider(name, img, sortn, pos, brief, link, typex, artid,
 			ctime, utime, isdel) 
-		VALUES(#{name}, #{img}, #{sortn}, #{pos}, #{brief}, #{link}, 
+		VALUES(#{name}, #{img}, #{sortn}, #{pos}, #{brief}, #{link}, #{typex}, #{artid}, 
 			#{ctime}, #{utime}, #{isdel})
 	</insert>
 	<update id="update" >
@@ -64,6 +70,8 @@
 			<if test="pos != null">a.pos = #{pos},</if>
 			<if test="brief != null">a.brief = #{brief},</if>
 			<if test="link != null">a.link = #{link},</if>
+			<if test="typex != null">a.typex = #{typex},</if>
+			<if test="artid != null">a.artid = #{artid},</if>
 			
 			<if test="utime != null">a.utime = #{utime},</if>
 			<if test="isdel != null">a.isdel = #{isdel},</if>

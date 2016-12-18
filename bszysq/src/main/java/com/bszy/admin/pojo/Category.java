@@ -15,6 +15,10 @@ public class Category extends BasePojo {
 	private Long artid;		// 主题id
 	private String artname;	// 主题标题
 	
+	protected Integer addart;		// 禁止用户发布主题, 0: 正常; 1: 禁止
+	protected Integer addartauth;	// 认证用户才能发布主题, 0: 无需认证; 1: 需要认证
+	protected Integer lookartauth;	// 认证用户才能查看, 0: 无需认证; 1: 需要认证
+	
 	public String getName() {
 		return name;
 	}
@@ -29,6 +33,24 @@ public class Category extends BasePojo {
 	}
 	public String getImg() {
 		return img;
+	}
+	public Integer getAddart() {
+		return addart;
+	}
+	public void setAddart(Integer addart) {
+		this.addart = addart;
+	}
+	public Integer getAddartauth() {
+		return addartauth;
+	}
+	public void setAddartauth(Integer addartauth) {
+		this.addartauth = addartauth;
+	}
+	public Integer getLookartauth() {
+		return lookartauth;
+	}
+	public void setLookartauth(Integer lookartauth) {
+		this.lookartauth = lookartauth;
 	}
 	public void setImg(String img) {
 		this.img = img;

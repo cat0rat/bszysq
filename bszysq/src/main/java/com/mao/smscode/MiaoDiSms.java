@@ -11,30 +11,26 @@ import java.util.Date;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.mao.ini.PathIniUtil;
+
 public class MiaoDiSms {
 	
-	/**
-	 * url前半部分
-	 */
-	public static final String Base_Url = "https://api.miaodiyun.com/20150822";
-
-	/**
-	 * 开发者注册后系统自动生成的账号，可在官网登录后查看
-	 */
-	public static final String Account_Sid = "e4fa672856d8435e85facae9e539c096";
-
-	/**
-	 * 开发者注册后系统自动生成的TOKEN，可在官网登录后查看
-	 */
-	public static final String Auth_Token = "24812bbde786469f84a1147958f5a9d1";
-
-	/**
-	 * 响应数据类型, JSON或XML
-	 */
-	public static final String Resp_Data_Type = "json";
+//	/** url前半部分 */
+//	public static final String Base_Url = "https://api.miaodiyun.com/20150822";
+//	/** 开发者注册后系统自动生成的账号，可在官网登录后查看 */
+//	public static final String Account_Sid = "e4fa672856d8435e85facae9e539c096";
+//	/** 开发者注册后系统自动生成的TOKEN，可在官网登录后查看 */
+//	public static final String Auth_Token = "24812bbde786469f84a1147958f5a9d1";
+//	/** 响应数据类型, JSON或XML */
+//	private static String operation = "/industrySMS/sendSMS";
+//	private static String smsContent = "【碧水庄园社区】您的验证码为${code}，如非本人操作，请忽略此短信。";
 	
-	private static String operation = "/industrySMS/sendSMS";
-	private static String smsContent = "【碧水庄园社区】您的验证码为${code}，如非本人操作，请忽略此短信。";
+	public static final String Base_Url = PathIniUtil.getConfig().getValue("MiaoDi_Base_Url");
+	public static final String Account_Sid = PathIniUtil.getConfig().getValue("MiaoDi_Account_Sid");
+	public static final String Auth_Token = PathIniUtil.getConfig().getValue("MiaoDi_Auth_Token");
+	private static String operation = PathIniUtil.getConfig().getValue("MiaoDi_operation");
+	private static String smsContent = PathIniUtil.getConfig().getValue("MiaoDi_smsContent");
+	public static final String Resp_Data_Type = "json";
 	
 	public static String sendSmscode(String mobile, String code){
 		String cnt = smsContent.replaceAll("\\$\\{code\\}", code);

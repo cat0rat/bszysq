@@ -11,7 +11,7 @@ public class GetuiPojo {
 	public String title;		// 标题
 	public String content;		// 内容
 	public long createTime;		// 时间
-	public Integer typex;		// 消息类型: 0: 文章或评论, 100: 系统消息
+	public Integer typex;		// 消息类型: 0: 系统消息, 1: 文章或评论
 	public String extra;		// 额外内容, 消息类型为0时,为 文章id
 	
 	public GetuiPojo() {

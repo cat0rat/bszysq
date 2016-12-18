@@ -13,7 +13,7 @@
 	</sql>
 	
 	<select id="list" resultType="AppSlider" >
-		SELECT a.* FROM tbl_slider a
+		SELECT a.*, art.cateid FROM tbl_slider a LEFT JOIN tbl_article art on a.artid=art.id
 		<include refid="sql_list_where"></include>
 		<include refid="Common.sql_order_limit"></include>
 	</select>

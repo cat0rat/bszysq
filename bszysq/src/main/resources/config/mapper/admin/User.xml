@@ -102,5 +102,9 @@
 		UPDATE tbl_user a SET a.isdel = #{status} WHERE a.id in (${ids})
 	</update>
 	
+	<update id="repwd" >
+		UPDATE tbl_user a SET a.pwd = #{pwd} WHERE a.id = #{id}
+	</update>
+	
     
 </mapper>

@@ -7,7 +7,7 @@ import java.util.Date;
  * 用户
  * @author Mao 2016年10月29日 下午1:19:39
  */
-public class AppMineUser implements Serializable {
+public class AppUserMine implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	protected Long id;			// ID

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mao.ini.PathIniUtil;
 import com.qiniu.common.Config;
 import com.qiniu.common.QiniuException;
 import com.qiniu.common.Zone;
@@ -13,11 +14,16 @@ import com.qiniu.util.Auth;
 
 public class UpImg {
 	// 设置好账号的ACCESS_KEY和SECRET_KEY
-	public static String ACCESS_KEY = "4MIvb9rNQ0glzdTG8rvubygpsYQDm8UoHdATcEWf";
-	public static String SECRET_KEY = "oroMT6nRxYU4bU1ZTk5lLOECoEhBFrf_A8PhMnZO";
-	public static String NS = "http://oflfanlr8.bkt.clouddn.com/";
-	// 要上传的空间
-	public static String bucketname = "xxm-bbs";
+//	public static String ACCESS_KEY = "4MIvb9rNQ0glzdTG8rvubygpsYQDm8UoHdATcEWf";
+//	public static String SECRET_KEY = "oroMT6nRxYU4bU1ZTk5lLOECoEhBFrf_A8PhMnZO";
+//	public static String NS = "http://oflfanlr8.bkt.clouddn.com/";
+//	public static String bucketname = "xxm-bbs";	// 要上传的空间
+	
+	public static String ACCESS_KEY = PathIniUtil.getConfig().getValue("Qiniu_Access_Key");
+	public static String SECRET_KEY = PathIniUtil.getConfig().getValue("Qiniu_Secret_Key");
+	public static String NS = PathIniUtil.getConfig().getValue("Qiniu_NS");
+	public static String bucketname = PathIniUtil.getConfig().getValue("Qiniu_bucketname");	// 要上传的空间
+	
 	// 密钥配置
 	public static Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
 	// Token
@@ -37,7 +43,7 @@ public class UpImg {
 	public static String getUpToken() {
 		//if(token == null){
 			token = auth.uploadToken(bucketname);
-			System.out.println("七牛host:" + (Config.zone != null ? Config.zone.upHost : null));
+			//System.out.println("七牛host:" + (Config.zone != null ? Config.zone.upHost : null));
 		//}
 		return token;
 	}

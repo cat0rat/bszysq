@@ -226,7 +226,7 @@ var z = {
 		},
 		columnBase: function(cols){
 			var arr = [{field: 'ck', checkbox: true}, 
-						{field: 'id', title: '编号', width:60, align:'center', sortable: true}];
+						{field: 'id', title: '编号', width:40, align:'center', sortable: true}];
 			if(cols && cols.length){
 				for(var i = 0; i < cols.length; i++){
 					arr.push(cols[i]);
