@@ -9,6 +9,9 @@ import com.mao.ssm.BasePojo;
  */
 public class Sysmsg extends BasePojo {
 	private static final long serialVersionUID = 1L;
+	
+	public static Integer Typex_Sys = 0;
+	public static Integer Typex_Art = 1;
 
 	private String name;		// 标题(<200字符)
 	private String content;		// 内容(<500字符)
@@ -18,7 +21,7 @@ public class Sysmsg extends BasePojo {
 	private Long userid;			// 目标用户id
 	private String getuicid;		// 个推ClientID(20~50字符)
 	
-	private Integer rang;		// 推送范围: 0: 单用户, 1: 安卓用户, 2: IOS用户, 10: 指定用户, 11: 条件用户, 20: 全部用户
+	private Integer rangx;		// 推送范围: 0: 单用户, 1: 安卓用户, 2: IOS用户, 10: 指定用户, 11: 条件用户, 20: 全部用户
 	private String descx;		// 推送描述(<500字符)
 	
 	public String getContent() {
@@ -57,11 +60,11 @@ public class Sysmsg extends BasePojo {
 	public void setGetuicid(String getuicid) {
 		this.getuicid = getuicid;
 	}
-	public Integer getRang() {
-		return rang;
+	public Integer getRangx() {
+		return rangx;
 	}
-	public void setRang(Integer rang) {
-		this.rang = rang;
+	public void setRangx(Integer rangx) {
+		this.rangx = rangx;
 	}
 	public String getDescx() {
 		return descx;

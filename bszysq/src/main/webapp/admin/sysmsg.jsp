@@ -25,7 +25,7 @@
 <form id="search_form" >
 	<div class="l_search_tr">
 		<div class="l_search_td">
-			消息类型： <select name="rang" class="easyui-combobox x_input" 
+			消息类型： <select name="typex" class="easyui-combobox x_input" 
 				data-options="panelHeight:'auto',editable:false, width: 90"> 
 				<option value="">全部</option>
 				<option value="0">系统消息</option>
@@ -33,7 +33,7 @@
 			</select>
 		</div>
 		<div class="l_search_td">
-			推送范围： <select name="rang" class="easyui-combobox x_input" 
+			推送范围： <select name="rangx" class="easyui-combobox x_input" 
 				data-options="panelHeight:'auto',editable:false, width: 90"> 
 				<option value="">全部</option>
 				<option value="1">安卓用户</option>
@@ -66,7 +66,7 @@
 	<table class="dlg-tb">
 		<tr><td class="t-l">推送范围：</td>
 			<td class="t-l-c" colspan="3">
-				<select name="rang" class="easyui-combobox x_input x-ipt3" 
+				<select name="rangx" class="easyui-combobox x_input x-ipt3" 
 					data-options="panelHeight:'auto',required:true,editable:false"> 
 					<option value="">请选择</option>
 					<option value="1">安卓用户</option>

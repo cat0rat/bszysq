@@ -1,5 +1,5 @@
 var S_typex = { 0: '<font style="color: #00f">系统消息</font>', 1: '主题或评论' };
-var S_rang = { 0: '单用户', 1: '安卓用户', 2: 'IOS用户', 20: '全部用户' };
+var S_rangx = { 0: '单用户', 1: '安卓用户', 2: 'IOS用户', 20: '全部用户' };
 $.extend(z, {
 	clazz: 'sysmsg',
 	gDlgHeight: 300
@@ -20,8 +20,8 @@ $.extend(z.dg, {
 			{field: 'typex', title: '消息类型', width:40, align:'center', sortable: true, formatter: function(v, r, ix){
 				return S_typex[v] || '未知';
 			}},
-			{field: 'rang', title: '推送范围', width:40, align:'center', sortable: true, formatter: function(v, r, ix){
-				return S_rang[v] || '未知';
+			{field: 'rangx', title: '推送范围', width:40, align:'center', sortable: true, formatter: function(v, r, ix){
+				return S_rangx[v] || '未知';
 			}},
 			{field: 'name', title: '标题', width:120, align:'center', sortable: true},
 			{field: 'content', title: '内容', width:200, align:'center', sortable: true},

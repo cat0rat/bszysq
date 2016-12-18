@@ -14,7 +14,7 @@ public class SysmsgSearch extends BaseSearch {
 	private Long userid;		// 目标用户id
 	private String getuicid;	// 个推ClientID(20~50字符)
 	
-	private Integer rang;		// 推送范围: 0: 单用户, 1: 安卓用户, 2: IOS用户, 10: 指定用户, 11: 条件用户, 20: 全部用户
+	private Integer rangx;		// 推送范围: 0: 单用户, 1: 安卓用户, 2: IOS用户, 10: 指定用户, 11: 条件用户, 20: 全部用户
 	private String descx;		// 推送描述(<500字符)
 	
 	private Date stime;		// 开始时间
@@ -75,11 +75,11 @@ public class SysmsgSearch extends BaseSearch {
 	public void setGetuicid(String getuicid) {
 		this.getuicid = getuicid;
 	}
-	public Integer getRang() {
-		return rang;
+	public Integer getRangx() {
+		return rangx;
 	}
-	public void setRang(Integer rang) {
-		this.rang = rang;
+	public void setRangx(Integer rangx) {
+		this.rangx = rangx;
 	}
 	public String getDescx() {
 		return descx;

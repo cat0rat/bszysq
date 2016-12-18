@@ -14,7 +14,7 @@
 			<if test="userid != null">AND a.userid = #{userid}</if>
 			<if test="getuicid != null">AND a.getuicid = #{getuicid}</if>
 			
-			<if test="rang != null">AND a.rang = #{rang}</if>
+			<if test="rangx != null">AND a.rangx = #{rangx}</if>
 			<if test="descx != null and descx != ''">AND a.descx LIKE CONCAT('%',#{descx},'%' )</if>
 			
 			<if test="stime != null">AND a.ctime &gt;= #{stime}</if>
@@ -47,10 +47,10 @@
 	
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" >
 		INSERT INTO tbl_sysmsg(name, content, typex, extra,
-			 userid, getuicid, rang, descx, 
+			 userid, getuicid, rangx, descx, 
 			ctime, utime, isdel) 
 		VALUES(#{name}, #{content}, #{typex}, #{extra}, 
-			#{userid}, #{getuicid}, #{rang}, #{descx}, 
+			#{userid}, #{getuicid}, #{rangx}, #{descx}, 
 			#{ctime}, #{utime}, #{isdel})
 	</insert>
 	<update id="update" >
@@ -63,7 +63,7 @@
 			
 			<if test="userid != null">a.userid = #{userid},</if>
 			<if test="getuicid != null">a.getuicid = #{getuicid},</if>
-			<if test="rang != null">a.rang = #{rang},</if>
+			<if test="rangx != null">a.rangx = #{rangx},</if>
 			<if test="descx != null">a.descx = #{descx},</if>
 			
 			<if test="utime != null">a.utime = #{utime},</if>

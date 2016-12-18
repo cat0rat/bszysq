@@ -22,6 +22,8 @@ public class SysmsgController extends BaseController {
 	
 	@Inject
 	private SysmsgService service;
+	@Inject
+	private SysmsgService sysmsgService;
 	
 	// TODO page
 	@RequestMapping(value = {"/", "/page.do"}, method = RequestMethod.GET)
@@ -70,8 +72,8 @@ public class SysmsgController extends BaseController {
 		AjaxResult ar = new AjaxResult();
 		if(form == null){ ar.t_fail("1501"); return ar; }
 		
-		Integer rang = MUtil.toInteger(form.getRang());	// 9006 = 请先选择推送范围
-		if(rang == null || rang < 0){ ar.t_fail("9006"); return ar; }
+		Integer rangx = MUtil.toInteger(form.getRangx());	// 9006 = 请先选择推送范围
+		if(rangx == null || rangx < 0){ ar.t_fail("9006"); return ar; }
 		
 		String name = form.getName();	// 9001 = 标题不能为空
 		if(FormValid.isEmpty(name)){ ar.t_fail("9001"); return ar; }
@@ -88,8 +90,16 @@ public class SysmsgController extends BaseController {
 		mo.setName(name);
 		mo.setContent(content);
 		mo.setTypex(0);
-		mo.setRang(rang);
-		boolean rb = service.add(mo);
+		mo.setRangx(rangx);
+		
+		boolean rb = false;
+		try {
+			String emsg = sysmsgService.commMsg(mo);
+			rb = emsg == null;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		ar.t_result(rb);
 		return ar;
 	}

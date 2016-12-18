@@ -3,17 +3,17 @@ function build_tree_art(cates, topics){
 		art:[{
 			text: '版块管理',
 			beans: {
-				href:'/admin/category/page.do'
+				href:'/admin/category/'
 			}
 		},{
 			text: '标签管理',
 			beans: {
-				href:'/admin/arttag/page.do'
+				href:'/admin/arttag/'
 			}
 		},{
 			text: '主题管理',
 			beans: {
-				href:'/admin/article/page.do'
+				href:'/admin/article/'
 			}
 //		},{
 //			text: '评论管理',
@@ -23,18 +23,23 @@ function build_tree_art(cates, topics){
 		},{
 			text: '轮播管理',
 			beans: {
-				href:'/admin/slider/page.do'
+				href:'/admin/slider/'
+			}
+		},{
+			text: '推送管理',
+			beans: {
+				href:'/admin/sysmsg/'
 			}
 		}],
 		sys:[{
 			text: '用户管理',
 			beans: {
-				href:'/admin/user/page.do'
+				href:'/admin/user/'
 			}
 //		},{
 //			text: '短信验证码管理',
 //			beans: {
-//				href:'/admin/smscode/page.do'
+//				href:'/admin/smscode/'
 //			}
 //			},{
 //				text: '修改密码',

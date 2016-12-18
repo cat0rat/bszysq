@@ -15,7 +15,6 @@ import com.bszy.app.pojo.AppSysmsg;
 import com.bszy.app.vo.AppUserGetui;
 import com.mao.getui.GetuiPojo;
 import com.mao.getui.GetuiUtil;
-import com.mao.ssm.AjaxResult;
 import com.mao.ssm.AjaxResultUtil;
 import com.mao.ssm.BaseService;
 
@@ -27,7 +26,6 @@ public class AppSysmsgService extends BaseService<AppSysmsg, AppSysmsgMapper> {
 	public AppSysmsgMapper mapper(){return mapper;}
 	@Inject
 	private AppUserMapper userMapper;
-	
 	@Inject
 	private ArticleMapper articleMapper;
 	
@@ -97,7 +95,7 @@ public class AppSysmsgService extends BaseService<AppSysmsg, AppSysmsgMapper> {
 				smsg.getTypex(), smsg.getExtra());
 		String gmsg = AjaxResultUtil.toJsonStr(gmo);
 		try {
-			GetuiUtil.pushMessageToSingle(smsg.getGetuicid(), gmsg, isan);
+			GetuiUtil.pushMsgToSingle(smsg.getGetuicid(), gmsg, isan);
 			emsg = null;
 		} catch (Exception e1) {
 			emsg = "调用消息推送接口异常";
