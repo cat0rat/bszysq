@@ -394,9 +394,16 @@ if(!window["Mao"]){
 					v = fn.cal(fe, v, fm);
 				}
 				if(igEmpty && !v && v !== 0) continue;
-				vs[fe.name] = v;
+				var vsv = vs[fe.name];
+				if(!vsv) vsv = vs[fe.name] = [];
+				vsv.push(v);
 			}
-			return vs;
+			var nvs = {};
+			for(var k in vs){
+				v = vs[k];
+				nvs[k] = v.length > 1 ? v.join(',') : v[0];
+			}
+			return nvs;
 		},
 		/*----------数据查找----------*/
 		/** 从数据中查找节点, 用于树节点的属性查找, 如果找到了返回节点数据 */
@@ -2484,25 +2491,29 @@ $ImportSimpleJs = M.ImportSimpleJs;
 		 * @param idn (String) id字段名
 		 * @param sn (String) 删除提示时的字段名
 		 * @param fn (function) 确认删除时被调用
+		 * @param filter (function) 过滤数据函数
 		 * @see <code>
 		 * 	M.eu.dg_del(user_dg, 'id', 'userName', function(ids, sels){
 				M.alert(ids);
 			});
 		 * </code>
 		 */
-		dg_del: function(dg, idn, sn, fn){
+		dg_del: function(dg, idn, sn, fn, filter){
 			var sels = dg.datagrid('getCks');
-			var dstr = M.eu.build_del_eg(sels, sn, 10);
-			if(dstr){
-				$.messager.confirm('删除','您确定要删除' + dstr + '?', function(r){   
-				    if (r){
-				    	var ids = M.eu.build_fields(sels, idn);
-				    	fn.call(dg, ids, sels);
-				    }   
-				});
-			}else{
-				M.alert('请先选择一条记录!');
+			if(sels && sels.length){
+				filter && (sels = filter(sels));
+				if(sels && sels.length){
+					var dstr = M.eu.build_del_eg(sels, sn, 10);
+					$.messager.confirm('删除','您确定要删除' + dstr + '?', function(r){   
+					    if (r){
+					    	var ids = M.eu.build_fields(sels, idn);
+					    	fn.call(dg, ids, sels);
+					    }   
+					});
+					return ;
+				}
 			}
+			M.alert('请先选择一条记录!');
 		},
 		/**
 		 *  datagrid 批量操作
@@ -2517,8 +2528,9 @@ $ImportSimpleJs = M.ImportSimpleJs;
 			});
 		 * </code>
 		 */
-		dg_ids_opts: function(dg, idn, sn, title, fn){
+		dg_ids_opts: function(dg, idn, sn, title, fn, filter){
 			var sels = dg.datagrid('getCks');
+			filter && (sels = filter(sels));
 			var dstr = M.eu.build_del_eg(sels, sn, 10);
 			if(dstr){
 				title = title || '操作';

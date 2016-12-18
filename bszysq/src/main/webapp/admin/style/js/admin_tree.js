@@ -11,7 +11,7 @@ function build_tree_art(cates, topics){
 				href:'/admin/arttag/page.do'
 			}
 		},{
-			text: '文章管理',
+			text: '主题管理',
 			beans: {
 				href:'/admin/article/page.do'
 			}

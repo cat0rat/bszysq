@@ -12,9 +12,12 @@ $.extend(z.dg, {
 //			'-',
 //			{text:'禁用', iconCls:'icon-remove', plain:true, handler: zz.do_dis},
 //			{text:'启用', iconCls:'icon-standard-tick', plain:true, handler: zz.do_undis},
-//			'-',
+			'-',
 			{text:'推荐', iconCls:'icon-tip', plain:true, handler: zz.do_recom},
-			{text:'取消推荐', iconCls:'icon-no', plain:true, handler: zz.do_unrecom}
+			{text:'取消推荐', iconCls:'icon-no', plain:true, handler: zz.do_unrecom},
+			'-',
+			{text:'置顶', iconCls:'icon-tip', plain:true, handler: zz.do_ding},
+			{text:'取消置顶', iconCls:'icon-no', plain:true, handler: zz.do_unding}
 		];
 		return tb;
 	},
@@ -24,10 +27,16 @@ $.extend(z.dg, {
 			{field: 'catename', title: '版块', width:90, align:'center'},
 			{field: 'tagname', title: '标签', width:90, align:'center'},
 			z.dg.columnMidImg({field: 'img', title: '配图'}),
-			{field: 'recom', title: '是否推荐', width:200, align:'center', formatter: function(v){
+			{field: 'adminadd', title: '是否官方发布', width:60, align:'center', formatter: function(v){
+				return v == 1 ? '<span style="color:red;">官方发布</span>' : '用户发布';
+			}},
+			{field: 'recom', title: '是否推荐', width:60, align:'center', formatter: function(v){
 				return v == 1 ? '<span style="color:red;">推荐</span>' : '正常';
 			}},
-			{field: 'uname', title: '发布者', width:90, align:'center'}
+			{field: 'ding', title: '是否置顶', width:60, align:'center', formatter: function(v){
+				return v == 1 ? '<span style="color:red;">置顶</span>' : '正常';
+			}},
+			{field: 'usernname', title: '发布者', width:90, align:'center'}
 		]);
 		return cols;
 	},
@@ -72,13 +81,69 @@ $.extend(z.dg, {
 				}
 			});
 		});
+	},
+	/** 置顶 */
+	do_ding: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'name', '置顶', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:'1'};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/dings.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已置顶');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '置顶失败');
+					}
+				}
+			});
+		});
+	},
+	/** 取消置顶 */
+	do_unding: function(){
+		var dg = z.dg.dg;
+		M.eu.dg_ids_opts(dg, 'id', 'name', '取消置顶', function(ids, sels){
+			$.messager.progress();
+			var ps = {ids: ids, status:'0'};
+			$.ajax({
+				url : '/admin/' + z.clazz + '/dings.json',
+				data : ps,
+				success : function(d) {
+					$.messager.progress('close');
+					if(d.code == '200'){
+						M.alert('已取消置顶');
+						dg.datagrid('load');
+					}else{
+						M.err(d.message || '取消置顶失败');
+					}
+				}
+			});
+		});
 	}
 });
-//$.extend(z.add, {
+$.extend(z.add, {
+	isAjax: 1
 //	dlgOpt: {
 //		height: 280
 //	}
-//});
+});
+$.extend(z.edit, {
+	isAjax: 1,
+	on_open: function(zz){
+//		var tr = zz.frm.find('#tr-imgs');
+//		tr.remove('.td-img');
+//		var arr = [];
+//		for(var i = 0; i < 9)
+	},
+	on_submit_ps: function(ps){
+		if(ps.imgs) ps.imgs = ps.imgs.replace(/\,{2,}/gi, ',').replace(/^\,|\,$/gi, '');
+		console.log(',aa,,,,bb,,dd,,,'.replace(/,{2,}/gi, ',').replace(/^,|,$/gi, ''));
+	}
+});
 z.init();
 
 

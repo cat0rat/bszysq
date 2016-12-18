@@ -60,7 +60,7 @@
 
 <!-- 添加对话框 -->
  <div id="addMgrDlg" style="padding-left:5px;">
-	<form id="addMgrForm" class="dlg-frm t-min" method="post">
+	<form id="addMgrForm" class="dlg-frm" method="post">
 	<table class="dlg-tb">
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
@@ -87,8 +87,21 @@
 				<input upimgval="img" type="hidden" name="img" />
 				<input class="mi-upimg" field="img" type="button" value="选择图片" />
 			</td></tr>
+		<tr><td class="t-l">跳转类型：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="typex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
+					<option value="0" selected="selected">外链</option>   
+					<option value="1">内部主题</option>   
+				</select>
+			</td></tr>
+		<tr><td class="t-l">主题编号</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="artid" class="easyui-numberbox x_input x-ipt3" value="" min="1" max="100000000"
+					data-options="" />
+			</td></tr>
 		<tr><td class="t-l-c t-memo" colspan="4">
-				图片尺寸: 750 * 325;
+				如果【跳转类型】选择【内部主题】, 请将【主题管理】中的主题编号填写到这里。
 			</td></tr>
 		<tr><td class="t-l">外链：</td>
 			<td class="t-l-c" colspan="3">
@@ -96,7 +109,8 @@
 					data-options="validType:'length[0, 500]'"/>
 			</td></tr>
 		<tr><td class="t-l-c t-memo" colspan="4">
-				完整的网址, 如: http://wx.hechangzj.com/article/1
+				如果【跳转类型】选择【外链】，请填写完整的网址。<br>
+				如: http://wx.hechangzj.com/article/1
 			</td></tr>
 		<tr style="display: none;"><td class="t-l"><span>简介：</span></td>
 			<td class="t-l-c" colspan="3">
@@ -108,7 +122,7 @@
 
 <!-- 修改 -->
 <div id="editMgrDlg" style="padding-left:5px;">
-	<form id="editMgrForm" class="dlg-frm t-min" method="post">
+	<form id="editMgrForm" class="dlg-frm" method="post">
 	<input type="hidden" name="id" />
 	<table class="dlg-tb">
 		<tr style="display: none"><td class="t-l">位置：</td>
@@ -136,8 +150,21 @@
 				<input upimgval="img" type="hidden" name="img" />
 				<input class="mi-upimg" field="img" type="button" value="选择图片" />
 			</td></tr>
+		<tr><td class="t-l">跳转类型：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="typex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
+					<option value="0" selected="selected">外链</option>   
+					<option value="1">内部主题</option>   
+				</select>
+			</td></tr>
+		<tr><td class="t-l">主题编号</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="artid" class="easyui-numberbox x_input x-ipt3" value="" min="1" max="100000000"
+					data-options="" />
+			</td></tr>
 		<tr><td class="t-l-c t-memo" colspan="4">
-				图片尺寸: 750 * 325;
+				如果【跳转类型】选择【内部主题】, 请将【主题管理】中的主题编号填写到这里。
 			</td></tr>
 		<tr><td class="t-l">外链：</td>
 			<td class="t-l-c" colspan="3">
@@ -145,7 +172,8 @@
 					data-options="validType:'length[0, 500]'"/>
 			</td></tr>
 		<tr><td class="t-l-c t-memo" colspan="4">
-				完整的网址, 如: http://wx.hechangzj.com/article/1
+				如果【跳转类型】选择【外链】，请填写完整的网址。<br>
+				如: http://wx.hechangzj.com/article/1
 			</td></tr>
 		<tr style="display: none;"><td class="t-l"><span>简介：</span></td>
 			<td class="t-l-c" colspan="3">
@@ -157,7 +185,7 @@
 
 <!-- 查看 -->
 <div id="lookMgrDlg" style="padding-left:5px;">
-	<form id="lookMgrForm" class="dlg-frm t-min" method="post">
+	<form id="lookMgrForm" class="dlg-frm" method="post">
 	<table class="dlg-tb">
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
@@ -182,10 +210,29 @@
 			<td class="t-l-c" colspan="3">
 				<img class="mi-upimg-img" upimgshow="img" />
 			</td></tr>
+		<tr><td class="t-l">跳转类型：</td>
+			<td class="t-l-c" colspan="3">
+				<select name="typex" class="easyui-combobox x_input x-ipt3" 
+					data-options="panelHeight:'auto'"> 
+					<option value="0">外链</option>   
+					<option value="1">内部主题</option>   
+				</select>
+			</td></tr>
+		<tr><td class="t-l">主题编号</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="artid" class="x_input x-ipt3"/>
+			</td></tr>
+		<tr><td class="t-l">版块</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="catename" class="x_input x-ipt3"/>
+			</td></tr>
+		<tr><td class="t-l">主题</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="artname" class="x_input x-ipt3"/>
+			</td></tr>
 		<tr><td class="t-l">外链：</td>
 			<td class="t-l-c" colspan="3">
-				<input type="text" name="link" class="easyui-validatebox x_input x-ipt3"
-					data-options="validType:'length[0, 500]'"/>
+				<input type="text" name="link" class="x_input x-ipt3"/>
 			</td></tr>
 		<tr style="display: none;"><td class="t-l"><span>简介：</span></td>
 			<td class="t-l-c" colspan="3">

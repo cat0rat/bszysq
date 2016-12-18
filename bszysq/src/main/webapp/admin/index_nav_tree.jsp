@@ -10,11 +10,11 @@
 	if(admin != null){
 		xrole = MUtil.tolong(admin.getRolex(), 0);
 	}
-	if(xrole == 1){	// admin:超级管理员
+	if(xrole == 9){	// admin:超级管理员
 %>
 
 <div class="easyui-accordion" style="height:100%;">
-    <div id="nav-art-mgr" title="文章管理" data-options="selected:true">  
+    <div id="nav-art-mgr" title="内容管理" data-options="selected:true">  
 		<ul id="art-tree"></ul>
     </div>  
     <div id="nav-sys-mgr" title="系统管理">  

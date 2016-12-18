@@ -81,7 +81,7 @@
 	
 <!-- 添加用户对话框 -->
 <div id="addMgrDlg" style="padding-left:5px;">
-	<form id="addMgrForm" class="dlg-frm t-min" method="post">
+	<form id="addMgrForm" class="dlg-frm" method="post">
 	<table class="dlg-tb">
 		<tr><td class="t-l">角色：</td>
 			<td class="t-l-c" colspan="3">
@@ -156,7 +156,7 @@
 
 <!-- 修改用户 -->
 <div id="editMgrDlg" style="padding-left:5px;">
-	<form id="editMgrForm" class="dlg-frm t-min" method="post">
+	<form id="editMgrForm" class="dlg-frm" method="post">
 	<input type="hidden" name="id" />
 	<table class="dlg-tb">
 		<tr><td class="t-l">角色：</td>
@@ -246,6 +246,7 @@
 					<option value="2">待审核</option>   
 				</select>
 			</td></tr>
+		<!-- 
 		<tr><td class="t-l">性别：</td>
 			<td class="t-l-c" colspan="3">
 				<select name="sex" class="easyui-combobox x_input x-ipt3" 
@@ -255,7 +256,7 @@
 					<option value="2">女</option>   
 				</select>
 			</td></tr>
-			
+		 -->
 		<tr><td class="t-l">微信唯一id：</td>
 			<td class="t-l-c" colspan="3">
 				<input type="text" name="unionid" class="x_input x-ipt3" />
@@ -286,6 +287,40 @@
 		<tr><td class="t-l">邮箱：</td>
 			<td class="t-l-c" colspan="3">
 				<input type="text" name="email" class="x_input x-ipt3" />
+			</td></tr>
+	</table>
+	</form>
+</div>
+
+<!-- 推送消息 -->
+<div id="sysmsgMgrDlg" style="padding-left:5px;">
+	<form id="sysmsgMgrForm" class="dlg-frm" method="post">
+	<table class="dlg-tb">
+		<tr><td class="t-l">标题：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="name" class="easyui-validatebox x_input x-ipt3"
+					data-options="required:true, validType:'length[2, 16]'"/>
+			</td></tr>
+		<tr><td class="t-l"><span>内容：</span></td>
+			<td class="t-l-c" colspan="3">
+				<textarea name="content" rows="8" class="x-ipt3"></textarea>
+			</td></tr>
+	</table>
+	</form>
+</div>
+
+<!-- 修改密码 -->
+<div id="repwdMgrDlg" style="padding-left:5px;">
+	<form id="repwdMgrForm" class="dlg-frm" method="post">
+	<input type="hidden" name="id" />
+	<table class="dlg-tb">
+		<tr><td class="t-l">登录帐号：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="name" class="x_input x-ipt3" readonly="readonly"/>
+			</td></tr>
+		<tr><td class="t-l">密码：</td>
+			<td class="t-l-c" colspan="3">
+				<input type="text" name="pwd" class="x_input x-ipt3"/>
 			</td></tr>
 	</table>
 	</form>

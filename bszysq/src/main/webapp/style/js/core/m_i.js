@@ -365,10 +365,38 @@
 			});
 		},
 		upimgShowUtil: function(frm, data){
+			var its = {};	// 兼容处理 多图逗号分隔的情况
 			frm.find('[upimgshow]').each(function(ix, t){
 				var tt = $(t);
 				var key = tt.attr('upimgshow');
-				t.src = data[key];
+				var it = its[key];
+				if(!it){
+					it = its[key] = {
+						c: 1,
+						val: data[key],
+						tts: [tt]
+					};
+				}else{
+					it.c++;
+					it.tts.push(tt);
+				}
+			});
+			// 处理图片
+			var v;
+			$.each(its, function(itk, it){
+				if(it.c > 1){
+					var vals = it.val ? it.val.split(',') : [];	// 多图逗号分隔的情况
+					$.each(it.tts, function(ix, tt){
+						v = vals[ix] || '';
+						tt[0].src = v;
+						tt.parent().find('[upimgval=' + itk + ']').val(v);
+					});
+				}else{
+					v = it.val || '';
+					var tt = it.tts[0];
+					tt[0].src = v;
+					tt.parent().find('[upimgval=' + itk + ']').val(v);
+				}
 			});
 		},
 		// TODO 布局类

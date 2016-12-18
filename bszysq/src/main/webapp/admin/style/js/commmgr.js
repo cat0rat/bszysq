@@ -11,9 +11,11 @@ var z = {
 			z.edit.init();
 			z.look.init();
 			z.loaded();
+			z.init_oth_jq();
 		});
 		m_i.upimgUtil();
 	},
+	init_oth_jq: function(){},
 	// 页面加载完成,
 	loaded: function(){
 		var layout = $('#mainLayout');
@@ -22,6 +24,7 @@ var z = {
             $('#maskContainer').remove();
         }, 0);
 	},
+	def_fvs:{img:'', imgs:''},
 	// TODO 表格
 	dg:{
 		init: function(){
@@ -49,7 +52,9 @@ var z = {
 				},
 				loadFilter: function(data){
 					data = data.data ? data.data : data;
-					if(data && data.rows && data.rows.length){
+					data || (data = {});
+					var rows = data.rows;
+					if(rows && rows.length){
 						$.each(data.rows, function(ix, row){
 							if(row){
 								if(row.ctime){
@@ -61,9 +66,14 @@ var z = {
 							}
 						});
 					}
+					zz.loadFilter(rows, data);
 					return data;
 				}
 			});
+		},
+		// 处理 datagrid请求返回的数据
+		loadFilter: function(rows, data){
+			
 		},
 		gen_toolbar: function(zz){
 			var tb = [
@@ -226,14 +236,14 @@ var z = {
 		},
 		columnBase: function(cols){
 			var arr = [{field: 'ck', checkbox: true}, 
-						{field: 'id', title: '编号', width:40, align:'center', sortable: true}];
+						{field: 'id', title: '编号', width:60, align:'center', sortable: true}];
 			if(cols && cols.length){
 				for(var i = 0; i < cols.length; i++){
 					arr.push(cols[i]);
 				}
 			}
-			arr.push({field: 'ctimeStr', title: '添加时间', width: 100, align: 'center'});
-			arr.push({field: 'utimeStr', title: '更新时间', width: 100, align: 'center'});
+			arr.push({field: 'ctimeStr', title: '添加时间', width: 80, align: 'center'});
+			arr.push({field: 'utimeStr', title: '更新时间', width: 80, align: 'center'});
 			//arr.push({field: 'isdelStr', title: '状态', width: 60, align: 'center'});
 			return [arr];
 		},
@@ -277,7 +287,7 @@ var z = {
 
 			// 表单
 			zz.frm = $('#addMgrForm');
-			zz.def_fvs = {id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''};
+			zz.def_fvs = M.apply({id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''}, zz.def_fvs, z.def_fvs);
 		},
 		/** 打开对话框 */
 		dlg_open: function(){
@@ -285,31 +295,50 @@ var z = {
 			zz.dlg.dialog('open');
 			zz.frm.form('load', zz.def_fvs);
 		},
+		//isAjax: 0,
 		/** 提交 */
 		submit: function(){
 			var zz = z.add;
-			$.messager.progress();	// 显示一个进度条 
-			M.ajaxSubmit(zz.frm, {
-				url: '/admin/' + z.clazz + '/add.json',
-				onSubmit: function(){
-					var isValid = zz.frm.form('validate');
-					if (!isValid){
-						$.messager.progress('close');	// 当form不合法的时候隐藏工具条
-					}
-					return isValid;	// 返回false将停止form提交 
-				},
-				success: function(d){
-					d = Mao.decode(d);
-					$.messager.progress('close');	// 当成功提交之后隐藏进度条
-					if(d.code == '200'){
-						zz.dlg.dialog('close');
-						z.dg.dg.datagrid('load');
-						z.index_nav.reload();
-					}else{
-						M.err(d.message || '添加失败');
-					}
-				}
-			});
+			$.messager.progress();	// 显示一个进度条
+			var isValid = zz.frm.form('validate');
+			if (!isValid){
+				$.messager.progress('close');	// 当form不合法的时候隐藏工具条
+				return ;
+			}
+			var url = '/admin/' + z.clazz + '/add.json';
+			if(zz.isAjax){
+				var ps = M.formValues({selector:zz.frm});
+				console.log(ps);
+				var pps = {ps:ps};
+				zz.on_submit_ps(ps, zz, pps);
+				ps = pps.ps;
+				$.ajax({
+					data : ps,
+					url : url,
+					success : zz.on_submit_success,
+					error: function(){ $.messager.progress('close'); M.err('请求失败'); }
+				});
+			}else{
+				M.ajaxSubmit(zz.frm, {
+					url: url,
+					success: zz.on_submit_success
+				});
+			}
+		},
+		on_submit_ps: function(ps, pps){
+			
+		},
+		on_submit_success: function(d){
+			$.messager.progress('close');	// 当成功提交之后隐藏进度条
+			var zz = z.add;
+			if(!zz.isAjax) d = Mao.decode(d);
+			if(d.code == '200'){
+				zz.dlg.dialog('close');
+				z.dg.dg.datagrid('load');
+				z.index_nav.reload();
+			}else{
+				M.err(d.msg || '添加失败');
+			}
 		}
 	},
 	// TODO 修改对话框
@@ -337,7 +366,7 @@ var z = {
 			dlg.dialog(opt);
 			// 表单
 			zz.frm = $('#editMgrForm');
-			zz.def_fvs = {id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''};
+			zz.def_fvs = M.apply({id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''}, zz.def_fvs, z.def_fvs);
 		},
 		/** 打开对话框 */
 		dlg_open: function(){
@@ -345,6 +374,7 @@ var z = {
 			var sel = z.dg.dg.datagrid('getSel');
 			if(sel && sel.id){
 				sel = M.apply({},  sel, zz.def_fvs);
+				zz.on_open && zz.on_open(zz, sel);
 				zz.dlg.dialog('open');
 				zz.frm.form('load', sel);
 				m_i.upimgShowUtil(zz.frm, sel);
@@ -352,31 +382,47 @@ var z = {
 				M.alert('请先选择一条记录!');
 			}
 		},
+		//isAjax: 0,
 		/** 提交 */
 		submit: function(){
 			var zz = z.edit;
 			$.messager.progress();	// 显示一个进度条 
-			M.ajaxSubmit(zz.frm, {
-				url: '/admin/' + z.clazz + '/update.json',
-				onSubmit: function(){
-					var isValid = zz.frm.form('validate');
-					if (!isValid){
-						$.messager.progress('close');	// 当form不合法的时候隐藏工具条
-					}
-					return isValid;	// 返回false将停止form提交 
-				},
-				success: function(d){
-					d = Mao.decode(d);
-					$.messager.progress('close');	// 当成功提交之后隐藏进度条
-					if(d.code == '200'){
-						zz.dlg.dialog('close');
-						z.dg.dg.datagrid('load');
-						z.index_nav.reload();
-					}else{
-						M.err(d.message || '修改失败');
-					}
-				}
-			});
+			var isValid = zz.frm.form('validate');
+			if (!isValid){
+				$.messager.progress('close');	// 当form不合法的时候隐藏工具条
+				return ;
+			}
+			var url = '/admin/' + z.clazz + '/update.json';
+			if(zz.isAjax){
+				var ps = M.formValues({selector:zz.frm});
+				console.log(ps);
+				var pps = {ps:ps};
+				zz.on_submit_ps(ps, zz, pps);
+				ps = pps.ps;
+				$.ajax({
+					data : ps,
+					url : url,
+					success : zz.on_submit_success,
+					error: function(){ $.messager.progress('close'); M.err('请求失败'); }
+				});
+			}else{
+				M.ajaxSubmit(zz.frm, {
+					url: url,
+					success: zz.on_submit_success
+				});
+			}
+		},
+		on_submit_success: function(d){
+			$.messager.progress('close');	// 当成功提交之后隐藏进度条
+			var zz = z.edit;
+			if(!zz.isAjax) d = Mao.decode(d);
+			if(d.code == '200'){
+				zz.dlg.dialog('close');
+				z.dg.dg.datagrid('load');
+				z.index_nav.reload();
+			}else{
+				M.err(d.message || '修改失败');
+			}
 		}
 	},
 	// TODO 查看对话框
@@ -403,7 +449,7 @@ var z = {
 			dlg.dialog(opt);
 			// 表单
 			zz.frm = $('#lookMgrForm');
-			zz.def_fvs = {id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''};
+			zz.def_fvs = M.apply({id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''}, zz.def_fvs, z.def_fvs);
 		},
 		/** 打开对话框 */
 		dlg_open: function(){

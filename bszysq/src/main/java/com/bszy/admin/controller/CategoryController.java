@@ -79,6 +79,9 @@ public class CategoryController extends BaseController {
 		mo.setName(name);
 		mo.setImg(form.getImg());
 		mo.setSortn(MUtil.toInt(form.getSortn(), 0));
+		mo.setAddart(0);
+		mo.setAddartauth(0);
+		mo.setLookartauth(0);
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
 		return ar;

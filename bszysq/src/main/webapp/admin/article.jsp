@@ -37,6 +37,30 @@
 					<option value="">全部</option>
 				</select>
 			</div>
+			<div class="l_search_td" style="width:130px">
+				推荐：
+				<select name="recom" class="x_input i-search easyui-combobox" data-options="panelHeight: 'auto', editable: false, width: 70" > 
+					<option value="">全部</option> 
+					<option value="0">正常</option> 
+					<option value="1">推荐</option>
+				</select>
+			</div>
+			<div class="l_search_td" style="width:180px">
+				官方发布：
+				<select name="adminadd" class="x_input i-search easyui-combobox" data-options="panelHeight: 'auto', editable: false, width: 90" > 
+					<option value="">全部</option> 
+					<option value="0">用户发布</option> 
+					<option value="1">官方发布</option>
+				</select>
+			</div>
+			<div class="l_search_td" style="width:160px">
+				置顶：
+				<select name="ding" class="x_input i-search easyui-combobox" data-options="panelHeight: 'auto', editable: false, width: 70" > 
+					<option value="">全部</option> 
+					<option value="0">正常</option> 
+					<option value="1">置顶</option>
+				</select>
+			</div>
 			<div class="l_search_td">
 				标题：<input type="text" name="name" class="x_input"/>
 			</div>
@@ -93,10 +117,33 @@
 		<tr><td class="t-l-c t-memo" colspan="4">
 				图片尺寸: 如: 32*32, 64*64等;
 			</td></tr>
-		<tr>
-	        <td class="t-l"><span>内容：</span></td>
+		<tr><td class="t-l"><span>内容：</span></td>
 			<td class="t-l-c" colspan="3">
 				<textarea name="content" rows="8" class="x-ipt3"></textarea>
+			</td></tr>
+		<tr class="tr-imgs"><td class="t-l" rowspan="3"><span>图片：</span></td>
+			<td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td></tr>
+		<tr class="tr-imgs">
+			<td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
 			</td></tr>
 	</table>
 	</form>
@@ -133,10 +180,33 @@
 		<tr><td class="t-l-c t-memo" colspan="4">
 				图片尺寸: 如: 32*32, 64*64等;
 			</td></tr>
-		<tr>
-	        <td class="t-l"><span>内容：</span></td>
+		<tr><td class="t-l"><span>内容：</span></td>
 			<td class="t-l-c" colspan="3">
 				<textarea name="content" rows="8" class="x-ipt3"></textarea>
+			</td></tr>
+		<tr class="tr-imgs"><td class="t-l" rowspan="3"><span>图片：</span></td>
+			<td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td></tr>
+		<tr class="tr-imgs">
+			<td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+				<input class="mi-upimg dis_block" field="imgs" type="button" value="选择图片" />
 			</td></tr>
 	</table>
 	</form>
@@ -177,10 +247,28 @@
 		<tr><td class="t-l-c t-memo" colspan="4">
 				图片尺寸: 如: 32*32, 64*64等;
 			</td></tr>
-		<tr>
-	        <td class="t-l"><span>内容：</span></td>
+		<tr><td class="t-l"><span>内容：</span></td>
 			<td class="t-l-c" colspan="3">
 				<textarea name="content" rows="8" class="x-ipt3"></textarea>
+			</td></tr>
+		<tr class="tr-imgs"><td class="t-l" rowspan="3"><span>图片：</span></td>
+			<td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+			</td></tr>
+		<tr class="tr-imgs">
+			<td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
+			</td><td class="t-l td-img">
+				<img class="mi-upimg-img" upimgshow="imgs" />
+				<input upimgval="imgs" type="hidden" name="imgs" />
 			</td></tr>
 	</table>
 	</form>
