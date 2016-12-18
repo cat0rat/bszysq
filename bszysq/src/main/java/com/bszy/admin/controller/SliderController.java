@@ -74,6 +74,11 @@ public class SliderController extends BaseController {
 		if(FormValid.isEmpty(img)){ ar.t_fail("7001"); return ar; }
 		if(!FormValid.len(img, 1, 500)){ ar.t_fail("7002"); return ar; }
 		
+		int typex = MUtil.toInt(form.getTypex(), 0);
+		Long artid = MUtil.toLong(form.getArtid());
+		// 7003 = 请填写主题编号
+		if(typex == 1 && !FormValid.isId(artid)){ ar.t_fail("7003"); return ar; }
+		
 		Slider mo = new Slider();
 		mo.init_add();
 		mo.setName(form.getName());
@@ -82,6 +87,8 @@ public class SliderController extends BaseController {
 		mo.setPos(MUtil.toInt(form.getPos(), 0));
 		mo.setBrief(form.getBrief());
 		mo.setLink(form.getLink());
+		mo.setTypex(typex);
+		mo.setArtid(artid);
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
 		return ar;
@@ -99,6 +106,11 @@ public class SliderController extends BaseController {
 		if(FormValid.isEmpty(img)){ ar.t_fail("7001"); return ar; }
 		if(!FormValid.len(img, 1, 500)){ ar.t_fail("7002"); return ar; }
 		
+		int typex = MUtil.toInt(form.getTypex(), 0);
+		Long artid = MUtil.toLong(form.getArtid());
+		// 7003 = 请填写主题编号
+		if(typex == 1 && !FormValid.isId(artid)){ ar.t_fail("7003"); return ar; }
+		
 		Slider mo = new Slider();
 		mo.init_update();
 		mo.setId(id);
@@ -108,6 +120,8 @@ public class SliderController extends BaseController {
 		mo.setPos(MUtil.toInteger(form.getPos()));
 		mo.setBrief(form.getBrief());
 		mo.setLink(form.getLink());
+		mo.setTypex(typex);
+		mo.setArtid(artid);
 		
 		boolean rb = service.update(mo);
 		ar.t_result(rb);

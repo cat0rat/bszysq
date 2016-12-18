@@ -732,6 +732,27 @@ public class MUtil extends StringUtil {
 		}
 		return null;
 	}
+
+	/** 字符串数组转long数组, 出错填充默认值0 */
+	public static long[] strArrToLngArr(String[] sa){
+		return strArrToLngArr(sa, 0);
+	}
+	/** 字符串数组转long数组, 出错填充默认值def */
+	public static long[] strArrToLngArr(String[] sa, long def){
+		if(sa != null){
+			int len = sa.length;
+			long[] ia = new long[len];
+			for(int i = 0; i < len; i++){
+				try {
+					ia[i] = Long.parseLong(sa[i].trim());
+				} catch (NumberFormatException e) {
+					ia[i] = def;
+				}
+			}
+			return ia;
+		}
+		return null;
+	}
 	
 	/** int数组转字符串数组, 出错填充默认值def */
 	public static String[] intArrToStrArr(int[] sa){
@@ -964,6 +985,18 @@ public class MUtil extends StringUtil {
 	public static double[] strTodoubleArr(String str, String sign, boolean trim){
 		String[] sa = MUtil.split(str, sign, trim);
 		return MUtil.strArrToDoubleArr(sa);
+	}
+	
+	/** 将"1,2,3"--转换成 [1, 2, 3] */
+	public static int[] strToIntArr(String str, String sign, boolean trim){
+		String[] sa = MUtil.split(str, sign, trim);
+		return MUtil.strArrToIntArr(sa);
+	}
+	
+	/** 将"1,2,3"--转换成 [1, 2, 3] */
+	public static long[] strToLngArr(String str, String sign, boolean trim){
+		String[] sa = MUtil.split(str, sign, trim);
+		return MUtil.strArrToLngArr(sa);
 	}
 	
 	/** 求两个Long的各, null按0处理 */

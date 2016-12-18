@@ -1,5 +1,8 @@
 package com.bszy.admin.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -8,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bszy.admin.form.RepwdForm;
+import com.bszy.admin.form.SysmsgForm;
 import com.bszy.admin.form.UserForm;
 import com.bszy.admin.pojo.User;
 import com.bszy.admin.service.UserService;
 import com.bszy.admin.vo.UserSearch;
+import com.bszy.app.pojo.AppSysmsg;
+import com.bszy.app.service.AppSysmsgService;
 import com.mao.lang.DateUtil;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
@@ -25,6 +32,8 @@ public class UserController extends BaseController {
 	
 	@Inject
 	private UserService service;
+	@Inject
+	private AppSysmsgService sysmsgService;
 	
 	// TODO page
 
@@ -103,7 +112,7 @@ public class UserController extends BaseController {
 		mo.setAddress(form.getAddress());
 		
 		mo.setSex(form.getSex());
-		mo.setHead(form.getHead());
+		mo.setHead(FormValid.userHeadEmptyDef(form.getHead()));
 		mo.setEmail(form.getEmail());
 		mo.setBirth(DateUtil.toDate(form.getBirth(), null, false));
 		mo.setLcount(0);
@@ -180,6 +189,75 @@ public class UserController extends BaseController {
 			rb = service.option_isdels(form);
 		}else{ ar.t_fail("1501"); return ar; }
 		
+		ar.t_result(rb);
+		return ar;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/send/sysmsg.json", method = RequestMethod.POST)
+	public AjaxResult send_sysmsg_json(SysmsgForm form){
+		AjaxResult ar = new AjaxResult();
+		
+		String name = form.getName();	// 标题(<200字符)
+		if(FormValid.isEmpty(name)){ ar.t_fail("9001"); return ar; }		// 9001 = 标题不能为空
+		if(!FormValid.len(name, 1, 200)){ ar.t_fail("9002"); return ar; }	// 9002 = 标题(<200字符)
+		
+		String content = form.getContent();	// 内容(<500字符)
+		if(FormValid.isEmpty(content)){ ar.t_fail("9003"); return ar; }		// 9003 = 内容不能为空
+		if(!FormValid.len(name, 1, 500)){ ar.t_fail("9004"); return ar; }	// 9004 = 内容(<500字符)
+		
+		String ids = form.getIds();		// 9005 = 请先选择目标用户
+		if(FormValid.isEmpty(ids)){ ar.t_fail("9005"); return ar; }		// 9005 = 请先选择目标用户
+		long[] ida = MUtil.strToLngArr(ids, ",", true);
+		if(ida == null || ida.length == 0){ ar.t_fail("9005"); return ar; }	// 9005 = 请先选择目标用户
+		
+		AppSysmsg smsg = new AppSysmsg();
+		smsg.setName(name);
+		smsg.setContent(content);
+		smsg.setTypex(AppSysmsg.Typex_Sys);
+		int c = 0;
+		List<Long> errids = new ArrayList<Long>();
+		for(long id : ida){
+			try {
+				smsg.setUserid(id);
+				if(sysmsgService.commMsg(smsg) != null){
+					c++;
+					errids.add(id);
+				}
+			} catch (Exception e) {
+				c++;
+				errids.add(id);
+				e.printStackTrace();
+			}
+		}
+		if(c > 0){
+			ar.setMsg((ida.length - c) + "个用户发送成功, " + c + "个用户发送失败!");
+			ar.setData(errids);
+		}else{
+			ar.t_succ();
+		}
+		return ar;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "/repwd.json", method = RequestMethod.POST)
+	public AjaxResult repwd_json(RepwdForm form){
+		AjaxResult ar = new AjaxResult();
+		
+		Long id = MUtil.toLong(form.getId());	// 帐号
+		if(!FormValid.isId(id)){ ar.t_fail("1284"); return ar; }		// 1284 = 请选择一个帐号
+		
+		String pwd = form.getPwd();	// 密码
+		if(FormValid.isEmpty(pwd)){ ar.t_fail("2104"); return ar; }		// 2104 = 密码不能为空
+		if(!FormValid.len(pwd, 6, 16)){ ar.t_fail("2105"); return ar; }	// 2105 = 密码(6~16位字母数字)
+		pwd = DigestUtils.md5Hex(pwd);
+		
+		User mo = new User();
+		mo.setId(id);
+		mo.setPwd(pwd);
+		boolean rb = service.repwd(mo);
 		ar.t_result(rb);
 		return ar;
 	}

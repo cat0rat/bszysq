@@ -14,8 +14,9 @@ public class BaseSearch {
 	
 	protected Long start = 0L;	// 开始位置
 	protected Integer page = 1;	// 页码, 1开始。
-	protected Integer limit = 20;	// 每页条数，默认20。
+	protected Integer limit = Limit;	// 每页条数，默认20。
 	protected Long lastid;	// 上一次查询最后一条数据的id。
+	public static Integer Limit = 20;
 	
 	protected Long uid;	// 当前用户ID
 	
@@ -78,6 +79,15 @@ public class BaseSearch {
 		if(page == null) page = 1;
 		page += x;
 		return page;
+	}
+	/** 检测必须有限制条数, 如果没有, 设置为Limit */
+	public int limit_must(){
+		return limit_must(Limit);
+	}
+	/** 检测必须有限制条数, 如果没有, 设置为def */
+	public int limit_must(int def){
+		if(limit == null || limit < 1) limit = def;
+		return limit;
 	}
 
 	

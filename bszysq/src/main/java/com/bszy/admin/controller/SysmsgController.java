@@ -70,13 +70,25 @@ public class SysmsgController extends BaseController {
 		AjaxResult ar = new AjaxResult();
 		if(form == null){ ar.t_fail("1501"); return ar; }
 		
-		String name = form.getName();	// 名称
-		if(FormValid.isEmpty(name)){ ar.t_fail("6001"); return ar; }
-		if(!FormValid.len(name, 1, 20)){ ar.t_fail("6002"); return ar; }
+		Integer rang = MUtil.toInteger(form.getRang());	// 9006 = 请先选择推送范围
+		if(rang == null || rang < 0){ ar.t_fail("9006"); return ar; }
+		
+		String name = form.getName();	// 9001 = 标题不能为空
+		if(FormValid.isEmpty(name)){ ar.t_fail("9001"); return ar; }
+		// 9002 = 标题(<200字符)
+		if(!FormValid.len(name, 1, 200)){ ar.t_fail("9002"); return ar; }
+		
+		String content = form.getContent();	// 9003 = 内容不能为空
+		if(FormValid.isEmpty(content)){ ar.t_fail("9003"); return ar; }
+		// 9004 = 内容(<500字符)
+		if(!FormValid.len(content, 1, 500)){ ar.t_fail("9004"); return ar; }
 		
 		Sysmsg mo = new Sysmsg();
 		mo.init_add();
 		mo.setName(name);
+		mo.setContent(content);
+		mo.setTypex(0);
+		mo.setRang(rang);
 		boolean rb = service.add(mo);
 		ar.t_result(rb);
 		return ar;

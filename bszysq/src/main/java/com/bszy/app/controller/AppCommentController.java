@@ -14,6 +14,8 @@ import com.bszy.admin.pojo.Comment;
 import com.bszy.admin.service.CommentService;
 import com.bszy.admin.vo.CommentSearch;
 import com.bszy.app.service.AppSysmsgService;
+import com.bszy.app.service.AppUserService;
+import com.bszy.app.vo.AppUserAuth;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
@@ -27,6 +29,8 @@ public class AppCommentController extends BaseController {
 	private CommentService service;
 	@Inject
 	private AppSysmsgService sysmsgService;
+	@Inject
+	private AppUserService appUserService;
 	
 	
 	// TODO json
@@ -65,6 +69,12 @@ public class AppCommentController extends BaseController {
 		
 		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+		
+		// 检测 用户状态
+		AppUserAuth aua = appUserService.user_auth(uid);
+		if (aua == null) { ar.t_fail("1011"); return ar; }	// 1011 = 检测用户失败, 请重新登录
+		// 1012 = 您的帐号已被封号
+		if (FormValid.eq(aua.getIsdel(), Integer.valueOf(1))) { ar.t_fail("1012"); return ar; }
 		
 		Comment mo = new Comment();
 		mo.init_add();
@@ -110,6 +120,12 @@ public class AppCommentController extends BaseController {
 		
 		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+		
+		// 检测 用户状态
+		AppUserAuth aua = appUserService.user_auth(uid);
+		if (aua == null) { ar.t_fail("1011"); return ar; }	// 1011 = 检测用户失败, 请重新登录
+		// 1012 = 您的帐号已被封号
+		if (FormValid.eq(aua.getIsdel(), Integer.valueOf(1))) { ar.t_fail("1012"); return ar; }
 		
 		Comment mo = new Comment();
 		mo.init_add();

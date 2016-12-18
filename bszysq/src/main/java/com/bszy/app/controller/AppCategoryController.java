@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.service.CategoryService;
 import com.bszy.admin.vo.ArttagSearch;
+import com.bszy.admin.vo.CategorySearch;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
 
@@ -44,12 +45,23 @@ public class AppCategoryController extends BaseController {
 		return ar;
 	}
 	
-
+	
+	/** 只列出可以发表主题的版块 */
 	@ResponseBody
-	@RequestMapping(value = {"/list_idval", "/list_idname"}, method = RequestMethod.GET)
-	public AjaxResult list_idval_json(){
+	@RequestMapping(value = "/list_idname", method = RequestMethod.GET)
+	public AjaxResult list_idname_json(){
 		AjaxResult ar = new AjaxResult();
-		ArttagSearch bs = new ArttagSearch();
+		CategorySearch bs = new CategorySearch();
+		bs.setAddart(0);
+		ar.t_succ_not_null(service.list_idname(bs).getRows());
+		return ar;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/list_idname_all", method = RequestMethod.GET)
+	public AjaxResult list_idname_all_json(){
+		AjaxResult ar = new AjaxResult();
+		CategorySearch bs = new CategorySearch();
 		ar.t_succ_not_null(service.list_idname(bs).getRows());
 		return ar;
 	}

@@ -12,6 +12,8 @@ public class ArticleSearch extends BaseSearch {
 	private Long userid;		// 发布者id
 	private String usernname;	// 发布者昵称(关联)
 	private Integer recom;		// 0: 正常; 1: 推荐(版块下显示)
+	private Integer ding;		// 置顶, 0:正常; 1: 置顶
+	private Integer adminadd;	// 是否官方发布, 0: 用户发布; 1: 官方发布
 	private Integer isdel;
 
 	public String getName() {
@@ -19,6 +21,18 @@ public class ArticleSearch extends BaseSearch {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public Integer getDing() {
+		return ding;
+	}
+	public void setDing(Integer ding) {
+		this.ding = ding;
+	}
+	public Integer getAdminadd() {
+		return adminadd;
+	}
+	public void setAdminadd(Integer adminadd) {
+		this.adminadd = adminadd;
 	}
 	public Integer getIsdel() {
 		return isdel;

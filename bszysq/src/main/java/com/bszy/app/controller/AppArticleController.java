@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bszy.admin.form.ArticleForm;
 import com.bszy.admin.pojo.Article;
 import com.bszy.admin.service.ArticleService;
+import com.bszy.admin.service.CategoryService;
 import com.bszy.admin.vo.ArticleSearch;
+import com.bszy.admin.vo.CategoryArtAuth;
+import com.bszy.app.service.AppUserService;
+import com.bszy.app.vo.AppUserAuth;
 import com.mao.lang.MUtil;
 import com.mao.ssm.AjaxResult;
 import com.mao.ssm.BaseController;
@@ -24,6 +28,10 @@ public class AppArticleController extends BaseController {
 	
 	@Inject
 	private ArticleService service;
+	@Inject
+	private CategoryService categoryService;
+	@Inject
+	private AppUserService appUserService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/article/get/{id}", method = RequestMethod.GET)
@@ -44,7 +52,27 @@ public class AppArticleController extends BaseController {
 	@RequestMapping(value = "/article/list", method = RequestMethod.POST)
 	public AjaxResult list(@RequestBody ArticleSearch bs){
 		AjaxResult ar = new AjaxResult();
-		ar.t_succ_not_null(service.list_simple(bs));
+		Long cateid = bs.getCateid();
+		if (!FormValid.isId(cateid)) {
+			ar.t_fail("6105");
+			return ar;
+		}
+		CategoryArtAuth caa = categoryService.artauth(cateid);
+		if (caa == null) { ar.t_fail("4101"); return ar; }
+		Long uid = bs.getUid();
+		// 认证用户才能查看, 0: 无需认证; 1: 需要认证; 2: 无需登录
+		if (!FormValid.eq(caa.getLookartauth(), Integer.valueOf(2))) {
+			if (!FormValid.isId(uid)) { ar.t_fail("1001"); return ar; }
+			AppUserAuth aua = appUserService.user_auth(uid);
+			if (aua == null) { ar.t_fail("1011"); return ar; }
+			if (FormValid.eq(aua.getIsdel(), Integer.valueOf(1))) { ar.t_fail("1012"); return ar;
+			}
+			if (FormValid.eq(caa.getLookartauth(), Integer.valueOf(1)) && !FormValid.eq(aua.getAuthx(), Integer.valueOf(0))) {
+				ar.t_fail("4102");
+				return ar;
+			}
+		}
+		ar.t_succ_not_null(service.list_for_app(bs));
 		return ar;
 	}
 	
@@ -72,6 +100,22 @@ public class AppArticleController extends BaseController {
 		
 		Long uid = MUtil.toLong(form.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+		
+		// 检测 版块权限
+		// addart 禁止用户发布主题, 0: 正常; 1: 禁止
+		CategoryArtAuth caa = categoryService.artauth(cateid);
+		if (caa == null) { ar.t_fail("4101"); return ar; }	// 4101 = 版块不存在或已删除
+		// 4103 = 该版块不可以发表主题
+		if (FormValid.eq(caa.getAddart(), 1)) { ar.t_fail("4103"); return ar; }
+		// addartauth 认证用户才能发布主题, 0: 无需认证; 1: 需要认证
+		if (FormValid.eq(caa.getAddartauth(), 1)) {
+			AppUserAuth aua = appUserService.user_auth(uid);
+			if (aua == null) { ar.t_fail("1011"); return ar; }	// 1011 = 检测用户失败, 请重新登录
+			// 1012 = 您的帐号已被封号
+			if (FormValid.eq(aua.getIsdel(), 1)) { ar.t_fail("1012"); return ar; }
+			// 4104 = 该版块认证用户才能发表主题
+			if (!FormValid.eq(aua.getAuthx(), 0)) { ar.t_fail("4104"); return ar; }
+		}
 		
 		// 处理图片
 		String img = form.getImg();
@@ -113,6 +157,13 @@ public class AppArticleController extends BaseController {
 		AjaxResult ar = new AjaxResult();
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+		
+		// 检测 用户状态
+		AppUserAuth aua = appUserService.user_auth(uid);
+		if (aua == null) { ar.t_fail("1011"); return ar; }	// 1011 = 检测用户失败, 请重新登录
+		// 1012 = 您的帐号已被封号
+		if (FormValid.eq(aua.getIsdel(), Integer.valueOf(1))) { ar.t_fail("1012"); return ar; }
+		
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.list_simple(bs));
 		return ar;
@@ -126,6 +177,13 @@ public class AppArticleController extends BaseController {
 		AjaxResult ar = new AjaxResult();
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+		
+		// 检测 用户状态
+		AppUserAuth aua = appUserService.user_auth(uid);
+		if (aua == null) { ar.t_fail("1011"); return ar; }	// 1011 = 检测用户失败, 请重新登录
+		// 1012 = 您的帐号已被封号
+		if (FormValid.eq(aua.getIsdel(), Integer.valueOf(1))) { ar.t_fail("1012"); return ar; }
+		
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.commlist(bs));
 		return ar;
@@ -138,6 +196,13 @@ public class AppArticleController extends BaseController {
 		AjaxResult ar = new AjaxResult();
 		Long uid = MUtil.toLong(bs.getUid());	// 检查当前用户ID(登录)
 		if(!FormValid.isId(uid)){ ar.t_fail("1001"); return ar; }
+		
+		// 检测 用户状态
+		AppUserAuth aua = appUserService.user_auth(uid);
+		if (aua == null) { ar.t_fail("1011"); return ar; }	// 1011 = 检测用户失败, 请重新登录
+		// 1012 = 您的帐号已被封号
+		if (FormValid.eq(aua.getIsdel(), Integer.valueOf(1))) { ar.t_fail("1012"); return ar; }
+		
 		bs.setUserid(uid);
 		ar.t_succ_not_null(service.commlist(bs));
 		return ar;

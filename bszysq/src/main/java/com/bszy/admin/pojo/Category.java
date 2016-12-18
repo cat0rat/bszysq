@@ -17,7 +17,7 @@ public class Category extends BasePojo {
 	
 	protected Integer addart;		// 禁止用户发布主题, 0: 正常; 1: 禁止
 	protected Integer addartauth;	// 认证用户才能发布主题, 0: 无需认证; 1: 需要认证
-	protected Integer lookartauth;	// 认证用户才能查看, 0: 无需认证; 1: 需要认证
+	protected Integer lookartauth;	// 认证用户才能查看, 0: 无需认证; 1: 需要认证; 2: 无需登录
 	
 	public String getName() {
 		return name;

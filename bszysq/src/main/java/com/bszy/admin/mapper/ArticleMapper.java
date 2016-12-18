@@ -16,6 +16,7 @@ import com.mao.ssm.BaseSearch;
 public interface ArticleMapper extends BaseMapper<Article> {
 	public AppArticleDetail detail(Long id);
 	public Long recoms(Map<String, Object> map);
+	public Long dings(Map<String, Object> map);
 	
 	public List<AppArticleSimple> commlist(BaseSearch bs);
 	public Long commlscount(BaseSearch bs);

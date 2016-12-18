@@ -9,6 +9,9 @@ import com.mao.ssm.BasePojo;
  */
 public class AppSysmsg extends BasePojo {
 	private static final long serialVersionUID = 1L;
+	
+	public static Integer Typex_Sys = 0;
+	public static Integer Typex_Art = 1;
 
 	public String name;			// 标题(<200字符)
 	public String content;		// 内容(<500字符)

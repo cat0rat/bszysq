@@ -40,6 +40,13 @@ public class AjaxResult {
 		if(rb) t_succ();
 		else t_fail(code);
 	}
+	public String code_msg(String code) {
+		if(code != null) return  ErrorCodeUtil.getConfig().getValue(code);
+		return null;
+	}
+	public void t_code_msg(String code) {
+		msg = code_msg(code);
+	}
 	
 	/** 标记成功 */
 	public void t_succ(){

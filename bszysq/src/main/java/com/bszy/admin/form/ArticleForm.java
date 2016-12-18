@@ -18,6 +18,7 @@ public class ArticleForm extends BaseForm {
 	private String userid;		// 发布者id
 	private String usernname;	// 发布者昵称(关联)
 	private String recom;		// 0: 正常; 1: 推荐(版块下显示)
+	private String ding;		// 置顶, 0:正常; 1: 置顶
 	
 	private String lookn;		// 浏览量
 	private String liken;		// 点赞数
@@ -132,6 +133,12 @@ public class ArticleForm extends BaseForm {
 	}
 	public void setFavorn(String favorn) {
 		this.favorn = favorn;
+	}
+	public String getDing() {
+		return ding;
+	}
+	public void setDing(String ding) {
+		this.ding = ding;
 	}
 	
 }

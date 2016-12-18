@@ -11,6 +11,8 @@ public class SliderForm extends BaseForm {
 	private String pos;		// 位置
 	private String brief;	// 简介
 	private String link;	// 跳转地址
+	private String typex;	// 跳转类型, 0: 外链; 1: 内部主题
+	private String artid;	// 主题id
 	
 	public String getName() {
 		return name;
@@ -20,6 +22,18 @@ public class SliderForm extends BaseForm {
 	}
 	public String getSortn() {
 		return sortn;
+	}
+	public String getTypex() {
+		return typex;
+	}
+	public void setTypex(String typex) {
+		this.typex = typex;
+	}
+	public String getArtid() {
+		return artid;
+	}
+	public void setArtid(String artid) {
+		this.artid = artid;
 	}
 	public void setSortn(String sortn) {
 		this.sortn = sortn;

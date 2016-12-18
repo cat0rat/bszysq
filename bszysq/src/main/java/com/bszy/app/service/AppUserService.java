@@ -9,9 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bszy.app.mapper.AppUserMapper;
 import com.bszy.app.pojo.AppUser;
+import com.bszy.app.vo.AppUserAuth;
 import com.bszy.app.vo.AppUserMine;
-import com.bszy.app.vo.AppSimpleUser;
 import com.bszy.app.vo.AppUserRePwd;
+import com.bszy.app.vo.AppUserSimple;
 import com.mao.ssm.BaseService;
 
 @Service
@@ -38,23 +39,34 @@ public class AppUserService extends BaseService<AppUser, AppUserMapper> {
 		return mapper.mine(id);
 	}
 	
-	public AppSimpleUser simple(Long id){
+	public AppUserSimple simple(Long id){
 		return mapper.simple(id);
 	}
 	
-	// 修改密码
+	/** 修改密码 */
 	public boolean repwd(AppUserRePwd params){
 		Long rn = mapper.repwd(params);
 		return rn != null && rn == 1;
 	}
-	// 找回密码
+	/** 找回密码 */
 	public boolean findpwd(AppUser params){
 		Long rn = mapper.findpwd(params);
 		return rn != null && rn == 1;
 	}
-	// 绑定个推ClientID
+	
+	/** 绑定个推ClientID */
 	public boolean bindGetuiCid(AppUser params){
 		Long rn = mapper.bindGetuiCid(params);
 		return rn != null && rn == 1;
+	}
+	
+	/** App用户的权限 */
+	public AppUserAuth user_auth(Long uid){
+		return mapper.user_auth(uid);
+	}
+	
+	/** App手机号的权限 */
+	public AppUserAuth mobile_auth(String mobile){
+		return mapper.mobile_auth(mobile);
 	}
 }

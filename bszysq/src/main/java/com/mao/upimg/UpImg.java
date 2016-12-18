@@ -13,19 +13,19 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 
 public class UpImg {
-	// 设置好账号的ACCESS_KEY和SECRET_KEY
-//	public static String ACCESS_KEY = "4MIvb9rNQ0glzdTG8rvubygpsYQDm8UoHdATcEWf";
-//	public static String SECRET_KEY = "oroMT6nRxYU4bU1ZTk5lLOECoEhBFrf_A8PhMnZO";
+	// 设置好账号的Access_Key和Secret_Key
+//	public static String Access_Key = "4MIvb9rNQ0glzdTG8rvubygpsYQDm8UoHdATcEWf";
+//	public static String Secret_Key = "oroMT6nRxYU4bU1ZTk5lLOECoEhBFrf_A8PhMnZO";
 //	public static String NS = "http://oflfanlr8.bkt.clouddn.com/";
 //	public static String bucketname = "xxm-bbs";	// 要上传的空间
 	
-	public static String ACCESS_KEY = PathIniUtil.getConfig().getValue("Qiniu_Access_Key");
-	public static String SECRET_KEY = PathIniUtil.getConfig().getValue("Qiniu_Secret_Key");
+	public static String Access_Key = PathIniUtil.getConfig().getValue("Qiniu_Access_Key");
+	public static String Secret_Key = PathIniUtil.getConfig().getValue("Qiniu_Secret_Key");
 	public static String NS = PathIniUtil.getConfig().getValue("Qiniu_NS");
 	public static String bucketname = PathIniUtil.getConfig().getValue("Qiniu_bucketname");	// 要上传的空间
 	
 	// 密钥配置
-	public static Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
+	public static Auth auth = Auth.create(Access_Key, Secret_Key);
 	// Token
 	public static String token;
 	static{

@@ -21,6 +21,7 @@ import com.bszy.app.pojo.AppUser;
 import com.bszy.app.security.AppUserCurUtil;
 import com.bszy.app.security.SmscodeTimer;
 import com.bszy.app.service.AppUserService;
+import com.bszy.app.vo.AppUserAuth;
 import com.mao.captcha.Captcha;
 import com.mao.lang.MUtil;
 import com.mao.smscode.MiaoDiSms;
@@ -34,6 +35,8 @@ public class AppRegController extends BaseController {
 	
 	@Inject
 	private AppUserService service;
+	@Inject
+	private AppUserService appUserService;
 	
 	// TODO json
 
@@ -55,9 +58,14 @@ public class AppRegController extends BaseController {
 		}
 	}
 	
+	/**
+	 * 发送短信验证验
+	 * @param typex (Integer) 短信类型: 0/null/默认: 用户注册; 1: 修改密码; 2: 找回密码
+	 * @param mobile (String) 手机号
+	 */
 	@ResponseBody
-	@RequestMapping(value = "/smscode/{mobile}", method = RequestMethod.GET)
-	public AjaxResult smscode_json(@PathVariable String mobile, /*String captcha, */HttpServletRequest request, HttpSession session){
+	@RequestMapping(value = "/smscode{typex}/{mobile}", method = RequestMethod.GET)
+	public AjaxResult smscode_json(@PathVariable Integer typex, @PathVariable String mobile, /*String captcha, */HttpServletRequest request, HttpSession session){
 		AjaxResult ar = new AjaxResult();
 		
 		// 手机号
@@ -74,6 +82,29 @@ public class AppRegController extends BaseController {
 		Long ss = SmscodeTimer.remaining(mobile, 60);
 		if(ss != null){ ar.t_fail("1211"); return ar; }	// ar.setData(ss); 
 		
+		if(typex == null) typex = 0;
+		
+		AppUserAuth aua = appUserService.mobile_auth(mobile);
+		// 1: 修改密码
+		if(typex == 1){
+			// 1011 = 检测用户失败, 请重新登录
+			if(null == aua){ ar.t_fail("1011"); return ar; }
+			// 1014 = 此手机号注册的帐号已被封号
+			else if(FormValid.eq(aua.getIsdel(), 1)){ ar.t_fail("1014"); return ar; }
+		}else if(typex == 2){	// 2: 找回密码
+			// 1015 = 此手机号尚未注册帐号
+			if(null == aua){ ar.t_fail("1015"); return ar; }
+			// 1014 = 此手机号注册的帐号已被封号
+			else if(FormValid.eq(aua.getIsdel(), 1)){ ar.t_fail("1014"); return ar; }
+		}else{	// 0/null/默认: 用户注册
+			if(null != aua){
+				// 1014 = 此手机号注册的帐号已被封号
+				if(FormValid.eq(aua.getIsdel(), 1)){ ar.t_fail("1014"); return ar; }
+				// 1007 = 此号码已注册，请登录
+				else{ ar.t_fail("1007"); return ar; }
+			}
+		}
+		
 		String smscode = MUtil.smscode();
 		SmscodeTimer.build(mobile, smscode);
 		//AppUserCurUtil.smscode_to_session(session, smscode);
@@ -83,7 +114,7 @@ public class AppRegController extends BaseController {
 			System.out.println("手机号：" + mobile + ", 短信验证码：" + smscode);
 			ar.t_succ();
 			//ar.t_succ(smscode); 
-			ar.setMsg("短信验证码已发送到您的手机上，请注意查收。");
+			ar.t_code_msg("201");	// 201 = 短信验证码已发送到您的手机上，请注意查收。
 		}else{
 			ar.t_fail("1231", rstr);
 		}

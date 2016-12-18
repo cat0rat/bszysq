@@ -38,4 +38,10 @@ public class UserService extends BaseService<User, UserMapper> {
 		return rn != null && rn > 0;
 	}
 	
+	@Transactional
+	public boolean repwd(User mo){
+		Long rn = mapper().repwd(mo);
+		return rn != null && rn == 1;
+	}
+	
 }

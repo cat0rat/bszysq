@@ -14,4 +14,6 @@ public interface UserMapper extends BaseMapper<User> {
 	
 	public Long option_isdel(BaseStatusForm mo);
 	public Long option_isdels(BaseStatusForm mo);
+	
+	public Long repwd(User mo);
 }
