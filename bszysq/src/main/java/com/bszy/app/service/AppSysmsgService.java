@@ -37,7 +37,7 @@ public class AppSysmsgService extends BaseService<AppSysmsg, AppSysmsgMapper> {
 		smsg.setName("您有新的评论");
 		smsg.setContent(mo.getContent());
 		smsg.setUserid(authorid);
-		smsg.setTypex(AppSysmsg.Typex_Sys);
+		smsg.setTypex(AppSysmsg.Typex_Art);
 		smsg.setExtra(String.valueOf(mo.getArtid()));
 		commMsg(smsg);
 	}
@@ -49,7 +49,7 @@ public class AppSysmsgService extends BaseService<AppSysmsg, AppSysmsgMapper> {
 		smsg.setName("您有新的评论");
 		smsg.setContent(mo.getContent());
 		smsg.setUserid(mo.getTouserid());
-		smsg.setTypex(AppSysmsg.Typex_Sys);
+		smsg.setTypex(AppSysmsg.Typex_Art);
 		smsg.setExtra(String.valueOf(mo.getArtid()));
 		commMsg(smsg);
 	}
@@ -60,7 +60,7 @@ public class AppSysmsgService extends BaseService<AppSysmsg, AppSysmsgMapper> {
 	@Transactional
 	public void user(Comment mo){
 		AppSysmsg smsg = new AppSysmsg();
-		smsg.setName("您有新的评论");
+		smsg.setName("您有新的系统消息");
 		smsg.setContent(mo.getContent());
 		smsg.setUserid(mo.getTouserid());
 		smsg.setTypex(AppSysmsg.Typex_Sys);

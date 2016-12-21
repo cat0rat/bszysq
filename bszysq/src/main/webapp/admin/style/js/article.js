@@ -1,6 +1,7 @@
 $.extend(z, {
 	clazz: 'article',
-	gDlgHeight: 500
+	gDlgHeight: 500,
+	def_fvs: {cateid:'', tagid:'', name:'', img:'', content:'', imgs:''}
 });
 $.extend(z.dg, {
 	gen_toolbar: function(zz){

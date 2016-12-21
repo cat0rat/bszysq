@@ -293,7 +293,10 @@ var z = {
 		dlg_open: function(){
 			var zz = z.add;
 			zz.dlg.dialog('open');
-			zz.frm.form('load', zz.def_fvs);
+			if(zz.is_clear_before !== 0){
+				zz.frm.form('load', zz.def_fvs);
+				m_i.upimgShowUtil(zz.frm, zz.def_fvs);
+			}
 		},
 		//isAjax: 0,
 		/** 提交 */

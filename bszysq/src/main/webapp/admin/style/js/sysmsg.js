@@ -30,5 +30,8 @@ $.extend(z.dg, {
 		return cols;
 	}
 });
+$.extend(z.add, {
+	is_clear_before: 0
+});
 z.init();
 

@@ -283,11 +283,12 @@
 			<td class="t-l-c" colspan="3">
 				<input type="text" name="phonename" class="x_input x-ipt3" />
 			</td></tr>
-			
+		<!-- 
 		<tr><td class="t-l">邮箱：</td>
 			<td class="t-l-c" colspan="3">
 				<input type="text" name="email" class="x_input x-ipt3" />
 			</td></tr>
+		 -->
 	</table>
 	</form>
 </div>

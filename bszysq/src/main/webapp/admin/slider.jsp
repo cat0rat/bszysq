@@ -65,7 +65,7 @@
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
 				<select name="pos" class="easyui-combobox x_input" 
-					data-options="panelHeight:'auto',required:true, editable:false, width: 200"> 
+					data-options="panelHeight:'auto',editable:false, width: 200"> 
 					<option value="0">首页</option>   
 				</select>
 			</td>
@@ -128,7 +128,7 @@
 		<tr style="display: none"><td class="t-l">位置：</td>
 			<td class="t-l-c">
 				<select name="pos" class="easyui-combobox x_input" 
-					data-options="panelHeight:'auto',required:true, editable:false, width: 200"> 
+					data-options="panelHeight:'auto',editable:false, width: 200"> 
 					<option value="0">首页</option>   
 				</select>
 			</td>

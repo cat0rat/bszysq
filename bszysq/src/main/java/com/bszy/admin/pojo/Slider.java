@@ -20,8 +20,8 @@ public class Slider extends BasePojo {
 	private Integer typex;		// 跳转类型, 0: 外链; 1: 内部主题
 	private Long artid;			// 主题id
 	private Long cateid;		// 版块id
-	private String artname;		// 主题标题
-	private String catename;	// 版块标题
+	private String artname;		// 主题标题(关联)
+	private String catename;	// 版块标题(关联)
 	
 	public String getName() {
 		return name;

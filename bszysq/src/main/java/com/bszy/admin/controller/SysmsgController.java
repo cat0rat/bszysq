@@ -89,7 +89,7 @@ public class SysmsgController extends BaseController {
 		mo.init_add();
 		mo.setName(name);
 		mo.setContent(content);
-		mo.setTypex(0);
+		mo.setTypex(Sysmsg.Typex_Sys);
 		mo.setRangx(rangx);
 		
 		boolean rb = false;

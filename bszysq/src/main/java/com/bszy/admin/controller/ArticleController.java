@@ -83,6 +83,15 @@ public class ArticleController  extends BaseController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = "/dings.json", method = RequestMethod.POST)
+	public AjaxResult dings_json(String ids, Integer status){
+		AjaxResult ar = new AjaxResult();
+		if(ids == null || !FormValid.isIds(ids) || status == null){ ar.t_fail("1501"); return ar; }
+		ar.t_result(service.dings(ids, status));
+		return ar;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/list.json", method = RequestMethod.POST)
 	public AjaxResult list_json(ArticleSearch bs){
 		AjaxResult ar = new AjaxResult();

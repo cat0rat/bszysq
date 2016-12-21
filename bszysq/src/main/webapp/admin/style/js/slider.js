@@ -1,6 +1,7 @@
 $.extend(z, {
 	clazz: 'slider',
-	gDlgHeight: 400
+	gDlgHeight: 400,
+	def_fvs: {pos:'', typex:'', artid:'', link:'', catename:'', artname:''}
 });
 $.extend(z.dg, {
 	gen_columns: function(zz){

@@ -13,7 +13,7 @@ public class Category extends BasePojo {
 	private Integer sortn;	// 排序号(默认0, 倒序)
 	private String img;		// 配图(<500字符，完整网址)
 	private Long artid;		// 主题id
-	private String artname;	// 主题标题
+	private String artname;	// 主题标题(关联)
 	
 	protected Integer addart;		// 禁止用户发布主题, 0: 正常; 1: 禁止
 	protected Integer addartauth;	// 认证用户才能发布主题, 0: 无需认证; 1: 需要认证

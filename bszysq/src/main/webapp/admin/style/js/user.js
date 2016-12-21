@@ -7,6 +7,9 @@ var S_sendable = { 0: '正常', 1: '<font style="color: #999">不能</font>' };
 $.extend(z, {
 	clazz: 'user',
 	gDlgHeight: 300,
+	def_fvs: {rolex:'', nname:'', name:'', pwd:'', mobile:'', authx:'', 
+		head:'', tname:'', address:'', unionid:'', openid:'', getuicid:'', 
+		phonetype:'', phonename:'', content:''},
 	init_oth_jq: function(){
 		z.sysmsg.init();
 		z.repwd.init();
