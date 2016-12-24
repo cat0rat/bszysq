@@ -1,13 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+
 <%-- 这是一个通用的jsp头包含文件 --%>
-
-<%-- 
-<meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
---%>
-
 
 <!-- 0、引入 jquery 基础库 -->
 <!--<script src="/style/jquery-1.11.1.js" type="text/javascript"></script>-->
