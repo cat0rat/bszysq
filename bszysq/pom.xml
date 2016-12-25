@@ -231,11 +231,13 @@
 			<version>5.1.36</version>
 		</dependency>
 		
+		<!-- 
 		<dependency>
 		    <groupId>com.mchange</groupId>
 		    <artifactId>c3p0</artifactId>
 		    <version>0.9.5.2</version>
 		</dependency>
+		 -->
 		
 		<!-- // TODO 权限控制 -->
 		<!-- Spring 整合Shiro需要的依赖 -->
