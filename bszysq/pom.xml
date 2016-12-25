@@ -363,6 +363,13 @@
 			<version>20160607</version>
 		</dependency>
 		
+		<!-- quartz包 -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		
 	</dependencies>
 	<repositories>
 	    <repository>

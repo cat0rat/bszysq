@@ -90,7 +90,7 @@
 	
 	
 	<select id="login" resultType="AppUserMine" >
-		SELECT * FROM tbl_user WHERE rolex=0 and name = #{name} and pwd = #{pwd} limit 1
+		SELECT * FROM tbl_user WHERE name = #{name} and pwd = #{pwd} limit 1
 	</select>
 	<select id="mine" resultType="AppUserMine" >
 		SELECT a.* FROM tbl_user a WHERE a.id = #{id}
@@ -129,11 +129,11 @@
 	</select>
     
 	<select id="user_auth" resultType="AppUserAuth" >
-		SELECT a.id, a.authx, a.isdel FROM tbl_user a WHERE a.id = #{id} and a.rolex = 0
+		SELECT a.id, a.authx, a.isdel FROM tbl_user a WHERE a.id = #{id}
 	</select>
     
 	<select id="mobile_auth" resultType="AppUserAuth" >
-		SELECT a.id, a.authx, a.isdel FROM tbl_user a WHERE a.rolex = 0 and a.name = #{mobile} limit 1
+		SELECT a.id, a.authx, a.isdel FROM tbl_user a WHERE a.name = #{mobile} limit 1
 	</select>
     
 </mapper>

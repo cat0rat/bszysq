@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bszy.admin.form.CommentForm;
+import com.bszy.admin.job.ClientQueue;
 import com.bszy.admin.pojo.Comment;
 import com.bszy.admin.service.CommentService;
 import com.bszy.admin.vo.CommentSearch;
@@ -93,7 +94,8 @@ public class AppCommentController extends BaseController {
 		if(rb){
 			ar.t_succ_not_null(mo.getId());
 			try {
-				sysmsgService.comment(mo);
+				ClientQueue.App_Comment_Msg.add(mo);
+				//sysmsgService.comment(mo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -147,7 +149,8 @@ public class AppCommentController extends BaseController {
 		if(rb){
 			ar.t_succ_not_null(mo.getId());
 			try {
-				sysmsgService.commentex(mo);
+				ClientQueue.App_Commentex_Msg.add(mo);
+				//sysmsgService.commentex(mo);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
