@@ -9,9 +9,9 @@
 
 <!-- 0、引入 jquery 基础库 -->
 <!--<script src="/style/jquery-1.11.1.js" type="text/javascript"></script>-->
-<script src="/style/jquery-1.11.1.min.js" type="text/javascript"></script>
-<script src="/style/core/Mao.js" type="text/javascript"></script>
-<script src="/style/js/core/m_i.js" type="text/javascript"></script>
+<script src="/style/jquery-1.11.1.min.js?r=${__rnd}" type="text/javascript"></script>
+<script src="/style/core/Mao.js?r=${__rnd}" type="text/javascript"></script>
+<script src="/style/js/core/m_i.js?r=${__rnd}" type="text/javascript"></script>
 <script type="text/javascript" id="jar">var jar = [${jar}]; jar = jar.length ? jar[0] : {};</script>
 
 <!-- 百度统计
@@ -31,6 +31,6 @@ a{ cursor: pointer; }
 .mi-upimg-img{width: 90px; height: 90px;}
 </style>
 
-<link href="/admin/style/css/comm-mgr.css" rel="stylesheet" type="text/css" />
+<link href="/admin/style/css/comm-mgr.css?r=${__rnd}" rel="stylesheet" type="text/css" />
 
 <%@ include file="/admin/inc/alertErr.jsp"%>

@@ -33,6 +33,26 @@ public class CommentService extends BaseService<Comment, CommentMapper> {
 	public Comment refids(Long id){
 		return mapper.refids(id);
 	}
+
+	/** 查询评论 */
+	public BasePage<Comment> list_normal(BaseSearch bs){
+		BasePage<Comment> bp = new BasePage<Comment>();
+		bs.start_i();
+		List<Comment> rows = mapper().list_normal(bs);
+		Long total = mapper().lscount_normal(bs);
+
+		bp.t_param(bs.page_i(), bs.limit_i());
+		bp.t_result(total, rows);
+		if(rows != null && rows.size() > 0){
+			Comment mo = rows.get(rows.size() - 1);
+			if(mo != null){
+				Long lastid = mo.getId();
+				bp.setLastid(lastid != null ? lastid : 0L);
+			}
+		}
+		
+		return bp;
+	}
 	
 	/** 查询评论 */
 	public BasePage<AppCommentSimple> list(CommentSearch bs){

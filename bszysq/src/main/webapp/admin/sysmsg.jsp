@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
-	<script src="/admin/style/js/sysmsg.js" type="text/javascript"></script>
+	<script src="/admin/style/js/sysmsg.js?r=${__rnd}" type="text/javascript"></script>
 </head>
 <body>
 <div id="maskContainer">

@@ -9,6 +9,7 @@ public class ArttagSearch extends BaseSearch {
 	private Integer isdel;
 	{
 		limit = null;
+		orderby = "sortn asc, id asc";
 	}
 
 	public String getName() {

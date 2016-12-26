@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
-	<script type="text/javascript" src="/admin/style/js/arttag.js"></script>
+	<script type="text/javascript" src="/admin/style/js/arttag.js?r=${__rnd}"></script>
 </head>
 <body>
 <div id="maskContainer">

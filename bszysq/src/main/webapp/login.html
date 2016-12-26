@@ -44,6 +44,16 @@
 			}
 		});
 	}
+	$(function(){
+		$(document).keyup(function(event){
+			if(event.keyCode ==13){
+				doSubmit();
+				event.preventDefault();  //阻止默认行为 ( 表单提交 )
+				event.stopPropagation();    //  阻止事件冒泡
+				return false;
+			}
+		});
+	});
 </script>
 </head>
 <body style="background-color: #1B89C8; background: url('/style/image/sys/login1.png') repeat-x; " >

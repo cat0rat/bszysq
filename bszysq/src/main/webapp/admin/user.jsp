@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
-	<script src="/admin/style/js/user.js" type="text/javascript"></script>
+	<script src="/admin/style/js/user.js?r=${__rnd}" type="text/javascript"></script>
 </head>
 <body>
 <div id="maskContainer">
@@ -28,8 +28,8 @@
 			用户角色： <select name="rolex" class="easyui-combobox x_input" 
 				data-options="panelHeight:'auto',editable:false, width: 90"> 
 				<option value="">全部</option>
-				<option value="9">管理员</option>   
-			    <option value="0">用户</option> 
+				<option value="9">超级管理员</option>   
+			    <option value="0">普通用户</option> 
 			</select>
 		</div>
 		<div class="l_search_td">
@@ -42,8 +42,8 @@
 			手机类型： <select name="phonetype" class="easyui-combobox x_input" 
 				data-options="panelHeight:'auto',editable:false, width: 90"> 
 				<option value="">全部</option>
-				<option value="0">安卓</option>   
-			    <option value="1">苹果</option> 
+				<option value="0">安卓</option>
+				<option value="1">苹果</option> 
 			</select>
 		</div>
 		<div class="l_search_td">
@@ -87,9 +87,8 @@
 			<td class="t-l-c" colspan="3">
 				<select name="rolex" class="easyui-combobox x_input x-ipt3" 
 					data-options="panelHeight:'auto',required:true,editable:false"> 
-					<option value="">请选择</option>
-					<option value="9">管理员</option>   
-				    <option value="0" selected="selected">用户</option>
+					<option value="9">超级管理员</option>   
+				    <option value="0" selected="selected">普通用户</option>
 				</select>
 			</td>
 		<tr><td class="t-l">昵称：</td>
@@ -164,8 +163,8 @@
 				<select name="rolex" class="easyui-combobox x_input x-ipt3" 
 					data-options="panelHeight:'auto',required:true,editable:false"> 
 					<option value="">请选择</option>
-					<option value="9">管理员</option>   
-				    <option value="0" selected="selected">用户</option>
+					<option value="9">超级管理员</option>   
+				    <option value="0" selected="selected">普通用户</option>
 				</select>
 			</td>
 		<tr><td class="t-l">昵称：</td>
@@ -211,8 +210,8 @@
 				<select name="rolex" class="easyui-combobox x_input x-ipt3" 
 					data-options="panelHeight:'auto'"> 
 					<option value="">请选择</option>
-					<option value="9">管理员</option>   
-				    <option value="0" selected="selected">用户</option>
+					<option value="9">超级管理员</option>   
+				    <option value="0" selected="selected">普通用户</option>
 				</select>
 			</td>
 		<tr><td class="t-l">昵称：</td>
@@ -275,8 +274,8 @@
 				<select name="phonetype" class="easyui-combobox x_input x-ipt3" 
 					data-options="panelHeight:'auto'"> 
 					<option value="">请选择</option>
-				    <option value="0" selected="selected">安卓</option>
-					<option value="9">苹果</option>   
+					<option value="0">安卓</option>
+					<option value="1">苹果</option> 
 				</select>
 			</td></tr>
 		<tr><td class="t-l">手机显示名：</td>

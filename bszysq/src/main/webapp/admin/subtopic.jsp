@@ -8,7 +8,7 @@
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
 	<script id="jar" type="text/javascript">var jar = ${jar };</script>
-	<script type="text/javascript" src="/admin/style/js/art/subtopic.js"></script>
+	<script type="text/javascript" src="/admin/style/js/art/subtopic.js?r=${__rnd}"></script>
 </head>
 <body class="easyui-layout"  data-options="border:false">
 <div data-options="region:'north', border:false" class="s_show_north" style="height:50px;">

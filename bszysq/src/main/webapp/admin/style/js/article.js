@@ -18,28 +18,50 @@ $.extend(z.dg, {
 			{text:'取消推荐', iconCls:'icon-no', plain:true, handler: zz.do_unrecom},
 			'-',
 			{text:'置顶', iconCls:'icon-tip', plain:true, handler: zz.do_ding},
-			{text:'取消置顶', iconCls:'icon-no', plain:true, handler: zz.do_unding}
+			{text:'取消置顶', iconCls:'icon-no', plain:true, handler: zz.do_unding},
+			'-',
+			{text:'查看评论', iconCls:'icon-search', plain:true, handler: zz.do_comment}
 		];
 		return tb;
 	},
 	gen_columns: function(zz){
 		var cols = z.dg.columnBase([
-			{field: 'name', title: '标题', width:220, align:'center'},	
-			{field: 'catename', title: '版块', width:90, align:'center'},
-			{field: 'tagname', title: '标签', width:90, align:'center'},
+			{field: 'name', title: '标题', width:220, align:'center', sortable: true},	
+			{field: 'catename', title: '版块', width:90, align:'center', sortable: true},
+			{field: 'tagname', title: '标签', width:90, align:'center', sortable: true},
 			z.dg.columnMidImg({field: 'img', title: '配图'}),
-			{field: 'adminadd', title: '是否官方发布', width:60, align:'center', formatter: function(v){
+			{field: 'adminadd', title: '是否官方发布', width:60, align:'center', sortable: true, formatter: function(v){
 				return v == 1 ? '<span style="color:red;">官方发布</span>' : '用户发布';
 			}},
-			{field: 'recom', title: '是否推荐', width:60, align:'center', formatter: function(v){
+			{field: 'recom', title: '是否推荐', width:60, align:'center', sortable: true, formatter: function(v){
 				return v == 1 ? '<span style="color:red;">推荐</span>' : '正常';
 			}},
-			{field: 'ding', title: '是否置顶', width:60, align:'center', formatter: function(v){
+			{field: 'ding', title: '是否置顶', width:60, align:'center', sortable: true, formatter: function(v){
 				return v == 1 ? '<span style="color:red;">置顶</span>' : '正常';
 			}},
-			{field: 'usernname', title: '发布者', width:90, align:'center'}
+			{field: 'usernname', title: '发布者', width:90, align:'center', sortable: true}
 		]);
 		return cols;
+	},
+	/** 查看评论 */
+	do_comment: function(){
+		var dg = z.dg.dg;
+		var sels = dg.datagrid('getCks');
+		if(sels && sels.length && (sel = sels[0])){
+			var sel = sels[0];
+			if(sel && sel.id){
+				if(window.top && top.tabs){
+					top.M.tabs.toCenter({
+						url: '/admin/comment/?artid=' + sel.id,
+						title: sel.name + '-评论管理'
+					});
+				}
+			}else{
+				M.alert('未找到主题编号!');
+			}
+		}else{
+			M.alert('请先选择一条记录!');
+		}
 	},
 	/** 推荐 */
 	do_recom: function(){

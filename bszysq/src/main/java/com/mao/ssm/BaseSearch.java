@@ -20,6 +20,9 @@ public class BaseSearch {
 	
 	protected Long uid;	// 当前用户ID
 	
+	protected String sort;
+	protected String order;
+	
 	
 	// TODO 业务
 	
@@ -89,6 +92,16 @@ public class BaseSearch {
 		if(limit == null || limit < 1) limit = def;
 		return limit;
 	}
+	public String re_orderby(){
+		if(sort != null && sort.length() > 0){
+			if(order != null && order.length() > 0){
+				orderby = sort + " " + order;
+			}else{
+				orderby = sort;
+			}
+		}
+		return orderby;
+	}
 
 	
 	// TODO get set
@@ -128,6 +141,14 @@ public class BaseSearch {
 	}
 	public void setUid(Long uid) {
 		this.uid = uid;
+	}
+	public void setSort(String sort) {
+		this.sort = sort;
+		re_orderby();
+	}
+	public void setOrder(String order) {
+		this.order = order;
+		re_orderby();
 	}
 	
 	

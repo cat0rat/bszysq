@@ -25,7 +25,7 @@ $.extend(z.dg, {
 			}},
 			{field: 'name', title: '标题', width:120, align:'center', sortable: true},
 			{field: 'content', title: '内容', width:200, align:'center', sortable: true},
-			{field: 'ctimeStr', title: '推送时间', width: 100, align: 'center'}
+			z.dg.columnDateTime({field: 'ctime', title: '推送时间'})
 			]];
 		return cols;
 	}

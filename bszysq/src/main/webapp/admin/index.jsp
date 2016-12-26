@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<% 
+	application.setAttribute("__rnd", "6");
+%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -8,7 +11,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
-	<link href="/admin/style/css/index.css" rel="stylesheet" type="text/css">
+	<link href="/admin/style/css/index.css?r=${__rnd}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <div id="maskContainer">
@@ -77,6 +80,6 @@
 	</div>
 </div>
 </body>
-<script src="/admin/style/js/index.js" type="text/javascript"></script>
-<script src="/admin/style/js/edi_win.js" type="text/javascript"></script>
+<script src="/admin/style/js/index.js?r=${__rnd}" type="text/javascript"></script>
+<script src="/admin/style/js/edi_win.js?r=${__rnd}" type="text/javascript"></script>
 </html>

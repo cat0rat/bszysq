@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
-	<script type="text/javascript" src="/admin/style/js/comment.js"></script>
+	<script type="text/javascript" src="/admin/style/js/comment.js?r=${__rnd}"></script>
 </head>
 <body>
 <div id="maskContainer">
@@ -25,10 +25,10 @@
 	<form id="search_form" >
 		<div class="l_search_tr">
 			<div class="l_search_td">
-				文章标题：<input type="text" name="artname" class="x_input"/>
+				主题标题：<input type="text" name="artname" class="x_input"/>
 			</div>
 			<div class="l_search_td">
-				文章作者：<input type="text" name="authornname" class="x_input"/>
+				主题作者：<input type="text" name="authornname" class="x_input"/>
 			</div>
 			<div class="l_search_td">
 				评论者：<input type="text" name="usernname" class="x_input"/>
@@ -37,7 +37,7 @@
 				对谁的评论：<input type="text" name="tousernname" class="x_input"/>
 			</div>
 			<div class="l_search_td">
-				内容：<input type="text" name="context" class="x_input"/>
+				内容：<input type="text" name="content" class="x_input"/>
 			</div>
 			<!-- 
 			<div class="l_search_td">
@@ -127,11 +127,11 @@
 <div id="lookMgrDlg" style="padding-left:5px;">
 	<form id="lookMgrForm" class="dlg-frm" method="post">
 	<table class="dlg-tb">
-		<tr><td class="t-l">文章标题：</td>
+		<tr><td class="t-l">主题标题：</td>
 			<td class="t-l-c" colspan="3">
 				<input type="text" name="artname" class="x_input x-ipt3" value="" />
 			</td></tr>
-		<tr><td class="t-l">文章作者：</td>
+		<tr><td class="t-l">主题作者：</td>
 			<td class="t-l-c" colspan="3">
 				<input type="text" name="authornname" class="x_input x-ipt3" value="" />
 			</td></tr>
@@ -145,7 +145,7 @@
 			</td></tr>
 		<tr><td class="t-l">内容：</td>
 			<td class="t-l-c" colspan="3">
-				<textarea name="context" class="x_input x-ipt3" style="height: 120px;" ></textarea>
+				<textarea name="content" class="x_input x-ipt3" style="height: 120px;" ></textarea>
 			</td></tr>
 	</table>
 	</form>

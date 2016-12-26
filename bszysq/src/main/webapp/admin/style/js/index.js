@@ -1,3 +1,4 @@
+var tabs;
 $(function(){
 	window.isIndexJsp = true;
 	
@@ -11,7 +12,7 @@ $(function(){
 	
 
 	//初始化主页的Tabs
-	var tabs = $('#i_tabs');
+    tabs = $('#i_tabs');
 	tabs.tabs({   
 		fit:true,
 	    border:false,

@@ -31,9 +31,9 @@ public class AppCategoryController extends BaseController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public AjaxResult list(){
+	public AjaxResult list(CategorySearch bs){
 		AjaxResult ar = new AjaxResult();
-		ar.t_succ_not_null(service.list());
+		ar.t_succ_not_null(service.list(bs));
 		return ar;
 	}
 	

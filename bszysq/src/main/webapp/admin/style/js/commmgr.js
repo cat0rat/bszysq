@@ -46,6 +46,7 @@ var z = {
 				fitColumns: true,
 				toolbar: zz.gen_toolbar(zz),
 				url: '/admin/' + z.clazz + '/list.json',
+				queryParams: $.extend({}, z.listps),
 				columns : zz.gen_columns(zz),
 				onLoadError : function() {
 					$.messager.alert('温馨提示', '系统繁忙，请重试!', 'error');
@@ -91,7 +92,7 @@ var z = {
 			var cols = [[ 
 			    {field: 'ck', checkbox: true}, 
 				{field: 'id', title: '编号', width:100, align:'center', sortable: true},
-				{field: 'name', title: '名称', width:220, align:'center'},	
+				{field: 'name', title: '名称', width:220, align:'center', sortable: true},	
 //				{field: 'img', title: '图片', width:150, align:'center', formatter: function(v, r, ix){
 //					return '<img src="' + M.buildImgUrl(v, Imgs_Url) + '" alt="已删除" width="100px" height="60px" />';
 //				}},
@@ -212,7 +213,7 @@ var z = {
 			});
 		},
 		columnIsdel: function(){
-			return {field: 'isdelStr', title: '状态', width: 60, align: 'center'};
+			return {field: 'isdelStr', title: '状态', width: 60, align: 'center', sortable: true};
 		},
 		columnImg: function(opt){
 			return $.extend({field : 'img', title : '配图', width : 100, align : 'center', formatter: function(val){
@@ -234,6 +235,11 @@ var z = {
 				if(val) return '<img style="width:60px; height: 60px;" src="' + val + '" >';
 			}}, opt);
 		},
+		columnDateTime:function(opt){
+			return $.extend({field : 'ctime', title : '添加时间', width : 60, align : 'center', sortable: true, formatter: function(val){
+				if(val) return new Date(val).fmt();
+			}}, opt);
+		},
 		columnBase: function(cols){
 			var arr = [{field: 'ck', checkbox: true}, 
 						{field: 'id', title: '编号', width:60, align:'center', sortable: true}];
@@ -242,8 +248,10 @@ var z = {
 					arr.push(cols[i]);
 				}
 			}
-			arr.push({field: 'ctimeStr', title: '添加时间', width: 80, align: 'center'});
-			arr.push({field: 'utimeStr', title: '更新时间', width: 80, align: 'center'});
+			arr.push(z.dg.columnDateTime({field: 'ctime', title: '添加时间'}));
+			arr.push(z.dg.columnDateTime({field: 'utime', title: '更新时间'}));
+//			arr.push({field: 'ctimeStr', title: '添加时间', width: 80, align: 'center', sortable: true});
+//			arr.push({field: 'utimeStr', title: '更新时间', width: 80, align: 'center', sortable: true});
 			//arr.push({field: 'isdelStr', title: '状态', width: 60, align: 'center'});
 			return [arr];
 		},
@@ -255,10 +263,23 @@ var z = {
 			// TODO 查询
 			var frm = zz.frm = $('#search_form');
 			zz.sbtn = $('#search_btn');
-			zz.sbtn.on('click', function(){
-				var ds = M.formValues('#search_form');
-				z.dg.dg.datagrid('load', ds);
+			zz.sbtn.on('click', zz.search);
+			$(frm).keyup(function(event){
+				if(event.keyCode ==13){
+					zz.search();
+					event.preventDefault();  //阻止默认行为 ( 表单提交 )
+					event.stopPropagation();    //  阻止事件冒泡
+					return false;
+				}
 			});
+			frm[0].onsubmit = function(){
+				//zz.search();
+				return false;
+			};
+		},
+		search: function(){
+			var ds = M.formValues('#search_form');
+			z.dg.dg.datagrid('load', $.extend({}, ds, z.listps));
 		}
 	},
 	// TODO 添加对话框

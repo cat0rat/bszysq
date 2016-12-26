@@ -25,4 +25,7 @@ public interface CommentMapper extends BaseMapper<Comment> {
 	
 	// 与评论相关的id
 	public Comment refids(Long id);
+	
+	public List<Comment> list_normal(BaseSearch bs);
+	public Long lscount_normal(BaseSearch bs);
 }

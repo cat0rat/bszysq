@@ -69,6 +69,38 @@
 			}
 			return mo;
 		},
+		/** 参数化Url, Url中的参数转发成数据对象 */
+		url_params: function(){
+			var loc = window.location;
+			var search = loc.search ? loc.search.substring(1) : '';
+			var us = search.split('&');
+			var data = {};
+			if(us && us.length){
+				for(var i = 0; i < us.length; i++){
+					var kv = us[i].split('=');
+					kv[0] = decodeURIComponent(kv[0]);
+					kv[1] = kv[1] ? decodeURIComponent(kv[1]) : kv[1];
+					data[kv[0]] = kv[1];
+				}
+			}
+			return {
+				ps: data,
+				anchor: loc.hash ? loc.hash.substring(1) : ''
+			};
+		},
+		/** 串化d对象为url参数 */
+		param_str: function(d, ns, w){
+			var str = '';
+			for(var i = 0, len = ns.length; i < len; i++){
+				var nm = ns[i];
+				if(d[nm]) str += '&' + nm + '=' + d[nm];
+			}
+			if(str){
+				str = str.substring(1);
+				if(w) str = '?' + str;
+			}
+			return str;
+		},
 		/**
 		 * 处理ajax返回值
 		 * @param data (json) 参数data下的result属性, 由 jsonstring--> json对象

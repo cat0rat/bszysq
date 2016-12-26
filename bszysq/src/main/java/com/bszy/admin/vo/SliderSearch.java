@@ -10,6 +10,7 @@ public class SliderSearch extends BaseSearch {
 	private Integer isdel;
 	{
 		pos = 0;
+		orderby = "sortn asc, id asc";
 	}
 
 	public String getName() {

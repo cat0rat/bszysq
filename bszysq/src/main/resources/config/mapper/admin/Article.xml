@@ -16,8 +16,8 @@
 			<if test="recom != null">AND a.recom = #{recom}</if>
 			<if test="adminadd != null">
 				<choose>
-					<when test="adminadd == 0">exists (select u.id from tbl_user u where u.id=a.userid and u.rolex=0 limit 1)</when>
-					<when test="adminadd == 1">exists (select u.id from tbl_user u where u.id=a.userid and u.rolex=9 limit 1)</when>
+					<when test="adminadd == 0">AND  exists (select u.id from tbl_user u where u.id=a.userid and u.rolex=0 limit 1)</when>
+					<when test="adminadd == 1">AND  exists (select u.id from tbl_user u where u.id=a.userid and u.rolex=9 limit 1)</when>
 				</choose>
 			</if>
 			<if test="ding != null">AND a.ding = #{ding}</if>

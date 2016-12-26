@@ -22,7 +22,7 @@
     </div>  
 </div>  
 
-<script src="/admin/style/js/admin_tree.js" type="text/javascript"></script>
+<script src="/admin/style/js/admin_tree.js?r=${__rnd}" type="text/javascript"></script>
 
 <%
 	}

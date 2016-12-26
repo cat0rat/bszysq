@@ -9,8 +9,8 @@
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
 	
-	<link href="/admin/style/css/login.css" rel="stylesheet" type="text/css" />
-	<script src="/admin/style/js/login.js" type="text/javascript"></script>
+	<link href="/admin/style/css/login.css?r=${__rnd}" rel="stylesheet" type="text/css" />
+	<script src="/admin/style/js/login.js?r=${__rnd}" type="text/javascript"></script>
 </head>
 <body class="easyui-layout">
 	<div id="i_center" data-options="region:'center'" style="background-color: #ecfafa;">

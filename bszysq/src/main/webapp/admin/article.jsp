@@ -2,13 +2,13 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>文章管理</title>
+	<title>主题管理</title>
 	<meta name="description" content="后台管理" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<%@ include file="/admin/inc/comm.jsp"%>
 	<%@ include file="/admin/inc/easyui.jsp"%>
     <%@ include file="/admin/inc/ueditor.jsp" %>
-	<script src="/admin/style/js/article.js" type="text/javascript"></script>
+	<script src="/admin/style/js/article.js?r=${__rnd}" type="text/javascript"></script>
 </head>
 <body>
 <div id="maskContainer">

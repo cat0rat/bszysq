@@ -3,6 +3,43 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bszy.admin.mapper.CommentMapper" >
+	<sql id="sql_list_normal_where">
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="artid != null">AND a.artid = #{artid}</if>
+			<if test="artname != null and artname != ''">AND art.name LIKE CONCAT('%',#{artname},'%' )</if>
+			
+			<if test="authorid != null">AND a.authorid = #{authorid}</if>
+			<if test="authornname != null and authornname != ''">AND au.nname LIKE CONCAT('%',#{authornname},'%' )</if>
+			
+			<if test="userid != null">AND a.userid = #{userid}</if>
+			<if test="usernname != null and usernname != ''">AND uu.nname LIKE CONCAT('%',#{usernname},'%' )</if>
+			
+			<if test="touserid != null">AND a.touserid = #{touserid}</if>
+			<if test="tousernname != null and tousernname != ''">AND tu.nname LIKE CONCAT('%',#{tousernname},'%' )</if>
+			
+			<if test="content != null and content != ''">AND a.content LIKE CONCAT('%',#{content},'%' )</if>
+			<if test="isdel != null">AND a.isdel = #{isdel}</if>
+		</trim>
+	</sql>
+	
+	<select id="list_normal" resultType="Comment" >
+		SELECT a.*, art.name artname, au.nname authornname, au.head authorhead, uu.nname usernname, uu.head userhead, tu.nname tousernname, tu.head userhead
+		FROM tbl_comment a
+		LEFT JOIN tbl_article art on art.id = a.artid
+		LEFT JOIN tbl_user au on au.id = a.authorid
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		LEFT JOIN tbl_user tu on tu.id = a.touserid
+		<include refid="sql_list_normal_where"></include>
+		<include refid="Common.sql_order_asc_limit"></include>
+	</select>
+	<select id="lscount_normal" resultType="Long" >
+		SELECT COUNT(0) FROM tbl_comment a
+		LEFT JOIN tbl_article art on art.id = a.artid
+		LEFT JOIN tbl_user au on au.id = a.authorid
+		LEFT JOIN tbl_user uu on uu.id = a.userid
+		LEFT JOIN tbl_user tu on tu.id = a.touserid
+		<include refid="sql_list_normal_where"></include>
+	</select>
 
 	<sql id="sql_list_where">
 		<trim prefix="WHERE" prefixOverrides="AND | OR">

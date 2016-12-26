@@ -15,11 +15,11 @@ function build_tree_art(cates, topics){
 			beans: {
 				href:'/admin/article/'
 			}
-//		},{
-//			text: '评论管理',
-//			beans: {
-//				href:'/admin/comment/page.do'
-//			}
+		},{
+			text: '评论管理',
+			beans: {
+				href:'/admin/comment/'
+			}
 		},{
 			text: '轮播管理',
 			beans: {

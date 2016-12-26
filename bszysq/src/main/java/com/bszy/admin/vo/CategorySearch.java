@@ -10,6 +10,10 @@ public class CategorySearch extends BaseSearch {
 	protected Integer lookartauth;	// 认证用户才能查看, 0: 无需认证; 1: 需要认证
 	private Integer sortn;	// 排序号(默认0, 倒序)
 	private Integer isdel;	// 删除标记, 0: 正常; 1: 已删除
+	
+	{
+		orderby = "sortn asc, id asc";
+	}
 
 	public String getName() {
 		return name;

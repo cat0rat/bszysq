@@ -6,6 +6,7 @@ var S_isdel = { 0: '正常', 1: '<font style="color: #f00">已封号</font>' };
 var S_sendable = { 0: '正常', 1: '<font style="color: #999">不能</font>' };
 $.extend(z, {
 	clazz: 'user',
+	gDlgWidth: 650,
 	gDlgHeight: 300,
 	def_fvs: {rolex:'', nname:'', name:'', pwd:'', mobile:'', authx:'', 
 		head:'', tname:'', address:'', unionid:'', openid:'', getuicid:'', 
@@ -230,7 +231,7 @@ $.extend(z.dg, {
 			}},
 			{field: 'tname', title: '认证姓名', width:60, align:'center', sortable: true},
 			{field: 'address', title: '认证地址', width:90, align:'center', sortable: true},
-			{field: 'sendable', title: '可推送消息', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
+			{field: 'sendable', title: '可推送消息', width:60, align:'center', formatter: function(v, r, ix){
 				return S_sendable[v] || '未知';
 			}},
 			{field: 'isdel', title: '用户状态', width:60, align:'center', sortable: true, formatter: function(v, r, ix){
