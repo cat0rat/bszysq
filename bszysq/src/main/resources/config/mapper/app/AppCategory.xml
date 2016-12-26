@@ -13,7 +13,7 @@
 			)
 			order by a.id desc
 		) as aw on c.id = aw.cateid
-		where c.isdel=0
+		where c.isdel=0 order by c.sortn asc
 	</select>
 	
 	<select id="get" resultType="AppCategory" >

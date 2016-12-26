@@ -8,6 +8,7 @@ public class UserForm extends BaseForm {
 	private String name;	// 用户名(6~16位字母数字)
 	private String pwd;		// 密码(6~16位字母数字)
 	private String nname;	// 昵称(6~16位字母数字汉字)
+	private String rolex;	// 角色
 	
 	private String unionid;	// 微信唯一id(20~50字符)
 	private String openid;	// 微信id(20~50字符)
@@ -28,11 +29,18 @@ public class UserForm extends BaseForm {
 	private String lcount;	// 登录次数
 	private String lstat;	// 登录状态: 0: 离线; 1: 在线; 2: 隐身
 	
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getRolex() {
+		return rolex;
+	}
+	public void setRolex(String rolex) {
+		this.rolex = rolex;
 	}
 	public String getPwd() {
 		return pwd;

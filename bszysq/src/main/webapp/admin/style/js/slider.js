@@ -18,6 +18,7 @@ $.extend(z.dg, {
 			{field: 'link', title: '跳转地址', width:50, align:'center', formatter:function(v){
 				return v ? ('<a href="' + v + '" target="__blank">查看</a>') : '';
 			}},	
+			{field: 'artid', title: '主题编号', width:50, align:'center'},
 			{field: 'catename', title: '版块', width:60, align:'center'},
 			{field: 'artname', title: '主题', width:200, align:'center'}
 		]);

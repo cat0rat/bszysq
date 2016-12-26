@@ -100,6 +100,7 @@ public class UserController extends BaseController {
 		mo.setName(name);
 		mo.setPwd(pwd);
 		mo.setNname(nname);
+		mo.setRolex(MUtil.toInt(form.getRolex(), 0));
 		
 		mo.setUnionid(form.getUnionid());
 		mo.setOpenid(form.getOpenid());
@@ -138,6 +139,7 @@ public class UserController extends BaseController {
 		mo.init_update();
 		mo.setId(id);
 		mo.setNname(nname);
+		mo.setRolex(MUtil.toInt(form.getRolex(), 0));
 		
 		mo.setUnionid(form.getUnionid());
 		mo.setOpenid(form.getOpenid());
