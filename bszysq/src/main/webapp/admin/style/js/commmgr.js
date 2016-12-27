@@ -393,7 +393,7 @@ var z = {
 			zz.def_fvs = M.apply({id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''}, zz.def_fvs, z.def_fvs);
 		},
 		/** 打开对话框 */
-		dlg_open: function(){
+		dlg_open_def: function(){
 			var zz = z.edit;
 			var sel = z.dg.dg.datagrid('getSel');
 			if(sel && sel.id){
@@ -405,6 +405,17 @@ var z = {
 			}else{
 				M.alert('请先选择一条记录!');
 			}
+		},
+		/** 打开对话框 */
+		dlg_open: function(){
+			M.eu.dg_ck_one(z.dg.dg, function(sel){
+				var zz = z.edit;
+				sel = M.apply({},  sel, zz.def_fvs);
+				zz.on_open && zz.on_open(zz, sel);
+				zz.dlg.dialog('open');
+				zz.frm.form('load', sel);
+				m_i.upimgShowUtil(zz.frm, sel);
+			});
 		},
 		//isAjax: 0,
 		/** 提交 */
@@ -476,8 +487,7 @@ var z = {
 			zz.def_fvs = M.apply({id:'', name:'', img:'', sortn:'0', brief:'', isdel:'', imgFile:''}, zz.def_fvs, z.def_fvs);
 		},
 		/** 打开对话框 */
-		dlg_open: function(){
-			var zz = z.look;
+		dlg_open_def: function(){
 			var sel = z.dg.dg.datagrid('getSel');
 			if(sel && sel.id){
 				var zz = z.look;
@@ -488,6 +498,16 @@ var z = {
 			}else{
 				M.alert('请先选择一条记录!');
 			}
+		},
+		/** 打开对话框 */
+		dlg_open: function(){
+			M.eu.dg_ck_one(z.dg.dg, function(sel){
+				var zz = z.look;
+				sel = M.apply({},  sel, zz.def_fvs);
+				zz.dlg.dialog('open');
+				zz.frm.form('load', sel);
+				m_i.upimgShowUtil(zz.frm, sel);
+			});
 		}
 	},
 	index_nav:{

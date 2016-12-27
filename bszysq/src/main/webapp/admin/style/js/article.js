@@ -44,7 +44,7 @@ $.extend(z.dg, {
 		return cols;
 	},
 	/** 查看评论 */
-	do_comment: function(){
+	do_comment_def: function(){
 		var dg = z.dg.dg;
 		var sels = dg.datagrid('getCks');
 		if(sels && sels.length && (sel = sels[0])){
@@ -62,6 +62,17 @@ $.extend(z.dg, {
 		}else{
 			M.alert('请先选择一条记录!');
 		}
+	},
+	/** 查看评论 */
+	do_comment: function(){
+		M.eu.dg_ck_one(z.dg.dg, function(sel){
+			if(window.top && top.tabs){
+				top.M.tabs.toCenter({
+					url: '/admin/comment/?artid=' + sel.id,
+					title: sel.name + '-评论管理'
+				});
+			}
+		});
 	},
 	/** 推荐 */
 	do_recom: function(){

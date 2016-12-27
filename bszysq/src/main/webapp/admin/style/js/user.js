@@ -126,7 +126,7 @@ $.extend(z, {
 			zz.def_fvs = M.apply({id:'', name:'', pwd:''}, zz.def_fvs, z.def_fvs);
 		},
 		/** 打开对话框 */
-		dlg_open: function(){
+		dlg_open_def: function(){
 			var zz = z.repwd;
 			var sel = z.dg.dg.datagrid('getSel');
 			if(sel && sel.id){
@@ -139,6 +139,18 @@ $.extend(z, {
 			}else{
 				M.alert('请先选择一条记录!');
 			}
+		},
+		/** 打开对话框 */
+		dlg_open: function(){
+			M.eu.dg_ck_one(z.dg.dg, function(sel){
+				var zz = z.repwd;
+				sel.pwd !== undefined && (delete sel.pwd);
+				sel = M.apply({},  sel, zz.def_fvs);
+				zz.on_open && zz.on_open(zz, sel);
+				zz.dlg.dialog('open');
+				zz.frm.form('load', sel);
+				m_i.upimgShowUtil(zz.frm, sel);
+			});
 		},
 		isAjax: 1,
 		/** 提交 */

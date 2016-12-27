@@ -2408,6 +2408,20 @@ $ImportSimpleJs = M.ImportSimpleJs;
 				return sel;
 			}
 		},
+		/** 获取当前check的记录, 如果没有, 返回select的记录(第1条) */
+		getCkOne:function(jq){
+			jq = $(jq[0]);
+			var cks = jq.datagrid('getChecked');
+			if(cks && cks.length){
+				return cks[0];
+			}
+		},
+		/** 获取当前check的记录数 */
+		getCkCount:function(jq){
+			jq = $(jq[0]);
+			var cks = jq.datagrid('getChecked');
+			return cks && cks.length ? cks.length : 0;
+		},
 		/** 获取当前select的记录, 如果没有, 返回check的记录 */
 		getSels:function(jq){
 			jq = $(jq[0]);
@@ -2499,7 +2513,8 @@ $ImportSimpleJs = M.ImportSimpleJs;
 		 * </code>
 		 */
 		dg_del: function(dg, idn, sn, fn, filter){
-			var sels = dg.datagrid('getCks');
+			//var sels = dg.datagrid('getCks');
+			var sels = dg.datagrid('getChecked');
 			if(sels && sels.length){
 				filter && (sels = filter(sels));
 				if(sels && sels.length){
@@ -2513,7 +2528,7 @@ $ImportSimpleJs = M.ImportSimpleJs;
 					return ;
 				}
 			}
-			M.alert('请先选择一条记录!');
+			M.alert('请先勾选一条记录!');
 		},
 		/**
 		 *  datagrid 批量操作
@@ -2529,7 +2544,8 @@ $ImportSimpleJs = M.ImportSimpleJs;
 		 * </code>
 		 */
 		dg_ids_opts: function(dg, idn, sn, title, fn, filter){
-			var sels = dg.datagrid('getCks');
+			//var sels = dg.datagrid('getCks');
+			var sels = dg.datagrid('getChecked');
 			filter && (sels = filter(sels));
 			var dstr = M.eu.build_del_eg(sels, sn, 10);
 			if(dstr){
@@ -2541,7 +2557,19 @@ $ImportSimpleJs = M.ImportSimpleJs;
 				    }   
 				});
 			}else{
-				M.alert('请先选择一条记录!');
+				M.alert('请先勾选一条记录!');
+			}
+		},
+		dg_ck_one: function(dg, fn){
+			var cks = dg.datagrid('getChecked');
+			if(cks && cks.length){
+				if(cks.length > 1){
+					M.alert('只能勾选一条记录!');
+				}else{
+					fn(cks[0]);
+				}
+			}else{
+				M.alert('请先勾选一条记录!');
 			}
 		}
 	};
