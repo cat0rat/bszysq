@@ -1,5 +1,5 @@
 var t_ps = m_i.url_params();
-var listps = {};
+var listps = {sort:'id',order:'desc'};
 if(t_ps && t_ps.ps){
 	var ps = t_ps.ps;
 	listps.artid = ps.artid;
